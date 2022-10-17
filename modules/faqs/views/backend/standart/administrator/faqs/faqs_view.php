@@ -81,7 +81,7 @@ jQuery(document).ready(domo);
                     </div>
                                         
                     <div class="form-group ">
-                        <label for="content" class="col-sm-2 control-label">Faq CreateAt </label>
+                        <label for="content" class="col-sm-2 control-label">Tanggal Dibuat </label>
 
                         <div class="col-sm-8">
                         <span class="detail_group-faq-createAt"><?= _ent($faqs->faq_createAt); ?></span>
@@ -115,6 +115,12 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var faq_question = $('.detail_group-faq-question');
+        var faq_answer = $('.detail_group-faq-answer');
+        var faq_createAt = $('.detail_group-faq-createAt');
+        var faq_user = $('.detail_group-faq-user');
+    })()
+      
    });
 </script>

@@ -50,12 +50,12 @@
 					</h3>
 				</div>
 				<div class="box-body ">
-					<!-- Widget: user widget style 1 -->
 				<?php
-					// $user_id 	= get_user_data('id');
-					$group_id 	=  $this->session->userdata('group_id');
-					// if ($group_id == 1) {}
+					$group_id = $this->session->userdata('group_id');
+
+					if ($group_id == '1') {
 				?>
+					<!-- Widget: user widget style 1 -->
 					<div class="menu-type-wrapper <?= $this->uri->segment(4) == 'side-menu' ? 'active' :''; ?>">
 						<div data-href="<?= site_url('administrator/menu/index/'.url_title('side menu')); ?>" class="clickable btn-block menu-type btn-group ">
 							<?= cclang('side_menu'); ?>
@@ -64,28 +64,47 @@
 							&nbsp;
 						</a>
 					</div>
+				<?php
+					}
+				?>
 					<?php foreach (db_get_all_data('menu_type', 'name!= "side menu"') as $row): ?>
 					<div
 						class="menu-type-wrapper <?= $this->uri->segment(4) == url_title($row->name) ? 'active' :''; ?>">
 						<span data-href="<?= site_url('administrator/menu/index/'.url_title($row->name)); ?>" class="clickable btn-block menu-type btn-group">
 							<?= _ent(ucwords($row->name)); ?>
 						</span>
+					<?php
+						if ($group_id == '1') {
+					?>
+						<a class="menu-type-action remove-data"
+							data-href="<?= base_url('administrator/menu_type/delete/'.$row->id); ?>"
+							href="javascript:void()">
+							<i class="fa fa-trash"></i>
+						</a>
+					<?php
+						}else{
+					?>
 						<a class="menu-type-action">
 							&nbsp;
 						</a>
-						<!-- <a class="menu-type-action remove-data"
-							data-href="<?//= base_url('administrator/menu_type/delete/'.$row->id); ?>"
-							href="javascript:void()">
-							<i class="fa fa-trash"></i>
-						</a> -->
+					<?php
+						}
+					?>
+						
 					</div>
 					<?php endforeach; ?>
-					<br>
-					<!-- <a href="<?= site_url('administrator/menu_type/add'); ?>"
-						class="btn btn-block btn-add btn-add-menu btn-flat" title="add menu type (Ctrl+r)"><i
-							class="fa fa-plus-square-o"></i>
-						<?//= cclang('add_menu_type'); ?>
-					</a> -->
+					<?php
+						if ($group_id == '1') {
+					?>
+						<br>
+						<a href="<?= site_url('administrator/menu_type/add'); ?>"
+							class="btn btn-block btn-add btn-add-menu btn-flat" title="add menu type (Ctrl+r)"><i
+								class="fa fa-plus-square-o"></i>
+							<?= cclang('add_menu_type'); ?>
+						</a>
+					<?php
+						}
+					?>
 				</div>
 				<!--/box body -->
 			</div>

@@ -37,6 +37,102 @@
 </section>
 
 <style>
+   /* .group-faq-question */
+   .group-faq-question {
+
+   }
+
+   .group-faq-question .control-label {
+
+   }
+
+   .group-faq-question .col-sm-8 {
+
+   }
+
+   .group-faq-question .form-control {
+
+   }
+
+   .group-faq-question .help-block {
+
+   }
+   /* end .group-faq-question */
+
+
+
+   /* .group-faq-answer */
+   .group-faq-answer {
+
+   }
+
+   .group-faq-answer .control-label {
+
+   }
+
+   .group-faq-answer .col-sm-8 {
+
+   }
+
+   .group-faq-answer .form-control {
+
+   }
+
+   .group-faq-answer .help-block {
+
+   }
+   /* end .group-faq-answer */
+
+
+
+   /* .group-faq-createAt */
+   .group-faq-createAt {
+
+   }
+
+   .group-faq-createAt .control-label {
+
+   }
+
+   .group-faq-createAt .col-sm-8 {
+
+   }
+
+   .group-faq-createAt .form-control {
+
+   }
+
+   .group-faq-createAt .help-block {
+
+   }
+   /* end .group-faq-createAt */
+
+
+
+   /* .group-faq-user */
+   .group-faq-user {
+
+   }
+
+   .group-faq-user .control-label {
+
+   }
+
+   .group-faq-user .col-sm-8 {
+
+   }
+
+   .group-faq-user .form-control {
+
+   }
+
+   .group-faq-user .help-block {
+
+   }
+   /* end .group-faq-user */
+
+
+
 
 </style>
 <!-- Main content -->
@@ -131,7 +227,17 @@
     $(document).ready(function() {
     window.event_submit_and_action = '';
             
-    
+    (function(){
+    var faq_question = $('#faq_question');
+   /* 
+    faq_question.on('change', function() {});
+    */
+    var faq_answer = $('#faq_answer');
+   var faq_createAt = $('#faq_createAt');
+   var faq_user = $('#faq_user');
+   
+})()
+      
       
       
       
@@ -173,7 +279,13 @@
         value: save_type
     });
 
-    
+    (function(){
+    data_post.push({
+        name : '_example',
+        value : 'value_of_example',
+    })
+})()
+      
       
     data_post.push({
         name: 'event_submit_and_action',

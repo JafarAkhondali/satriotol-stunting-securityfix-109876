@@ -9,10 +9,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *| menu site
  *|
  */
-class Menu extends Admin
-{
-	public function __construct()
-	{
+class Menu extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_menu');
@@ -24,12 +22,17 @@ class Menu extends Admin
 	 *
 	 * @var $offset String
 	 */
-	public function index($type = null)
-	{
+	public function index($type = null) {
 		$this->is_allowed('menu_list');
 
+		$group_id = $this->session->userdata('group_id');
+
 		if (!$this->model_menu->get_id_menu_type_by_flag($type)) {
-			redirect('administrator/menu/index/side-menu');
+			if ($group_id == '1') {
+				redirect('administrator/menu/index/side-menu');
+			}else{
+				redirect('administrator/menu/index/top-menu');
+			}
 		}
 
 		$this->template->title('Menu List');
@@ -40,8 +43,7 @@ class Menu extends Admin
 	 * show all menus
 	 *
 	 */
-	public function add($menu_type = '')
-	{
+	public function add($menu_type = '') {
 		$this->is_allowed('menu_add');
 
 		$menu_type = $this->uri->segment(4);
@@ -67,8 +69,7 @@ class Menu extends Admin
 	 *
 	 * @return JSON
 	 */
-	public function add_save($menu_type = 'side menu')
-	{
+	public function add_save($menu_type = 'side menu') {
 		if (!$this->is_allowed('menu_add', false)) {
 			return $this->response([
 				'success' => false,
@@ -164,8 +165,7 @@ class Menu extends Admin
 	 *
 	 * @var $id String
 	 */
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('menu_update');
 
 		$this->data =
@@ -184,8 +184,7 @@ class Menu extends Admin
 	 *
 	 * @var $id String
 	 */
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('menu_update', false)) {
 			return $this->response([
 				'success' => false,
@@ -262,8 +261,7 @@ class Menu extends Admin
 	 *
 	 * @var $id String
 	 */
-	public function save_ordering()
-	{
+	public function save_ordering() {
 		if (!$this->is_allowed('menu_save_ordering', false)) {
 			return $this->response([
 				'success' => false,
@@ -296,8 +294,7 @@ class Menu extends Admin
 	 *
 	 * @var $menu array
 	 */
-	private function _parse_menu($menus, $parent = '')
-	{
+	private function _parse_menu($menus, $parent = '') {
 		$data = [];
 		foreach ($menus as $menu) {
 			$this->sort++;
@@ -317,8 +314,7 @@ class Menu extends Admin
 	 *
 	 * @var $id String
 	 */
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('menu_delete');
 
 		$remove = $this->model_menu->remove($id);
@@ -338,8 +334,7 @@ class Menu extends Admin
 	 *
 	 * @return JSON
 	 */
-	public function set_status()
-	{
+	public function set_status() {
 		if (!$this->is_allowed('menu_update', false)) {
 			return $this->response([
 				'success' => false,

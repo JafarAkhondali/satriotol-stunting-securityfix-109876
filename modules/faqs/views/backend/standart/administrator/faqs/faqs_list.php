@@ -90,8 +90,8 @@ jQuery(document).ready(domo);
                               <option value=""><?= cclang('all'); ?></option>
                                <option <?= $this->input->get('f') == 'faq_question' ? 'selected' :''; ?> value="faq_question">Pertanyaan</option>
                             <option <?= $this->input->get('f') == 'faq_answer' ? 'selected' :''; ?> value="faq_answer">Jawaban</option>
-                            <option <?= $this->input->get('f') == 'faq_createAt' ? 'selected' :''; ?> value="faq_createAt">Faq CreateAt</option>
-                            <option <?= $this->input->get('f') == 'faq_user' ? 'selected' :''; ?> value="faq_user">Faq User</option>
+                            <option <?= $this->input->get('f') == 'faq_createAt' ? 'selected' :''; ?> value="faq_createAt">Tanggal Dibuat</option>
+                            <option <?= $this->input->get('f') == 'faq_user' ? 'selected' :''; ?> value="faq_user">Pembuat</option>
                            </select>
                         </div>
                         <div class="col-sm-1 padd-left-0 ">
@@ -180,7 +180,21 @@ jQuery(document).ready(domo);
 <script>
   $(document).ready(function(){
    
-    
+    (function(){
+
+})()
+      
+      
+      $('.table tbody tr').each(function(){
+         var row = $(this);
+         (function(){
+    var faq_question = row.find('.list_group-faq-question');
+    var faq_answer = row.find('.list_group-faq-answer');
+    var faq_createAt = row.find('.list_group-faq-createAt');
+    var faq_user = row.find('.list_group-faq-user');
+
+})()
+      })
       
     $('.remove-data').click(function(){
 

@@ -95,6 +95,8 @@ class Faqs extends Admin
 
 			
 			
+//$save_data['_example'] = $this->input->post('_example');
+			
 
 
 
@@ -104,6 +106,8 @@ class Faqs extends Admin
             
 
 			if ($save_faqs) {
+				
+				$id = $save_faqs;
 				
 				
 					
@@ -190,6 +194,8 @@ class Faqs extends Admin
 			
 
 			
+//$save_data['_example'] = $this->input->post('_example');
+			
 
 
 			
@@ -198,6 +204,7 @@ class Faqs extends Admin
 
 			if ($save_faqs) {
 
+				
 				
 
 				
