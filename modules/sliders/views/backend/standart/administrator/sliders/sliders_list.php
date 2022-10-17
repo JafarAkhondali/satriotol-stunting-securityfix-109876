@@ -55,18 +55,14 @@
 						<div class="widget-user-header ">
 							<div class="row pull-right">
 								<?php is_allowed('sliders_add', function(){?>
-								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new"
-									title="<?= cclang('add_new_button', [cclang('sliders')]); ?>  (Ctrl+a)"
-									href="<?=  site_url('administrator/sliders/add'); ?>"><i
-										class="fa fa-plus-square-o"></i>
+								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('sliders')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/sliders/add'); ?>">
+									<i class="fa fa-plus-square-o"></i>
 									<?= cclang('add_new_button', [cclang('sliders')]); ?>
 								</a>
 								<?php }) ?>
 								<?php is_allowed('sliders_export', function(){?>
-								<a class="btn btn-flat btn-success"
-									title="<?= cclang('export'); ?> <?= cclang('sliders') ?> "
-									href="<?= site_url('administrator/sliders/export?q='.$this->input->get('q').'&f='.$this->input->get('f')); ?>"><i
-										class="fa fa-file-excel-o"></i>
+								<a class="btn btn-flat btn-success" title="<?= cclang('export'); ?> <?= cclang('sliders') ?> " href="<?= site_url('administrator/sliders/export?q='.$this->input->get('q').'&f='.$this->input->get('f')); ?>">
+									<i class="fa fa-file-excel-o"></i>
 									<?= cclang('export'); ?> XLS
 								</a>
 								<?php }) ?>
@@ -86,34 +82,25 @@
 							</h5>
 						</div>
 
-						<form name="form_sliders" id="form_sliders"
-							action="<?= base_url('administrator/sliders/index'); ?>">
-
-
-
+						<form name="form_sliders" id="form_sliders" action="<?= base_url('administrator/sliders/index'); ?>">
 							<!-- /.widget-user -->
 							<div class="row">
 								<div class="col-md-8">
 									<div class="col-sm-2 padd-left-0 ">
-										<select type="text" class="form-control chosen chosen-select" name="bulk"
-											id="bulk" placeholder="Site Email">
+										<select type="text" class="form-control chosen chosen-select" name="bulk" id="bulk" placeholder="Site Email">
 											<option value="delete">Delete</option>
 										</select>
 									</div>
 									<div class="col-sm-2 padd-left-0 ">
-										<button type="button" class="btn btn-flat" name="apply" id="apply"
-											title="<?= cclang('apply_bulk_action'); ?>">
+										<button type="button" class="btn btn-flat" name="apply" id="apply" title="<?= cclang('apply_bulk_action'); ?>">
 											<?= cclang('apply_button'); ?>
 										</button>
 									</div>
 									<div class="col-sm-3 padd-left-0  ">
-										<input type="text" class="form-control" name="q" id="filter"
-											placeholder="<?= cclang('filter'); ?>"
-											value="<?= $this->input->get('q'); ?>">
+										<input type="text" class="form-control" name="q" id="filter" placeholder="<?= cclang('filter'); ?>" value="<?= $this->input->get('q'); ?>">
 									</div>
 									<div class="col-sm-3 padd-left-0 ">
-										<select type="text" class="form-control chosen chosen-select" name="f"
-											id="field">
+										<select type="text" class="form-control chosen chosen-select" name="f" id="field">
 											<option value="">
 												<?= cclang('all'); ?>
 											</option>
@@ -128,35 +115,29 @@
 										</select>
 									</div>
 									<div class="col-sm-1 padd-left-0 ">
-										<button type="submit" class="btn btn-flat" name="sbtn" id="sbtn" value="Apply"
-											title="<?= cclang('filter_search'); ?>">
+										<button type="submit" class="btn btn-flat" name="sbtn" id="sbtn" value="Apply" title="<?= cclang('filter_search'); ?>">
 											Filter
 										</button>
 									</div>
 									<div class="col-sm-1 padd-left-0 ">
-										<a class="btn btn-default btn-flat" name="reset" id="reset" value="Apply"
-											href="<?= base_url('administrator/sliders');?>"
-											title="<?= cclang('reset_filter'); ?>">
+										<a class="btn btn-default btn-flat" name="reset" id="reset" value="Apply" href="<?= base_url('administrator/sliders');?>" title="<?= cclang('reset_filter'); ?>">
 											<i class="fa fa-undo"></i>
 										</a>
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div class="dataTables_paginate paging_simple_numbers pull-right"
-										id="example2_paginate">
+									<div class="dataTables_paginate paging_simple_numbers pull-right" id="example2_paginate">
 										<?= $pagination; ?>
 									</div>
 								</div>
 							</div>
 							<div class="table-responsive">
-
 								<br>
 								<table class="table table-bordered table-striped dataTable">
 									<thead>
 										<tr class="">
 											<th>
-												<input type="checkbox" class="flat-red toltip" id="check_all"
-													name="check_all" title="check all">
+												<input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all">
 											</th>
 											<th data-field="slider_title" data-sort="1" data-primary-key="0">
 												<?= cclang('slider_title') ?>
@@ -177,16 +158,14 @@
 										<?php foreach($sliderss as $sliders): ?>
 										<tr>
 											<td width="5">
-												<input type="checkbox" class="flat-red check" name="id[]"
-													value="<?= $sliders->slider_id; ?>">
+												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $sliders->slider_id; ?>">
 											</td>
-
-											<td><span class="list_group-slider-title">
-													<?= _ent($sliders->slider_title); ?>
-												</span></td>
-											<td><span class="list_group-slider-subtitle">
-													<?= _ent($sliders->slider_subtitle); ?>
-												</span></td>
+											<td>
+												<span class="list_group-slider-title">
+													<?= _ent($sliders->slider_title).'<br/><small><i>dibuat oleh : '._ent($sliders->username).'</i></small>';?>
+												</span>
+											</td>
+											<td><span class="list_group-slider-subtitle"><?= _ent($sliders->slider_subtitle); ?></span></td>
 											<td>
 												<?php if (!empty($sliders->slider_image)): ?>
 												<?php if (is_image($sliders->slider_image)): ?>
@@ -207,30 +186,27 @@
 												<?php endif; ?>
 												<?php endif; ?>
 											</td>
+											<td><span class="list_group-slider-createAt"><?= _ent($sliders->slider_createAt); ?></span></td>
+											<td width="200" align="center">
+											<?php
+												is_allowed('sliders_view', function() use ($sliders) {
+											?>
+													<a href="<?= site_url('administrator/sliders/view/' . $sliders->slider_id); ?>" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Lihat Slider"><i class="fa fa-picture-o"></i></a>
+											<?php
+												});
 
-											<td><span class="list_group-slider-createAt">
-													<?= _ent($sliders->slider_createAt); ?>
-												</span></td>
-											<td width="200">
+												is_allowed('sliders_update', function() use ($sliders) {
+											?>
+													<a href="<?= site_url('administrator/sliders/edit/' . $sliders->slider_id); ?>" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Update Slider"><i class="fa fa-edit"></i></a>
+											<?php
+												});
 
-												<?php is_allowed('sliders_view', function() use ($sliders){?>
-												<a href="<?= site_url('administrator/sliders/view/' . $sliders->slider_id); ?>"
-													class="label-default"><i class="fa fa-newspaper-o"></i>
-													<?= cclang('view_button'); ?>
-													<?php }) ?>
-													<?php is_allowed('sliders_update', function() use ($sliders){?>
-													<a href="<?= site_url('administrator/sliders/edit/' . $sliders->slider_id); ?>"
-														class="label-default"><i class="fa fa-edit "></i>
-														<?= cclang('update_button'); ?>
-													</a>
-													<?php }) ?>
-													<?php is_allowed('sliders_delete', function() use ($sliders){?>
-													<a href="javascript:void(0);"
-														data-href="<?= site_url('administrator/sliders/delete/' . $sliders->slider_id); ?>"
-														class="label-default remove-data"><i class="fa fa-close"></i>
-														<?= cclang('remove_button'); ?>
-													</a>
-													<?php }) ?>
+												is_allowed('sliders_delete', function() use ($sliders) {
+											?>
+													<a href="javascript:void(0);" data-href="<?= site_url('administrator/sliders/delete/' . $sliders->slider_id); ?>" class="btn btn-danger remove-data"  data-toggle="tooltip" data-placement="top" title="Hapus Slider"><i class="fa fa-close"></i></a>
+											<?php
+												});
+											?>
 
 											</td>
 										</tr>
