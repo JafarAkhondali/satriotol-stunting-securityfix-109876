@@ -172,6 +172,7 @@
 						</div> -->
 
 						<div class="message"></div>
+
 						<div class="row-fluid col-md-7 container-button-bottom">
 							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay'
 								title="<?= cclang('save_button'); ?> (Ctrl+s)">
@@ -184,9 +185,8 @@
 								<?= cclang('save_and_go_the_list_button'); ?>
 							</a>
 
-							<div class="custom-button-wrapper">
+							<div class="custom-button-wrapper"></div>
 
-							</div>
 							<a class="btn btn-flat btn-default btn_action" id="btn_cancel"
 								title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
 								<i class="fa fa-undo"></i>
