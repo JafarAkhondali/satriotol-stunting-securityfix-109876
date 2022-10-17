@@ -53,7 +53,12 @@
 								<h3 class="footer__widget-title footer__widget-title-3">Links</h3>
 								<div class="footer__widget-content">
 									<ul>
-										<li>
+								<?php
+									foreach ($links as $link) {
+										echo '<li><a href="'.base_url().$link->link.'">'.$link->label.'</a></li>';
+									}
+								?>
+										<!-- <li>
 											<a href="#">Partners</a>
 										</li>
 										<li>
@@ -67,7 +72,7 @@
 										</li>
 										<li>
 											<a href="#">Contact us</a>
-										</li>
+										</li> -->
 									</ul>
 								</div>
 							</div>
