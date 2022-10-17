@@ -19,6 +19,7 @@ class Web extends Front
 	public function index()
 	{
         $data['sliders'] = $this->db->get('sliders')->result();
+        $data['categories'] = $this->db->get('blog_category')->result();
         $this->template->build('beranda', $data);
 	}
 
