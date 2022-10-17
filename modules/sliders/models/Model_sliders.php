@@ -2,10 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_sliders extends MY_Model {
+
     private $primary_key    = 'slider_id';
     private $table_name     = 'sliders';
-    public $field_search    = ['slider_title', 'slider_subtitle', 'slider_image'];
-    public $sort_option     = ['slider_id', 'DESC'];
+    public $field_search   = ['slider_title', 'slider_subtitle', 'slider_image', 'slider_createAt'];
+    public $sort_option = ['slider_id', 'DESC'];
     
     public function __construct() {
         $config = array(
@@ -95,11 +96,18 @@ class Model_sliders extends MY_Model {
     }
 
     public function join_avaiable() {
-        $this->db->select('sliders.*');
+        $this->db->select('sliders.*,
+                            aauth_users.id AS user_id,
+                            aauth_users.username AS username,
+                            aauth_users.email AS user_email,
+                            aauth_users.full_name AS full_name');
+        $this->db->join('aauth_users', 'slider_user = id');
+
         return $this;
     }
 
     public function filter_avaiable() {
+
         if (!$this->aauth->is_admin()) {
             }
 

@@ -78,13 +78,13 @@ class Sliders extends Admin	{
 		if ($this->form_validation->run()) {
 			$sliders_slider_image_uuid = $this->input->post('sliders_slider_image_uuid');
 			$sliders_slider_image_name = $this->input->post('sliders_slider_image_name');
-		
-			$save_data = [
-				'slider_title' 		=> $this->input->post('slider_title'),
-				'slider_subtitle' 	=> $this->input->post('slider_subtitle'),
-				'slider_status' 	=> $this->input->post('slider_status'),
-			];
 
+			$save_data = [
+				'slider_title' => $this->input->post('slider_title'),
+				'slider_subtitle' => $this->input->post('slider_subtitle'),
+				'slider_status' => $this->input->post('slider_status'),
+			];
+			
 			if (!is_dir(FCPATH . '/uploads/sliders/')) {
 				mkdir(FCPATH . '/uploads/sliders/');
 			}
@@ -105,12 +105,12 @@ class Sliders extends Admin	{
 
 				$save_data['slider_image'] = $sliders_slider_image_name_copy;
 			}
-			
+
 			$save_sliders = $id = $this->model_sliders->store($save_data);
 
 			if ($save_sliders) {
 				$id = $save_sliders;
-				
+
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_sliders;
@@ -155,7 +155,6 @@ class Sliders extends Admin	{
 		$this->is_allowed('sliders_update');
 
 		$this->data['sliders'] = $this->model_sliders->find($id);
-
 		$this->template->title('Sliders Update');
 		$this->render('backend/standart/administrator/sliders/sliders_update', $this->data);
 	}
@@ -306,7 +305,6 @@ class Sliders extends Admin	{
 			}
 		}
 		
-		
 		return $this->model_sliders->remove($id);
 	}
 	
@@ -409,7 +407,6 @@ class Sliders extends Admin	{
 		$this->model_sliders->pdf('sliders', 'sliders');
 	}
 
-
 	public function single_pdf($id = null) {
 		$this->is_allowed('sliders_export');
 
@@ -441,8 +438,6 @@ class Sliders extends Admin	{
         $this->pdf->writeHTML($content);
         $this->pdf->Output($table.'.pdf', 'H');
 	}
-
-	
 }
 
 

@@ -91,6 +91,7 @@ jQuery(document).ready(domo);
                                <option <?= $this->input->get('f') == 'slider_title' ? 'selected' :''; ?> value="slider_title">Judul</option>
                             <option <?= $this->input->get('f') == 'slider_subtitle' ? 'selected' :''; ?> value="slider_subtitle">Deskripsi</option>
                             <option <?= $this->input->get('f') == 'slider_image' ? 'selected' :''; ?> value="slider_image">Image</option>
+                            <option <?= $this->input->get('f') == 'slider_createAt' ? 'selected' :''; ?> value="slider_createAt">Tanggal Dibuat</option>
                            </select>
                         </div>
                         <div class="col-sm-1 padd-left-0 ">
@@ -122,6 +123,7 @@ jQuery(document).ready(domo);
                                                     <th data-field="slider_title"data-sort="1" data-primary-key="0"> <?= cclang('slider_title') ?></th>
                            <th data-field="slider_subtitle"data-sort="1" data-primary-key="0"> <?= cclang('slider_subtitle') ?></th>
                            <th data-field="slider_image"data-sort="0" data-primary-key="0"> <?= cclang('slider_image') ?></th>
+                           <th data-field="slider_createAt"data-sort="1" data-primary-key="0"> <?= cclang('slider_createAt') ?></th>
                            <th>Action</th>                        </tr>
                      </thead>
                      <tbody id="tbody_sliders">
@@ -147,6 +149,7 @@ jQuery(document).ready(domo);
                               <?php endif; ?>
                            </td>
                             
+                           <td><span class="list_group-slider-createAt"><?= _ent($sliders->slider_createAt); ?></span></td> 
                            <td width="200">
                             
                                                               <?php is_allowed('sliders_view', function() use ($sliders){?>
