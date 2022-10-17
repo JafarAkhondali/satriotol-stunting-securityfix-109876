@@ -32,7 +32,6 @@ class Auth extends Admin
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 
-
 		if ($this->form_validation->run()) {
 			if ($this->aauth->login($this->input->post('username'), $this->input->post('password'), $this->input->post('remember'))) {
 				$ref = $this->session->userdata('redirect');
@@ -48,6 +47,7 @@ class Auth extends Admin
 		} else {
 			$data['error'] = validation_errors();
 		}
+
 		$this->template->build('backend/standart/administrator/login', $data);
 	}
 

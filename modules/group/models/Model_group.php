@@ -8,8 +8,7 @@ class Model_group extends MY_Model {
 	private $table_name 	= 'aauth_groups';
 	private $field_search 	= array('name', 'definition');
 
-	public function __construct()
-	{
+	public function __construct() {
 		$config = array(
 			'primary_key' 	=> $this->primary_key,
 		 	'table_name' 	=> $this->table_name,
@@ -19,8 +18,7 @@ class Model_group extends MY_Model {
 		parent::__construct($config);
 	}
 
-	public function count_all($q = '', $field = '')
-	{
+	public function count_all($q = '', $field = '') {
 		$iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -48,8 +46,7 @@ class Model_group extends MY_Model {
 		return $query->num_rows();
 	}
 
-	public function get($q = '', $field = '', $limit = 0, $offset = 0)
-	{
+	public function get($q = '', $field = '', $limit = 0, $offset = 0) {
 		$iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -79,8 +76,7 @@ class Model_group extends MY_Model {
 		return $query->result();
 	}
 
-	public function get_permission_group($group_id = false)
-	{
+	public function get_permission_group($group_id = false) {
 		if ($group_id === false) {
 			$group_id = get_user_data('id');
 		}
@@ -95,8 +91,7 @@ class Model_group extends MY_Model {
 		return $result_perm_group;
 	}
 
-	public function get_user_group_ids()
-	{
+	public function get_user_group_ids() {
 		return array_map(function($item){
 			return $item->id;
 		  }, $this->aauth->get_user_groups());

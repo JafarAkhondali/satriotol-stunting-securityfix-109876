@@ -221,10 +221,8 @@
 									})
 									.fail(function () { })
 									.always(function () { });
-
 							});
 						</script>
-
 
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">

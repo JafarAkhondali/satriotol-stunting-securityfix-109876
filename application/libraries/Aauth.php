@@ -247,8 +247,14 @@ class Aauth
 		}
 
 		$query = null;
+		$query = $this->aauth_db->select("aauth_users.*, aauth_users.id AS user_id,
+											aauth_users.email AS user_email,
+											aauth_users.username AS user_username,
+											aauth_groups.id AS group_id,
+											aauth_groups.NAME AS group_name");
 		$query = $this->aauth_db->where($db_identifier, $identifier);
 		$query = $this->aauth_db->where('banned', 0);
+		$query = $this->aauth_db->join('aauth_groups', "aauth_groups.id = aauth_users.id");
 
 		$query = $this->aauth_db->get($this->config_vars['users']);
 
@@ -262,14 +268,15 @@ class Aauth
 		}
 
 		if ($query->num_rows() != 0 && $this->verify_password($password, $row->pass)) {
-
 			// If email and pass matches
 			// create session
 			$data = array(
-				'id' => $row->id,
-				'username' => $row->username,
-				'email' => $row->email,
-				'loggedin' => TRUE
+				'id' 			=> $row->id,
+				'username' 		=> $row->username,
+				'email' 		=> $row->email,
+				'group_id' 		=> $row->group_id,
+				'group_name' 	=> $row->group_name,
+				'loggedin' 		=> TRUE
 			);
 
 			if ($set_userdata) {

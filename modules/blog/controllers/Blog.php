@@ -8,19 +8,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| For default controller
 *|
 */
-class Blog extends Front
-{
-	
-	public function __construct()
-	{
+class Blog extends Front {
+
+	public function __construct() {
 		parent::__construct();
         $this->load->model('model_blog');
 	}
-
-
  
-    public function index($offset = 0) 
-    {
+    public function index($offset = 0) {
         $this->limit_page = 5;
         
         $filter = $this->input->get('q');
@@ -41,8 +36,7 @@ class Blog extends Front
         $this->template->build('blog/blog_index', $this->data);
     }
 
-    public function category($category_id = 0, $category_name = '', $offset = 0) 
-    {
+    public function category($category_id = 0, $category_name = '', $offset = 0) {
         $this->limit_page = 5;
         
         $filter = $this->input->get('q');
@@ -63,8 +57,7 @@ class Blog extends Front
         $this->template->build('blog/blog_index', $this->data);
     }
 
-    public function tag($tag = 0, $offset = 0) 
-    {
+    public function tag($tag = 0, $offset = 0) {
         $this->limit_page = 5;
         
         $filter = $this->input->get('q');
@@ -85,8 +78,7 @@ class Blog extends Front
         $this->template->build('blog/blog_index', $this->data);
     }
 
-    public function detail($slug = null) 
-    {
+    public function detail($slug = null) {
         $blog = $this->model_blog->find_by_slug($slug);
         $this->register_unparse_html($blog);
         if (!$blog) {

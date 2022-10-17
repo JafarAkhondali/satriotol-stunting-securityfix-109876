@@ -9,13 +9,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Blog site
 *|
 */
-class Blog extends Admin	
-{
-	
-	public function __construct()
-	{
+class Blog extends Admin {
+	public function __construct() {
 		parent::__construct();
 
+        if (empty($this->session->userdata('loggedin')) || $this->session->userdata('loggedin') == false) {
+            redirect('/', 'refresh');
+        }
 
 		$this->load->model('model_blog');
 	}
@@ -25,14 +25,14 @@ class Blog extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		//$this->is_allowed('blog_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
 		$this->data['blogs'] = $this->model_blog->get($filter, $field, $this->limit_page, $offset);
+
 		$this->data['blog_counts'] = $this->model_blog->count_all($filter, $field);
 
 		$config = [
@@ -57,8 +57,7 @@ class Blog extends Admin
 	* Add new blogs
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('blog_add');
 
 		$this->template->title('Blog New');
@@ -70,8 +69,10 @@ class Blog extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
+		$user_id 	= $this->session->userdata('id');
+		$group_id 	= $this->session->userdata('group_id');
+
 		if (!$this->is_allowed('blog_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -85,21 +86,32 @@ class Blog extends Admin
 		$this->form_validation->set_rules('blog_image_name[]', 'Image', 'trim');
 		$this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('status', 'Status', 'trim|required|max_length[10]');
-		
 
 		if ($this->form_validation->run()) {
+			if ($group_id != '1') {
+				$verified_status 	= '0';
+				$verified_by 		= NULL;
+				$verified_at 		= NULL;
+			}else{
+				$verified_status 	= '1';
+				$verified_by 		= get_user_data('id');
+				$verified_at 		= date('Y-m-d H:i:s');
+			}
+
 			$slug = url_title(substr($this->input->post('title'), 0, 100));
 			$save_data = [
-				'title' => $this->input->post('title'),
-				'slug' => $slug,
-				'content' => $this->input->post('content'),
-				'tags' => $this->input->post('tags'),
-				'category' => $this->input->post('category'),
-				'author' => get_user_data('username'),
-				'status' => $this->input->post('status'),
-				'created_at' => date('Y-m-d H:i:s'),
+				'title' 			=> $this->input->post('title'),
+				'slug' 				=> $slug,
+				'content' 			=> $this->input->post('content'),
+				'tags' 				=> $this->input->post('tags'),
+				'category' 			=> $this->input->post('category'),
+				'author' 			=> get_user_data('id'),
+				'status' 			=> $this->input->post('status'),
+				'created_at' 		=> date('Y-m-d H:i:s'),
+				'verified_status' 	=> $verified_status,
+				'verified_by' 		=> $verified_by,
+				'verified_at' 		=> $verified_at,
 			];
-
 
 			if (!is_dir(FCPATH . '/uploads/blog/')) {
 				mkdir(FCPATH . '/uploads/blog/');
@@ -123,7 +135,7 @@ class Blog extends Admin
 					}
 				}
 
-				$save_data['image'] = implode($listed_image, ',');
+				$save_data['image'] = implode(',', $listed_image);
 			}
 		
 			
@@ -170,8 +182,7 @@ class Blog extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('blog_update');
 
 		$this->data['blog'] = $this->model_blog->find($id);
@@ -185,8 +196,7 @@ class Blog extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('blog_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -205,14 +215,14 @@ class Blog extends Admin
 		
 			$slug = url_title(substr($this->input->post('slug'), 0, 100));
 			$save_data = [
-				'title' => $this->input->post('title'),
-				'slug' => $slug,
-				'content' => $this->input->post('content'),
-				'tags' => $this->input->post('tags'),
-				'category' => $this->input->post('category'),
-				'author' => get_user_data('username'),
-				'status' => $this->input->post('status'),
-				'updated_at' => date('Y-m-d H:i:s'),
+				'title' 		=> $this->input->post('title'),
+				'slug' 			=> $slug,
+				'content' 		=> $this->input->post('content'),
+				'tags' 			=> $this->input->post('tags'),
+				'category' 		=> $this->input->post('category'),
+				'author' 		=> get_user_data('username'),
+				'status' 		=> $this->input->post('status'),
+				'updated_at' 	=> date('Y-m-d H:i:s'),
 			];
 
 			$listed_image = [];
@@ -239,7 +249,7 @@ class Blog extends Admin
 				}
 			}
 			
-			$save_data['image'] = implode($listed_image, ',');
+			$save_data['image'] = implode(',', $listed_image);
 		
 			
 			$save_blog = $this->model_blog->change($id, $save_data);
@@ -276,14 +286,13 @@ class Blog extends Admin
 
 		echo json_encode($this->data);
 	}
-	
+
 	/**
 	* delete Blogs
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('blog_delete');
 
 		$this->load->helper('file');
@@ -308,13 +317,37 @@ class Blog extends Admin
 		redirect_back();
 	}
 
+	/**
+	* delete Blogs
+	*
+	* @var $id String
+	*/
+	public function verified($id = null) {
+		$this->is_allowed('blog_verified');
+
+		$data = [
+			'verified_status' 	=> '1',
+			'verified_by' 		=> get_user_data('id'),
+			'verified_at' 		=> date('Y-m-d H:i:s'),
+		];
+
+		$update = $this->model_blog->change($id, $data);
+
+		if ($update) {
+            set_message(cclang('has_been_verified', 'berita'), 'success');
+        } else {
+            set_message(cclang('error_verified', 'berita'), 'error');
+        }
+
+		redirect_back();
+	}
+
 		/**
 	* View view Blogs
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('blog_view');
 
 		$this->data['blog'] = $this->model_blog->join_avaiable()->filter_avaiable()->find($id);
@@ -322,17 +355,15 @@ class Blog extends Admin
 		$this->template->title('Blog Detail');
 		$this->render('backend/standart/administrator/blog/blog_view', $this->data);
 	}
-	
+
 	/**
 	* delete Blogs
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$blog = $this->model_blog->find($id);
 
-		
 		if (!empty($blog->image)) {
 			foreach ((array) explode(',', $blog->image) as $filename) {
 				$path = FCPATH . '/uploads/blog/' . $filename;
@@ -342,7 +373,7 @@ class Blog extends Admin
 				}
 			}
 		}
-		
+
 		return $this->model_blog->remove($id);
 	}
 	
@@ -351,8 +382,7 @@ class Blog extends Admin
 	* Upload Image Blog	* 
 	* @return JSON
 	*/
-	public function upload_image_file()
-	{
+	public function upload_image_file() {
 		if (!$this->is_allowed('blog_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -374,8 +404,7 @@ class Blog extends Admin
 	* Delete Image Blog	* 
 	* @return JSON
 	*/
-	public function delete_image_file($uuid)
-	{
+	public function delete_image_file($uuid) {
 		if (!$this->is_allowed('blog_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -399,8 +428,7 @@ class Blog extends Admin
 	* Get Image Blog	* 
 	* @return JSON
 	*/
-	public function get_image_file($id)
-	{
+	public function get_image_file($id) {
 		if (!$this->is_allowed('blog_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -427,8 +455,7 @@ class Blog extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('blog_export');
 
 		$this->model_blog->export('blog', 'blog');
@@ -439,8 +466,7 @@ class Blog extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('blog_export');
 
 		$this->db->where([
