@@ -18,11 +18,8 @@ class Web extends Front
 
 	public function index()
 	{
-		if (installation_complete()) {
-			$this->home();
-		} else {
-			redirect('wizzard/language','refresh');
-		}
+        $data['sliders'] = $this->db->get('sliders')->result();
+        $this->template->build('index', $data);
 	}
 
 	public function switch_lang($lang = 'english')
