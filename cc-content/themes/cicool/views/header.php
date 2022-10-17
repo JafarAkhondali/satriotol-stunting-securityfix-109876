@@ -97,7 +97,17 @@
                             <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
                                 <div class="header__login-2 d-none d-md-flex align-items-center ml-20 pl-20">
                                     <div class="header__login-icon mr-10">
+                                <?php
+                                    if (! $this->session->userdata('loggedin') || $this->session->userdata('loggedin') == FALSE) {
+                                ?>
                                         <a href="<?= base_url();?>administrator/login">
+                                <?php
+                                    }else{
+                                ?>
+                                        <a href="<?= base_url();?>administrator/user/profile">
+                                <?php
+                                    }
+                                ?>
                                             <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M5.99995 6.83333C7.61078 6.83333 8.91662 5.5275 8.91662 3.91667C8.91662 2.30584 7.61078 1 5.99995 1C4.38912 1 3.08328 2.30584 3.08328 3.91667C3.08328 5.5275 4.38912 6.83333 5.99995 6.83333Z" stroke="#031220" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M11.0108 12.6667C11.0108 10.4092 8.76497 8.58333 5.99997 8.58333C3.23497 8.58333 0.989136 10.4092 0.989136 12.6667" stroke="#031220" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
@@ -105,7 +115,17 @@
                                         </a>
                                     </div>
                                     <div class="header__login-content">
+                                <?php
+                                    if (! $this->session->userdata('loggedin') || $this->session->userdata('loggedin') == FALSE) {
+                                ?>
                                         <p><a href="<?= base_url();?>administrator/login">Login</a></p>
+                                <?php
+                                    }else{
+                                ?>
+                                        <p><a href="<?= base_url();?>administrator/user/profile">Dashboard</a></p>
+                                <?php
+                                    }
+                                ?>
                                     </div>
                                 </div>
                                 <div class="header__hamburger ml-50 d-lg-none">
@@ -133,8 +153,13 @@
                                 </div>
                                 <nav>
                                     <ul>
-                                        <li>
-                                            <a href="<?= base_url();?>">Beranda</a>
+								<?php
+									foreach ($navigation as $navigasi) {
+										echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
+									}
+								?>
+                                        <!-- <li>
+                                            <a href="<?//= base_url();?>">Beranda</a>
                                         </li>
                                         <li>
                                             <a href="about.html">About</a>
@@ -174,7 +199,7 @@
                                         </li>
                                         <li>
                                             <a href="contact.html">Contact</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </nav>
                             </div>
@@ -227,7 +252,12 @@
                             <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
                                 <nav id="mobile-menu">
                                     <ul>
-                                        <li>
+								<?php
+									foreach ($navigation as $navigasi) {
+										echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
+									}
+								?>
+                                        <!-- <li>
                                             <a href="<?= base_url();?>">Beranda</a>
                                         </li>
                                         <li>
@@ -268,7 +298,7 @@
                                         </li>
                                         <li>
                                             <a href="contact.html">Contact</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </nav>
                             </div>
@@ -279,7 +309,17 @@
                             <div class="header__action d-none d-xl-block">
                                 <ul>
                                     <li>
-                                        <a href="<?= base_url();?>administrator/login">
+                                <?php
+                                    if (! $this->session->userdata('loggedin') || $this->session->userdata('loggedin') == FALSE) {
+                                ?>
+                                    <a href="<?= base_url();?>administrator/login">
+                                <?php
+                                    }else{
+                                ?>
+                                        <a href="<?= base_url();?>administrator/user/profile">
+                                <?php
+                                    }
+                                ?>
                                             <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.1466 8.96416C7.05493 8.95499 6.94493 8.95499 6.8441 8.96416C4.66243 8.89083 2.92993 7.10333 2.92993 4.90333C2.92993 2.65749 4.74493 0.833328 6.99993 0.833328C9.24576 0.833328 11.0699 2.65749 11.0699 4.90333C11.0608 7.10333 9.32826 8.89083 7.1466 8.96416Z" stroke="#0C140F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M2.56341 12.3467C0.345075 13.8317 0.345075 16.2517 2.56341 17.7275C5.08424 19.4142 9.21841 19.4142 11.7392 17.7275C13.9576 16.2425 13.9576 13.8225 11.7392 12.3467C9.22758 10.6692 5.09341 10.6692 2.56341 12.3467Z" stroke="#0C140F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
