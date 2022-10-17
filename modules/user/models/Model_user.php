@@ -72,7 +72,7 @@ class Model_user extends MY_Model {
         }
 
         $this->db->where($where);
-		$this->db->where_not_in('id', '1');
+		// $this->db->where_not_in('id', '1');
         $this->db->limit($limit, $offset);
         $this->sortable();
 		$query = $this->db->get($this->table_name);
