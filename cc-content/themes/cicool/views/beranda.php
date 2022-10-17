@@ -181,20 +181,15 @@
                     <div class="col-xxl-8 col-xl-9 col-lg-10 col-md-6 col-6">
                         <div class="header__bottom-left d-flex align-items-center">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="/">
                                     <img src="assets_stunting/logo-bappeda.png" alt="logo">
                                 </a>
                             </div>
                             <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
                                 <nav id="mobile-menu">
                                     <ul>
-                                        <li class="has-dropdown">
-                                            <a href="index.html">Home</a>
-                                            <ul class="submenu">
-                                                <li><a href="index.html">Home Style 1</a></li>
-                                                <li><a href="index-2.html">Home Style 2</a></li>
-                                                <li><a href="index-3.html">Home Style 3</a></li>
-                                            </ul>
+                                        <li>
+                                            <a href="/">Beranda</a>
                                         </li>
                                         <li>
                                             <a href="about.html">About</a>
