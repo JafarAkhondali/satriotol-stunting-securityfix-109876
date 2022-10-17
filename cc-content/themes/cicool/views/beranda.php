@@ -322,7 +322,7 @@
                                         <li>
                                             <div class="course__tutor-3">
                                                 <a href="#">
-                                                    <img src="assets_stunting/img/course/tutor/course-tutor-1.jpg" alt="">
+                                                    <img src="<?= base_url();?>assets_stunting/img/course/tutor/course-tutor-1.jpg" alt="">
                                                 </a>
                                             </div>
                                         </li>
@@ -387,7 +387,7 @@
                                         <li>
                                             <div class="course__tutor-3">
                                                 <a href="#">
-                                                    <img src="assets_stunting/img/course/tutor/course-tutor-2.jpg" alt="">
+                                                    <img src="<?= base_url();?>assets_stunting/img/course/tutor/course-tutor-2.jpg" alt="">
                                                 </a>
                                             </div>
                                         </li>
@@ -451,7 +451,7 @@
                                         <li>
                                             <div class="course__tutor-3">
                                                 <a href="#">
-                                                    <img src="assets_stunting/img/course/tutor/course-tutor-3.jpg" alt="">
+                                                    <img src="<?= base_url();?>assets_stunting/img/course/tutor/course-tutor-3.jpg" alt="">
                                                 </a>
                                             </div>
                                         </li>
@@ -466,7 +466,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-xxl-8 col-xl-8 col-lg-8">
-                        <div class="course__enroll-wrapper mt-40 p-relative d-sm-flex align-items-center justify-content-between include-bg" data-background="assets_stunting/img/course/bg/course-bg.png">
+                        <div class="course__enroll-wrapper mt-40 p-relative d-sm-flex align-items-center justify-content-between include-bg" data-background="<?= base_url();?>assets_stunting/img/course/bg/course-bg.png">
                             <div class="course__enroll-icon">
                                 <span>
                                     <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -507,7 +507,7 @@
             <div class="container">
                 <div class="certificate__inner grey-bg-9 p-relative">
                     <div class="certificate__thumb">
-                        <img src="assets_stunting/img/certificate/certificate.png" alt="">
+                        <img src="<?= base_url();?>assets_stunting/img/certificate/certificate.png" alt="">
                     </div>
                     <div class="row">
                         <div class="col-xxl-7">
@@ -549,7 +549,7 @@
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                         <div class="price__banner theme-bg-3 mb-30 fix p-relative">
                             <div class="price__shape">
-                                <img src="assets_stunting/img/price/price-shape.png" alt="">
+                                <img src="<?= base_url();?>assets_stunting/img/price/price-shape.png" alt="">
                             </div>
                             <div class="price__banner-content p-relative z-index-1">
                                 <h3>
@@ -561,7 +561,7 @@
                                 <a href="contact.html" class="tp-price-btn">Choose Plan</a>
                             </div>
                             <div class="price__thumb">
-                                <img src="assets_stunting/img/price/price-thumb.png" alt="">
+                                <img src="<?= base_url();?>assets_stunting/img/price/price-thumb.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -708,8 +708,8 @@
             <div class="container">
                 <div class="app__inner theme-bg-3 p-relative fix">
                     <div class="app__shape">
-                        <img class="app__shape-1" src="assets_stunting/img/app/app-shape-1.png" alt="">
-                        <img class="app__shape-2" src="assets_stunting/img/app/app-shape-2.png" alt="">
+                        <img class="app__shape-1" src="<?= base_url();?>assets_stunting/img/app/app-shape-1.png" alt="">
+                        <img class="app__shape-2" src="<?= base_url();?>assets_stunting/img/app/app-shape-2.png" alt="">
                     </div>
                     <div class="row align-items-center">
                         <div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -721,13 +721,13 @@
                             <div class="app__download p-relative z-index-1 d-sm-flex align-items-center justify-content-lg-end">
                                 <div class="app__item mr-15">
                                     <a href="#">
-                                        <span><img src="assets_stunting/img/app/google-play.png" alt=""></span>
+                                        <span><img src="<?= base_url();?>assets_stunting/img/app/google-play.png" alt=""></span>
                                         Google play
                                     </a>
                                 </div>
                                 <div class="app__item">
                                     <a href="#" class="active">
-                                        <span class="apple"><img src="assets_stunting/img/app/apple.png" alt=""></span>
+                                        <span class="apple"><img src="<?= base_url();?>assets_stunting/img/app/apple.png" alt=""></span>
                                         Apple Store
                                     </a>
                                 </div>

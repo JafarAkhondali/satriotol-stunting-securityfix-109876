@@ -9,28 +9,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
-    <!-- <link rel="shortcut icon" type="image/x-icon" href="assets_stunting/favicon/favicon.ico"> -->
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="<?= base_url();?>assets_stunting/favicon/favicon.ico"> -->
 
-    <link rel="apple-touch-icon" sizes="180x180" href="assets_stunting/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets_stunting/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets_stunting/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets_stunting/favicon/site.webmanifest">
-    <link rel="mask-icon" href="assets_stunting/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url();?>assets_stunting/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url();?>assets_stunting/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url();?>assets_stunting/favicon/favicon-16x16.png">
+    <link rel="manifest" href="<?= base_url();?>assets_stunting/favicon/site.webmanifest">
+    <link rel="mask-icon" href="<?= base_url();?>assets_stunting/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets_stunting/css/bootstrap.css">
-    <link rel="stylesheet" href="assets_stunting/css/meanmenu.css">
-    <link rel="stylesheet" href="assets_stunting/css/animate.css">
-    <link rel="stylesheet" href="assets_stunting/css/owl-carousel.css">
-    <link rel="stylesheet" href="assets_stunting/css/swiper-bundle.css">
-    <link rel="stylesheet" href="assets_stunting/css/backtotop.css">
-    <link rel="stylesheet" href="assets_stunting/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets_stunting/css/nice-select.css">
-    <link rel="stylesheet" href="assets_stunting/css/font-awesome-pro.css">
-    <link rel="stylesheet" href="assets_stunting/css/spacing.css">
-    <link rel="stylesheet" href="assets_stunting/css/style.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/bootstrap.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/meanmenu.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/animate.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/owl-carousel.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/swiper-bundle.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/backtotop.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/magnific-popup.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/nice-select.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/font-awesome-pro.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/spacing.css">
+    <link rel="stylesheet" href="<?= base_url();?>assets_stunting/css/style.css">
 
     <style type="text/css">
         .carousel-caption {
@@ -64,7 +64,7 @@
                 <!-- <svg id="loader">
 					<path id="corners" d="m 0 12.5 l 0 -12.5 l 50 0 l 0 50 l -50 0 l 0 -50.5" />
 				</svg> -->
-                <img src="assets_stunting/favicon/android-chrome-192x192.png" alt="">
+                <img src="<?= base_url();?>assets_stunting/favicon/android-chrome-192x192.png" alt="">
             </div>
         </div>
     </div>
@@ -88,8 +88,8 @@
                         </div>
                         <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-6">
                             <div class="logo text-lg-center">
-                                <a href="index.html">
-                                    <img src="assets_stunting/logo-bappeda.png" alt="logo">
+                                <a href="<?= base_url();?>">
+                                    <img src="<?= base_url();?>assets_stunting/logo-bappeda.png" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                             <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
                                 <div class="header__login-2 d-none d-md-flex align-items-center ml-20 pl-20">
                                     <div class="header__login-icon mr-10">
-                                        <a href="/administrator/login">
+                                        <a href="<?= base_url();?>administrator/login">
                                             <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M5.99995 6.83333C7.61078 6.83333 8.91662 5.5275 8.91662 3.91667C8.91662 2.30584 7.61078 1 5.99995 1C4.38912 1 3.08328 2.30584 3.08328 3.91667C3.08328 5.5275 4.38912 6.83333 5.99995 6.83333Z" stroke="#031220" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M11.0108 12.6667C11.0108 10.4092 8.76497 8.58333 5.99997 8.58333C3.23497 8.58333 0.989136 10.4092 0.989136 12.6667" stroke="#031220" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
@@ -105,7 +105,7 @@
                                         </a>
                                     </div>
                                     <div class="header__login-content">
-                                        <p><a href="/administrator/login">Login</a></p>
+                                        <p><a href="<?= base_url();?>administrator/login">Login</a></p>
                                     </div>
                                 </div>
                                 <div class="header__hamburger ml-50 d-lg-none">
@@ -134,7 +134,7 @@
                                 <nav>
                                     <ul>
                                         <li>
-                                            <a href="/">Beranda</a>
+                                            <a href="<?= base_url();?>">Beranda</a>
                                         </li>
                                         <li>
                                             <a href="about.html">About</a>
@@ -220,15 +220,15 @@
                     <div class="col-xxl-8 col-xl-9 col-lg-10 col-md-6 col-6">
                         <div class="header__bottom-left d-flex align-items-center">
                             <div class="logo">
-                                <a href="/">
-                                    <img src="assets_stunting/logo-bappeda.png" alt="logo">
+                                <a href="<?= base_url();?>">
+                                    <img src="<?= base_url();?>assets_stunting/logo-bappeda.png" alt="logo">
                                 </a>
                             </div>
                             <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
                                 <nav id="mobile-menu">
                                     <ul>
                                         <li>
-                                            <a href="/">Beranda</a>
+                                            <a href="<?= base_url();?>">Beranda</a>
                                         </li>
                                         <li>
                                             <a href="about.html">About</a>
@@ -279,7 +279,7 @@
                             <div class="header__action d-none d-xl-block">
                                 <ul>
                                     <li>
-                                        <a href="sign-in.html">
+                                        <a href="<?= base_url();?>administrator/login">
                                             <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.1466 8.96416C7.05493 8.95499 6.94493 8.95499 6.8441 8.96416C4.66243 8.89083 2.92993 7.10333 2.92993 4.90333C2.92993 2.65749 4.74493 0.833328 6.99993 0.833328C9.24576 0.833328 11.0699 2.65749 11.0699 4.90333C11.0608 7.10333 9.32826 8.89083 7.1466 8.96416Z" stroke="#0C140F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M2.56341 12.3467C0.345075 13.8317 0.345075 16.2517 2.56341 17.7275C5.08424 19.4142 9.21841 19.4142 11.7392 17.7275C13.9576 16.2425 13.9576 13.8225 11.7392 12.3467C9.22758 10.6692 5.09341 10.6692 2.56341 12.3467Z" stroke="#0C140F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -313,7 +313,7 @@
                             <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
                                 <div class="offcanvas__logo logo">
                                     <a href="index.html">
-                                        <img src="assets_stunting/img/logo/logo-3.png" alt="logo">
+                                        <img src="<?= base_url();?>assets_stunting/img/logo/logo-3.png" alt="logo">
                                     </a>
                                 </div>
                                 <div class="offcanvas__close">
