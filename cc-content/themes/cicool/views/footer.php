@@ -10,7 +10,7 @@
 								<div class="footer__logo">
 									<div class="logo">
 										<a href="index.html">
-											<img src="assets_stunting/img/logo/logo-3.png" alt="">
+											<img src="assets_stunting/logo-bappeda.png" alt="">
 										</a>
 									</div>
 								</div>
@@ -19,12 +19,6 @@
 										<div class="footer__subscribe footer__subscribe-3">
 											<p>Educal University does not discriminate on the basis of race, nationa.
 											</p>
-											<form action="#">
-												<div class="footer__subscribe-input">
-													<input type="text" placeholder="Email">
-													<button type="submit" class="tp-btn-subscribe">Subscribe</button>
-												</div>
-											</form>
 										</div>
 									</div>
 								</div>
