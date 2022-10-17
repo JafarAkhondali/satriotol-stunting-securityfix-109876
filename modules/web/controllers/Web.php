@@ -19,7 +19,7 @@ class Web extends Front
 	public function index()
 	{
         $data['sliders'] = $this->db->get('sliders')->result();
-        $this->template->build('index', $data);
+        $this->template->build('beranda', $data);
 	}
 
 	public function switch_lang($lang = 'english')
