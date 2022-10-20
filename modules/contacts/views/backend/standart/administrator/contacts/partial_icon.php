@@ -3,7 +3,6 @@
         <br>
 
         <div class="col-sm-4  col-sm-4">
-
             <select class="form-control " name="category-icon-filter" id="category-icon-filter" tabi-ndex="5" data-placeholder="Select Parent"></select>
         </div>
         <div class="col-sm-4 col-sm-4"></div>

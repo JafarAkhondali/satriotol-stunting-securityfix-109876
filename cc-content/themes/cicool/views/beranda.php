@@ -1,7 +1,5 @@
 <?= get_header(); ?>
 
-
-
 <main>
     <!-- slider area start -->
     <section class="slider__area">
@@ -13,12 +11,11 @@
                         <div class="carousel-caption">
                             <h2><?php echo $slider->slider_title; ?></h2>
                             <div class="carousel-caption-description">
-                                <p><?php echo $slider->slider_title; ?></p>
+                                <p><?php echo $slider->slider_subtitle; ?></p>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
-
             </div>
             <div class="main-slider-paginations main-slider-paginations-2">
                 <button class="slider-button-next"><i class="fa-regular fa-arrow-right"></i></button>
@@ -32,7 +29,7 @@
         <div class="container">
             <div class="certificate__inner grey-bg-9 p-relative">
                 <div class="certificate__thumb">
-                    <img src="<?= base_url(); ?>assets_stunting/img/certificate/certificate.png" alt="">
+                    <img src="<?= base_url();?>assets_stunting/img/certificate/certificate.png" alt="">
                 </div>
                 <div class="row">
                     <div class="col-xxl-6">
@@ -43,7 +40,7 @@
                             </div>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem molestias aspernatur eligendi adipisci eum saepe aliquam soluta necessitatibus dolorem facilis rerum, incidunt expedita eaque quas cumque tempora laborum laboriosam quis?</p>
                             <div class="certificate__links d-sm-flex align-items-center">
-                                <a href="" class="play-video"><i class="fas fa-book"></i> Lihat Selengkapnya</a>
+                                <!-- <a href="" class="play-video"><i class="fas fa-book"></i> Lihat Selengkapnya</a> -->
                             </div>
                         </div>
                     </div>

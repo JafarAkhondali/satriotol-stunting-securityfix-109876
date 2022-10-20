@@ -213,7 +213,6 @@
 									<?php endforeach; ?>
 								</select>
 								<small class="info help-block">
-
 									group is allowed to access this menu.
 								</small>
 							</div>
