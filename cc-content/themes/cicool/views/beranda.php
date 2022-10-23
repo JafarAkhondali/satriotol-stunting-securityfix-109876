@@ -66,7 +66,7 @@
                         <div class="course__item white-bg transition-3 mb-30">
                             <div class="course__thumb w-img fix">
                                 <a href="course-details.html">
-                                    <img src="assets_stunting/img/course/course-1.jpg" alt="">
+                                    <img src="<?php echo base_url();?>uploads/blog/<?= $blog->image;?>" alt="">
                                 </a>
                             </div>
                             <div class="course__content p-relative">
