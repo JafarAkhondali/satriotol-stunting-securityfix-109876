@@ -94,7 +94,7 @@ class Blog extends Admin {
 				$verified_at 		= NULL;
 			}else{
 				$verified_status 	= '1';
-				$verified_by 		= get_user_data('id');
+				$verified_by 		= $user_id;
 				$verified_at 		= date('Y-m-d H:i:s');
 			}
 
@@ -105,7 +105,7 @@ class Blog extends Admin {
 				'content' 			=> $this->input->post('content'),
 				'tags' 				=> $this->input->post('tags'),
 				'category' 			=> $this->input->post('category'),
-				'author' 			=> get_user_data('id'),
+				'author' 			=> $user_id,
 				'status' 			=> $this->input->post('status'),
 				'created_at' 		=> date('Y-m-d H:i:s'),
 				'verified_status' 	=> $verified_status,
@@ -137,8 +137,7 @@ class Blog extends Admin {
 
 				$save_data['image'] = implode(',', $listed_image);
 			}
-		
-			
+
 			$save_blog = $this->model_blog->store($save_data);
 
 			if ($save_blog) {
