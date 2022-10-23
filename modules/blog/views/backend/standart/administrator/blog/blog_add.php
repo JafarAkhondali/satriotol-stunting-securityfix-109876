@@ -75,13 +75,11 @@
 								<i class="required">*</i>
 							</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" name="title" id="title" placeholder="Title"
-									value="<?= set_value('title'); ?>">
+								<input type="text" class="form-control" name="title" id="title" placeholder="Title" value="<?= set_value('title'); ?>">
 								<small class="info help-block">
 									<span class="info help-block">
 										<?= site_url('blog/') ?>
-										<span contenteditable="true" class="blog-slug"></span> <i class="fa fa-pencil"
-											title="Custom URL"></i>
+										<span contenteditable="true" class="blog-slug"></span> <i class="fa fa-pencil" title="Custom URL"></i>
 									</span>
 								</small>
 							</div>
@@ -235,17 +233,13 @@
 <!-- Page script -->
 <script>
 	$(document).ready(function () {
-
-
 		$(document).on('keyup', '#title', function (event) {
 			var link = $(this).val().replaceAll(/[^0-9a-z]/gi, '-').replaceAll(/_+/g, '-').toLowerCase();
-			var title = $(this).val().replaceAll(/[^0-9a-z\.\? ]/gi, ' ').toLowerCase().replaceAll(/ +/g,
-				' ').toLowerCase();
+			// var title = $(this).val().replaceAll(/[^0-9a-z\.\? ]/gi, ' ').toLowerCase().replaceAll(/ +/g, ' ').toLowerCase();
 
 			$('.blog-slug').html(link);
-			$('#title').val(title);
+			// $('#title').val(title);
 		});
-
 
 		$(document).on('focusout', '.blog-slug', function (event) {
 			var link = $(this).html().replaceAll(/[^0-9a-z]/gi, '-').replaceAll(/-+/g, '-').toLowerCase();
