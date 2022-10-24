@@ -106,9 +106,9 @@
 											if ($blog->verified_status == '0') {
 												$verified = '<label class="label label-danger">Belum diverifikasi</label>&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Harap konfimasi dengan Administrator"></i>';
 
-												is_allowed('blog_verified', function() use ($blog) {
-													$btn_verif = '<a href="javascript:void(0);" data-href="'.site_url('administrator/blog/verified/'.$blog->id).'" class="btn btn-primary verif-data" data-toggle="tooltip" data-placement="top" title="Verifikasi"><i class="fa fa-check-square-o"></i></a>';
-												});
+												// is_allowed('blog_verified', function() use ($blog) {
+												// 	$btn_verif = '<a href="javascript:void(0);" data-href="'.site_url('administrator/blog/verified/'.$blog->id).'" class="btn btn-primary verif-data" data-toggle="tooltip" data-placement="top" title="Verifikasi"><i class="fa fa-check-square-o"></i></a>';
+												// });
 											}else{
 												$verified = '<label class="label label-success">Diverifikasi</label>';
 											}
