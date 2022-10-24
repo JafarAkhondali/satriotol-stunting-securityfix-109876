@@ -88,18 +88,19 @@ class Blog extends Admin {
 		$this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('status', 'Status', 'trim|required|max_length[10]');
 
-		if ($this->form_validation->run()) {
-			if ($group_id != '1') {
-				$verified_status 	= '0';
-				$verified_by 		= NULL;
-				$verified_at 		= NULL;
-			}else{
-				$verified_status 	= '1';
-				$verified_by 		= $user_id;
-				$verified_at 		= date('Y-m-d H:i:s');
-			}
+		if ($group_id != '1') {
+			$verified_status 	= '0';
+			$verified_by 		= null;
+			$verified_at 		= null;
+		}else{
+			$verified_status 	= '1';
+			$verified_by 		= $user_id;
+			$verified_at 		= date('Y-m-d H:i:s');
+		}
 
+		if ($this->form_validation->run()) {
 			$slug = url_title(substr($this->input->post('title'), 0, 100));
+
 			$save_data = [
 				'title' 			=> $this->input->post('title'),
 				'slug' 				=> $slug,
