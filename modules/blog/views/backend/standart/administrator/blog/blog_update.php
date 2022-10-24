@@ -23,7 +23,6 @@
 			$('.btn_save_back').trigger('click');
 			return false;
 		});
-
 	}
 
 	jQuery(document).ready(domo);
@@ -40,10 +39,10 @@
 	</ol>
 </section>
 <?= form_open(base_url('administrator/blog/edit_save/'.$this->uri->segment(4)), [
-'name'    => 'form_blog', 
-'class'   => 'form-horizontal', 
-'id'      => 'form_blog', 
-'method'  => 'POST'
+	'name'    => 'form_blog', 
+	'class'   => 'form-horizontal', 
+	'id'      => 'form_blog', 
+	'method'  => 'POST'
 ]); ?>
 
 
@@ -70,9 +69,11 @@
 								<i class="required">*</i>
 							</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" name="title" id="title" placeholder="Title" value="<?= set_value('title', $blog->title); ?>">
+								<input type="text" class="form-control" name="title" id="title" placeholder="Title"
+									value="<?= set_value('title', $blog->title); ?>">
 								<span class="info help-block"><?= site_url('blog/') ?>
-									<span contenteditable="true" class="blog-slug"><?= $blog->slug ?></span> <i class="fa fa-pencil" title="Custom URL"></i>
+									<span contenteditable="true" class="blog-slug"><?= $blog->slug ?></span> <i
+										class="fa fa-pencil" title="Custom URL"></i>
 								</span>
 							</div>
 						</div>
@@ -89,8 +90,8 @@
 							</div>
 						</div>
 
-
 						<div class="message"></div>
+
 						<div class="row-fluid col-md-7">
 							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay'
 								title="<?= cclang('save_button'); ?> (Ctrl+s)">
@@ -125,10 +126,8 @@
 					<!-- Widget: user widget style 1 -->
 
 					<!-- Add the bg color to the header using any of the bg-* classes -->
-
 					<div class="clear"></div>
 					<br>
-
 
 					<div class="form-group ">
 						<label for="status" class="col-sm-3 control-label">Status
@@ -145,7 +144,6 @@
 							</select>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -159,7 +157,6 @@
 					<!-- Widget: user widget style 1 -->
 
 					<!-- Add the bg color to the header using any of the bg-* classes -->
-
 					<div class="clear"></div>
 					<br>
 
@@ -180,7 +177,6 @@
 					<div class="row"></div>
 					<br>
 
-
 					<div class="form-group ">
 						<label for="tags" class="col-sm-3 control-label">Tags
 						</label>
@@ -191,8 +187,6 @@
 							</small>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -206,9 +200,7 @@
 					<!-- Widget: user widget style 1 -->
 
 					<!-- Add the bg color to the header using any of the bg-* classes -->
-
 					<div class="clear"></div>
-
 
 					<div class="form-group ">
 						<div class="col-sm-12">
@@ -221,14 +213,13 @@
 								<?php endforeach; ?>
 							</div>
 							<small class="info help-block">
-								<b>Extension file must</b> JPG,JPEG,PNG.</small>
+								<b>Extension file must</b> JPG,JPEG,PNG.<br />
+								Ukuran gambar yang disarankan : <b>760 x 405</b>
+							</small>
 						</div>
 					</div>
-
 				</div>
 			</div>
-
-
 		</div>
 </section>
 <?= form_close(); ?>
@@ -245,15 +236,14 @@
 			// $('#title').val(title);
 		});
 
-
 		$(document).on('focusout', '.blog-slug', function (event) {
 
 			var link = $(this).html().replaceAll(/[^0-9a-z]/gi, '-').replaceAll(/-+/g, '-').toLowerCase();
 
 			$('.blog-slug').html(link);
 		});
-		$(document).on('keyup', '.blog-slug', function (event) {
 
+		$(document).on('keyup', '.blog-slug', function (event) {
 			if (event.keyCode == 13) {
 				return false;
 			}
@@ -346,7 +336,6 @@
 		}); /*end btn save*/
 
 
-
 		var params = {};
 		params[csrf] = token;
 
@@ -401,7 +390,6 @@
 				}
 			}
 		}); /*end image galery*/
-
 
 	}); /*end doc ready*/
 </script>

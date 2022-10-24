@@ -59,7 +59,7 @@
 			<div class="row">
 				<div class="col-xxl-12">
 					<div class="section__title-wrapper text-center mb-60">
-						<span class="section__title-pre">Top Courses</span>
+						<!-- <span class="section__title-pre">Top Courses</span> -->
 						<h2 class="section__title section__title-44">Berita Terbaru</h2>
 						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing aelit, sed do eiusmod</p> -->
 					</div>
@@ -81,22 +81,25 @@
 							<h3 class="course__title">
 								<a href="course-details.html"><?php echo $blog->title; ?></a>
 							</h3>
-							<p>A beginner’s guide to designing or renovating interior spaces that pop.</p>
+							<p>
+						<?php
+							if (strlen($blog->content) < 120) {
+								echo strip_tags($blog->content);
+							}else{
+								echo strip_tags(substr($blog->content, 0, 120)).'...';
+							}
+						?>
+							</p>
 
 							<div class="course__bottom d-sm-flex align-items-center justify-content-between">
 								<div class="course__tutor">
-									<a href="javascript:void(0);"><i class="fa fa-user"></i> Administrator</a>
+									<a href="javascript:void(0);"><i class="fa fa-user"></i> <?= ucwords(strtolower($blog->user_username));?></a>
 								</div>
-								<!-- <div class="course__lesson">
-                                        <a href="#"><svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 12.2V4.49999C1 1.7 1.70588 1 4.52941 1H9.47059C12.2941 1 13 1.7 13 4.49999V11.5C13 11.598 13 11.696 12.9929 11.794" stroke="#49535B" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M3.01176 10.0999H13V12.5498C13 13.9008 11.8918 14.9998 10.5294 14.9998H3.47059C2.10824 14.9998 1 13.9008 1 12.5498V12.0948C1 10.9959 1.90353 10.0999 3.01176 10.0999Z" stroke="#49535B" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M4.17647 4.5H9.82353" stroke="#49535B" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M4.17647 6.94995H7.70589" stroke="#49535B" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                            12 Lessons
-                                        </a>
-                                    </div> -->
+						<?php
+							if (strlen($blog->content) > 120) {
+								echo '<div class="course__lesson"><a href="javascript:void(0);">Read more</a></div>';
+							}
+						?>
 							</div>
 						</div>
 					</div>
@@ -106,7 +109,7 @@
 		</div>
 	</section>
 	<!-- course area start -->
-	<section class="course__area pt-115 pb-120 grey-bg-4">
+	<!-- <section class="course__area pt-115 pb-120 grey-bg-4">
 		<div class="container">
 			<div class="row">
 				<div class="col-xxl-12">
@@ -404,7 +407,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!-- course area end -->
 	<!-- faq area start -->
 	<section class="faq__area pt-20 pb-130">

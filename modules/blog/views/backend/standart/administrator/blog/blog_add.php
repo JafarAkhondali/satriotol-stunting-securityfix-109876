@@ -215,7 +215,7 @@
 							<div id="blog_image_galery_listed"></div>
 							<small class="info help-block">
 								<b>Extension file must</b> JPG,JPEG,PNG.<br/>
-								Ukuran gambar yang disarankan : <b>320 x 220</b>
+								Ukuran gambar yang disarankan : <b>760 x 405</b>
 							</small>
 						</div>
 					</div>

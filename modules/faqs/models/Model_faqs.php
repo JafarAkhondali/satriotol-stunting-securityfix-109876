@@ -2,14 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_faqs extends MY_Model {
-
     private $primary_key    = 'faq_id';
     private $table_name     = 'faqs';
-    public $field_search   = ['faq_question', 'faq_answer', 'faq_createAt', 'faq_user'];
-    public $sort_option = ['faq_id', 'DESC'];
+    public $field_search    = ['faq_question', 'faq_answer', 'faq_createAt', 'faq_user'];
+    public $sort_option     = ['faq_id', 'DESC'];
     
-    public function __construct()
-    {
+    public function __construct() {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -20,8 +18,7 @@ class Model_faqs extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null)
-    {
+    public function count_all($q = null, $field = null) {
         $iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -40,6 +37,7 @@ class Model_faqs extends MY_Model {
                 } else {
                     $where .= "OR " .  $f_search . " LIKE '%" . $q . "%' ";
                 }
+
                 $iterasi++;
             }
 
@@ -55,8 +53,7 @@ class Model_faqs extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
-    {
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
         $iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -99,17 +96,16 @@ class Model_faqs extends MY_Model {
     }
 
     public function join_avaiable() {
-        
-        $this->db->select('faqs.*');
-
+        $this->db->select('faqs.*, aauth_users.id AS user_id, aauth_users.username AS user_username,');
+        $this->db->join('aauth_users', 'faqs.faq_user = aauth_users.id');
 
         return $this;
     }
 
     public function filter_avaiable() {
-
         if (!$this->aauth->is_admin()) {
-            }
+            $this->db->where($this->table_name.'.faq_user', get_user_data('id'));
+        }
 
         return $this;
     }

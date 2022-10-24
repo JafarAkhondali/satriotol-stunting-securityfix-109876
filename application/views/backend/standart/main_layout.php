@@ -40,6 +40,14 @@
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	<?= $this->cc_html->getCssFileTop(); ?>
 
+	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url();?>assets_stunting/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url();?>assets_stunting/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url();?>assets_stunting/favicon/favicon-16x16.png">
+    <link rel="manifest" href="<?= base_url();?>assets_stunting/favicon/site.webmanifest">
+    <link rel="mask-icon" href="<?= base_url();?>assets_stunting/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 /**
 *| --------------------------------------------------------------------------
 *| Faqs Controller
@@ -9,11 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Faqs site
 *|
 */
-class Faqs extends Admin	
-{
-	
-	public function __construct()
-	{
+class Faqs extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_faqs');
@@ -26,8 +22,7 @@ class Faqs extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('faqs_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +48,7 @@ class Faqs extends Admin
 	* Add new faqss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('faqs_add');
 
 		$this->template->title('Faqs New');
@@ -66,8 +60,7 @@ class Faqs extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('faqs_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,42 +68,22 @@ class Faqs extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('faq_question', 'Pertanyaan', 'trim|required|max_length[255]');
-		
-
 		$this->form_validation->set_rules('faq_answer', 'Jawaban', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'faq_question' => $this->input->post('faq_question'),
-				'faq_answer' => $this->input->post('faq_answer'),
+				'faq_question' 	=> $this->input->post('faq_question'),
+				'faq_answer' 	=> $this->input->post('faq_answer'),
+				'faq_createAt' 	=> date('Y-m-d H:i:s'),
+				'faq_user' 		=> get_user_data('id'),
 			];
-
-			
-			
-//$save_data['_example'] = $this->input->post('_example');
-			
-
-
-
-			
 			
 			$save_faqs = $id = $this->model_faqs->store($save_data);
-            
 
 			if ($save_faqs) {
-				
 				$id = $save_faqs;
-				
-				
-					
 				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
@@ -138,7 +111,6 @@ class Faqs extends Admin
 					$this->data['redirect'] = base_url('administrator/faqs');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -153,8 +125,7 @@ class Faqs extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('faqs_update');
 
 		$this->data['faqs'] = $this->model_faqs->find($id);
@@ -168,8 +139,7 @@ class Faqs extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('faqs_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -177,38 +147,20 @@ class Faqs extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('faq_question', 'Pertanyaan', 'trim|required|max_length[255]');
-		
 
+		$this->form_validation->set_rules('faq_question', 'Pertanyaan', 'trim|required|max_length[255]');
 		$this->form_validation->set_rules('faq_answer', 'Jawaban', 'trim|required');
 		
-
-		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'faq_question' => $this->input->post('faq_question'),
-				'faq_answer' => $this->input->post('faq_answer'),
+				'faq_question' 	=> $this->input->post('faq_question'),
+				'faq_answer' 	=> $this->input->post('faq_answer'),
+				'faq_updateAt' 	=> date('Y-m-d H:i:s'),
 			];
-
-			
-
-			
-//$save_data['_example'] = $this->input->post('_example');
-			
-
-
-			
 			
 			$save_faqs = $this->model_faqs->change($id, $save_data);
 
 			if ($save_faqs) {
-
-				
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -247,8 +199,7 @@ class Faqs extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('faqs_delete');
 
 		$this->load->helper('file');
@@ -278,8 +229,7 @@ class Faqs extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('faqs_view');
 
 		$this->data['faqs'] = $this->model_faqs->join_avaiable()->filter_avaiable()->find($id);
@@ -293,11 +243,8 @@ class Faqs extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$faqs = $this->model_faqs->find($id);
-
-		
 		
 		return $this->model_faqs->remove($id);
 	}
@@ -308,15 +255,10 @@ class Faqs extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('faqs_export');
 
-		$this->model_faqs->export(
-			'faqs', 
-			'faqs',
-			$this->model_faqs->field_search
-		);
+		$this->model_faqs->export('faqs', 'faqs', $this->model_faqs->field_search);
 	}
 
 	/**
@@ -324,25 +266,23 @@ class Faqs extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('faqs_export');
 
 		$this->model_faqs->pdf('faqs', 'faqs');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('faqs_export');
 
 		$table = $title = 'faqs';
 		$this->load->library('HtmlPdf');
       
         $config = array(
-            'orientation' => 'p',
-            'format' => 'a4',
-            'marges' => array(5, 5, 5, 5)
+            'orientation' 	=> 'p',
+            'format' 		=> 'a4',
+            'marges' 		=> array(5, 5, 5, 5)
         );
 
         $this->pdf = new HtmlPdf($config);
@@ -354,9 +294,9 @@ class Faqs extends Admin
         $fields = $result->list_fields();
 
         $content = $this->pdf->loadHtmlPdf('core_template/pdf/pdf_single', [
-            'data' => $data,
-            'fields' => $fields,
-            'title' => $title
+            'data' 		=> $data,
+            'fields' 	=> $fields,
+            'title' 	=> $title
         ], TRUE);
 
         $this->pdf->initialize($config);

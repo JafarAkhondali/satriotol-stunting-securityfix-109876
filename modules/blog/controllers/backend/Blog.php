@@ -219,7 +219,7 @@ class Blog extends Admin {
 				'content' 		=> $this->input->post('content'),
 				'tags' 			=> $this->input->post('tags'),
 				'category' 		=> $this->input->post('category'),
-				'author' 		=> get_user_data('username'),
+				'author' 		=> get_user_data('id'),
 				'status' 		=> $this->input->post('status'),
 				'updated_at' 	=> date('Y-m-d H:i:s'),
 			];
