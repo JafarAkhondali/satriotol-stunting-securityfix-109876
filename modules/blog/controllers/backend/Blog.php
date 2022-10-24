@@ -77,7 +77,8 @@ class Blog extends Admin {
 			echo json_encode([
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
-				]);
+			]);
+
 			exit;
 		}
 
@@ -167,7 +168,6 @@ class Blog extends Admin {
 					$this->data['redirect'] = base_url('administrator/blog');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = validation_errors();

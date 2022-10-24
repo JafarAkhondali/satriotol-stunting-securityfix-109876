@@ -11,6 +11,8 @@ class Model_web extends MY_Model {
 		$this->db->from('blog');
 		$this->db->join('blog_category', 'blog.category = blog_category.category_id');
 		$this->db->join('aauth_users', 'blog.author = aauth_users.id');
+		$this->db->order_by('blog.id', 'DESC');
+		$this->db->limit(6);
 
 		return $this->db->where('verified_status', '1')->get();
 	}
