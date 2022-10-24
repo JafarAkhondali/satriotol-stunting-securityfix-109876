@@ -48,6 +48,7 @@ class Model_blog extends MY_Model {
 		}
 		$this->join_avaiable()->filter_avaiable();
         $this->db->where($where);
+		$this->db->order_by('blog.id', 'DESC');
 		$query = $this->db->get($this->table_name);
 
 		return $query->num_rows();
