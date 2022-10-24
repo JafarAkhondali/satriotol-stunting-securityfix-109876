@@ -157,13 +157,13 @@
 
 												
 												echo $status.'<br/>'.$verified;
-												if (in_array($group_id, $group_allowed)) {
+												// if (in_array($group_id, $group_allowed)) {
 													if ($blog->verified_status == '0') {
 														is_allowed('blog_verified', function() use ($blog) {
 															echo '<br/><a href="javascript:void(0);" data-href="'.site_url('administrator/blog/verified/'.$blog->id).'" class="btn btn-sm btn-success verif-data">Verifikasi</a>';
 														});
 													}
-												}
+												// }
 											?>
 											</td>
 											<td>
