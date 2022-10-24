@@ -90,8 +90,8 @@ class Blog extends Admin {
 
 		if ($group_id != '1') {
 			$verified_status 	= '0';
-			$verified_by 		= null;
-			$verified_at 		= null;
+			$verified_by 		= '';
+			$verified_at 		= '';
 		}else{
 			$verified_status 	= '1';
 			$verified_by 		= $user_id;
@@ -212,7 +212,6 @@ class Blog extends Admin {
 		$this->form_validation->set_rules('status', 'Status', 'trim|required|max_length[10]');
 		
 		if ($this->form_validation->run()) {
-		
 			$slug = url_title(substr($this->input->post('slug'), 0, 100));
 			$save_data = [
 				'title' 		=> $this->input->post('title'),
@@ -220,7 +219,6 @@ class Blog extends Admin {
 				'content' 		=> $this->input->post('content'),
 				'tags' 			=> $this->input->post('tags'),
 				'category' 		=> $this->input->post('category'),
-				'author' 		=> get_user_data('id'),
 				'status' 		=> $this->input->post('status'),
 				'updated_at' 	=> date('Y-m-d H:i:s'),
 			];
