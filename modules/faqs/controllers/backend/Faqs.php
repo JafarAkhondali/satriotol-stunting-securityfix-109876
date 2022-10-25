@@ -28,8 +28,8 @@ class Faqs extends Admin {
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['faqss'] = $this->model_faqs->get($filter, $field, $this->limit_page, $offset);
-		$this->data['faqs_counts'] = $this->model_faqs->count_all($filter, $field);
+		$this->data['faqss'] 		= $this->model_faqs->get($filter, $field, $this->limit_page, $offset);
+		$this->data['faqs_counts']	= $this->model_faqs->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/faqs/index/',

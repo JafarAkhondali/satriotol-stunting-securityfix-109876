@@ -19,11 +19,11 @@ class Model_faqs extends MY_Model {
     }
 
     public function count_all($q = null, $field = null) {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -54,11 +54,11 @@ class Model_faqs extends MY_Model {
     }
 
     public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -104,7 +104,7 @@ class Model_faqs extends MY_Model {
 
     public function filter_avaiable() {
         if (!$this->aauth->is_admin()) {
-            $this->db->where($this->table_name.'.faq_user', get_user_data('id'));
+            // $this->db->where($this->table_name.'.faq_user', get_user_data('id'));
         }
 
         return $this;
