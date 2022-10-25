@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Blog Category site
 *|
 */
-class Blog_category extends Admin	
-{
-	
-	public function __construct()
-	{
+class Blog_category extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_blog_category');
@@ -25,14 +22,13 @@ class Blog_category extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('blog_category_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['blog_categorys'] = $this->model_blog_category->get($filter, $field, $this->limit_page, $offset);
+		$this->data['blog_categorys'] 		= $this->model_blog_category->get($filter, $field, $this->limit_page, $offset);
 		$this->data['blog_category_counts'] = $this->model_blog_category->count_all($filter, $field);
 
 		$config = [
@@ -52,8 +48,7 @@ class Blog_category extends Admin
 	* Add new blog_categorys
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('blog_category_add');
 
 		$this->template->title('Blog Category New');
@@ -65,8 +60,7 @@ class Blog_category extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('blog_category_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -76,19 +70,14 @@ class Blog_category extends Admin
 		}
 
 		$this->form_validation->set_rules('category_name', 'Category Name', 'trim|required|max_length[200]');
-		$this->form_validation->set_rules('category_desc', 'Category Desc', 'trim|required');
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
 				'category_name' => $this->input->post('category_name'),
 				'category_desc' => $this->input->post('category_desc'),
 			];
 
-			
-			$save_blog_category = $this->model_blog_category->store($save_data);
-            
+			$save_blog_category = $this->model_blog_category->store($save_data);            
 
 			if ($save_blog_category) {
 				if ($this->input->post('save_type') == 'stay') {
@@ -117,7 +106,6 @@ class Blog_category extends Admin
 					$this->data['redirect'] = base_url('administrator/blog_category');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -132,8 +120,7 @@ class Blog_category extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('blog_category_update');
 
 		$this->data['blog_category'] = $this->model_blog_category->find($id);
@@ -147,8 +134,7 @@ class Blog_category extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('blog_category_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -158,7 +144,6 @@ class Blog_category extends Admin
 		}
 		
 		$this->form_validation->set_rules('category_name', 'Category Name', 'trim|required|max_length[200]');
-		$this->form_validation->set_rules('category_desc', 'Category Desc', 'trim|required');
 		
 		if ($this->form_validation->run()) {
 		
@@ -166,7 +151,6 @@ class Blog_category extends Admin
 				'category_name' => $this->input->post('category_name'),
 				'category_desc' => $this->input->post('category_desc'),
 			];
-
 			
 			$save_blog_category = $this->model_blog_category->change($id, $save_data);
 
@@ -209,8 +193,7 @@ class Blog_category extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('blog_category_delete');
 
 		$this->load->helper('file');
@@ -240,8 +223,7 @@ class Blog_category extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('blog_category_view');
 
 		$this->data['blog_category'] = $this->model_blog_category->join_avaiable()->filter_avaiable()->find($id);
@@ -255,11 +237,8 @@ class Blog_category extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$blog_category = $this->model_blog_category->find($id);
-
-		
 		
 		return $this->model_blog_category->remove($id);
 	}
@@ -270,8 +249,7 @@ class Blog_category extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('blog_category_export');
 
 		$this->model_blog_category->export('blog_category', 'blog_category');
@@ -282,16 +260,14 @@ class Blog_category extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('blog_category_export');
 
 		$this->model_blog_category->pdf('blog_category', 'blog_category');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('blog_category_export');
 
 		$table = $title = 'blog_category';

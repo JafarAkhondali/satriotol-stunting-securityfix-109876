@@ -31,6 +31,102 @@
     jQuery(document).ready(domo);
 </script>
 <style>
+   /* .group-about-description */
+   .group-about-description {
+
+   }
+
+   .group-about-description .control-label {
+
+   }
+
+   .group-about-description .col-sm-8 {
+
+   }
+
+   .group-about-description .form-control {
+
+   }
+
+   .group-about-description .help-block {
+
+   }
+   /* end .group-about-description */
+
+
+
+   /* .group-about-image */
+   .group-about-image {
+
+   }
+
+   .group-about-image .control-label {
+
+   }
+
+   .group-about-image .col-sm-8 {
+
+   }
+
+   .group-about-image .form-control {
+
+   }
+
+   .group-about-image .help-block {
+
+   }
+   /* end .group-about-image */
+
+
+
+   /* .group-about-logo */
+   .group-about-logo {
+
+   }
+
+   .group-about-logo .control-label {
+
+   }
+
+   .group-about-logo .col-sm-8 {
+
+   }
+
+   .group-about-logo .form-control {
+
+   }
+
+   .group-about-logo .help-block {
+
+   }
+   /* end .group-about-logo */
+
+
+
+   /* .group-about-address */
+   .group-about-address {
+
+   }
+
+   .group-about-address .control-label {
+
+   }
+
+   .group-about-address .col-sm-8 {
+
+   }
+
+   .group-about-address .form-control {
+
+   }
+
+   .group-about-address .help-block {
+
+   }
+   /* end .group-about-address */
+
+
+
 
 </style>
 <!-- Content Header (Page header) -->
@@ -73,7 +169,7 @@
                         $user_groups = $this->model_group->get_user_group_ids();
                         ?>
                                                                                                     <div class="form-group group-about-description ">
-                                <label for="about_description" class="col-sm-2 control-label">Deskripsi Pengantar                                    <i class="required">*</i>
+                                <label for="about_description" class="col-sm-2 control-label">Kata Pengantar                                    <i class="required">*</i>
                                     </label>
                                 <div class="col-sm-8">
                                     <textarea id="about_description" name="about_description" rows="5" cols="80"><?= set_value('About Description'); ?></textarea>
@@ -84,7 +180,7 @@
                         
 
                                                                                                                             <div class="form-group group-about-image ">
-                                <label for="about_image" class="col-sm-2 control-label">Gambar                                    <i class="required">*</i>
+                                <label for="about_image" class="col-sm-2 control-label">Gambar Kata Pengantar                                    <i class="required">*</i>
                                     </label>
                                 <div class="col-sm-8">
                                     <div id="about_about_image_galery"></div>
@@ -114,6 +210,54 @@
                                     </label>
                                 <div class="col-sm-8">
                                     <textarea id="about_address" name="about_address" rows="5" cols="80"><?= set_value('About Address'); ?></textarea>
+                                    <small class="info help-block">
+                                        </small>
+                                </div>
+                            </div>
+                        
+
+                                                                                                                            <div class="form-group group-about-pengertian ">
+                                <label for="about_pengertian" class="col-sm-2 control-label">Pengertian Stunting                                    <i class="required">*</i>
+                                    </label>
+                                <div class="col-sm-8">
+                                    <textarea id="about_pengertian" name="about_pengertian" rows="5" cols="80"><?= set_value('About Pengertian'); ?></textarea>
+                                    <small class="info help-block">
+                                        </small>
+                                </div>
+                            </div>
+                        
+
+                                                                                                                            <div class="form-group group-about-penyebab ">
+                                <label for="about_penyebab" class="col-sm-2 control-label">Penyebab Stunting                                    <i class="required">*</i>
+                                    </label>
+                                <div class="col-sm-8">
+                                    <textarea id="about_penyebab" name="about_penyebab" rows="5" cols="80"><?= set_value('About Penyebab'); ?></textarea>
+                                    <small class="info help-block">
+                                        </small>
+                                </div>
+                            </div>
+                        
+
+                                                                                                                            <div class="form-group group-about-image-pengertian ">
+                                <label for="about_image_pengertian" class="col-sm-2 control-label">Gambar Pengertian                                    <i class="required">*</i>
+                                    </label>
+                                <div class="col-sm-8">
+                                    <div id="about_about_image_pengertian_galery"></div>
+                                    <input class="data_file" name="about_about_image_pengertian_uuid" id="about_about_image_pengertian_uuid" type="hidden" value="<?= set_value('about_about_image_pengertian_uuid'); ?>">
+                                    <input class="data_file" name="about_about_image_pengertian_name" id="about_about_image_pengertian_name" type="hidden" value="<?= set_value('about_about_image_pengertian_name'); ?>">
+                                    <small class="info help-block">
+                                        </small>
+                                </div>
+                            </div>
+                        
+
+                                                                                                                            <div class="form-group group-about-image-penyebab ">
+                                <label for="about_image_penyebab" class="col-sm-2 control-label">Gambar Penyebab                                    <i class="required">*</i>
+                                    </label>
+                                <div class="col-sm-8">
+                                    <div id="about_about_image_penyebab_galery"></div>
+                                    <input class="data_file" name="about_about_image_penyebab_uuid" id="about_about_image_penyebab_uuid" type="hidden" value="<?= set_value('about_about_image_penyebab_uuid'); ?>">
+                                    <input class="data_file" name="about_about_image_penyebab_name" id="about_about_image_penyebab_name" type="hidden" value="<?= set_value('about_about_image_penyebab_name'); ?>">
                                     <small class="info help-block">
                                         </small>
                                 </div>
@@ -163,7 +307,17 @@
         
     window.event_submit_and_action = '';
         
-    
+    (function(){
+    var about_description = $('#about_description');
+   /* 
+    about_description.on('change', function() {});
+    */
+    var about_image = $('#about_image');
+   var about_logo = $('#about_logo');
+   var about_address = $('#about_address');
+   
+})()
+      
 
       
       
@@ -172,6 +326,10 @@
     var about_description = CKEDITOR.instances.about_description;
         CKEDITOR.replace('about_address');
     var about_address = CKEDITOR.instances.about_address;
+        CKEDITOR.replace('about_pengertian');
+    var about_pengertian = CKEDITOR.instances.about_pengertian;
+        CKEDITOR.replace('about_penyebab');
+    var about_penyebab = CKEDITOR.instances.about_penyebab;
         
     $('#btn_cancel').click(function() {
         swal({
@@ -198,6 +356,8 @@
         $('.message').fadeOut();
         $('#about_description').val(about_description.getData());
         $('#about_address').val(about_address.getData());
+        $('#about_pengertian').val(about_pengertian.getData());
+        $('#about_penyebab').val(about_penyebab.getData());
         
     var form_about = $('#form_about');
     var data_post = form_about.serializeArray();
@@ -213,7 +373,13 @@
         value: window.event_submit_and_action
     });
 
-    
+    (function(){
+    data_post.push({
+        name : '_example',
+        value : 'value_of_example',
+    })
+})()
+      
 
     $('.loading').show();
 
@@ -230,6 +396,8 @@
             if (res.success) {
                 var id_about_image = $('#about_about_image_galery').find('li').attr('qq-file-id');
             var id_about_logo = $('#about_about_logo_galery').find('li').attr('qq-file-id');
+            var id_about_image_pengertian = $('#about_about_image_pengertian_galery').find('li').attr('qq-file-id');
+            var id_about_image_penyebab = $('#about_about_image_penyebab_galery').find('li').attr('qq-file-id');
             
             if (save_type == 'back') {
                 window.location.href = res.redirect;
@@ -247,10 +415,20 @@
             if(typeof id_about_logo !== 'undefined') {
                 $('#about_about_logo_galery').fineUploader('deleteFile', id_about_logo);
             }
+            if(typeof id_about_image_pengertian !== 'undefined') {
+                $('#about_about_image_pengertian_galery').fineUploader('deleteFile', id_about_image_pengertian);
+            }
+            if(typeof id_about_image_penyebab !== 'undefined') {
+                $('#about_about_image_penyebab_galery').fineUploader('deleteFile', id_about_image_penyebab);
+            }
             $('.chosen option').prop('selected', false).trigger('chosen:updated');
             about_description.setData('');
             
             about_address.setData('');
+            
+            about_pengertian.setData('');
+            
+            about_penyebab.setData('');
             
             
             } else {
@@ -390,6 +568,104 @@
                 }
             }
         }); /*end about_logo galery*/
+                var params = {};
+        params[csrf] = token;
+
+        $('#about_about_image_pengertian_galery').fineUploader({
+            template: 'qq-template-gallery',
+            request: {
+                endpoint: BASE_URL + '/administrator/about/upload_about_image_pengertian_file',
+                params: params
+            },
+            deleteFile: {
+                enabled: true,
+                endpoint: BASE_URL + '/administrator/about/delete_about_image_pengertian_file',
+            },
+            thumbnails: {
+                placeholders: {
+                    waitingPath: BASE_URL + '/asset/fine-upload/placeholders/waiting-generic.png',
+                    notAvailablePath: BASE_URL + '/asset/fine-upload/placeholders/not_available-generic.png'
+                }
+            },
+            multiple: false,
+            validation: {
+                allowedExtensions: ["jpg","jpeg","png"],
+                sizeLimit: 0,
+                            },
+            showMessage: function(msg) {
+                toastr['error'](msg);
+            },
+            callbacks: {
+                onComplete: function(id, name, xhr) {
+                    if (xhr.success) {
+                        var uuid = $('#about_about_image_pengertian_galery').fineUploader('getUuid', id);
+                        $('#about_about_image_pengertian_uuid').val(uuid);
+                        $('#about_about_image_pengertian_name').val(xhr.uploadName);
+                    } else {
+                        toastr['error'](xhr.error);
+                    }
+                },
+                onSubmit: function(id, name) {
+                    var uuid = $('#about_about_image_pengertian_uuid').val();
+                    $.get(BASE_URL + '/administrator/about/delete_about_image_pengertian_file/' + uuid);
+                },
+                onDeleteComplete: function(id, xhr, isError) {
+                    if (isError == false) {
+                        $('#about_about_image_pengertian_uuid').val('');
+                        $('#about_about_image_pengertian_name').val('');
+                    }
+                }
+            }
+        }); /*end about_image_pengertian galery*/
+                var params = {};
+        params[csrf] = token;
+
+        $('#about_about_image_penyebab_galery').fineUploader({
+            template: 'qq-template-gallery',
+            request: {
+                endpoint: BASE_URL + '/administrator/about/upload_about_image_penyebab_file',
+                params: params
+            },
+            deleteFile: {
+                enabled: true,
+                endpoint: BASE_URL + '/administrator/about/delete_about_image_penyebab_file',
+            },
+            thumbnails: {
+                placeholders: {
+                    waitingPath: BASE_URL + '/asset/fine-upload/placeholders/waiting-generic.png',
+                    notAvailablePath: BASE_URL + '/asset/fine-upload/placeholders/not_available-generic.png'
+                }
+            },
+            multiple: false,
+            validation: {
+                allowedExtensions: ["jpg","jpeg","png"],
+                sizeLimit: 0,
+                            },
+            showMessage: function(msg) {
+                toastr['error'](msg);
+            },
+            callbacks: {
+                onComplete: function(id, name, xhr) {
+                    if (xhr.success) {
+                        var uuid = $('#about_about_image_penyebab_galery').fineUploader('getUuid', id);
+                        $('#about_about_image_penyebab_uuid').val(uuid);
+                        $('#about_about_image_penyebab_name').val(xhr.uploadName);
+                    } else {
+                        toastr['error'](xhr.error);
+                    }
+                },
+                onSubmit: function(id, name) {
+                    var uuid = $('#about_about_image_penyebab_uuid').val();
+                    $.get(BASE_URL + '/administrator/about/delete_about_image_penyebab_file/' + uuid);
+                },
+                onDeleteComplete: function(id, xhr, isError) {
+                    if (isError == false) {
+                        $('#about_about_image_penyebab_uuid').val('');
+                        $('#about_about_image_penyebab_name').val('');
+                    }
+                }
+            }
+        }); /*end about_image_penyebab galery*/
         
 
     

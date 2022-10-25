@@ -79,7 +79,7 @@
     <!-- back to top end -->
 
     <!-- header area start -->
-    <header>
+    <header id="beranda">
         <div class="header__area">
             <div class="header__bottom header__bottom-3">
                 <div class="container">
@@ -154,52 +154,12 @@
                                 <nav>
                                     <ul>
 								<?php
-									foreach ($navigation as $navigasi) {
-										echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
-									}
+                                    echo display_menu_website(0, 1);
+
+									// foreach ($navigation as $navigasi) {
+									// 	echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
+									// }
 								?>
-                                        <!-- <li>
-                                            <a href="<?//= base_url();?>">Beranda</a>
-                                        </li>
-                                        <li>
-                                            <a href="about.html">About</a>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="course-v1.html">Courses</a>
-                                            <ul class="submenu">
-                                                <li><a href="course-v1.html">Course Style 1</a></li>
-                                                <li><a href="course-v2.html">Course Style 2</a></li>
-                                                <li><a href="course-sidebar.html">Course Sidebar</a></li>
-                                                <li><a href="course-details.html">Course Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="about.html">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="event.html">Our Events</a></li>
-                                                <li><a href="event-details.html">Event Details</a></li>
-                                                <li><a href="team.html">Team</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                                <li><a href="error.html">404 Error</a></li>
-                                                <li><a href="my-profile.html">My Profile</a></li>
-                                                <li><a href="my-course.html">My Courses</a></li>
-                                                <li><a href="sign-in.html">Sign In</a></li>
-                                                <li><a href="sign-up.html">Sign Up</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="blog.html">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">Contact</a>
-                                        </li> -->
                                     </ul>
                                 </nav>
                             </div>
@@ -253,52 +213,12 @@
                                 <nav id="mobile-menu">
                                     <ul>
 								<?php
-									foreach ($navigation as $navigasi) {
-										echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
-									}
+                                    echo display_menu_website(0, 1);
+
+									// foreach ($navigation as $navigasi) {
+									// 	echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
+									// }
 								?>
-                                        <!-- <li>
-                                            <a href="<?= base_url();?>">Beranda</a>
-                                        </li>
-                                        <li>
-                                            <a href="about.html">About</a>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="course-v1.html">Courses</a>
-                                            <ul class="submenu">
-                                                <li><a href="course-v1.html">Course Style 1</a></li>
-                                                <li><a href="course-v2.html">Course Style 2</a></li>
-                                                <li><a href="course-sidebar.html">Course Sidebar</a></li>
-                                                <li><a href="course-details.html">Course Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="about.html">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="event.html">Our Events</a></li>
-                                                <li><a href="event-details.html">Event Details</a></li>
-                                                <li><a href="team.html">Team</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                                <li><a href="error.html">404 Error</a></li>
-                                                <li><a href="my-profile.html">My Profile</a></li>
-                                                <li><a href="my-course.html">My Courses</a></li>
-                                                <li><a href="sign-in.html">Sign In</a></li>
-                                                <li><a href="sign-up.html">Sign Up</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="blog.html">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">Contact</a>
-                                        </li> -->
                                     </ul>
                                 </nav>
                             </div>

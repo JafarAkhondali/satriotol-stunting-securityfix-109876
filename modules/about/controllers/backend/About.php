@@ -70,21 +70,30 @@ class About extends Admin {
 			exit;
 		}
 
-		$this->form_validation->set_rules('about_description', 'Deskripsi Pengantar', 'trim|required');
-		$this->form_validation->set_rules('about_about_image_name', 'Gambar', 'trim|required');
+		$this->form_validation->set_rules('about_description', 'Kata Pengantar', 'trim|required');
+		$this->form_validation->set_rules('about_about_image_name', 'Gambar Kata Pengantar', 'trim|required');
 		$this->form_validation->set_rules('about_about_logo_name', 'Logo', 'trim|required');
 		$this->form_validation->set_rules('about_address', 'Alamat', 'trim|required');
+		$this->form_validation->set_rules('about_pengertian', 'Pengertian Stunting', 'trim|required');
+		$this->form_validation->set_rules('about_penyebab', 'Penyebab Stunting', 'trim|required');
+		$this->form_validation->set_rules('about_about_image_pengertian_name', 'Gambar Pengertian', 'trim|required');
+		$this->form_validation->set_rules('about_about_image_penyebab_name', 'Gambar Penyebab', 'trim|required');
 
 		if ($this->form_validation->run()) {
 			$about_about_image_uuid = $this->input->post('about_about_image_uuid');
 			$about_about_image_name = $this->input->post('about_about_image_name');
 			$about_about_logo_uuid = $this->input->post('about_about_logo_uuid');
 			$about_about_logo_name = $this->input->post('about_about_logo_name');
+			$about_about_image_pengertian_uuid = $this->input->post('about_about_image_pengertian_uuid');
+			$about_about_image_pengertian_name = $this->input->post('about_about_image_pengertian_name');
+			$about_about_image_penyebab_uuid = $this->input->post('about_about_image_penyebab_uuid');
+			$about_about_image_penyebab_name = $this->input->post('about_about_image_penyebab_name');
 		
 			$save_data = [
 				'about_description' => $this->input->post('about_description'),
-				'about_address' 	=> $this->input->post('about_address'),
-				'about_created_at' 	=> date('Y-m-d H:i:s'),
+				'about_address' => $this->input->post('about_address'),
+				'about_pengertian' => $this->input->post('about_pengertian'),
+				'about_penyebab' => $this->input->post('about_penyebab'),
 			];
 			
 			if (!is_dir(FCPATH . '/uploads/about/')) {
@@ -124,10 +133,46 @@ class About extends Admin {
 
 				$save_data['about_logo'] = $about_about_logo_name_copy;
 			}
+		
+			if (!empty($about_about_image_pengertian_name)) {
+				$about_about_image_pengertian_name_copy = date('YmdHis') . '-' . $about_about_image_pengertian_name;
 
+				rename(FCPATH . 'uploads/tmp/' . $about_about_image_pengertian_uuid . '/' . $about_about_image_pengertian_name, 
+						FCPATH . 'uploads/about/' . $about_about_image_pengertian_name_copy);
+
+				if (!is_file(FCPATH . '/uploads/about/' . $about_about_image_pengertian_name_copy)) {
+					echo json_encode([
+						'success' => false,
+						'message' => 'Error uploading file'
+						]);
+					exit;
+				}
+
+				$save_data['about_image_pengertian'] = $about_about_image_pengertian_name_copy;
+			}
+		
+			if (!empty($about_about_image_penyebab_name)) {
+				$about_about_image_penyebab_name_copy = date('YmdHis') . '-' . $about_about_image_penyebab_name;
+
+				rename(FCPATH . 'uploads/tmp/' . $about_about_image_penyebab_uuid . '/' . $about_about_image_penyebab_name, 
+						FCPATH . 'uploads/about/' . $about_about_image_penyebab_name_copy);
+
+				if (!is_file(FCPATH . '/uploads/about/' . $about_about_image_penyebab_name_copy)) {
+					echo json_encode([
+						'success' => false,
+						'message' => 'Error uploading file'
+						]);
+					exit;
+				}
+
+				$save_data['about_image_penyebab'] = $about_about_image_penyebab_name_copy;
+			}
+		
 			$save_about = $id = $this->model_about->store($save_data);
 
 			if ($save_about) {
+				$id = $save_about;
+				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_about;
@@ -191,21 +236,30 @@ class About extends Admin {
 			exit;
 		}
 
-		$this->form_validation->set_rules('about_description', 'Deskripsi Pengantar', 'trim|required');
-		$this->form_validation->set_rules('about_about_image_name', 'Gambar', 'trim|required');
+		$this->form_validation->set_rules('about_description', 'Kata Pengantar', 'trim|required');
+		$this->form_validation->set_rules('about_about_image_name', 'Gambar Kata Pengantar', 'trim|required');
 		$this->form_validation->set_rules('about_about_logo_name', 'Logo', 'trim|required');
 		$this->form_validation->set_rules('about_address', 'Alamat', 'trim|required');
+		$this->form_validation->set_rules('about_pengertian', 'Pengertian Stunting', 'trim|required');
+		$this->form_validation->set_rules('about_penyebab', 'Penyebab Stunting', 'trim|required');
+		$this->form_validation->set_rules('about_about_image_pengertian_name', 'Gambar Pengertian', 'trim|required');
+		$this->form_validation->set_rules('about_about_image_penyebab_name', 'Gambar Penyebab', 'trim|required');
 
 		if ($this->form_validation->run()) {
 			$about_about_image_uuid = $this->input->post('about_about_image_uuid');
 			$about_about_image_name = $this->input->post('about_about_image_name');
 			$about_about_logo_uuid = $this->input->post('about_about_logo_uuid');
 			$about_about_logo_name = $this->input->post('about_about_logo_name');
+			$about_about_image_pengertian_uuid = $this->input->post('about_about_image_pengertian_uuid');
+			$about_about_image_pengertian_name = $this->input->post('about_about_image_pengertian_name');
+			$about_about_image_penyebab_uuid = $this->input->post('about_about_image_penyebab_uuid');
+			$about_about_image_penyebab_name = $this->input->post('about_about_image_penyebab_name');
 		
 			$save_data = [
 				'about_description' => $this->input->post('about_description'),
-				'about_address' 	=> $this->input->post('about_address'),
-				'about_updated_at' 	=> date('Y-m-d H:i:s'),
+				'about_address' => $this->input->post('about_address'),
+				'about_pengertian' => $this->input->post('about_pengertian'),
+				'about_penyebab' => $this->input->post('about_penyebab'),
 			];
 			
 			if (!is_dir(FCPATH . '/uploads/about/')) {
@@ -244,6 +298,40 @@ class About extends Admin {
 				}
 
 				$save_data['about_logo'] = $about_about_logo_name_copy;
+			}
+		
+			if (!empty($about_about_image_pengertian_uuid)) {
+				$about_about_image_pengertian_name_copy = date('YmdHis') . '-' . $about_about_image_pengertian_name;
+
+				rename(FCPATH . 'uploads/tmp/' . $about_about_image_pengertian_uuid . '/' . $about_about_image_pengertian_name, 
+						FCPATH . 'uploads/about/' . $about_about_image_pengertian_name_copy);
+
+				if (!is_file(FCPATH . '/uploads/about/' . $about_about_image_pengertian_name_copy)) {
+					echo json_encode([
+						'success' => false,
+						'message' => 'Error uploading file'
+						]);
+					exit;
+				}
+
+				$save_data['about_image_pengertian'] = $about_about_image_pengertian_name_copy;
+			}
+		
+			if (!empty($about_about_image_penyebab_uuid)) {
+				$about_about_image_penyebab_name_copy = date('YmdHis') . '-' . $about_about_image_penyebab_name;
+
+				rename(FCPATH . 'uploads/tmp/' . $about_about_image_penyebab_uuid . '/' . $about_about_image_penyebab_name, 
+						FCPATH . 'uploads/about/' . $about_about_image_penyebab_name_copy);
+
+				if (!is_file(FCPATH . '/uploads/about/' . $about_about_image_penyebab_name_copy)) {
+					echo json_encode([
+						'success' => false,
+						'message' => 'Error uploading file'
+						]);
+					exit;
+				}
+
+				$save_data['about_image_penyebab'] = $about_about_image_penyebab_name_copy;
 			}
 			
 			$save_about = $this->model_about->change($id, $save_data);
@@ -348,7 +436,20 @@ class About extends Admin {
 				$delete_file = unlink($path);
 			}
 		}
-		
+		if (!empty($about->about_image_pengertian)) {
+			$path = FCPATH . '/uploads/about/' . $about->about_image_pengertian;
+
+			if (is_file($path)) {
+				$delete_file = unlink($path);
+			}
+		}
+		if (!empty($about->about_image_penyebab)) {
+			$path = FCPATH . '/uploads/about/' . $about->about_image_penyebab;
+
+			if (is_file($path)) {
+				$delete_file = unlink($path);
+			}
+		}
 		
 		return $this->model_about->remove($id);
 	}
@@ -497,6 +598,149 @@ class About extends Admin {
         ]);
 	}
 	
+	/**
+	* Upload Image About	* 
+	* @return JSON
+	*/
+	public function upload_about_image_pengertian_file() {
+		if (!$this->is_allowed('about_add', false)) {
+			echo json_encode([
+				'success' => false,
+				'message' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		$uuid = $this->input->post('qquuid');
+
+		echo $this->upload_file([
+			'uuid' 		 	=> $uuid,
+			'table_name' 	=> 'about',
+			'allowed_types' => 'jpg|jpeg|png',
+		]);
+	}
+
+	/**
+	* Delete Image About	* 
+	* @return JSON
+	*/
+	public function delete_about_image_pengertian_file($uuid) {
+		if (!$this->is_allowed('about_delete', false)) {
+			echo json_encode([
+				'success' => false,
+				'error' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		echo $this->delete_file([
+            'uuid'              => $uuid, 
+            'delete_by'         => $this->input->get('by'), 
+            'field_name'        => 'about_image_pengertian', 
+            'upload_path_tmp'   => './uploads/tmp/',
+            'table_name'        => 'about',
+            'primary_key'       => 'about_id',
+            'upload_path'       => 'uploads/about/'
+        ]);
+	}
+
+	/**
+	* Get Image About	* 
+	* @return JSON
+	*/
+	public function get_about_image_pengertian_file($id) {
+		if (!$this->is_allowed('about_update', false)) {
+			echo json_encode([
+				'success' => false,
+				'message' => 'Image not loaded, you do not have permission to access'
+				]);
+			exit;
+		}
+
+		$about = $this->model_about->find($id);
+
+		echo $this->get_file([
+            'uuid'              => $id, 
+            'delete_by'         => 'id', 
+            'field_name'        => 'about_image_pengertian', 
+            'table_name'        => 'about',
+            'primary_key'       => 'about_id',
+            'upload_path'       => 'uploads/about/',
+            'delete_endpoint'   => 'administrator/about/delete_about_image_pengertian_file'
+        ]);
+	}
+	
+	/**
+	* Upload Image About	* 
+	* @return JSON
+	*/
+	public function upload_about_image_penyebab_file() {
+		if (!$this->is_allowed('about_add', false)) {
+			echo json_encode([
+				'success' => false,
+				'message' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		$uuid = $this->input->post('qquuid');
+
+		echo $this->upload_file([
+			'uuid' 		 	=> $uuid,
+			'table_name' 	=> 'about',
+			'allowed_types' => 'jpg|jpeg|png',
+		]);
+	}
+
+	/**
+	* Delete Image About	* 
+	* @return JSON
+	*/
+	public function delete_about_image_penyebab_file($uuid) {
+		if (!$this->is_allowed('about_delete', false)) {
+			echo json_encode([
+				'success' => false,
+				'error' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		echo $this->delete_file([
+            'uuid'              => $uuid, 
+            'delete_by'         => $this->input->get('by'), 
+            'field_name'        => 'about_image_penyebab', 
+            'upload_path_tmp'   => './uploads/tmp/',
+            'table_name'        => 'about',
+            'primary_key'       => 'about_id',
+            'upload_path'       => 'uploads/about/'
+        ]);
+	}
+
+	/**
+	* Get Image About	* 
+	* @return JSON
+	*/
+	public function get_about_image_penyebab_file($id) {
+		if (!$this->is_allowed('about_update', false)) {
+			echo json_encode([
+				'success' => false,
+				'message' => 'Image not loaded, you do not have permission to access'
+				]);
+			exit;
+		}
+
+		$about = $this->model_about->find($id);
+
+		echo $this->get_file([
+            'uuid'              => $id, 
+            'delete_by'         => 'id', 
+            'field_name'        => 'about_image_penyebab', 
+            'table_name'        => 'about',
+            'primary_key'       => 'about_id',
+            'upload_path'       => 'uploads/about/',
+            'delete_endpoint'   => 'administrator/about/delete_about_image_penyebab_file'
+        ]);
+	}
 	
 	/**
 	* Export to excel
@@ -546,9 +790,9 @@ class About extends Admin {
         $fields = $result->list_fields();
 
         $content = $this->pdf->loadHtmlPdf('core_template/pdf/pdf_single', [
-            'data' => $data,
-            'fields' => $fields,
-            'title' => $title
+            'data' 		=> $data,
+            'fields' 	=> $fields,
+            'title' 	=> $title
         ], TRUE);
 
         $this->pdf->initialize($config);
@@ -556,6 +800,8 @@ class About extends Admin {
         $this->pdf->writeHTML($content);
         $this->pdf->Output($table.'.pdf', 'H');
 	}
+
+	
 }
 
 

@@ -172,8 +172,7 @@ class Web extends Front {
         exit($image_content); // reads and outputs the file onto the output buffer
     }
 
-    public function create_user()
-    {
+    public function create_user() {
         for ($i = 0; $i < 30; $i++) {
             $this->aauth->create_user('user' . $i . '@gmail.com', 'admin123', 'user' . $i);
         }

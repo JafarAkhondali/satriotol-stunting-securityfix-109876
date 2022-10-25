@@ -100,14 +100,10 @@
                         $user_groups = $this->model_group->get_user_group_ids();
                     ?>
                         <div class="form-group group-contact-name ">
-                            <label for="contact_name" class="col-sm-2 control-label">Nama Kontak <i
-                                    class="required">*</i>
-                            </label>
+                            <label for="contact_name" class="col-sm-2 control-label">Nama Kontak <i class="required">*</i></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="contact_name" id="contact_name"
-                                    placeholder="Nama Kontak" value="<?= set_value('contact_name'); ?>">
-                                <small class="info help-block">
-                                    <b>Input Contact Name</b> Max Length : 60.</small>
+                                <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Nama Kontak" value="<?= set_value('contact_name'); ?>">
+                                <small class="info help-block"><b>Input Contact Name</b> Max Length : 60.</small>
                             </div>
                         </div>
 
@@ -115,7 +111,6 @@
                             <label for="contact_image" class="col-sm-2 control-label">Icon <i class="required">*</i></label>
                             <div class="col-sm-8">
                                 <input type="hidden" name="contact_image" id="contact_image">
-
                                 <div class="icon-preview">
                                     <span class="icon-preview-item"><i class="fa fa-book fa-lg"></i></span>
                                 </div>
@@ -140,19 +135,14 @@
                         <div class="message"></div>
 
                         <div class="row-fluid col-md-7 container-button-bottom">
-                            <button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay'
-                                title="<?= cclang('save_button'); ?> (Ctrl+s)">
+                            <button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay' title="<?= cclang('save_button'); ?> (Ctrl+s)">
                                 <i class="fa fa-save"></i> <?= cclang('save_button'); ?>
                             </button>
-                            <a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save"
-                                data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
+                            <a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save" data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
                                 <i class="ion ion-ios-list-outline"></i> <?= cclang('save_and_go_the_list_button'); ?>
                             </a>
 
-                            <div class="custom-button-wrapper"></div>
-
-                            <a class="btn btn-flat btn-default btn_action" id="btn_cancel"
-                                title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
+                            <a class="btn btn-flat btn-default btn_action" id="btn_cancel" title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
                                 <i class="fa fa-undo"></i> <?= cclang('cancel_button'); ?>
                             </a>
 
