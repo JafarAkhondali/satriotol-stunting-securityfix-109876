@@ -41,9 +41,7 @@
 								<span class="section__title-pre-3">Stunting Kota Semarang</span>
 								<h2 class="section__title section__title-44">Kata Pengantar</h2>
 							</div>
-							<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem molestias aspernatur
-								eligendi adipisci eum saepe aliquam soluta necessitatibus dolorem facilis rerum,
-								incidunt expedita eaque quas cumque tempora laborum laboriosam quis?</p>
+							<p><?php echo $about->about_description;?></p>
 							<div class="certificate__links d-sm-flex align-items-center">
 							</div>
 						</div>
@@ -114,7 +112,7 @@
 						<div class="section__title-wrapper mb-15">
 							<h2 class="section__title">Pengertian Stunting</h2>
 						</div>
-						<p>Stunting adalah kondisi gagal tumbuh akibat kekurangan gizi dalam waktu yang lama pada balita ditandai dengan tinggi badan tidak sesuai umur (dibawah rata-rata) sehingga menjadi pendek.</p>
+						<p><?php echo $about->about_pengertian;?></p>
 					</div>
 				</div>
 				<div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -148,16 +146,12 @@
 					</div>
 				</div>
 				<div class="col-xxl-6 col-xl-6 col-lg-6">
-					<div class="about__content pl-70 pr-25">
+					<div class="about__content pl-25 pr-25">
 						<div class="section__title-wrapper mb-15">
 							<h2 class="section__title">Penyebab Stunting</h2>
 						</div>
 						<div class="about__list mb-40">
-                           <ul>
-                              <li><i class="fa-solid fa-check"></i> Pola Asuh yang tidak tepat</li>
-                              <li><i class="fa-solid fa-check"></i> Asupan makanan tidak bergizi dan kurang dari kebutuhan sehari</li>
-                              <li><i class="fa-solid fa-check"></i> Higiene dan sanitasi yang kurang baik</li>
-                           </ul>
+							<p><?php echo $about->about_penyebab;?></p>
                         </div>
 					</div>
 				</div>

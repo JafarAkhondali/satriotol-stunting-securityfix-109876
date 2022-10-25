@@ -22,6 +22,9 @@ class Web extends Front {
         $data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
         $data['blogs']          = $this->model_web->berita_terbaru()->result();
         $data['faqs']           = $this->db->from('faqs')->get()->result();
+        $data['about']          = $this->db->get('about')->row();
+
+        // echo json_encode($data['about']);
 
         $this->template->build('beranda', $data);
     }

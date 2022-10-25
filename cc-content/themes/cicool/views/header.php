@@ -89,7 +89,7 @@
                         <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-6">
                             <div class="logo text-lg-center">
                                 <a href="<?= base_url();?>">
-                                    <img src="<?= base_url();?>assets_stunting/logo-bappeda.png" alt="logo">
+                                    <img src="<?= base_url().'uploads/about/'.$about->about_logo;?>" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                         <div class="header__bottom-left d-flex align-items-center">
                             <div class="logo">
                                 <a href="<?= base_url();?>">
-                                    <img src="<?= base_url();?>assets_stunting/logo-bappeda.png" alt="logo">
+                                    <img src="<?= base_url().'uploads/about/'.$about->about_logo;?>" alt="logo">
                                 </a>
                             </div>
                             <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
