@@ -202,7 +202,7 @@
         <div class="header__bottom">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-xxl-8 col-xl-9 col-lg-10 col-md-6 col-6">
+                    <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-6 col-6">
                         <div class="header__bottom-left d-flex align-items-center">
                             <div class="logo">
                                 <a href="<?= base_url();?>">
@@ -224,7 +224,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xxl-4 col-xl-3 col-lg-2 col-md-6 col-6">
+                    <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-6">
                         <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
                             <div class="header__action d-none d-xl-block">
                                 <ul>
