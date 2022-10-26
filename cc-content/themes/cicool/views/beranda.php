@@ -6,7 +6,7 @@
 			<div class="swiper-wrapper">
 				<?php foreach ($sliders as $slider) { ?>
 					<div class="slider__item swiper-slide p-relative slider__height slider__height-3 d-flex align-items-center z-index-1">
-						<div class="slider__bg slider__overlay slider__overlay-3 include-bg" data-background="<?php echo base_url(); ?>uploads/sliders/<?php echo $slider->slider_image; ?>">
+						<div class="slider__bg include-bg" data-background="<?php echo base_url(); ?>uploads/sliders/<?php echo $slider->slider_image; ?>">
 						</div>
 						<div class="carousel-caption">
 							<h2><?php echo $slider->slider_title; ?></h2>

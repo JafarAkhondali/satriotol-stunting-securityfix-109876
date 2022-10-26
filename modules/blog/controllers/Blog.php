@@ -86,19 +86,19 @@ class Blog extends Front {
         }
 
         $blog->viewers  = $this->model_blog->add_viewers($blog->id, $blog->viewers);
-        $related        = $this->model_blog->get(null, null, 5, 0, $blog->category);
-
+        $related        = $this->model_blog->get(null, null, 3, 0, $blog->category);
 
         $this->register_unparse_html($blog);
         $blog->content = $this->cc_page_element->unParseHtml($blog->content);
 
         $data = [
-            'related'   => $related,
-            'blog'      => $blog,
-            'title'     => $blog->title
+            'related'       => $related,
+            'blog'          => $blog,
+            'title'         => $blog->title,
+            'about'         => $this->db->get('about')->row(),
+            'links'         => $this->db->where('menu_type_id = 3')->get('menu')->result(),
+            'categories'    => $this->model_blog->count_category(),
         ];
-        $data['about']          = $this->db->get('about')->row();
-        $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 
         $this->template->build('blog/blog_read', $data);
     }

@@ -109,6 +109,10 @@ class Model_blog extends MY_Model {
     }
 
     public function find_by_slug($slug = null) {
+		$this->db->select('blog.*, blog_category.category_id AS id_kategori, blog_category.category_name AS nama_kategori,
+							aauth_users.id as user_id,
+							aauth_users.username as user_username');
+
     	$this->join_avaiable()->filter_avaiable();
     	return $this->db->get_where($this->table_name, ['slug' => $slug])->row();
     }
@@ -118,6 +122,21 @@ class Model_blog extends MY_Model {
     	$this->db->update($this->table_name, ['viewers' => $viewers], ['id' => $blog_id]);
     	return $viewers;
     }
+
+	public function count_category() {
+		$this->db->select("blog_category.category_id AS id_kategori,
+							blog_category.category_name AS nama_kategori,
+							COUNT(category) AS jumlah");
+		$this->db->join("blog_category", "blog.category = blog_category.category_id");
+		$this->db->where([
+			'verified_status' 	=> '1',
+			'status' 			=> 'publish',
+		]);
+
+		$this->db->group_by('category');
+
+		return $this->db->get('blog')->result();
+	}
 
     // public function bidding_exist() {
     // 	return $this->db->get_where($this->table_name, ['customer_id' => $customer_id, 'product_id' => $product_id])->num_rows();
