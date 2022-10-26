@@ -97,6 +97,8 @@ class Blog extends Front {
             'blog'      => $blog,
             'title'     => $blog->title
         ];
+        $data['about']          = $this->db->get('about')->row();
+        $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 
         $this->template->build('blog/blog_read', $data);
     }
