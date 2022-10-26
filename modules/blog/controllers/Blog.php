@@ -9,7 +9,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *|
 */
 class Blog extends Front {
-
 	public function __construct() {
 		parent::__construct();
         $this->load->model('model_blog');
@@ -81,20 +80,22 @@ class Blog extends Front {
     public function detail($slug = null) {
         $blog = $this->model_blog->find_by_slug($slug);
         $this->register_unparse_html($blog);
+
         if (!$blog) {
             show_404();
         }
-        $blog->viewers = $this->model_blog->add_viewers($blog->id, $blog->viewers);
-        $related = $this->model_blog->get(null, null, 5, 0, $blog->category);
+
+        $blog->viewers  = $this->model_blog->add_viewers($blog->id, $blog->viewers);
+        $related        = $this->model_blog->get(null, null, 5, 0, $blog->category);
 
 
         $this->register_unparse_html($blog);
         $blog->content = $this->cc_page_element->unParseHtml($blog->content);
 
         $data = [
-            'related' => $related,
-            'blog' => $blog,
-            'title' => $blog->title
+            'related'   => $related,
+            'blog'      => $blog,
+            'title'     => $blog->title
         ];
 
         $this->template->build('blog/blog_read', $data);

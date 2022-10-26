@@ -174,7 +174,7 @@
 				<div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
 					<div class="course__item-2 transition-3 white-bg mb-30 fix">
 						<div class="course__thumb-2 w-img fix">
-							<a href="javascript:void(0);">
+							<a href="<?= base_url().'blog/'.$blog->slug;?>">
 					<?php
 						if (!empty($blog->image)) {
 							$file = FCPATH.'uploads/blog/'.$blog->image;
@@ -207,7 +207,7 @@
 								</div>
 							</div>
 							<h3 class="course__title-2">
-								<a href="javascript:void(0);">
+							<a href="<?= base_url().'blog/'.$blog->slug;?>">
 						<?php
 							if (strlen($blog->title) < 50) {
 								echo $blog->title;

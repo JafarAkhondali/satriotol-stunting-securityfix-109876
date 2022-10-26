@@ -37,10 +37,6 @@ class Web extends Front {
         }
     }
 
-    public function detail() {
-        $this->template->build('blog-details');
-    }
-
     public function switch_lang($lang = 'english') {
         $this->load->helper(['cookie']);
 
