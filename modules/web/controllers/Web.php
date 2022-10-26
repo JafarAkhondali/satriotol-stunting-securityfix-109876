@@ -29,20 +29,24 @@ class Web extends Front {
         $this->template->build('beranda', $data);
     }
 
-    public function switch_lang($lang = 'english') {
-        $this->load->helper(['cookie']);
-
-        set_cookie('language', $lang, (60 * 60 * 24) * 365);
-        $this->lang->load('web', $lang);
-        redirect_back();
-    }
-
     public function home() {
         if (defined('IS_DEMO')) {
             $this->template->build('home-demo');
         } else {
             $this->template->build('home');
         }
+    }
+
+    public function detail() {
+        $this->template->build('blog-details');
+    }
+
+    public function switch_lang($lang = 'english') {
+        $this->load->helper(['cookie']);
+
+        set_cookie('language', $lang, (60 * 60 * 24) * 365);
+        $this->lang->load('web', $lang);
+        redirect_back();
     }
 
     public function set_full_group_sql() {
