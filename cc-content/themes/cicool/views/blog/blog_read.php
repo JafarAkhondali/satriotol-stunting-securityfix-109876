@@ -62,7 +62,7 @@
 							<div class="sidebar__widget-content">
 								<div class="sidebar__search p-relative">
 									<form action="" id="form-blog-search">
-										<input type="text" placeholder="Cari sesuatu disini...">
+										<input type="text" name="q" placeholder="Cari sesuatu disini...">
 										<button type="submit">
 											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;" xml:space="preserve">
 												<g>
