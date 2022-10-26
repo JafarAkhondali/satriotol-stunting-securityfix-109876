@@ -120,7 +120,7 @@
 		<div class="col-md-4">
 			<div class="box box box-solid box-blog-right">
 				<div class="box-header">
-					<h3>Status</h3>
+					<h3>Status <i class="required">*</i></h3>
 				</div>
 				<div class="box-body ">
 					<!-- Widget: user widget style 1 -->
@@ -130,8 +130,7 @@
 					<br>
 
 					<div class="form-group ">
-						<label for="status" class="col-sm-3 control-label">Status
-						</label>
+						<label for="status" class="col-sm-3 control-label">Status</label>
 						<div class="col-sm-9">
 							<select class="form-control chosen chosen-select" name="status" id="status"
 								data-placeholder="Select Status">
@@ -151,7 +150,7 @@
 		<div class="col-md-4">
 			<div class="box box box-solid box-blog-right">
 				<div class="box-header">
-					<h3>Category</h3>
+					<h3>Category <i class="required">*</i></h3>
 				</div>
 				<div class="box-body ">
 					<!-- Widget: user widget style 1 -->
@@ -161,8 +160,7 @@
 					<br>
 
 					<div class="form-group ">
-						<label for="category" class="col-sm-3 control-label">Category
-						</label>
+						<label for="category" class="col-sm-3 control-label">Category</label>
 						<div class="col-sm-9">
 							<select class="form-control chosen chosen-select-deselect" name="category" id="category"
 								data-placeholder="Select Category">
@@ -178,8 +176,7 @@
 					<br>
 
 					<div class="form-group ">
-						<label for="tags" class="col-sm-3 control-label">Tags
-						</label>
+						<label for="tags" class="col-sm-3 control-label">Tags </label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" name="tags" id="tags" placeholder="Tags"
 								value="<?= set_value('tags', $blog->tags); ?>">
@@ -194,7 +191,7 @@
 		<div class="col-md-4">
 			<div class="box box box-solid box-blog-right">
 				<div class="box-header">
-					<h3>Media</h3>
+					<h3>Media <i class="required">*</i></h3>
 				</div>
 				<div class="box-body ">
 					<!-- Widget: user widget style 1 -->

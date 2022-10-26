@@ -84,7 +84,7 @@ class Blog extends Admin {
 
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('content', 'Content', 'trim|required');
-		$this->form_validation->set_rules('blog_image_name[]', 'Image', 'trim');
+		$this->form_validation->set_rules('blog_image_name[]', 'Image', 'trim|required');
 		$this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('status', 'Status', 'trim|required|max_length[10]');
 
@@ -207,7 +207,7 @@ class Blog extends Admin {
 		
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('content', 'Content', 'trim|required');
-		$this->form_validation->set_rules('blog_image_name[]', 'Image', 'trim');
+		$this->form_validation->set_rules('blog_image_name[]', 'Image', 'trim|required');
 		$this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('status', 'Status', 'trim|required|max_length[10]');
 		

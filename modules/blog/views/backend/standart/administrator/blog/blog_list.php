@@ -105,10 +105,6 @@
 
 											if ($blog->verified_status == '0') {
 												$verified = '<label class="label label-danger">Belum diverifikasi</label>&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Harap konfimasi dengan Administrator"></i>';
-
-												// is_allowed('blog_verified', function() use ($blog) {
-												// 	$btn_verif = '<a href="javascript:void(0);" data-href="'.site_url('administrator/blog/verified/'.$blog->id).'" class="btn btn-primary verif-data" data-toggle="tooltip" data-placement="top" title="Verifikasi"><i class="fa fa-check-square-o"></i></a>';
-												// });
 											}else{
 												$verified = '<label class="label label-success">Diverifikasi</label>';
 											}
@@ -127,13 +123,19 @@
 											<td>
 											<?php
 												foreach (explode(',', $blog->image) as $file) {
+													$filenya = FCPATH.'uploads/blog/'.$blog->image;
+
 													if (!empty($file)) {
 														if (is_image($file)) {
+															if (file_exists($filenya)) {
 											?>
 												<a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/blog/' . $file; ?>">
 													<img src="<?= BASE_URL . 'uploads/blog/' . $file; ?>" class="image-responsive" alt="image blog" title="image blog" width="40px">
 												</a>
 											<?php
+															}else {
+																echo '<img src="https://via.placeholder.com/40x21.png?text=NO+IMAGE" alt="">';
+															}
 														}else{
 											?>
 												<a href="<?= BASE_URL . 'administrator/file/download/blog/' . $file; ?>">
@@ -141,6 +143,8 @@
 												</a>
 											<?php
 														}
+													}else{
+														echo '<img src="https://via.placeholder.com/40x21.png?text=NO+IMAGE" alt="">';
 													}
 												}
 											?>
