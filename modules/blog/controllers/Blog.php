@@ -28,9 +28,13 @@ class Blog extends Front {
             'total_rows'   => $this->model_blog->count_all($filter, $field),
             'per_page'     => $this->limit_page,
             'uri_segment'  => 3,
+            
         ];
 
         $this->data['pagination'] = $this->pagination($config);
+        $this->data['about'] = $this->db->get('about')->row();
+        $this->data['links'] = $this->db->where('menu_type_id = 3')->get('menu')->result();
+
 
         $this->template->build('blog/blog_index', $this->data);
     }
