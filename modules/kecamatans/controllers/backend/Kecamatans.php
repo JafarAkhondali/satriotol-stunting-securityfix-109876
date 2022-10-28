@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Kecamatans site
 *|
 */
-class Kecamatans extends Admin	
-{
-	
-	public function __construct()
-	{
+class Kecamatans extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_kecamatans');
@@ -26,8 +23,7 @@ class Kecamatans extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('kecamatans_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +49,7 @@ class Kecamatans extends Admin
 	* Add new kecamatanss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('kecamatans_add');
 
 		$this->template->title('Kecamatan New');
@@ -66,8 +61,7 @@ class Kecamatans extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('kecamatans_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,36 +69,19 @@ class Kecamatans extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('kecamatan_nama', 'Nama Kecamatan', 'trim|required|max_length[255]');
-		
-
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'kecamatan_nama' => $this->input->post('kecamatan_nama'),
-				'kecamatan_create_at' => $this->input->post('kecamatan_create_at'),
-				'kecamatan_user' => get_user_data('id'),			];
-
-			
-			
-
-
-
-			
+				'kecamatan_nama' 		=> $this->input->post('kecamatan_nama'),
+				'kecamatan_create_at' 	=> date('Y-m-d h:i:s'),
+				'kecamatan_user' 		=> get_user_data('id'),
+			];
 			
 			$save_kecamatans = $id = $this->model_kecamatans->store($save_data);
-            
 
 			if ($save_kecamatans) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_kecamatans;
@@ -131,7 +108,6 @@ class Kecamatans extends Admin
 					$this->data['redirect'] = base_url('administrator/kecamatans');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -146,8 +122,7 @@ class Kecamatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('kecamatans_update');
 
 		$this->data['kecamatans'] = $this->model_kecamatans->find($id);
@@ -161,8 +136,7 @@ class Kecamatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('kecamatans_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -170,31 +144,17 @@ class Kecamatans extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('kecamatan_nama', 'Nama Kecamatan', 'trim|required|max_length[255]');
-		
 
+		$this->form_validation->set_rules('kecamatan_nama', 'Nama Kecamatan', 'trim|required|max_length[255]');
 		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
 				'kecamatan_nama' => $this->input->post('kecamatan_nama'),
 			];
-
-			
-
-			
-
-
-			
 			
 			$save_kecamatans = $this->model_kecamatans->change($id, $save_data);
 
 			if ($save_kecamatans) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -233,8 +193,7 @@ class Kecamatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('kecamatans_delete');
 
 		$this->load->helper('file');
@@ -264,8 +223,7 @@ class Kecamatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('kecamatans_view');
 
 		$this->data['kecamatans'] = $this->model_kecamatans->join_avaiable()->filter_avaiable()->find($id);
@@ -279,12 +237,9 @@ class Kecamatans extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$kecamatans = $this->model_kecamatans->find($id);
 
-		
-		
 		return $this->model_kecamatans->remove($id);
 	}
 	
@@ -294,8 +249,7 @@ class Kecamatans extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('kecamatans_export');
 
 		$this->model_kecamatans->export(
@@ -310,16 +264,14 @@ class Kecamatans extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('kecamatans_export');
 
 		$this->model_kecamatans->pdf('kecamatans', 'kecamatans');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('kecamatans_export');
 
 		$table = $title = 'kecamatans';

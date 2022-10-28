@@ -8,8 +8,7 @@ class Model_kecamatans extends MY_Model {
     public $field_search   = ['kecamatan_nama', 'kecamatan_create_at', 'kecamatan_user'];
     public $sort_option = ['kecamatan_id', 'DESC'];
     
-    public function __construct()
-    {
+    public function __construct() {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -99,15 +98,12 @@ class Model_kecamatans extends MY_Model {
     }
 
     public function join_avaiable() {
-        
         $this->db->select('kecamatans.*');
-
 
         return $this;
     }
 
     public function filter_avaiable() {
-
         if (!$this->aauth->is_admin()) {
             $this->db->where($this->table_name.'.kecamatan_user', get_user_data('id'));
         }
