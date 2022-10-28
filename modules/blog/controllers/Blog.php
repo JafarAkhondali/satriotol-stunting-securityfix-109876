@@ -45,8 +45,9 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs'] = $this->model_blog->get($filter, $field, $this->limit_page, $offset, $category_id);
-        $this->data['blog_counts'] = $this->model_blog->count_all($filter, $field, $category_id);
+        $this->data['blogs']        = $this->model_blog->get($filter, $field, $this->limit_page, $offset, $category_id);
+        $this->data['blog_counts']  = $this->model_blog->count_all($filter, $field, $category_id);
+        $this->data['about']        = $this->db->get('about')->row();
 
         $config = [
             'base_url'     => 'blog/index/',
@@ -66,8 +67,9 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs'] = $this->model_blog->get($filter, $field, $this->limit_page, $offset, null, $tag);
-        $this->data['blog_counts'] = $this->model_blog->count_all($filter, $field, null, $tag);
+        $this->data['blogs']        = $this->model_blog->get($filter, $field, $this->limit_page, $offset, null, $tag);
+        $this->data['blog_counts']  = $this->model_blog->count_all($filter, $field, null, $tag);
+        $this->data['about']        = $this->db->get('about')->row();
 
         $config = [
             'base_url'     => 'blog/index/',
