@@ -120,14 +120,14 @@
 							<img class="about__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/about/about-shape-3.png" alt="">
 						</div>
 						<div class="about__thumb-2 mb-10">
-							<img src="<?php echo base_url(); ?>assets_stunting/stunting/pengertian.jpg" alt="Pengertian Stunting" style="width: 580px; border-radius: 20px;">
+							<img src="<?php echo base_url(); ?>assets_stunting/stunting/pengertian.jpg" alt="Pengertian Stunting" style="width: 100%; border-radius: 20px;">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section id="penyebab-stunting" class="about__area pt-120 pb-120 p-relative">
+	<section id="penyebab-stunting" class="about__area pb-120 p-relative">
 		<div class="container">
 			<div class="row">
 				<div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -138,7 +138,7 @@
 							<img class="about__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/about/about-shape-3.png" alt="">
 						</div>
 						<div class="about__thumb-2 mb-10">
-							<img src="<?php echo base_url(); ?>assets_stunting/stunting/penyebab.jpg" alt="Penyebab Stunting" style="width: 580px; border-radius: 20px;">
+							<img src="<?php echo base_url(); ?>assets_stunting/stunting/penyebab.jpg" alt="Penyebab Stunting" style="width: 100%; border-radius: 20px;">
 						</div>
 					</div>
 				</div>
