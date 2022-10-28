@@ -138,6 +138,10 @@ class Model_blog extends MY_Model {
 		return $this->db->get('blog')->result();
 	}
 
+	public function about() {
+		return $this->db->get('about')->row();
+	}
+
     // public function bidding_exist() {
     // 	return $this->db->get_where($this->table_name, ['customer_id' => $customer_id, 'product_id' => $product_id])->num_rows();
     // }

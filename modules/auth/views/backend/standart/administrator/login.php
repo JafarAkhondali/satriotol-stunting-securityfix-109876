@@ -70,7 +70,9 @@
 				<div class="row">
 					<div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
 						<div class="section__title-wrapper text-center mb-35">
-							<img src="<?= base_url();?>assets_stunting/logo-semarang-simpul.png" alt="logo" class="w-100 mb-10">
+							<a href="<?php echo base_url();?>">
+								<img src="<?= base_url();?>assets_stunting/logo-semarang-simpul.png" alt="logo" class="w-100 mb-10">
+							</a>
 							<h2 class="section__title"><?= cclang('login'); ?></b>&nbsp;<?= get_option('site_name'); ?></h2>
 							<p><?= cclang('sign_to_start_your_session'); ?></p>
 						</div>
