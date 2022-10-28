@@ -214,7 +214,7 @@
 							<div class="course__content-2">
 								<div class="course__top-2 d-flex align-items-center justify-content-between">
 									<div class="course__tag-2">
-										<a href="<?= $blog->kategori_id; ?>"><?= $blog->nama_kategori; ?></a>
+										<a href="<?= base_url().'blog/category/'.$blog->kategori_id; ?>"><?= $blog->nama_kategori; ?></a>
 									</div>
 								</div>
 								<h3 class="course__title-2">
