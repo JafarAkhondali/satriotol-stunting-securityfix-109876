@@ -122,7 +122,7 @@
 											<td>
 												<span class="list_group-kecamatan-nama">
 										<?=
-											_ent($kecamatans->kecamatan_nama).'<br/><small><i>dibuat oleh : '..'</i></small>'.;
+											_ent($kecamatans->kecamatan_nama).'<br/><small><i>dibuat oleh : '.$kecamatans->user_username.'</i></small>';
 										?>
 												</span>
 											</td>

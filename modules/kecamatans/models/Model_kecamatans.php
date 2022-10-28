@@ -98,7 +98,9 @@ class Model_kecamatans extends MY_Model {
     }
 
     public function join_avaiable() {
-        $this->db->select('kecamatans.*');
+        $this->db->select('kecamatans.*, aauth_users.id AS user_id, aauth_users.username AS user_username');
+        $this->db->join('aauth_users', 'aauth_users.id = kecamatans.kecamatan_user');
+        
 
         return $this;
     }
