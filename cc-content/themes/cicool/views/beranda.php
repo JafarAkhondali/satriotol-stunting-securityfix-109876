@@ -172,7 +172,7 @@
 						<nav>
 							<div class="nav nav-tabs justify-content-center" id="course-tab" role="tablist">
 								<?php foreach ($categories as $category) { ?>
-									<button class="nav-link" id="nav-trending-tab" data-bs-toggle="tab" data-bs-target="#nav-trending" type="button" role="tab" aria-controls="nav-trending" aria-selected="false"><?= $category->category_name; ?></button>
+									<button class="nav-link" id="<?= $category->category_name.$category->category_id;?>" data-bs-toggle="tab" data-bs-target="#<?= $category->category_name.$category->category_id;?>" type="button" role="tab" aria-controls="<?= $category->category_name.$category->category_id;?>" aria-selected="false"><?= $category->category_name; ?></button>
 								<?php } ?>
 
 							</div>
@@ -186,7 +186,7 @@
 						<div class="course__item-2 transition-3 white-bg mb-30 fix">
 							<div class="course__thumb-2 w-img fix">
 								<a href="<?= base_url() . 'blog/' . $blog->slug; ?>">
-									<?php
+								<?php
 									if (!empty($blog->image)) {
 										$file = FCPATH . 'uploads/blog/' . $blog->image;
 
@@ -208,7 +208,7 @@
 
 										echo '<img src="https://via.placeholder.com/760x405.png?text=' . $title . '" alt="">';
 									}
-									?>
+								?>
 								</a>
 							</div>
 							<div class="course__content-2">
@@ -265,43 +265,6 @@
 								</div>
 							</div>
 						</div>
-
-
-						<!-- <div class="course__item white-bg transition-3 mb-30">
-						<div class="course__thumb w-img fix">
-							<a href="course-details.html">
-								<img src="<?php echo base_url(); ?>uploads/blog/<?= $blog->image; ?>" alt="">
-							</a>
-						</div>
-						<div class="course__content p-relative">
-							<div class="course__tag">
-								<a href="#"><?= $blog->nama_kategori; ?></a>
-							</div>
-							<h3 class="course__title">
-								<a href="course-details.html"><?php echo $blog->title; ?></a>
-							</h3>
-							<p>
-						<?php
-						if (strlen($blog->content) < 120) {
-							echo strip_tags($blog->content);
-						} else {
-							echo strip_tags(substr($blog->content, 0, 120)) . '...';
-						}
-						?>
-							</p>
-
-							<div class="course__bottom d-sm-flex align-items-center justify-content-between">
-								<div class="course__tutor">
-									<a href="javascript:void(0);"><i class="fa fa-user"></i> <?= ucwords(strtolower($blog->user_username)); ?></a>
-								</div>
-						<?php
-						if (strlen($blog->content) > 120) {
-							echo '<div class="course__lesson"><a href="javascript:void(0);">Read more</a></div>';
-						}
-						?>
-							</div>
-						</div>
-					</div> -->
 					</div>
 				<?php } ?>
 			</div>

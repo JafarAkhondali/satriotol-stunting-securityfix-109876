@@ -29,8 +29,8 @@ class Kecamatans extends Admin {
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['kecamatanss'] = $this->model_kecamatans->get($filter, $field, $this->limit_page, $offset);
-		$this->data['kecamatans_counts'] = $this->model_kecamatans->count_all($filter, $field);
+		$this->data['kecamatanss'] 			= $this->model_kecamatans->get($filter, $field, $this->limit_page, $offset);
+		$this->data['kecamatans_counts'] 	= $this->model_kecamatans->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/kecamatans/index/',
@@ -149,7 +149,7 @@ class Kecamatans extends Admin {
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'kecamatan_nama' => $this->input->post('kecamatan_nama'),
+				'kecamatan_nama' 		=> $this->input->post('kecamatan_nama'),
 			];
 			
 			$save_kecamatans = $this->model_kecamatans->change($id, $save_data);

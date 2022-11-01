@@ -6,53 +6,67 @@
 			<div class="row">
 				<div class="col-xxl-8 col-xl-8 col-lg-8">
 					<div class="postbox__wrapper pr-20">
+					<?php
+						foreach ($blogs as $blog) {
+					?>
 						<article class="postbox__item format-image mb-50 transition-3">
 							<div class="postbox__thumb w-img">
-								<a href="blog-details.html">
-									<img src="assets/img/blog/blog-big-1.jpg" alt="">
+							<a href="<?= base_url() . 'blog/' . $blog->slug; ?>">
+					<?php
+						if (!empty($blog->image)) {
+							$file = FCPATH . 'uploads/blog/' . $blog->image;
+
+							if (is_image($blog->image)) {
+								if (file_exists($file)) {
+									echo '<img src="' . base_url() . 'uploads/blog/' . $blog->image . '" alt="">';
+								} else {
+									$title = str_replace(' ', '+', $blog->title);
+
+									echo '<img src="https://via.placeholder.com/760x405.png?text=' . $title . '" alt="">';
+								}
+							} else {
+								$title = str_replace(' ', '+', $blog->title);
+
+								echo '<img src="https://via.placeholder.com/760x405.png?text=' . $title . '" alt="">';
+							}
+						} else {
+							$title = str_replace(' ', '+', $blog->title);
+
+							echo '<img src="https://via.placeholder.com/760x405.png?text=' . $title . '" alt="">';
+						}
+					?>
 								</a>
 							</div>
 							<div class="postbox__content">
 								<div class="postbox__meta">
-									<span><i class="far fa-calendar-check"></i> July 21, 2020 </span>
-									<span><a href="#"><i class="far fa-user"></i> Shahnewaz</a></span>
-									<span><a href="#"><i class="fal fa-comments"></i> 02 Comments</a></span>
+									<span><i class="far fa-calendar-check"></i> <?php echo date('d M Y', strtotime($blog->created_at));?> </span>
+									<span><a href="javascript:void(0);"><i class="far fa-user"></i> <?php echo $blog->user_username;?></a></span>
+									<span><a href="<?php echo base_url().'blog/category/'.$blog->category_id;?>"><i class="far fa-bookmark"></i> <?php echo $blog->category_name;?></a></span>
 								</div>
 								<h3 class="postbox__title">
-									<a href="blog-details.html">Personalized Storage in Schools</a>
+								<a href="<?= base_url() . 'blog/' . $blog->slug; ?>"><?php echo $blog->title;?></a>
 								</h3>
 								<div class="postbox__text">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat […]</p>
+									<p>
+								<?php
+									if (strlen($blog->content) < 250) {
+										echo $blog->content;
+									} else {
+										echo substr($blog->content, 0, 250) . ' [...]';
+									}
+								?>
+									</p>
 								</div>
 								<div class="postbox__read-more">
-									<a href="blog-details.html" class="tp-btn">read more</a>
+									<a href="<?= base_url() . 'blog/' . $blog->slug; ?>" class="tp-btn">read more</a>
 								</div>
 							</div>
 						</article>
+					<?php
+						}
+					?>
 						<div class="basic-pagination">
-							<nav>
-								<ul>
-									<li>
-										<a href="blog.html">
-											<i class="far fa-angle-left"></i>
-										</a>
-									</li>
-									<li>
-										<a href="blog.html">1</a>
-									</li>
-									<li>
-										<span class="current">2</span>
-									</li>
-									<li>
-										<a href="blog.html">3</a>
-									</li>
-									<li>
-										<a href="blog.html">
-											<i class="far fa-angle-right"></i>
-										</a>
-									</li>
-								</ul>
-							</nav>
+							<?= $pagination;?>
 						</div>
 					</div>
 				</div>
@@ -61,9 +75,9 @@
 						<div class="sidebar__widget mb-60">
 							<div class="sidebar__widget-content">
 								<div class="sidebar__search p-relative">
-									<form action="#">
-										<input type="text" placeholder="Cari Sesuatu Disini...">
-										<button type="submit">
+									<form action="" method="get" id="form-blog-search">
+										<input type="text" name="q" placeholder="Cari Sesuatu Disini..." value="<?= $this->input->get('q');?>">
+										<button type="button" onclick="$('#form-blog-search').submit();">
 											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;" xml:space="preserve">
 												<g>
 													<g>
@@ -77,17 +91,18 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="sidebar__widget mb-55">
 							<div class="sidebar__widget-head mb-35">
 								<h3 class="sidebar__widget-title">Category</h3>
 							</div>
 							<div class="sidebar__widget-content">
 								<ul>
-									<li><a href="blog.html">Category</a></li>
-									<li><a href="blog.html">Video & Tips (4)</a></li>
-									<li><a href="blog.html">Education (8)</a></li>
-									<li><a href="blog.html">Business (5)</a></li>
-									<li><a href="blog.html">UX Design (3)</a></li>
+						<?php
+							foreach ($categories as $category) {
+								echo '<li><a href="'.base_url().'blog/category/'.$category->id_kategori.'">'.$category->nama_kategori.' ('.$category->jumlah.')</a></li>';
+							}
+						?>
 								</ul>
 							</div>
 						</div>

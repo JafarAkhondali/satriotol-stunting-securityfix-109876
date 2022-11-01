@@ -113,13 +113,13 @@ class MY_Controller extends MX_Controller
             'last_link'        => 'Last',
             'last_tag_open'    => '<li>',
             'last_tag_close'   => '</li>',
-            'next_link'        => 'Next',
+            'next_link'        => '<i class="far fa-angle-right"></i>',
             'next_tag_open'    => '<li>',
             'next_tag_close'   => '</li>',
-            'prev_link'        => 'Prev',
+            'prev_link'        => '<i class="far fa-angle-left"></i>',
             'prev_tag_open'    => '<li>',
             'prev_tag_close'   => '</li>',
-            'cur_tag_open'     => '<li class="active"><a href="#">',
+            'cur_tag_open'     => '<li class="active"><a href="javascript:void(0);">',
             'cur_tag_close'    => '</a></li>',
         ];
 

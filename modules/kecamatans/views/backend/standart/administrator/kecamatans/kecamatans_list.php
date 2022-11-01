@@ -48,11 +48,13 @@
 						<div class="widget-user-header ">
 							<div class="row pull-right">
 								<?php is_allowed('kecamatans_add', function(){?>
-								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('kecamatans')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/kecamatans/add'); ?>"><i class="fa fa-plus-square-o"></i>
+								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('kecamatans')]); ?> (Ctrl+a)" href="<?=  site_url('administrator/kecamatans/add'); ?>">
+									<i class="fa fa-plus-square-o"></i>
 									<?= cclang('add_new_button', [cclang('kecamatans')]); ?></a>
 								<?php }) ?>
 								<?php is_allowed('kecamatans_export', function(){?>
-								<a class="btn btn-flat btn-success" title="<?= cclang('export'); ?> <?= cclang('kecamatans') ?> " href="<?= site_url('administrator/kecamatans/export?q='.$this->input->get('q').'&f='.$this->input->get('f')); ?>"><i class="fa fa-file-excel-o"></i> <?= cclang('export'); ?> XLS</a>
+								<a class="btn btn-flat btn-success" title="<?= cclang('export'); ?> <?= cclang('kecamatans') ?> "href="<?= site_url('administrator/kecamatans/export?q='.$this->input->get('q').'&f='.$this->input->get('f')); ?>">
+									<i class="fa fa-file-excel-o"></i> <?= cclang('export'); ?> XLS</a>
 								<?php }) ?>
 							</div>
 							<div class="widget-user-image">
@@ -106,41 +108,36 @@
 								<table class="table table-bordered table-striped dataTable">
 									<thead>
 										<tr class="">
-											<th>
-												<input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all">
-											</th>
+											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
 											<th data-field="kecamatan_nama" data-sort="1" data-primary-key="0"><?= cclang('kecamatan_nama') ?></th>
+											<th data-field="dibuat_tanggal" data-sort="1" data-primary-key="0"><?= cclang('create_at') ?></th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody id="tbody_kecamatans">
-										<?php foreach($kecamatanss as $kecamatans): ?>
+								<?php foreach($kecamatanss as $kecamatans): ?>
 										<tr>
-											<td width="5">
-												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $kecamatans->kecamatan_id; ?>">
-											</td>
+											<td width="5"> <input type="checkbox" class="flat-red check" name="id[]" value="<?= $kecamatans->kecamatan_id; ?>"></td>
 											<td>
 												<span class="list_group-kecamatan-nama">
-										<?=
-											_ent($kecamatans->kecamatan_nama).'<br/><small><i>dibuat oleh : '.$kecamatans->user_username.'</i></small>';
-										?>
+													<?= _ent($kecamatans->kecamatan_nama).'<br/><small><i>dibuat oleh : '.$kecamatans->user_username.'</i></small>';?>
 												</span>
 											</td>
-											<td><span class="list_group-kecamatan-create-at"><?= _ent($kecamatans->kecamatan_create_at); ?></span></td>
-											<td><span class="list_group-kecamatan-user"><?= _ent($kecamatans->kecamatan_user); ?></span></td>
+											<td><span class="list_group-kecamatan-create-at"><?= _ent($kecamatans->kecamatan_create_at);?></span></td>
 											<td width="200">
 												<?php is_allowed('kecamatans_view', function() use ($kecamatans){?>
 												<a href="<?= site_url('administrator/kecamatans/view/' . $kecamatans->kecamatan_id); ?>" class="label-default"><i class="fa fa-newspaper-o"></i>
 													<?= cclang('view_button'); ?>
-												<?php }) ?>
-												<?php is_allowed('kecamatans_update', function() use ($kecamatans){?>
-												<a href="<?= site_url('administrator/kecamatans/edit/' . $kecamatans->kecamatan_id); ?>" class="label-default"><i class="fa fa-edit "></i>
-													<?= cclang('update_button'); ?></a>
-												<?php }) ?>
-												<?php is_allowed('kecamatans_delete', function() use ($kecamatans){?>
-												<a href="javascript:void(0);" data-href="<?= site_url('administrator/kecamatans/delete/' . $kecamatans->kecamatan_id); ?>" class="label-default remove-data"><i class="fa fa-close"></i>
-													<?= cclang('remove_button'); ?></a>
-												<?php }) ?>
+													<?php }) ?>
+													<?php is_allowed('kecamatans_update', function() use ($kecamatans){?>
+													<a href="<?= site_url('administrator/kecamatans/edit/' . $kecamatans->kecamatan_id); ?>" class="label-default"><i class="fa fa-edit "></i>
+														<?= cclang('update_button'); ?></a>
+													<?php }) ?>
+													<?php is_allowed('kecamatans_delete', function() use ($kecamatans){?>
+													<a href="javascript:void(0);" data-href="<?= site_url('administrator/kecamatans/delete/' . $kecamatans->kecamatan_id); ?>"
+														class="label-default remove-data"><i class="fa fa-close"></i>
+														<?= cclang('remove_button'); ?></a>
+													<?php }) ?>
 											</td>
 										</tr>
 										<?php endforeach; ?>

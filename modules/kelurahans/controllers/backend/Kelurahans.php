@@ -9,11 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Kelurahans site
 *|
 */
-class Kelurahans extends Admin	
-{
+class Kelurahans extends Admin {
 	
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_kelurahans');
@@ -26,8 +24,7 @@ class Kelurahans extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('kelurahans_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +50,7 @@ class Kelurahans extends Admin
 	* Add new kelurahanss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('kelurahans_add');
 
 		$this->template->title('Kelurahan New');
@@ -66,8 +62,7 @@ class Kelurahans extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('kelurahans_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,41 +70,22 @@ class Kelurahans extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('kelurahan_nama', 'Nama Kelurahan', 'trim|required|max_length[255]');
-		
-
-		
 
 		if ($this->form_validation->run()) {
 		
 			$save_data = [
-				'kecamatan_id' => $this->input->post('kecamatan_id'),
-				'kelurahan_nama' => $this->input->post('kelurahan_nama'),
-				'kelurahan_create_at' => $this->input->post('kelurahan_create_at'),
-				'kelurahan_create_user' => $this->input->post('kelurahan_create_user'),
+				'kecamatan_id' 			=> $this->input->post('kecamatan_id'),
+				'kelurahan_nama' 		=> $this->input->post('kelurahan_nama'),
+				'kelurahan_create_at' 	=> date('Y-m-d H:i:s'),
+				'kelurahan_create_user' => get_user_data('id'),
 			];
 
-			
-			
-
-
-
-			
-			
 			$save_kelurahans = $id = $this->model_kelurahans->store($save_data);
-            
 
 			if ($save_kelurahans) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_kelurahans;
@@ -136,7 +112,6 @@ class Kelurahans extends Admin
 					$this->data['redirect'] = base_url('administrator/kelurahans');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -151,8 +126,7 @@ class Kelurahans extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('kelurahans_update');
 
 		$this->data['kelurahans'] = $this->model_kelurahans->find($id);
@@ -166,8 +140,7 @@ class Kelurahans extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('kelurahans_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -175,35 +148,19 @@ class Kelurahans extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
-		
 
+		$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_nama', 'Nama Kelurahan', 'trim|required|max_length[255]');
 		
-
-		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'kecamatan_id' => $this->input->post('kecamatan_id'),
-				'kelurahan_nama' => $this->input->post('kelurahan_nama'),
+				'kecamatan_id' 		=> $this->input->post('kecamatan_id'),
+				'kelurahan_nama' 	=> $this->input->post('kelurahan_nama'),
 			];
 
-			
-
-			
-
-
-			
-			
 			$save_kelurahans = $this->model_kelurahans->change($id, $save_data);
 
 			if ($save_kelurahans) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -242,8 +199,7 @@ class Kelurahans extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('kelurahans_delete');
 
 		$this->load->helper('file');
@@ -273,8 +229,7 @@ class Kelurahans extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('kelurahans_view');
 
 		$this->data['kelurahans'] = $this->model_kelurahans->join_avaiable()->filter_avaiable()->find($id);
@@ -288,11 +243,8 @@ class Kelurahans extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$kelurahans = $this->model_kelurahans->find($id);
-
-		
 		
 		return $this->model_kelurahans->remove($id);
 	}
@@ -303,8 +255,7 @@ class Kelurahans extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('kelurahans_export');
 
 		$this->model_kelurahans->export(
@@ -319,16 +270,14 @@ class Kelurahans extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('kelurahans_export');
 
 		$this->model_kelurahans->pdf('kelurahans', 'kelurahans');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('kelurahans_export');
 
 		$table = $title = 'kelurahans';
@@ -360,8 +309,7 @@ class Kelurahans extends Admin
         $this->pdf->Output($table.'.pdf', 'H');
 	}
 
-	public function ajax_kecamatan_id($id = null)
-	{
+	public function ajax_kecamatan_id($id = null) {
 		if (!$this->is_allowed('kelurahans_list', false)) {
 			echo json_encode([
 				'success' => false,
@@ -372,7 +320,6 @@ class Kelurahans extends Admin
 		$results = db_get_all_data('kecamatans', ['kecamatan_id' => $id]);
 		$this->response($results);	
 	}
-
 	
 }
 

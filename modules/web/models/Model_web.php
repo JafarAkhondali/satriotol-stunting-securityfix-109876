@@ -16,6 +16,12 @@ class Model_web extends MY_Model {
 
 		return $this->db->where('verified_status', '1')->get();
 	}
+
+	public function categorynya(){
+		$this->db->select('blog_category.category_id AS id_kategori,
+							blog_category.category_name AS nama_kategori');
+		return $this->db->from('blog_category')->get();
+	}
 }
 	
 ?>

@@ -88,22 +88,30 @@
 	<!-- footer area end -->
 
 	<!-- JS here -->
-	<script src="<?= base_url();?>assets_stunting/js/vendor/jquery.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/vendor/waypoints.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/bootstrap-bundle.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/meanmenu.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/swiper-bundle.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/owl-carousel.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/magnific-popup.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/parallax.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/backtotop.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/nice-select.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/counterup.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/wow.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/isotope-pkgd.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/imagesloaded-pkgd.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/ajax-form.js"></script>
-	<script src="<?= base_url();?>assets_stunting/js/main.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/vendor/jquery.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/vendor/waypoints.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/bootstrap-bundle.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/meanmenu.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/swiper-bundle.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/owl-carousel.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/magnific-popup.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/parallax.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/backtotop.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/nice-select.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/counterup.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/wow.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/isotope-pkgd.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/imagesloaded-pkgd.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/ajax-form.js"></script>
+	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/main.js"></script>
+	<script type="text/javascript">
+		$('#pilih-berita').on('change', function (e) {
+			var optionSelected = $("option:selected", this);
+			var valueSelected = this.value;
+			
+			window.location.href = "<?php echo base_url().'blog/category/';?>"+valueSelected;
+		});
+	</script>
 </body>
 
 </html>
