@@ -181,8 +181,16 @@ class Web extends Front {
         }
     }
 
-    public function aksi_konvergensi() {
-        $this->template->build('aksi-konvergensi');
+    public function tahun_lokus() {
+        $this->template->build('tahun-lokus-stunting');
+    }
+
+    public function rembuk_stunting() {
+        $this->template->build('rembuk-stunting');
+    }
+
+    public function analisa_situasi() {
+        $this->template->build('analisa-situasi-stunting');
     }
 }
 

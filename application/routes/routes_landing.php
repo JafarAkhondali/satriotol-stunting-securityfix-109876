@@ -3,4 +3,6 @@ $route['default_controller'] = 'web';
 
 
 /* Custom Route */
-$route['aksi-konvergensi'] = 'web/aksi_konvergensi';
+$route['tahun-lokus-stunting'] 	= 'web/tahun_lokus';
+$route['rembuk-stunting'] 		= 'web/rembuk_stunting';
+$route['analisa-situasi'] 		= 'web/analisa_situasi';

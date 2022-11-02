@@ -151,7 +151,14 @@
                                 <nav>
                                     <ul>
                                         <li><a href="<?php echo base_url();?>">Beranda</a></li>
-                                        <li><a href="<?php echo base_url();?>aksi-konvergensi/">Aksi Konvergensi</a></li>
+                                        <li class="has-dropdown">
+                                            <a href="#">Aksi Konvergensi</a>
+                                            <ul class="submenu">
+                                                <li><a href="<?= base_url().'tahun-lokus-stunting/';?>">Tahun Lokus</a></li>
+                                                <li><a href="<?= base_url().'rembuk-stunting/'?>">Rembuk Stunting</a></li>
+                                                <li><a href="<?= base_url().'analisa-situasi/'?>">Analisa Situasi</a></li>
+                                            </ul>
+                                        </li>
                                         <?php echo display_menu_website(0, 1);?>
                                         <li><a href="<?php echo base_url();?>blog/">Program Kegiatan</a></li>
                                     </ul>
