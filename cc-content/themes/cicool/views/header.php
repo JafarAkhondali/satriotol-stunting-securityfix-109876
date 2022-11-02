@@ -202,7 +202,7 @@
                                     <img src="<?= base_url().'uploads/about/'.$about->about_logo;?>" alt="logo">
                                 </a>
                             </div>
-                            <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
+                            <div class="main-menu main-menu-2 main-menu-mobile ml-10 pl-10">
                                 <nav id="mobile-menu">
                                     <ul>
                                         <li><a href="<?php echo base_url();?>">Beranda</a></li>
