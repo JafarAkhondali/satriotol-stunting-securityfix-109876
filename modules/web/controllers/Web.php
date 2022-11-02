@@ -180,6 +180,10 @@ class Web extends Front {
             $this->aauth->create_user('user' . $i . '@gmail.com', 'admin123', 'user' . $i);
         }
     }
+
+    public function aksi_konvergensi() {
+        $this->template->build('aksi-konvergensi');
+    }
 }
 
 
