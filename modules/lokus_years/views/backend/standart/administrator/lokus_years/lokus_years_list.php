@@ -113,23 +113,13 @@
 								</div>
 							</div>
 							<div class="table-responsive">
-
 								<br>
 								<table class="table table-bordered table-striped dataTable">
 									<thead>
 										<tr class="">
-											<th>
-												<input type="checkbox" class="flat-red toltip" id="check_all"
-													name="check_all" title="check all">
-											</th>
-											<th data-field="lokus_year_nama" data-sort="1" data-primary-key="0">
-												<?= cclang('lokus_year_nama') ?></th>
-											<th data-field="lokus_year_file" data-sort="0" data-primary-key="0">
-												<?= cclang('lokus_year_file') ?></th>
-											<th data-field="lokus_year_create_at" data-sort="1" data-primary-key="0">
-												<?= cclang('lokus_year_create_at') ?></th>
-											<th data-field="lokus_year_user" data-sort="1" data-primary-key="0">
-												<?= cclang('lokus_year_user') ?></th>
+											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
+											<th data-field="lokus_year_nama" data-sort="1" data-primary-key="0"><?= cclang('lokus_year_nama') ?></th>
+											<th data-field="lokus_year_file" data-sort="0" data-primary-key="0"><?= cclang('lokus_year_file') ?></th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -137,55 +127,34 @@
 										<?php foreach($lokus_yearss as $lokus_years): ?>
 										<tr>
 											<td width="5">
-												<input type="checkbox" class="flat-red check" name="id[]"
-													value="<?= $lokus_years->lokus_year_id; ?>">
+												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $lokus_years->lokus_year_id; ?>">
 											</td>
-
-											<td><span
-													class="list_group-lokus-year-nama"><?= _ent($lokus_years->lokus_year_nama); ?></span>
-											</td>
+											<td><span class="list_group-lokus-year-nama"><?= _ent($lokus_years->lokus_year_nama).'<br/><small><i>dibuat oleh : '._ent($lokus_years->user_username);?></span></td>
 											<td>
 												<?php if (!empty($lokus_years->lokus_year_file)): ?>
 												<?php if (is_image($lokus_years->lokus_year_file)): ?>
-												<a class="fancybox" rel="group"
-													href="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>">
-													<img src="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>"
-														class="image-responsive" alt="image lokus_years"
-														title="lokus_year_file lokus_years" width="40px">
+												<a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>">
+													<img src="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>" class="image-responsive" alt="image lokus_years" title="lokus_year_file lokus_years" width="40px">
 												</a>
 												<?php else: ?>
-												<a href="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>"
-													target="blank">
+												<a href="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>" target="blank">
 													<img src="<?= get_icon_file($lokus_years->lokus_year_file); ?>"
-														class="image-responsive image-icon" alt="image lokus_years"
-														title="lokus_year_file <?= $lokus_years->lokus_year_file; ?>"
-														width="40px">
+														class="image-responsive image-icon" alt="image lokus_years" title="lokus_year_file <?= $lokus_years->lokus_year_file; ?>" width="40px">
 												</a>
 												<?php endif; ?>
 												<?php endif; ?>
 											</td>
-
-											<td><span
-													class="list_group-lokus-year-create-at"><?= _ent($lokus_years->lokus_year_create_at); ?></span>
-											</td>
-											<td><span
-													class="list_group-lokus-year-user"><?= _ent($lokus_years->lokus_year_user); ?></span>
-											</td>
 											<td width="200">
-
 												<?php is_allowed('lokus_years_view', function() use ($lokus_years){?>
-												<a href="<?= site_url('administrator/lokus_years/view/' . $lokus_years->lokus_year_id); ?>"
-													class="label-default"><i class="fa fa-newspaper-o"></i>
+												<a href="<?= site_url('administrator/lokus_years/view/' . $lokus_years->lokus_year_id); ?>" class="label-default"><i class="fa fa-newspaper-o"></i>
 													<?= cclang('view_button'); ?>
 													<?php }) ?>
 													<?php is_allowed('lokus_years_update', function() use ($lokus_years){?>
-													<a href="<?= site_url('administrator/lokus_years/edit/' . $lokus_years->lokus_year_id); ?>"
-														class="label-default"><i class="fa fa-edit "></i>
+													<a href="<?= site_url('administrator/lokus_years/edit/' . $lokus_years->lokus_year_id); ?>" class="label-default"><i class="fa fa-edit "></i>
 														<?= cclang('update_button'); ?></a>
 													<?php }) ?>
 													<?php is_allowed('lokus_years_delete', function() use ($lokus_years){?>
-													<a href="javascript:void(0);"
-														data-href="<?= site_url('administrator/lokus_years/delete/' . $lokus_years->lokus_year_id); ?>"
+													<a href="javascript:void(0);" data-href="<?= site_url('administrator/lokus_years/delete/' . $lokus_years->lokus_year_id); ?>"
 														class="label-default remove-data"><i class="fa fa-close"></i>
 														<?= cclang('remove_button'); ?></a>
 													<?php }) ?>

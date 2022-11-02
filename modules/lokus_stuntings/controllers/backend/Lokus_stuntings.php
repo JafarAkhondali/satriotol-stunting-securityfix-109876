@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Lokus Stuntings site
 *|
 */
-class Lokus_stuntings extends Admin	
-{
-	
-	public function __construct()
-	{
+class Lokus_stuntings extends Admin	{
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_lokus_stuntings');
@@ -26,8 +23,7 @@ class Lokus_stuntings extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('lokus_stuntings_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +49,7 @@ class Lokus_stuntings extends Admin
 	* Add new lokus_stuntingss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('lokus_stuntings_add');
 
 		$this->template->title('Lokus Stuntings New');
@@ -66,8 +61,7 @@ class Lokus_stuntings extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('lokus_stuntings_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,43 +69,22 @@ class Lokus_stuntings extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('lokus_year_id', 'Tahun Lokus', 'trim|required');
-		
-
 		$this->form_validation->set_rules('kelurahan_id', 'Nama Kelurahan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('lokus_stunting_create_at', 'Tanggal Pembuatan', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'lokus_year_id' => $this->input->post('lokus_year_id'),
-				'kelurahan_id' => $this->input->post('kelurahan_id'),
-				'lokus_stunting_create_at' => $this->input->post('lokus_stunting_create_at'),
-				'lokus_stunting_user' => get_user_data('id'),			];
+				'lokus_year_id' 			=> $this->input->post('lokus_year_id'),
+				'kelurahan_id' 				=> $this->input->post('kelurahan_id'),
+				'lokus_stunting_create_at' 	=> date('Y-m-d H:i:s'),
+				'lokus_stunting_user' 		=> get_user_data('id'),
+			];
 
-			
-			
-
-
-
-			
-			
 			$save_lokus_stuntings = $id = $this->model_lokus_stuntings->store($save_data);
-            
 
 			if ($save_lokus_stuntings) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_lokus_stuntings;
@@ -138,7 +111,6 @@ class Lokus_stuntings extends Admin
 					$this->data['redirect'] = base_url('administrator/lokus_stuntings');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -153,8 +125,7 @@ class Lokus_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('lokus_stuntings_update');
 
 		$this->data['lokus_stuntings'] = $this->model_lokus_stuntings->find($id);
@@ -168,8 +139,7 @@ class Lokus_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('lokus_stuntings_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -177,20 +147,14 @@ class Lokus_stuntings extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('lokus_year_id', 'Tahun Lokus', 'trim|required');
-		
 
+		$this->form_validation->set_rules('lokus_year_id', 'Tahun Lokus', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_id', 'Nama Kelurahan', 'trim|required');
 		
-
-		
-
-		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
 				'lokus_year_id' => $this->input->post('lokus_year_id'),
-				'kelurahan_id' => $this->input->post('kelurahan_id'),
+				'kelurahan_id' 	=> $this->input->post('kelurahan_id'),
 			];
 
 			
