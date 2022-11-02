@@ -99,7 +99,7 @@
 							<div class="sidebar__widget-content">
 								<ul>
 						<?php
-							foreach ($categories as $category) {
+							foreach ($count_categories as $category) {
 								echo '<li><a href="'.base_url().'blog/category/'.$category->id_kategori.'">'.$category->nama_kategori.' ('.$category->jumlah.')</a></li>';
 							}
 						?>

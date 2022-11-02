@@ -20,22 +20,21 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs']        = $this->model_blog->get($filter, $field, $this->limit_page, $offset);
-        $this->data['blog_counts']  = $this->model_blog->count_all($filter, $field);
-        $this->data['categories']   = $this->model_blog->count_category();
+        $this->data['blogs']                = $this->model_blog->get($filter, $field, $this->limit_page, $offset);
+        $this->data['blog_counts']          = $this->model_blog->count_all($filter, $field);
+        $this->data['categories']           = $this->db->get('blog_category')->result();
+        $this->data['count_categories']     = $this->model_blog->count_category();
 
         $config = [
             'base_url'     => 'blog/index/',
             'total_rows'   => $this->model_blog->count_all($filter, $field),
             'per_page'     => $this->limit_page,
             'uri_segment'  => 3,
-            
         ];
 
         $this->data['pagination'] = $this->pagination($config);
         $this->data['about'] = $this->db->get('about')->row();
         $this->data['links'] = $this->db->where('menu_type_id = 3')->get('menu')->result();
-
 
         $this->template->build('blog/blog_index', $this->data);
     }
@@ -46,10 +45,11 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs']        = $this->model_blog->get($filter, $field, $this->limit_page, $offset, $category_id);
-        $this->data['blog_counts']  = $this->model_blog->count_all($filter, $field, $category_id);
-        $this->data['about']        = $this->db->get('about')->row();
-        $this->data['categories']   = $this->model_blog->count_category();
+        $this->data['blogs']                = $this->model_blog->get($filter, $field, $this->limit_page, $offset, $category_id);
+        $this->data['blog_counts']          = $this->model_blog->count_all($filter, $field, $category_id);
+        $this->data['about']                = $this->db->get('about')->row();
+        $this->data['categories']           = $this->db->get('blog_category')->result();
+        $this->data['count_categories']     = $this->model_blog->count_category();
 
         $config = [
             'base_url'     => 'blog/index/',
@@ -101,12 +101,13 @@ class Blog extends Front {
         $blog->content = $this->cc_page_element->unParseHtml($blog->content);
 
         $data = [
-            'related'       => $related,
-            'blog'          => $blog,
-            'title'         => $blog->title,
-            'about'         => $this->db->get('about')->row(),
-            'links'         => $this->db->where('menu_type_id = 3')->get('menu')->result(),
-            'categories'    => $this->model_blog->count_category(),
+            'related'           => $related,
+            'blog'              => $blog,
+            'title'             => $blog->title,
+            'about'             => $this->db->get('about')->row(),
+            'links'             => $this->db->where('menu_type_id = 3')->get('menu')->result(),
+            'categories'        => $this->db->get('blog_category')->result(),
+            'count_categories'  => $this->model_blog->count_category(),
         ];
 
         $this->template->build('blog/blog_read', $data);

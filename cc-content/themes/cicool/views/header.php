@@ -140,7 +140,7 @@
             <div class="header__menu theme-bg-3 d-none d-lg-block">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-xxl-8 col-xl-8 col-lg-8">
+                        <div class="col-xxl-10 col-xl-10 col-lg-10">
                             <div class="main-menu main-menu-3 d-flex align-items-center">
                                 <div class="main-menu-icon mr-10">
                                     <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,18 +150,13 @@
                                 </div>
                                 <nav>
                                     <ul>
-								<?php
-                                    echo display_menu_website(0, 1);
-
-									// foreach ($navigation as $navigasi) {
-									// 	echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
-									// }
-								?>
+                                        <?php echo display_menu_website(0, 1);?>
+                                        <li><a href="<?php echo base_url();?>blog/">Program Kegiatan</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
+                        <div class="col-xxl-2 col-xl-2 col-lg-2">
                             <div class="header__category d-flex align-items-center justify-content-end">
                                 <div class="header__category-icon mr-10"><i class="fa fa-list-ul text-white"></i></div>
                                 <div class="header__category-content">
@@ -201,13 +196,8 @@
                             <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
                                 <nav id="mobile-menu">
                                     <ul>
-								<?php
-                                    echo display_menu_website(0, 1);
-
-									// foreach ($navigation as $navigasi) {
-									// 	echo '<li><a href="'.base_url().$navigasi->link.'">'.$navigasi->label.'</a></li>';
-									// }
-								?>
+								        <?php echo display_menu_website(0, 1);?>
+                                        <li><a href="<?php echo base_url();?>blog/">Program Kegiatan</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -261,8 +251,8 @@
                         <div class="offcanvas__content">
                             <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
                                 <div class="offcanvas__logo logo">
-                                    <a href="index.html">
-                                        <img src="<?= base_url();?>assets_stunting/img/logo/logo-3.png" alt="logo">
+                                    <a href="<?php echo base_url();?>">
+                                    <img src="<?= base_url().'uploads/about/'.$about->about_logo;?>" alt="logo">
                                     </a>
                                 </div>
                                 <div class="offcanvas__close">
@@ -271,21 +261,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="offcanvas__search mb-25">
-                                <form action="#">
-                                    <input type="text" placeholder="What are you searching for?">
-                                    <button type="submit"><i class="far fa-search"></i></button>
-                                </form>
-                            </div>
                             <div class="mobile-menu fix"></div>
-                            <div class="offcanvas__text d-none d-lg-block">
-                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and
-                                    praising pain was born and will give you a complete account of the system and
-                                    expound the actual teachings of the great explore</p>
-                            </div>
-                            <div class="offcanvas__map d-none d-lg-block mb-15">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d29176.030811137334!2d90.3883827!3d23.924917699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1605272373598!5m2!1sen!2sbd"></iframe>
-                            </div>
                             <div class="offcanvas__contact mt-30 mb-20">
                                 <h4>Contact Info</h4>
                                 <ul>
@@ -294,8 +270,7 @@
                                             <i class="fal fa-map-marker-alt"></i>
                                         </div>
                                         <div class="offcanvas__contact-text">
-                                            <a target="_blank" href="https://www.google.com/maps/place/Dhaka/@23.7806207,90.3492859,12z/data=!3m1!4b1!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.8104753!4d90.4119873">12/A,
-                                                Mirnada City Tower, NYC</a>
+                                            <a target="_blank" href="https://goo.gl/maps/BbScUFtW7YA1Q9aB7"><?= $about->about_address;?></a>
                                         </div>
                                     </li>
                                     <li class="d-flex align-items-center">
@@ -303,7 +278,7 @@
                                             <i class="far fa-phone"></i>
                                         </div>
                                         <div class="offcanvas__contact-text">
-                                            <a href="mailto:support@gmail.com">088889797697</a>
+                                            <a href="mailto:support@gmail.com">0123456789</a>
                                         </div>
                                     </li>
                                     <li class="d-flex align-items-center">
@@ -311,19 +286,19 @@
                                             <i class="fal fa-envelope"></i>
                                         </div>
                                         <div class="offcanvas__contact-text">
-                                            <a href="tel:+012-345-6789">support@mail.com</a>
+                                            <a href="tel:+012-345-6789">bappeda@semarangkota.go.id</a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="offcanvas__social">
+                            <!-- <div class="offcanvas__social">
                                 <ul>
                                     <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                     <li><a href="#"><i class="fab fa-youtube"></i></a></li>
                                     <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

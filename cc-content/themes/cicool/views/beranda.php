@@ -172,7 +172,7 @@
 						<nav>
 							<div class="nav nav-tabs justify-content-center" id="course-tab" role="tablist">
 								<?php foreach ($categories as $category) { ?>
-									<button class="nav-link" id="<?= $category->category_name.$category->category_id;?>" data-bs-toggle="tab" data-bs-target="#<?= $category->category_name.$category->category_id;?>" type="button" role="tab" aria-controls="<?= $category->category_name.$category->category_id;?>" aria-selected="false"><?= $category->category_name; ?></button>
+									<a href="<?= base_url().'blog/category/'.$category->category_id; ?>" target="blank" class="nav-link"><?= $category->category_name; ?></a>
 								<?php } ?>
 
 							</div>

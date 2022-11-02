@@ -10,7 +10,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *|
 */
 class Kelurahans extends Admin {
-	
 	public function __construct() {
 		parent::__construct();
 
@@ -30,8 +29,8 @@ class Kelurahans extends Admin {
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['kelurahanss'] = $this->model_kelurahans->get($filter, $field, $this->limit_page, $offset);
-		$this->data['kelurahans_counts'] = $this->model_kelurahans->count_all($filter, $field);
+		$this->data['kelurahanss'] 			= $this->model_kelurahans->get($filter, $field, $this->limit_page, $offset);
+		$this->data['kelurahans_counts'] 	= $this->model_kelurahans->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/kelurahans/index/',
@@ -317,7 +316,13 @@ class Kelurahans extends Admin {
 				]);
 			exit;
 		}
-		$results = db_get_all_data('kecamatans', ['kecamatan_id' => $id]);
+
+		if ($id != null) {
+			$results = db_get_all_data('kecamatans', ['kecamatan_id' => $id]);
+		}else{
+			$results = db_get_all_data('kecamatans');
+		}
+
 		$this->response($results);	
 	}
 	

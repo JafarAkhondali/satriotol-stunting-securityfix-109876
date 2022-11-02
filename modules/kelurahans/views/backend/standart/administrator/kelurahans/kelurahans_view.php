@@ -123,6 +123,12 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var kecamatan_id = $('.detail_group-kecamatan-id');
+        var kelurahan_nama = $('.detail_group-kelurahan-nama');
+        var kelurahan_create_at = $('.detail_group-kelurahan-create-at');
+        var kelurahan_create_user = $('.detail_group-kelurahan-create-user');
+    })()
+      
    });
 </script>
