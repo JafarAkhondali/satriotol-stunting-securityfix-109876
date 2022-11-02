@@ -284,11 +284,10 @@
 				<div class="col-xxl-5 col-xl-5 col-lg-5">
 					<div class="faq__wrapper pt-45 pr-25">
 						<div class="section__title-wrapper mb-5">
-							<span class="section__title-pre-3">Learn how to get started</span>
-							<h2 class="section__title section__title-44">Frequently Asked Questions</h2>
+							<span class="section__title-pre-3">Stunting Kota Semarang</span>
+							<h2 class="section__title section__title-44">Pertanyaan Mengenai Stunting</h2>
 						</div>
-						<p>Join our club member community now to get free updates and also a lot of freebies are
-							waiting for you or <a href="contact.html">Contact Us</a></p>
+						<p>Semarang Semakin Hebat</p>
 					</div>
 				</div>
 				<div class="col-xxl-7 col-xl-7 col-lg-7">

@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-7">
 							<div class="footer__widget footer__widget-3 footer-col-3-4 mb-50">
-								<h3 class="footer__widget-title footer__widget-title-3">Information</h3>
+								<h3 class="footer__widget-title footer__widget-title-3">Informasi</h3>
 
 								<div class="footer__contact">
 									<ul>
