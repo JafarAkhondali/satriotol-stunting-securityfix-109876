@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 /**
 *| --------------------------------------------------------------------------
 *| Lokus Years Controller
@@ -9,11 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Lokus Years site
 *|
 */
-class Lokus_years extends Admin	
-{
-	
-	public function __construct()
-	{
+class Lokus_years extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_lokus_years');
@@ -26,8 +22,7 @@ class Lokus_years extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('lokus_years_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +48,7 @@ class Lokus_years extends Admin
 	* Add new lokus_yearss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('lokus_years_add');
 
 		$this->template->title('Tahun Lokus New');
@@ -66,40 +60,28 @@ class Lokus_years extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('lokus_years_add', false)) {
 			echo json_encode([
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
 				]);
+
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('lokus_year_nama', 'Tahun Lokus', 'trim|required|max_length[255]');
-		
-
 		$this->form_validation->set_rules('lokus_years_lokus_year_file_name', 'File Lokus', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
 			$lokus_years_lokus_year_file_uuid = $this->input->post('lokus_years_lokus_year_file_uuid');
 			$lokus_years_lokus_year_file_name = $this->input->post('lokus_years_lokus_year_file_name');
 		
 			$save_data = [
-				'lokus_year_nama' => $this->input->post('lokus_year_nama'),
-				'lokus_year_create_at' => $this->input->post('lokus_year_create_at'),
-				'lokus_year_user' => get_user_data('id'),			];
-
-			
-			
-
-
-
+				'lokus_year_nama' 		=> $this->input->post('lokus_year_nama'),
+				'lokus_year_create_at' 	=> date('Y-m-d H:i:s'),
+				'lokus_year_user' 		=> get_user_data('id'),
+			];
 			
 			if (!is_dir(FCPATH . '/uploads/lokus_years/')) {
 				mkdir(FCPATH . '/uploads/lokus_years/');
@@ -121,16 +103,10 @@ class Lokus_years extends Admin
 
 				$save_data['lokus_year_file'] = $lokus_years_lokus_year_file_name_copy;
 			}
-		
-			
+
 			$save_lokus_years = $id = $this->model_lokus_years->store($save_data);
-            
 
 			if ($save_lokus_years) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_lokus_years;
@@ -157,7 +133,6 @@ class Lokus_years extends Admin
 					$this->data['redirect'] = base_url('administrator/lokus_years');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -172,8 +147,7 @@ class Lokus_years extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('lokus_years_update');
 
 		$this->data['lokus_years'] = $this->model_lokus_years->find($id);
@@ -187,8 +161,7 @@ class Lokus_years extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('lokus_years_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -196,12 +169,9 @@ class Lokus_years extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('lokus_year_nama', 'Tahun Lokus', 'trim|required|max_length[255]');
-		
 
+		$this->form_validation->set_rules('lokus_year_nama', 'Tahun Lokus', 'trim|required|max_length[255]');
 		$this->form_validation->set_rules('lokus_years_lokus_year_file_name', 'File Lokus', 'trim|required');
-		
-
 		
 		if ($this->form_validation->run()) {
 			$lokus_years_lokus_year_file_uuid = $this->input->post('lokus_years_lokus_year_file_uuid');
@@ -210,12 +180,6 @@ class Lokus_years extends Admin
 			$save_data = [
 				'lokus_year_nama' => $this->input->post('lokus_year_nama'),
 			];
-
-			
-
-			
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/lokus_years/')) {
 				mkdir(FCPATH . '/uploads/lokus_years/');
@@ -237,16 +201,10 @@ class Lokus_years extends Admin
 
 				$save_data['lokus_year_file'] = $lokus_years_lokus_year_file_name_copy;
 			}
-		
 			
 			$save_lokus_years = $this->model_lokus_years->change($id, $save_data);
 
 			if ($save_lokus_years) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -285,8 +243,7 @@ class Lokus_years extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('lokus_years_delete');
 
 		$this->load->helper('file');
@@ -316,8 +273,7 @@ class Lokus_years extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('lokus_years_view');
 
 		$this->data['lokus_years'] = $this->model_lokus_years->join_avaiable()->filter_avaiable()->find($id);
@@ -331,8 +287,7 @@ class Lokus_years extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$lokus_years = $this->model_lokus_years->find($id);
 
 		if (!empty($lokus_years->lokus_year_file)) {
@@ -351,8 +306,7 @@ class Lokus_years extends Admin
 	* Upload Image Lokus Years	* 
 	* @return JSON
 	*/
-	public function upload_lokus_year_file_file()
-	{
+	public function upload_lokus_year_file_file() {
 		if (!$this->is_allowed('lokus_years_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -374,8 +328,7 @@ class Lokus_years extends Admin
 	* Delete Image Lokus Years	* 
 	* @return JSON
 	*/
-	public function delete_lokus_year_file_file($uuid)
-	{
+	public function delete_lokus_year_file_file($uuid) {
 		if (!$this->is_allowed('lokus_years_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -399,8 +352,7 @@ class Lokus_years extends Admin
 	* Get Image Lokus Years	* 
 	* @return JSON
 	*/
-	public function get_lokus_year_file_file($id)
-	{
+	public function get_lokus_year_file_file($id) {
 		if (!$this->is_allowed('lokus_years_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -422,14 +374,12 @@ class Lokus_years extends Admin
         ]);
 	}
 	
-	
 	/**
 	* Export to excel
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('lokus_years_export');
 
 		$this->model_lokus_years->export(
@@ -444,16 +394,13 @@ class Lokus_years extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('lokus_years_export');
 
 		$this->model_lokus_years->pdf('lokus_years', 'lokus_years');
 	}
 
-
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('lokus_years_export');
 
 		$table = $title = 'lokus_years';
@@ -469,14 +416,14 @@ class Lokus_years extends Admin
         $this->pdf->setDefaultFont('stsongstdlight'); 
 
         $result = $this->db->get($table);
-       
+
         $data = $this->model_lokus_years->find($id);
         $fields = $result->list_fields();
 
         $content = $this->pdf->loadHtmlPdf('core_template/pdf/pdf_single', [
-            'data' => $data,
-            'fields' => $fields,
-            'title' => $title
+            'data' 		=> $data,
+            'fields' 	=> $fields,
+            'title' 	=> $title
         ], TRUE);
 
         $this->pdf->initialize($config);
@@ -484,7 +431,6 @@ class Lokus_years extends Admin
         $this->pdf->writeHTML($content);
         $this->pdf->Output($table.'.pdf', 'H');
 	}
-
 	
 }
 

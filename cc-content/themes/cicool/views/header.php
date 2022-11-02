@@ -150,6 +150,8 @@
                                 </div>
                                 <nav>
                                     <ul>
+                                        <li><a href="<?php echo base_url();?>">Beranda</a></li>
+                                        <li><a href="<?php echo base_url();?>aksi-konvergensi/">Aksi Konvergensi</a></li>
                                         <?php echo display_menu_website(0, 1);?>
                                         <li><a href="<?php echo base_url();?>blog/">Program Kegiatan</a></li>
                                     </ul>
