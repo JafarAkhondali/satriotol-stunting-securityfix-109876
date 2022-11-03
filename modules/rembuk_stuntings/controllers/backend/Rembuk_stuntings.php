@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 /**
 *| --------------------------------------------------------------------------
 *| Rembuk Stuntings Controller
@@ -9,11 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Rembuk Stuntings site
 *|
 */
-class Rembuk_stuntings extends Admin	
-{
-	
-	public function __construct()
-	{
+class Rembuk_stuntings extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_rembuk_stuntings');
@@ -26,15 +22,14 @@ class Rembuk_stuntings extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('rembuk_stuntings_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['rembuk_stuntingss'] = $this->model_rembuk_stuntings->get($filter, $field, $this->limit_page, $offset);
-		$this->data['rembuk_stuntings_counts'] = $this->model_rembuk_stuntings->count_all($filter, $field);
+		$this->data['rembuk_stuntingss'] 		= $this->model_rembuk_stuntings->get($filter, $field, $this->limit_page, $offset);
+		$this->data['rembuk_stuntings_counts'] 	= $this->model_rembuk_stuntings->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/rembuk_stuntings/index/',
@@ -53,8 +48,7 @@ class Rembuk_stuntings extends Admin
 	* Add new rembuk_stuntingss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('rembuk_stuntings_add');
 
 		$this->template->title('Rembuk Stunting New');
@@ -66,8 +60,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('rembuk_stuntings_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,30 +68,19 @@ class Rembuk_stuntings extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('rembuk_stunting_year', 'Tahun', 'trim|required|max_length[10]');
-		
-
 		$this->form_validation->set_rules('rembuk_stuntings_rembuk_stunting_file_name', 'File', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
 			$rembuk_stuntings_rembuk_stunting_file_uuid = $this->input->post('rembuk_stuntings_rembuk_stunting_file_uuid');
 			$rembuk_stuntings_rembuk_stunting_file_name = $this->input->post('rembuk_stuntings_rembuk_stunting_file_name');
 		
 			$save_data = [
-				'rembuk_stunting_year' => $this->input->post('rembuk_stunting_year'),
+				'rembuk_stunting_year' 		=> $this->input->post('rembuk_stunting_year'),
+				'rembuk_stunting_create_at' => date('Y-m-d H:i:s'),
+				'rembuk_stunting_user' 		=> get_user_data('id'),
 			];
-
-			
-			
-
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/rembuk_stuntings/')) {
 				mkdir(FCPATH . '/uploads/rembuk_stuntings/');
@@ -120,15 +102,11 @@ class Rembuk_stuntings extends Admin
 
 				$save_data['rembuk_stunting_file'] = $rembuk_stuntings_rembuk_stunting_file_name_copy;
 			}
-		
 			
 			$save_rembuk_stuntings = $id = $this->model_rembuk_stuntings->store($save_data);
-            
 
 			if ($save_rembuk_stuntings) {
-				
-				
-					
+				$id = $save_rembuk_stuntings;
 				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
@@ -171,8 +149,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('rembuk_stuntings_update');
 
 		$this->data['rembuk_stuntings'] = $this->model_rembuk_stuntings->find($id);
@@ -186,8 +163,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('rembuk_stuntings_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -195,12 +171,9 @@ class Rembuk_stuntings extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('rembuk_stunting_year', 'Tahun', 'trim|required|max_length[10]');
-		
 
+		$this->form_validation->set_rules('rembuk_stunting_year', 'Tahun', 'trim|required|max_length[10]');
 		$this->form_validation->set_rules('rembuk_stuntings_rembuk_stunting_file_name', 'File', 'trim|required');
-		
-
 		
 		if ($this->form_validation->run()) {
 			$rembuk_stuntings_rembuk_stunting_file_uuid = $this->input->post('rembuk_stuntings_rembuk_stunting_file_uuid');
@@ -209,12 +182,6 @@ class Rembuk_stuntings extends Admin
 			$save_data = [
 				'rembuk_stunting_year' => $this->input->post('rembuk_stunting_year'),
 			];
-
-			
-
-			
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/rembuk_stuntings/')) {
 				mkdir(FCPATH . '/uploads/rembuk_stuntings/');
@@ -236,16 +203,10 @@ class Rembuk_stuntings extends Admin
 
 				$save_data['rembuk_stunting_file'] = $rembuk_stuntings_rembuk_stunting_file_name_copy;
 			}
-		
 			
 			$save_rembuk_stuntings = $this->model_rembuk_stuntings->change($id, $save_data);
 
 			if ($save_rembuk_stuntings) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -284,8 +245,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('rembuk_stuntings_delete');
 
 		$this->load->helper('file');
@@ -315,8 +275,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('rembuk_stuntings_view');
 
 		$this->data['rembuk_stuntings'] = $this->model_rembuk_stuntings->join_avaiable()->filter_avaiable()->find($id);
@@ -330,8 +289,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$rembuk_stuntings = $this->model_rembuk_stuntings->find($id);
 
 		if (!empty($rembuk_stuntings->rembuk_stunting_file)) {
@@ -342,7 +300,6 @@ class Rembuk_stuntings extends Admin
 			}
 		}
 		
-		
 		return $this->model_rembuk_stuntings->remove($id);
 	}
 	
@@ -350,8 +307,7 @@ class Rembuk_stuntings extends Admin
 	* Upload Image Rembuk Stuntings	* 
 	* @return JSON
 	*/
-	public function upload_rembuk_stunting_file_file()
-	{
+	public function upload_rembuk_stunting_file_file() {
 		if (!$this->is_allowed('rembuk_stuntings_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -365,6 +321,7 @@ class Rembuk_stuntings extends Admin
 		echo $this->upload_file([
 			'uuid' 		 	=> $uuid,
 			'table_name' 	=> 'rembuk_stuntings',
+			'allowed_types' => 'pdf',
 		]);
 	}
 
@@ -372,8 +329,7 @@ class Rembuk_stuntings extends Admin
 	* Delete Image Rembuk Stuntings	* 
 	* @return JSON
 	*/
-	public function delete_rembuk_stunting_file_file($uuid)
-	{
+	public function delete_rembuk_stunting_file_file($uuid) {
 		if (!$this->is_allowed('rembuk_stuntings_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -397,8 +353,7 @@ class Rembuk_stuntings extends Admin
 	* Get Image Rembuk Stuntings	* 
 	* @return JSON
 	*/
-	public function get_rembuk_stunting_file_file($id)
-	{
+	public function get_rembuk_stunting_file_file($id) {
 		if (!$this->is_allowed('rembuk_stuntings_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -426,8 +381,7 @@ class Rembuk_stuntings extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('rembuk_stuntings_export');
 
 		$this->model_rembuk_stuntings->export(
@@ -442,16 +396,14 @@ class Rembuk_stuntings extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('rembuk_stuntings_export');
 
 		$this->model_rembuk_stuntings->pdf('rembuk_stuntings', 'rembuk_stuntings');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('rembuk_stuntings_export');
 
 		$table = $title = 'rembuk_stuntings';
@@ -482,7 +434,6 @@ class Rembuk_stuntings extends Admin
         $this->pdf->writeHTML($content);
         $this->pdf->Output($table.'.pdf', 'H');
 	}
-
 	
 }
 

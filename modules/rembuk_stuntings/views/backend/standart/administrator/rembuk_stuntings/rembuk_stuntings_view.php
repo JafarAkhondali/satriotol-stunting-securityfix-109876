@@ -98,14 +98,6 @@ jQuery(document).ready(domo);
                         </div>
                     </div>
                                         
-                    <div class="form-group ">
-                        <label for="content" class="col-sm-2 control-label">Author </label>
-
-                        <div class="col-sm-8">
-                        <span class="detail_group-rembuk-stunting-user"><?= _ent($rembuk_stuntings->rembuk_stunting_user); ?></span>
-                        </div>
-                    </div>
-                                        
                     <br>
                     <br>
 
@@ -133,6 +125,10 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var rembuk_stunting_year = $('.detail_group-rembuk-stunting-year');
+        var rembuk_stunting_file = $('.detail_group-rembuk-stunting-file');
+    })()
+      
    });
 </script>

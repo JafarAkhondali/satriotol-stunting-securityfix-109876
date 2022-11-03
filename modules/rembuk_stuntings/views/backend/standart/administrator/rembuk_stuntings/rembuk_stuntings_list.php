@@ -187,7 +187,19 @@ jQuery(document).ready(domo);
 <script>
   $(document).ready(function(){
    
-    
+    (function(){
+
+})()
+      
+      
+      $('.table tbody tr').each(function(){
+         var row = $(this);
+         (function(){
+    var rembuk_stunting_year = row.find('.list_group-rembuk-stunting-year');
+    var rembuk_stunting_file = row.find('.list_group-rembuk-stunting-file');
+
+})()
+      })
       
     $('.remove-data').click(function(){
 

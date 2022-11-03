@@ -2,14 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_rembuk_stunting_galery extends MY_Model {
-
     private $primary_key    = 'rembuk_stunting_galery_id';
     private $table_name     = 'rembuk_stunting_galery';
-    public $field_search   = ['rembuk_stunting_id', 'rembuk_stunting_galery_image', 'rembuk_stuntings.rembuk_stunting_year'];
-    public $sort_option = ['rembuk_stunting_galery_id', 'DESC'];
+    public $field_search    = ['rembuk_stunting_id', 'rembuk_stunting_galery_image', 'rembuk_stuntings.rembuk_stunting_year'];
+    public $sort_option     = ['rembuk_stunting_galery_id', 'DESC'];
     
-    public function __construct()
-    {
+    public function __construct() {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -20,13 +18,12 @@ class Model_rembuk_stunting_galery extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null)
-    {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+    public function count_all($q = null, $field = null) {
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -55,8 +52,7 @@ class Model_rembuk_stunting_galery extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
-    {
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
         $iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -99,18 +95,15 @@ class Model_rembuk_stunting_galery extends MY_Model {
     }
 
     public function join_avaiable() {
-        $this->db->join('rembuk_stuntings', 'rembuk_stuntings.rembuk_stunting_id = rembuk_stunting_galery.rembuk_stunting_id', 'LEFT');
-        
         $this->db->select('rembuk_stuntings.rembuk_stunting_year,rembuk_stunting_galery.*,rembuk_stuntings.rembuk_stunting_year as rembuk_stuntings_rembuk_stunting_year,rembuk_stuntings.rembuk_stunting_year as rembuk_stunting_year');
-
+        $this->db->join('rembuk_stuntings', 'rembuk_stuntings.rembuk_stunting_id = rembuk_stunting_galery.rembuk_stunting_id', 'LEFT');
 
         return $this;
     }
 
     public function filter_avaiable() {
-
         if (!$this->aauth->is_admin()) {
-            $this->db->where($this->table_name.'.rembuk_stunting_galery_user', get_user_data('id'));
+            // $this->db->where($this->table_name.'.rembuk_stunting_galery_user', get_user_data('id'));
         }
 
         return $this;

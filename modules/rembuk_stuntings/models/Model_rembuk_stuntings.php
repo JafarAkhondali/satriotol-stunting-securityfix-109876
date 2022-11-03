@@ -5,11 +5,10 @@ class Model_rembuk_stuntings extends MY_Model {
 
     private $primary_key    = 'rembuk_stunting_id';
     private $table_name     = 'rembuk_stuntings';
-    public $field_search   = ['rembuk_stunting_year', 'rembuk_stunting_file'];
-    public $sort_option = ['rembuk_stunting_id', 'DESC'];
+    public $field_search    = ['rembuk_stunting_year', 'rembuk_stunting_file'];
+    public $sort_option     = ['rembuk_stunting_id', 'DESC'];
     
-    public function __construct()
-    {
+    public function __construct() {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -20,8 +19,7 @@ class Model_rembuk_stuntings extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null)
-    {
+    public function count_all($q = null, $field = null) {
         $iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -55,8 +53,7 @@ class Model_rembuk_stuntings extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
-    {
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
         $iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -109,7 +106,8 @@ class Model_rembuk_stuntings extends MY_Model {
     public function filter_avaiable() {
 
         if (!$this->aauth->is_admin()) {
-            }
+            $this->db->where($this->table_name.'.rembuk_stunting_user', get_user_data('id'));
+        }
 
         return $this;
     }

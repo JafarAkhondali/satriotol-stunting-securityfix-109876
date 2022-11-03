@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Rembuk Stunting Galery site
 *|
 */
-class Rembuk_stunting_galery extends Admin	
-{
-	
-	public function __construct()
-	{
+class Rembuk_stunting_galery extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_rembuk_stunting_galery');
@@ -26,8 +23,7 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('rembuk_stunting_galery_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +49,7 @@ class Rembuk_stunting_galery extends Admin
 	* Add new rembuk_stunting_galerys
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('rembuk_stunting_galery_add');
 
 		$this->template->title('Rembuk Stunting Galery New');
@@ -66,8 +61,7 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('rembuk_stunting_galery_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,61 +69,51 @@ class Rembuk_stunting_galery extends Admin
 				]);
 			exit;
 		}
-		
-		
 
-		$this->form_validation->set_rules('rembuk_stunting_id', 'Reff Rembuk Stunting', 'trim|required|max_length[11]');
-		
-
-		$this->form_validation->set_rules('rembuk_stunting_galery_rembuk_stunting_galery_image_name', 'Gambar', 'trim|required');
-		
-
-		
+		$this->form_validation->set_rules('rembuk_stunting_id', 'Reff Rembuk Stunting', 'trim|required');
+		$this->form_validation->set_rules('rembuk_stunting_galery_rembuk_stunting_galery_image_name[]', 'Gambar', 'trim|required');
 
 		if ($this->form_validation->run()) {
-			$rembuk_stunting_galery_rembuk_stunting_galery_image_uuid = $this->input->post('rembuk_stunting_galery_rembuk_stunting_galery_image_uuid');
-			$rembuk_stunting_galery_rembuk_stunting_galery_image_name = $this->input->post('rembuk_stunting_galery_rembuk_stunting_galery_image_name');
-		
 			$save_data = [
-				'rembuk_stunting_id' => $this->input->post('rembuk_stunting_id'),
+				'rembuk_stunting_id' 				=> $this->input->post('rembuk_stunting_id'),
+				'rembuk_stunting_galery_create_at' 	=> date('Y-m-d H:i:s'),
+				'rembuk_stunting_galery_user' 		=> get_user_data('id'),
 			];
-
-			
-			
-
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/rembuk_stunting_galery/')) {
 				mkdir(FCPATH . '/uploads/rembuk_stunting_galery/');
 			}
 
-			if (!empty($rembuk_stunting_galery_rembuk_stunting_galery_image_name)) {
-				$rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy = date('YmdHis') . '-' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name;
+			if (count((array) $this->input->post('rembuk_stunting_galery_rembuk_stunting_galery_image_name'))) {
+				foreach ((array) $_POST['rembuk_stunting_galery_rembuk_stunting_galery_image_name'] as $idx => $file_name) {
+					$cek[] = $file_name;
+					$rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy = date('YmdHis') . '-' . $file_name;
 
-				rename(FCPATH . 'uploads/tmp/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_uuid . '/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name, 
-						FCPATH . 'uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy);
+					rename(FCPATH . 'uploads/tmp/' . $_POST['rembuk_stunting_galery_rembuk_stunting_galery_image_uuid'][$idx] . '/' .  $file_name, 
+							FCPATH . 'uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy);
 
-				if (!is_file(FCPATH . '/uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy)) {
-					echo json_encode([
-						'success' => false,
-						'message' => 'Error uploading file'
-						]);
-					exit;
+					$listed_image[] = $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy;
+
+					if (!is_file(FCPATH . '/uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy)) {
+						echo json_encode([
+								'success' => false,
+								'message' => 'Error uploading file'
+							]);
+
+						exit;
+					}
 				}
 
-				$save_data['rembuk_stunting_galery_image'] = $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy;
+				$save_data['rembuk_stunting_galery_image'] = implode(',', $listed_image);
 			}
-		
-			
+
+			// echo json_encode($cek);
+			// exit;
+
 			$save_rembuk_stunting_galery = $id = $this->model_rembuk_stunting_galery->store($save_data);
-            
 
 			if ($save_rembuk_stunting_galery) {
-				
-				
-					
-				
+				$id = $save_rembuk_stunting_galery;
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_rembuk_stunting_galery;
@@ -156,7 +140,6 @@ class Rembuk_stunting_galery extends Admin
 					$this->data['redirect'] = base_url('administrator/rembuk_stunting_galery');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -171,8 +154,7 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('rembuk_stunting_galery_update');
 
 		$this->data['rembuk_stunting_galery'] = $this->model_rembuk_stunting_galery->find($id);
@@ -186,8 +168,7 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('rembuk_stunting_galery_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -195,57 +176,44 @@ class Rembuk_stunting_galery extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('rembuk_stunting_id', 'Reff Rembuk Stunting', 'trim|required|max_length[11]');
-		
 
-		$this->form_validation->set_rules('rembuk_stunting_galery_rembuk_stunting_galery_image_name', 'Gambar', 'trim|required');
-		
-
+		$this->form_validation->set_rules('rembuk_stunting_id', 'Reff Rembuk Stunting', 'trim|required');
+		$this->form_validation->set_rules('rembuk_stunting_galery_rembuk_stunting_galery_image_name[]', 'Gambar', 'trim|required');
 		
 		if ($this->form_validation->run()) {
-			$rembuk_stunting_galery_rembuk_stunting_galery_image_uuid = $this->input->post('rembuk_stunting_galery_rembuk_stunting_galery_image_uuid');
-			$rembuk_stunting_galery_rembuk_stunting_galery_image_name = $this->input->post('rembuk_stunting_galery_rembuk_stunting_galery_image_name');
-		
 			$save_data = [
 				'rembuk_stunting_id' => $this->input->post('rembuk_stunting_id'),
 			];
-
 			
+			$listed_image = [];
+			if (count((array) $this->input->post('rembuk_stunting_galery_rembuk_stunting_galery_image_name'))) {
+				foreach ((array) $_POST['rembuk_stunting_galery_rembuk_stunting_galery_image_name'] as $idx => $file_name) {
+					if (isset($_POST['rembuk_stunting_galery_rembuk_stunting_galery_image_uuid'][$idx]) AND !empty($_POST['rembuk_stunting_galery_rembuk_stunting_galery_image_uuid'][$idx])) {
+						$rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy = date('YmdHis') . '-' . $file_name;
 
-			
+						rename(FCPATH . 'uploads/tmp/' . $_POST['rembuk_stunting_galery_rembuk_stunting_galery_image_uuid'][$idx] . '/' .  $file_name, 
+								FCPATH . 'uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy);
 
+						$listed_image[] = $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy;
 
-			
-			if (!is_dir(FCPATH . '/uploads/rembuk_stunting_galery/')) {
-				mkdir(FCPATH . '/uploads/rembuk_stunting_galery/');
-			}
-
-			if (!empty($rembuk_stunting_galery_rembuk_stunting_galery_image_uuid)) {
-				$rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy = date('YmdHis') . '-' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name;
-
-				rename(FCPATH . 'uploads/tmp/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_uuid . '/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name, 
-						FCPATH . 'uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy);
-
-				if (!is_file(FCPATH . '/uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy)) {
-					echo json_encode([
-						'success' => false,
-						'message' => 'Error uploading file'
-						]);
-					exit;
+						if (!is_file(FCPATH . '/uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy)) {
+							echo json_encode([
+								'success' => false,
+								'message' => 'Error uploading file'
+								]);
+							exit;
+						}
+					} else {
+						$listed_image[] = $file_name;
+					}
 				}
-
-				$save_data['rembuk_stunting_galery_image'] = $rembuk_stunting_galery_rembuk_stunting_galery_image_name_copy;
 			}
-		
+			
+			$save_data['rembuk_stunting_galery_image'] = implode(',', $listed_image);
 			
 			$save_rembuk_stunting_galery = $this->model_rembuk_stunting_galery->change($id, $save_data);
 
 			if ($save_rembuk_stunting_galery) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -284,8 +252,7 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('rembuk_stunting_galery_delete');
 
 		$this->load->helper('file');
@@ -315,8 +282,7 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('rembuk_stunting_galery_view');
 
 		$this->data['rembuk_stunting_galery'] = $this->model_rembuk_stunting_galery->join_avaiable()->filter_avaiable()->find($id);
@@ -330,28 +296,29 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$rembuk_stunting_galery = $this->model_rembuk_stunting_galery->find($id);
 
+		
 		if (!empty($rembuk_stunting_galery->rembuk_stunting_galery_image)) {
-			$path = FCPATH . '/uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery->rembuk_stunting_galery_image;
+			foreach ((array) explode(',', $rembuk_stunting_galery->rembuk_stunting_galery_image) as $filename) {
+				$path = FCPATH . '/uploads/rembuk_stunting_galery/' . $filename;
 
-			if (is_file($path)) {
-				$delete_file = unlink($path);
+				if (is_file($path)) {
+					$delete_file = unlink($path);
+				}
 			}
 		}
 		
-		
 		return $this->model_rembuk_stunting_galery->remove($id);
 	}
+	
 	
 	/**
 	* Upload Image Rembuk Stunting Galery	* 
 	* @return JSON
 	*/
-	public function upload_rembuk_stunting_galery_image_file()
-	{
+	public function upload_rembuk_stunting_galery_image_file() {
 		if (!$this->is_allowed('rembuk_stunting_galery_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -365,6 +332,7 @@ class Rembuk_stunting_galery extends Admin
 		echo $this->upload_file([
 			'uuid' 		 	=> $uuid,
 			'table_name' 	=> 'rembuk_stunting_galery',
+			'allowed_types' => 'jpg|jpeg|png',
 		]);
 	}
 
@@ -372,8 +340,7 @@ class Rembuk_stunting_galery extends Admin
 	* Delete Image Rembuk Stunting Galery	* 
 	* @return JSON
 	*/
-	public function delete_rembuk_stunting_galery_image_file($uuid)
-	{
+	public function delete_rembuk_stunting_galery_image_file($uuid) {
 		if (!$this->is_allowed('rembuk_stunting_galery_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -397,8 +364,7 @@ class Rembuk_stunting_galery extends Admin
 	* Get Image Rembuk Stunting Galery	* 
 	* @return JSON
 	*/
-	public function get_rembuk_stunting_galery_image_file($id)
-	{
+	public function get_rembuk_stunting_galery_image_file($id) {
 		if (!$this->is_allowed('rembuk_stunting_galery_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -420,14 +386,12 @@ class Rembuk_stunting_galery extends Admin
         ]);
 	}
 	
-	
 	/**
 	* Export to excel
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('rembuk_stunting_galery_export');
 
 		$this->model_rembuk_stunting_galery->export(
@@ -442,16 +406,14 @@ class Rembuk_stunting_galery extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('rembuk_stunting_galery_export');
 
 		$this->model_rembuk_stunting_galery->pdf('rembuk_stunting_galery', 'rembuk_stunting_galery');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('rembuk_stunting_galery_export');
 
 		$table = $title = 'rembuk_stunting_galery';
@@ -483,8 +445,7 @@ class Rembuk_stunting_galery extends Admin
         $this->pdf->Output($table.'.pdf', 'H');
 	}
 
-	public function ajax_rembuk_stunting_id($id = null)
-	{
+	public function ajax_rembuk_stunting_id($id = null) {
 		if (!$this->is_allowed('rembuk_stunting_galery_list', false)) {
 			echo json_encode([
 				'success' => false,
@@ -492,11 +453,15 @@ class Rembuk_stunting_galery extends Admin
 				]);
 			exit;
 		}
-		$results = db_get_all_data('rembuk_stuntings', ['rembuk_stunting_id' => $id]);
+
+		if ($id != null) {
+			$results = db_get_all_data('rembuk_stuntings', ['rembuk_stunting_id' => $id]);
+		}else{
+			$results = db_get_all_data('rembuk_stuntings');
+		}
+
 		$this->response($results);	
 	}
-
-	
 }
 
 

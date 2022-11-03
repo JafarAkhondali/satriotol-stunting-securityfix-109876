@@ -75,20 +75,25 @@ jQuery(document).ready(domo);
                     <div class="form-group ">
                         <label for="content" class="col-sm-2 control-label"> Gambar </label>
                         <div class="col-sm-8">
-                             <?php if (is_image($rembuk_stunting_galery->rembuk_stunting_galery_image)): ?>
-                              <a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery->rembuk_stunting_galery_image; ?>">
-                                <img src="<?= BASE_URL . 'uploads/rembuk_stunting_galery/' . $rembuk_stunting_galery->rembuk_stunting_galery_image; ?>" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
-                              </a>
-                              <?php else: ?>
-                              <label>
-                                <a href="<?= BASE_URL . 'administrator/file/download/rembuk_stunting_galery/' . $rembuk_stunting_galery->rembuk_stunting_galery_image; ?>">
-                                 <img src="<?= get_icon_file($rembuk_stunting_galery->rembuk_stunting_galery_image); ?>" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image <?= $rembuk_stunting_galery->rembuk_stunting_galery_image; ?>" width="40px"> 
-                               <?= $rembuk_stunting_galery->rembuk_stunting_galery_image ?>
+                             <?php if (!empty($rembuk_stunting_galery->rembuk_stunting_galery_image)): ?>
+                             <?php foreach (explode(',', $rembuk_stunting_galery->rembuk_stunting_galery_image) as $filename): ?>
+                               <?php if (is_image($rembuk_stunting_galery->rembuk_stunting_galery_image)): ?>
+                                <a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/rembuk_stunting_galery/' . $filename; ?>">
+                                  <img src="<?= BASE_URL . 'uploads/rembuk_stunting_galery/' . $filename; ?>" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+                                </a>
+                                <?php else: ?>
+                                <label>
+                                  <a href="<?= BASE_URL . 'administrator/file/download/rembuk_stunting_galery/' . $filename; ?>">
+                                   <img src="<?= get_icon_file($filename); ?>" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image <?= $filename; ?>" width="40px"> 
+                                 <?= $filename ?>
                                </a>
                                </label>
                               <?php endif; ?>
+                            <?php endforeach; ?>
+                          <?php endif; ?>
                         </div>
                     </div>
+                  
                                       
                     <div class="form-group ">
                         <label for="content" class="col-sm-2 control-label">Create At </label>
@@ -125,6 +130,10 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var rembuk_stunting_id = $('.detail_group-rembuk_stunting_id');
+        var rembuk_stunting_galery_image = $('.detail_group-rembuk_stunting_galery_image');
+    })()
+      
    });
 </script>

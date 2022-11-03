@@ -46,8 +46,6 @@
 
 	/* end .group-rencana-kegiatan-definisi */
 
-
-
 	/* .group-rencana-kegiatan-tujuan */
 	.group-rencana-kegiatan-tujuan {}
 
@@ -60,8 +58,6 @@
 	.group-rencana-kegiatan-tujuan .help-block {}
 
 	/* end .group-rencana-kegiatan-tujuan */
-
-
 
 	/* .group-rencana-kegiatan-output */
 	.group-rencana-kegiatan-output {}
@@ -76,8 +72,6 @@
 
 	/* end .group-rencana-kegiatan-output */
 
-
-
 	/* .group-rencana-kegiatan-meliputi */
 	.group-rencana-kegiatan-meliputi {}
 
@@ -90,8 +84,6 @@
 	.group-rencana-kegiatan-meliputi .help-block {}
 
 	/* end .group-rencana-kegiatan-meliputi */
-
-
 
 	/* .group-rencana-kegiatan-peran-opd */
 	.group-rencana-kegiatan-peran-opd {}
