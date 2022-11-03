@@ -228,6 +228,16 @@ class Web extends Front {
 	public function rencana_kegiatan() {
         $this->template->build('rencana-kegiatan');
 	}
+
+	public function data_statistik() {
+        $data['sliders']        = $this->db->get('sliders')->result();
+        $data['categories']     = $this->db->get('blog_category')->result();
+        $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+        $data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
+        $data['about']          = $this->db->get('about')->row();
+
+        $this->template->build('data-statistik', $data);
+	}
 }
 
 
