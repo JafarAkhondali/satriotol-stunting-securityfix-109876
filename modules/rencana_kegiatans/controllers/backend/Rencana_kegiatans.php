@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Rencana Kegiatans site
 *|
 */
-class Rencana_kegiatans extends Admin	
-{
-	
-	public function __construct()
-	{
+class Rencana_kegiatans extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_rencana_kegiatans');
@@ -26,8 +23,7 @@ class Rencana_kegiatans extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('rencana_kegiatans_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +49,7 @@ class Rencana_kegiatans extends Admin
 	* Add new rencana_kegiatanss
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('rencana_kegiatans_add');
 
 		$this->template->title('Rencana Kegiatan New');
@@ -66,8 +61,7 @@ class Rencana_kegiatans extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('rencana_kegiatans_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,54 +69,28 @@ class Rencana_kegiatans extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('rencana_kegiatan_definisi', 'Definisi', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_tujuan', 'Tujuan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_output', 'Output', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_meliputi', 'Meliputi', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_peran_opd', 'Peran OPD', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'rencana_kegiatan_definisi' => $this->input->post('rencana_kegiatan_definisi'),
-				'rencana_kegiatan_tujuan' => $this->input->post('rencana_kegiatan_tujuan'),
-				'rencana_kegiatan_output' => $this->input->post('rencana_kegiatan_output'),
-				'rencana_kegiatan_meliputi' => $this->input->post('rencana_kegiatan_meliputi'),
-				'rencana_kegiatan_peran_opd' => $this->input->post('rencana_kegiatan_peran_opd'),
+				'rencana_kegiatan_definisi' 	=> $this->input->post('rencana_kegiatan_definisi'),
+				'rencana_kegiatan_tujuan' 		=> $this->input->post('rencana_kegiatan_tujuan'),
+				'rencana_kegiatan_output' 		=> $this->input->post('rencana_kegiatan_output'),
+				'rencana_kegiatan_meliputi' 	=> $this->input->post('rencana_kegiatan_meliputi'),
+				'rencana_kegiatan_peran_opd' 	=> $this->input->post('rencana_kegiatan_peran_opd'),
+				'rencana_kegiatan_create_at' 	=> date('Y-m-d H:i:s'),
+				'rencana_kegiatan_create_user' 	=> get_user_data('id'),
 			];
 
-			
-			
-//$save_data['_example'] = $this->input->post('_example');
-			
-
-
-
-			
-			
 			$save_rencana_kegiatans = $id = $this->model_rencana_kegiatans->store($save_data);
-            
 
 			if ($save_rencana_kegiatans) {
-				
 				$id = $save_rencana_kegiatans;
-				
-				
-					
 				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
@@ -150,7 +118,6 @@ class Rencana_kegiatans extends Admin
 					$this->data['redirect'] = base_url('administrator/rencana_kegiatans');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -165,8 +132,7 @@ class Rencana_kegiatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('rencana_kegiatans_update');
 
 		$this->data['rencana_kegiatans'] = $this->model_rencana_kegiatans->find($id);
@@ -180,8 +146,7 @@ class Rencana_kegiatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('rencana_kegiatans_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -189,51 +154,27 @@ class Rencana_kegiatans extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('rencana_kegiatan_definisi', 'Definisi', 'trim|required');
-		
 
+		$this->form_validation->set_rules('rencana_kegiatan_definisi', 'Definisi', 'trim|required');
 		$this->form_validation->set_rules('rencana_kegiatan_tujuan', 'Tujuan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_output', 'Output', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_meliputi', 'Meliputi', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rencana_kegiatan_peran_opd', 'Peran OPD', 'trim|required');
 		
-
-		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'rencana_kegiatan_definisi' => $this->input->post('rencana_kegiatan_definisi'),
-				'rencana_kegiatan_tujuan' => $this->input->post('rencana_kegiatan_tujuan'),
-				'rencana_kegiatan_output' => $this->input->post('rencana_kegiatan_output'),
-				'rencana_kegiatan_meliputi' => $this->input->post('rencana_kegiatan_meliputi'),
-				'rencana_kegiatan_peran_opd' => $this->input->post('rencana_kegiatan_peran_opd'),
-				'rencana_kegiatan_create_at' => $this->input->post('rencana_kegiatan_create_at'),
+				'rencana_kegiatan_definisi' 	=> $this->input->post('rencana_kegiatan_definisi'),
+				'rencana_kegiatan_tujuan' 		=> $this->input->post('rencana_kegiatan_tujuan'),
+				'rencana_kegiatan_output' 		=> $this->input->post('rencana_kegiatan_output'),
+				'rencana_kegiatan_meliputi' 	=> $this->input->post('rencana_kegiatan_meliputi'),
+				'rencana_kegiatan_peran_opd' 	=> $this->input->post('rencana_kegiatan_peran_opd'),
+				'rencana_kegiatan_update_at' 	=> date('Y-m-d H:i:s'),
+				'rencana_kegiatan_update_user' 	=> get_user_data('id'),
 			];
 
-			
-
-			
-//$save_data['_example'] = $this->input->post('_example');
-			
-
-
-			
-			
 			$save_rencana_kegiatans = $this->model_rencana_kegiatans->change($id, $save_data);
 
 			if ($save_rencana_kegiatans) {
-
-				
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -272,8 +213,7 @@ class Rencana_kegiatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('rencana_kegiatans_delete');
 
 		$this->load->helper('file');
@@ -303,8 +243,7 @@ class Rencana_kegiatans extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('rencana_kegiatans_view');
 
 		$this->data['rencana_kegiatans'] = $this->model_rencana_kegiatans->join_avaiable()->filter_avaiable()->find($id);
@@ -318,23 +257,18 @@ class Rencana_kegiatans extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$rencana_kegiatans = $this->model_rencana_kegiatans->find($id);
-
-		
 		
 		return $this->model_rencana_kegiatans->remove($id);
 	}
-	
 	
 	/**
 	* Export to excel
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('rencana_kegiatans_export');
 
 		$this->model_rencana_kegiatans->export(
@@ -349,25 +283,23 @@ class Rencana_kegiatans extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('rencana_kegiatans_export');
 
 		$this->model_rencana_kegiatans->pdf('rencana_kegiatans', 'rencana_kegiatans');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('rencana_kegiatans_export');
 
 		$table = $title = 'rencana_kegiatans';
 		$this->load->library('HtmlPdf');
       
         $config = array(
-            'orientation' => 'p',
-            'format' => 'a4',
-            'marges' => array(5, 5, 5, 5)
+            'orientation' 	=> 'p',
+            'format' 		=> 'a4',
+            'marges' 		=> array(5, 5, 5, 5)
         );
 
         $this->pdf = new HtmlPdf($config);
@@ -375,13 +307,13 @@ class Rencana_kegiatans extends Admin
 
         $result = $this->db->get($table);
        
-        $data = $this->model_rencana_kegiatans->find($id);
+        $data 	= $this->model_rencana_kegiatans->find($id);
         $fields = $result->list_fields();
 
         $content = $this->pdf->loadHtmlPdf('core_template/pdf/pdf_single', [
-            'data' => $data,
-            'fields' => $fields,
-            'title' => $title
+            'data' 		=> $data,
+            'fields' 	=> $fields,
+            'title' 	=> $title
         ], TRUE);
 
         $this->pdf->initialize($config);
