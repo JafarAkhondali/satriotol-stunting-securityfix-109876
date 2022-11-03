@@ -180,7 +180,20 @@ jQuery(document).ready(domo);
 <script>
   $(document).ready(function(){
    
-    
+    (function(){
+
+})()
+      
+      
+      $('.table tbody tr').each(function(){
+         var row = $(this);
+         (function(){
+    var analisa_situasi_id = row.find('.list_group-analisa-situasi-id');
+    var analisa_situasi_aksi_indikator = row.find('.list_group-analisa-situasi-aksi-indikator');
+    var analisa_situasi_aksi_cakupan = row.find('.list_group-analisa_situasi_aksi_cakupan');
+
+})()
+      })
       
     $('.remove-data').click(function(){
 

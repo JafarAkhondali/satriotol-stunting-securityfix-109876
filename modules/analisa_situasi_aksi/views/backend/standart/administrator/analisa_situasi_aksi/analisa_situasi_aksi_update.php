@@ -38,6 +38,78 @@
 </section>
 
 <style>
+   /* .group-analisa-situasi-id */
+   .group-analisa-situasi-id {
+
+   }
+
+   .group-analisa-situasi-id .control-label {
+
+   }
+
+   .group-analisa-situasi-id .col-sm-8 {
+
+   }
+
+   .group-analisa-situasi-id .form-control {
+
+   }
+
+   .group-analisa-situasi-id .help-block {
+
+   }
+   /* end .group-analisa-situasi-id */
+
+
+
+   /* .group-analisa-situasi-aksi-indikator */
+   .group-analisa-situasi-aksi-indikator {
+
+   }
+
+   .group-analisa-situasi-aksi-indikator .control-label {
+
+   }
+
+   .group-analisa-situasi-aksi-indikator .col-sm-8 {
+
+   }
+
+   .group-analisa-situasi-aksi-indikator .form-control {
+
+   }
+
+   .group-analisa-situasi-aksi-indikator .help-block {
+
+   }
+   /* end .group-analisa-situasi-aksi-indikator */
+
+
+
+   /* .group-analisa_situasi_aksi_cakupan */
+   .group-analisa_situasi_aksi_cakupan {
+
+   }
+
+   .group-analisa_situasi_aksi_cakupan .control-label {
+
+   }
+
+   .group-analisa_situasi_aksi_cakupan .col-sm-8 {
+
+   }
+
+   .group-analisa_situasi_aksi_cakupan .form-control {
+
+   }
+
+   .group-analisa_situasi_aksi_cakupan .help-block {
+
+   }
+   /* end .group-analisa_situasi_aksi_cakupan */
+
+
+
 
 </style>
 <!-- Main content -->
@@ -79,7 +151,7 @@
                                         <option value=""></option>
                                                                             </select>
                                     <small class="info help-block">
-                                        <b>Input Analisa Situasi Id</b> Max Length : 11.</small>
+                                        </small>
                                 </div>
                             </div>
 
@@ -147,7 +219,16 @@
     $(document).ready(function() {
     window.event_submit_and_action = '';
             
-    
+    (function(){
+    var analisa_situasi_id = $('#analisa_situasi_id');
+   /* 
+    analisa_situasi_id.on('change', function() {});
+    */
+    var analisa_situasi_aksi_indikator = $('#analisa_situasi_aksi_indikator');
+   var analisa_situasi_aksi_cakupan = $('#analisa_situasi_aksi_cakupan');
+   
+})()
+      
       
       
       
@@ -186,7 +267,13 @@
         value: save_type
     });
 
-    
+    (function(){
+    data_post.push({
+        name : '_example',
+        value : 'value_of_example',
+    })
+})()
+      
       
     data_post.push({
         name: 'event_submit_and_action',

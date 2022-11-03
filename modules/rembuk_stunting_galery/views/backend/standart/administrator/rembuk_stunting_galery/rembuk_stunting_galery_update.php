@@ -383,7 +383,6 @@
 				});
 		}
 
-
 		// $('#rembuk_stunting_id').change(function (event) {
 		// 	chained_rembuk_stunting_id('')
 		// });

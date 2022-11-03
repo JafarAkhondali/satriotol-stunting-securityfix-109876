@@ -44,6 +44,54 @@
 </section>
 
 <style>
+   /* .group-analisa-situasi-year */
+   .group-analisa-situasi-year {
+
+   }
+
+   .group-analisa-situasi-year .control-label {
+
+   }
+
+   .group-analisa-situasi-year .col-sm-8 {
+
+   }
+
+   .group-analisa-situasi-year .form-control {
+
+   }
+
+   .group-analisa-situasi-year .help-block {
+
+   }
+   /* end .group-analisa-situasi-year */
+
+
+
+   /* .group-analisa-situasi-image */
+   .group-analisa-situasi-image {
+
+   }
+
+   .group-analisa-situasi-image .control-label {
+
+   }
+
+   .group-analisa-situasi-image .col-sm-8 {
+
+   }
+
+   .group-analisa-situasi-image .form-control {
+
+   }
+
+   .group-analisa-situasi-image .help-block {
+
+   }
+   /* end .group-analisa-situasi-image */
+
+
+
 
 </style>
 <!-- Main content -->
@@ -139,7 +187,15 @@
     $(document).ready(function() {
     window.event_submit_and_action = '';
             
-    
+    (function(){
+    var analisa_situasi_year = $('#analisa_situasi_year');
+   /* 
+    analisa_situasi_year.on('change', function() {});
+    */
+    var analisa_situasi_image = $('#analisa_situasi_image');
+   
+})()
+      
       
       
       
@@ -178,7 +234,13 @@
         value: save_type
     });
 
-    
+    (function(){
+    data_post.push({
+        name : '_example',
+        value : 'value_of_example',
+    })
+})()
+      
       
     data_post.push({
         name: 'event_submit_and_action',

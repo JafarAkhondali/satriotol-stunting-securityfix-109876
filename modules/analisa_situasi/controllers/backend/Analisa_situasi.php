@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Analisa Situasi site
 *|
 */
-class Analisa_situasi extends Admin	
-{
-	
-	public function __construct()
-	{
+class Analisa_situasi extends Admin	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->load->model('model_analisa_situasi');
@@ -26,15 +23,14 @@ class Analisa_situasi extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('analisa_situasi_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['analisa_situasis'] = $this->model_analisa_situasi->get($filter, $field, $this->limit_page, $offset);
-		$this->data['analisa_situasi_counts'] = $this->model_analisa_situasi->count_all($filter, $field);
+		$this->data['analisa_situasis'] 		= $this->model_analisa_situasi->get($filter, $field, $this->limit_page, $offset);
+		$this->data['analisa_situasi_counts'] 	= $this->model_analisa_situasi->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/analisa_situasi/index/',
@@ -53,8 +49,7 @@ class Analisa_situasi extends Admin
 	* Add new analisa_situasis
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('analisa_situasi_add');
 
 		$this->template->title('Analisa Situasi New');
@@ -66,8 +61,7 @@ class Analisa_situasi extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('analisa_situasi_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,30 +69,19 @@ class Analisa_situasi extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('analisa_situasi_year', 'Tahun', 'trim|required|max_length[10]');
-		
-
 		$this->form_validation->set_rules('analisa_situasi_analisa_situasi_image_name', 'Gambar', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
 			$analisa_situasi_analisa_situasi_image_uuid = $this->input->post('analisa_situasi_analisa_situasi_image_uuid');
 			$analisa_situasi_analisa_situasi_image_name = $this->input->post('analisa_situasi_analisa_situasi_image_name');
 		
 			$save_data = [
-				'analisa_situasi_year' => $this->input->post('analisa_situasi_year'),
+				'analisa_situasi_year' 		=> $this->input->post('analisa_situasi_year'),
+				'analisa_situasi_create_at' => date('Y-m-d H:i:s'),
+				'analisa_situasi_user' 		=> get_user_data('id'),
 			];
-
-			
-			
-
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/analisa_situasi/')) {
 				mkdir(FCPATH . '/uploads/analisa_situasi/');
@@ -120,16 +103,12 @@ class Analisa_situasi extends Admin
 
 				$save_data['analisa_situasi_image'] = $analisa_situasi_analisa_situasi_image_name_copy;
 			}
-		
 			
 			$save_analisa_situasi = $id = $this->model_analisa_situasi->store($save_data);
-            
 
 			if ($save_analisa_situasi) {
-				
-				
-					
-				
+				$id = $save_analisa_situasi;
+
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_analisa_situasi;
@@ -156,7 +135,6 @@ class Analisa_situasi extends Admin
 					$this->data['redirect'] = base_url('administrator/analisa_situasi');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -171,8 +149,7 @@ class Analisa_situasi extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('analisa_situasi_update');
 
 		$this->data['analisa_situasi'] = $this->model_analisa_situasi->find($id);
@@ -186,8 +163,7 @@ class Analisa_situasi extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('analisa_situasi_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -195,12 +171,9 @@ class Analisa_situasi extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('analisa_situasi_year', 'Tahun', 'trim|required|max_length[10]');
-		
 
+		$this->form_validation->set_rules('analisa_situasi_year', 'Tahun', 'trim|required|max_length[10]');
 		$this->form_validation->set_rules('analisa_situasi_analisa_situasi_image_name', 'Gambar', 'trim|required');
-		
-
 		
 		if ($this->form_validation->run()) {
 			$analisa_situasi_analisa_situasi_image_uuid = $this->input->post('analisa_situasi_analisa_situasi_image_uuid');
@@ -209,12 +182,6 @@ class Analisa_situasi extends Admin
 			$save_data = [
 				'analisa_situasi_year' => $this->input->post('analisa_situasi_year'),
 			];
-
-			
-
-			
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/analisa_situasi/')) {
 				mkdir(FCPATH . '/uploads/analisa_situasi/');
@@ -236,16 +203,10 @@ class Analisa_situasi extends Admin
 
 				$save_data['analisa_situasi_image'] = $analisa_situasi_analisa_situasi_image_name_copy;
 			}
-		
-			
+
 			$save_analisa_situasi = $this->model_analisa_situasi->change($id, $save_data);
 
 			if ($save_analisa_situasi) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -284,8 +245,7 @@ class Analisa_situasi extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('analisa_situasi_delete');
 
 		$this->load->helper('file');
@@ -315,8 +275,7 @@ class Analisa_situasi extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('analisa_situasi_view');
 
 		$this->data['analisa_situasi'] = $this->model_analisa_situasi->join_avaiable()->filter_avaiable()->find($id);
@@ -330,8 +289,7 @@ class Analisa_situasi extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$analisa_situasi = $this->model_analisa_situasi->find($id);
 
 		if (!empty($analisa_situasi->analisa_situasi_image)) {
@@ -342,7 +300,6 @@ class Analisa_situasi extends Admin
 			}
 		}
 		
-		
 		return $this->model_analisa_situasi->remove($id);
 	}
 	
@@ -350,8 +307,7 @@ class Analisa_situasi extends Admin
 	* Upload Image Analisa Situasi	* 
 	* @return JSON
 	*/
-	public function upload_analisa_situasi_image_file()
-	{
+	public function upload_analisa_situasi_image_file() {
 		if (!$this->is_allowed('analisa_situasi_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -372,8 +328,7 @@ class Analisa_situasi extends Admin
 	* Delete Image Analisa Situasi	* 
 	* @return JSON
 	*/
-	public function delete_analisa_situasi_image_file($uuid)
-	{
+	public function delete_analisa_situasi_image_file($uuid) {
 		if (!$this->is_allowed('analisa_situasi_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -397,8 +352,7 @@ class Analisa_situasi extends Admin
 	* Get Image Analisa Situasi	* 
 	* @return JSON
 	*/
-	public function get_analisa_situasi_image_file($id)
-	{
+	public function get_analisa_situasi_image_file($id) {
 		if (!$this->is_allowed('analisa_situasi_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -426,8 +380,7 @@ class Analisa_situasi extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('analisa_situasi_export');
 
 		$this->model_analisa_situasi->export(
@@ -442,16 +395,14 @@ class Analisa_situasi extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('analisa_situasi_export');
 
 		$this->model_analisa_situasi->pdf('analisa_situasi', 'analisa_situasi');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('analisa_situasi_export');
 
 		$table = $title = 'analisa_situasi';

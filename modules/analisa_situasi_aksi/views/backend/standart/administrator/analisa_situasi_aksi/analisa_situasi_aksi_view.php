@@ -123,6 +123,11 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var analisa_situasi_id = $('.detail_group-analisa-situasi-id');
+        var analisa_situasi_aksi_indikator = $('.detail_group-analisa-situasi-aksi-indikator');
+        var analisa_situasi_aksi_cakupan = $('.detail_group-analisa_situasi_aksi_cakupan');
+    })()
+      
    });
 </script>

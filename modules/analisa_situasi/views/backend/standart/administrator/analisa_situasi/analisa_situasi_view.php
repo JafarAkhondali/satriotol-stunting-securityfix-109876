@@ -125,6 +125,10 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var analisa_situasi_year = $('.detail_group-analisa-situasi-year');
+        var analisa_situasi_image = $('.detail_group-analisa-situasi-image');
+    })()
+      
    });
 </script>
