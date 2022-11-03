@@ -11,38 +11,46 @@
                 </div>
             </div>
             <div class="row">
+        <?php
+            foreach ($rembuks as $rembuk) {
+        ?>
                 <div class="col-xxl-12">
                     <div class="event__item white-bg mb-10 transition-3 p-relative d-lg-flex align-items-center justify-content-between">
                         <div class="event__left d-sm-flex align-items-center">
                             <div class="event__date">
-                                <h4>2022</h4>
+                                <h4><?php echo $rembuk->rembuk_stunting_year;?></h4>
                             </div>
                             <div class="event__content">
                                 <h3 class="event__title">
                                     <a href="javascript:void(0);">Galeri</a>
                                 </h3>
                                 <div class="row">
-                                    <div class="col-md-2 mb-1">
-                                        <a href="https://cdn.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-760x400.png" target="_blank">
-                                            <img class="img-fluid h-100" src="https://cdn.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-760x400.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2 mb-1">
-                                        <a href="https://i1.wp.com/img.phonandroid.com/2021/11/comment-reduire-taille-poids-image.jpg" target="_blank">
-                                            <img class="img-fluid h-100" src="https://i1.wp.com/img.phonandroid.com/2021/11/comment-reduire-taille-poids-image.jpg">
-                                        </a>
-                                    </div>
+                            <?php
+                                $images = explode(',', $rembuk->rembuk_stunting_galery_image);
 
+                                for ($i=0; $i < count($images); $i++) {
+                             ?>
+                                    <div class="col-md-2 mb-1">
+                                        <a href="<?php echo base_url().'uploads/rembuk_stunting_galery/'.$images[$i];?>" target="_blank">
+                                            <img class="img-fluid h-100" src="<?php echo base_url().'uploads/rembuk_stunting_galery/'.$images[$i];?>" alt="">
+                                        </a>
+                                    </div>
+                             <?php
+                                }
+                            ?>
                                 </div>
                             </div>
                         </div>
                         <div class="event__right d-sm-flex align-items-center">
                             <div class="event__more ml-30">
-                                <a href="javascript:void(0);" target="_blank" class="tp-btn-5 tp-btn-7">Lihat File </a>
+                                <a href="<?php echo base_url().'uploads/rembuk_stuntings/'.$rembuk->rembuk_stunting_file;?>" target="_blank" class="tp-btn-5 tp-btn-7">Lihat File </a>
                             </div>
                         </div>
                     </div>
                 </div>
+        <?php
+            }
+        ?>
             </div>
         </div>
     </section>

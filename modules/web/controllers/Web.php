@@ -193,6 +193,7 @@ class Web extends Front {
         $data['blogs']          = $this->model_web->berita_terbaru()->result();
         $data['faqs']           = $this->db->from('faqs')->get()->result();
         $data['about']          = $this->db->get('about')->row();
+		$data['rembuks'] 		= $this->model_web->rembuk_stunting()->result();
 
         $this->template->build('rembuk-stunting', $data);
     }

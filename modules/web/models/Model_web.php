@@ -22,6 +22,13 @@ class Model_web extends MY_Model {
 							blog_category.category_name AS nama_kategori');
 		return $this->db->from('blog_category')->get();
 	}
+
+	public function rembuk_stunting(){
+		$this->db->select('rembuk_stuntings.*, rembuk_stunting_galery.*');
+		$this->db->join('rembuk_stuntings', 'rembuk_stuntings.rembuk_stunting_id = rembuk_stunting_galery.rembuk_stunting_id', 'LEFT');
+		
+		return $this->db->get('rembuk_stunting_galery');
+	}
 }
 	
 ?>
