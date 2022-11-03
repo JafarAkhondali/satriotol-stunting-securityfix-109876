@@ -6,12 +6,12 @@
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="section__title-wrapper-2 text-center mb-60">
-                        <h3 class="section__title-2">Analisa Stunting 2022</h3>
+                        <h3 class="section__title-2">Analisa Stunting <?php echo $analisa->analisa_situasi_year;?></h3>
                     </div>
                     <div class="row">
                         <div class="col-md-5">
-                            <a href="https://media.istockphoto.com/photos/wild-grass-in-the-mountains-at-sunset-picture-id1322277517?k=20&m=1322277517&s=612x612&w=0&h=ZdxT3aGDGLsOAn3mILBS6FD7ARonKRHe_EKKa-V-Hws=" target="_blank">
-                                <img src="https://media.istockphoto.com/photos/wild-grass-in-the-mountains-at-sunset-picture-id1322277517?k=20&m=1322277517&s=612x612&w=0&h=ZdxT3aGDGLsOAn3mILBS6FD7ARonKRHe_EKKa-V-Hws=" class="img-fluid" alt="">
+                            <a href="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" target="_blank">
+                                <img src="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" class="img-fluid" alt="">
                             </a>
                         </div>
                         <div class="col-md-7">
@@ -19,15 +19,21 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="">Indikator</th>
-                                            <th class="">Cakupan</th>
+                                            <th>Indikator</th>
+                                            <th>Cakupan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                <?php
+                                    foreach ($details as $detail) {
+                                ?>
                                         <tr>
-                                            <td class="">lorem</td>
-                                            <td class="">25</td>
+                                            <td><?php echo $detail->analisa_situasi_aksi_indikator;?></td>
+                                            <td><?php echo $detail->analisa_situasi_aksi_cakupan;?></td>
                                         </tr>
+                                <?php
+                                    }
+                                ?>
                                     </tbody>
                                 </table>
                             </div>

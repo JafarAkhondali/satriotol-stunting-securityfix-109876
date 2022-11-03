@@ -11,20 +11,26 @@
                 </div>
             </div>
             <div class="row">
+        <?php
+            foreach ($analisas as $analisa) {
+        ?>
                 <div class="col-xxl-4">
                     <div class="event__item white-bg mb-10 transition-3 p-relative d-lg-flex align-items-center justify-content-between">
                         <div class="event__left d-sm-flex align-items-center">
                             <div class="event__date">
-                                <h4>2022</h4>
+                                <h4><?php echo $analisa->analisa_situasi_year;?></h4>
                             </div>
                         </div>
                         <div class="event__right d-sm-flex align-items-center">
                             <div class="event__more ml-30">
-                                <a href="<?= base_url() . 'analisa-situasi-detail/' ?>" class="tp-btn-5 tp-btn-7">Detail</a>
+                                <a href="<?= base_url() . 'analisa-situasi-detail/'.$analisa->analisa_situasi_id;?>" class="tp-btn-5 tp-btn-7">Detail</a>
                             </div>
                         </div>
                     </div>
                 </div>
+        <?php
+            }
+        ?>
             </div>
         </div>
     </section>
