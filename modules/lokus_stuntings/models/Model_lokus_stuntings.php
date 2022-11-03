@@ -97,10 +97,15 @@ class Model_lokus_stuntings extends MY_Model {
 
     public function join_avaiable() {
         $this->db->join('lokus_years', 'lokus_years.lokus_year_id = lokus_stuntings.lokus_year_id', 'LEFT');
-        $this->db->join('kelurahans', 'kelurahans.kelurahan_id = lokus_stuntings.kelurahan_id', 'LEFT');
+        $this->db->join('kelurahans', 'FIND_IN_SET( kelurahans.kelurahan_id, lokus_stuntings.kelurahan_id ) > 0');
         
-        $this->db->select('lokus_years.lokus_year_nama,kelurahans.kelurahan_nama,lokus_stuntings.*,lokus_years.lokus_year_nama as lokus_years_lokus_year_nama,lokus_years.lokus_year_nama as lokus_year_nama,kelurahans.kelurahan_nama as kelurahans_kelurahan_nama,kelurahans.kelurahan_nama as kelurahan_nama');
+        $this->db->select('lokus_years.lokus_year_nama,kelurahans.kelurahan_nama,
+                            lokus_stuntings.*,lokus_years.lokus_year_nama as lokus_years_lokus_year_nama,lokus_years.lokus_year_nama as lokus_year_nama,
+                            kelurahans.kelurahan_nama as kelurahans_kelurahan_nama,kelurahans.kelurahan_nama as kelurahan_nama,
+                            GROUP_CONCAT(kelurahans.kelurahan_nama) AS nama_kelurahan');
 
+        $this->db->group_by('lokus_stunting_id');
+        $this->db->order_by('lokus_stunting_id', 'desc');
 
         return $this;
     }

@@ -143,8 +143,22 @@
 										}
 									?>
 											</td>
-											<td><?php if  ($lokus_stuntings->kelurahan_id) {
-                              echo anchor('administrator/kelurahans/view/'.$lokus_stuntings->kelurahan_id.'?popup=show', $lokus_stuntings->kelurahans_kelurahan_nama, ['class' => 'popup-view']); }?>
+											<td>
+									<?php 
+										if  ($lokus_stuntings->kelurahan_id) {
+											$kelurahan_id 	= explode(',', $lokus_stuntings->kelurahan_id);
+											$kelurahan_nama = explode(',', $lokus_stuntings->nama_kelurahan);
+
+											$kelurahan = [];
+											for ($i=0; $i < count($kelurahan_id); $i++) {
+												$kelurahan[] = anchor('administrator/kelurahans/view/'.$kelurahan_id[$i].'?popup=show', $kelurahan_nama[$i], ['class' => 'popup-view']);
+											}
+
+											$kelurahans = implode(',', $kelurahan);
+
+                              				echo $kelurahans;
+										}
+									?>
 											</td>
 											<td width="200">
 												<?php is_allowed('lokus_stuntings_view', function() use ($lokus_stuntings){?>
