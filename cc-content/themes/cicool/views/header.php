@@ -156,6 +156,7 @@
                                             <ul class="submenu">
                                                 <li><a href="<?= base_url() . 'rembuk-stunting/' ?>">Rembuk Stunting</a></li>
                                                 <li><a href="<?= base_url() . 'analisa-situasi/' ?>">Analisa Situasi</a></li>
+                                                <li><a href="<?= base_url() . 'rencana-kegiatan/' ?>">Rencana Kegiatan</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="<?php echo base_url(); ?>blog/">Program Kegiatan</a></li>
@@ -210,6 +211,7 @@
                                             <ul class="submenu">
                                                 <li><a href="<?= base_url() . 'rembuk-stunting/' ?>">Rembuk Stunting</a></li>
                                                 <li><a href="<?= base_url() . 'analisa-situasi/' ?>">Analisa Situasi</a></li>
+                                                <li><a href="<?= base_url() . 'rencana-kegiatan/' ?>">Rencana Kegiatan</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="<?php echo base_url(); ?>blog/">Program Kegiatan</a></li>

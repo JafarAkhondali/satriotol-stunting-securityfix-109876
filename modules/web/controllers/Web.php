@@ -8,17 +8,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *| For default controller
  *|
  */
-class Web extends Front
-{
-    public function __construct()
-    {
+class Web extends Front {
+    public function __construct() {
         parent::__construct();
 
         $this->load->model('model_web');
     }
 
-    public function index()
-    {
+    public function index() {
         $data['sliders']        = $this->db->get('sliders')->result();
         $data['categories']     = $this->db->get('blog_category')->result();
         $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
@@ -32,8 +29,7 @@ class Web extends Front
         $this->template->build('beranda', $data);
     }
 
-    public function home()
-    {
+    public function home() {
         if (defined('IS_DEMO')) {
             $this->template->build('home-demo');
         } else {
@@ -41,8 +37,7 @@ class Web extends Front
         }
     }
 
-    public function switch_lang($lang = 'english')
-    {
+    public function switch_lang($lang = 'english') {
         $this->load->helper(['cookie']);
 
         set_cookie('language', $lang, (60 * 60 * 24) * 365);
@@ -50,8 +45,7 @@ class Web extends Front
         redirect_back();
     }
 
-    public function set_full_group_sql()
-    {
+    public function set_full_group_sql() {
         $this->db->query(" 
             set global sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
          ");
@@ -61,8 +55,7 @@ class Web extends Front
          ");
     }
 
-    public function migrate($version = null)
-    {
+    public function migrate($version = null) {
         $this->load->library('migration');
 
         if ($version) {
@@ -76,8 +69,7 @@ class Web extends Front
         }
     }
 
-    public function migrate_cicool()
-    {
+    public function migrate_cicool() {
         $this->load->helper('file');
         $this->load->helper('directory');
 
@@ -111,8 +103,7 @@ class Web extends Front
         }
     }
 
-    public function migrate_cicool_front()
-    {
+    public function migrate_cicool_front() {
         $this->load->helper('file');
         $this->load->helper('directory');
 
@@ -146,8 +137,7 @@ class Web extends Front
         }
     }
 
-    public function  recurse_copy($src, $dst)
-    {
+    public function recurse_copy($src, $dst) {
         $dir = opendir($src);
         @mkdir($dst);
         while (false !== ($file = readdir($dir))) {
@@ -162,8 +152,7 @@ class Web extends Front
         closedir($dir);
     }
 
-    function image($mime_type_or_return = 'image/png')
-    {
+    function image($mime_type_or_return = 'image/png') {
         $file_path = $this->input->get('path');
         $this->helper('file');
 
@@ -186,20 +175,17 @@ class Web extends Front
         exit($image_content); // reads and outputs the file onto the output buffer
     }
 
-    public function create_user()
-    {
+    public function create_user() {
         for ($i = 0; $i < 30; $i++) {
             $this->aauth->create_user('user' . $i . '@gmail.com', 'admin123', 'user' . $i);
         }
     }
 
-    public function tahun_lokus()
-    {
+    public function tahun_lokus() {
         $this->template->build('tahun-lokus-stunting');
     }
 
-    public function rembuk_stunting()
-    {
+    public function rembuk_stunting() {
         $data['sliders']        = $this->db->get('sliders')->result();
         $data['categories']     = $this->db->get('blog_category')->result();
         $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
@@ -207,11 +193,11 @@ class Web extends Front
         $data['blogs']          = $this->model_web->berita_terbaru()->result();
         $data['faqs']           = $this->db->from('faqs')->get()->result();
         $data['about']          = $this->db->get('about')->row();
+
         $this->template->build('rembuk-stunting', $data);
     }
 
-    public function analisa_situasi()
-    {
+    public function analisa_situasi() {
         $data['sliders']        = $this->db->get('sliders')->result();
         $data['categories']     = $this->db->get('blog_category')->result();
         $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
@@ -219,10 +205,11 @@ class Web extends Front
         $data['blogs']          = $this->model_web->berita_terbaru()->result();
         $data['faqs']           = $this->db->from('faqs')->get()->result();
         $data['about']          = $this->db->get('about')->row();
+
         $this->template->build('analisa-situasi-stunting', $data);
     }
-    public function analisa_situasi_detail()
-    {
+
+    public function analisa_situasi_detail() {
         $data['sliders']        = $this->db->get('sliders')->result();
         $data['categories']     = $this->db->get('blog_category')->result();
         $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
@@ -230,8 +217,13 @@ class Web extends Front
         $data['blogs']          = $this->model_web->berita_terbaru()->result();
         $data['faqs']           = $this->db->from('faqs')->get()->result();
         $data['about']          = $this->db->get('about')->row();
+
         $this->template->build('analisa-situasi-detail', $data);
     }
+
+	public function rencana_kegiatan() {
+        $this->template->build('rencana-kegiatan');
+	}
 }
 
 

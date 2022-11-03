@@ -1,13 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Model_lokus_stuntings extends MY_Model {
-    private $primary_key    = 'lokus_stunting_id';
-    private $table_name     = 'lokus_stuntings';
-    public $field_search    = ['lokus_year_id', 'kelurahan_id', 'lokus_stunting_create_at', 'lokus_stunting_user', 'lokus_years.lokus_year_nama', 'kelurahans.kelurahan_nama'];
-    public $sort_option     = ['lokus_stunting_id', 'DESC'];
+class Model_analisa_situasi_aksi extends MY_Model {
+
+    private $primary_key    = 'analisa_situasi_aksi_id';
+    private $table_name     = 'analisa_situasi_aksi';
+    public $field_search   = ['analisa_situasi_id', 'analisa_situasi_aksi_indikator', 'analisa_situasi_aksi_cakupan', 'analisa_situasi.analisa_situasi_year'];
+    public $sort_option = ['analisa_situasi_aksi_id', 'DESC'];
     
-    public function __construct() {
+    public function __construct()
+    {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -18,21 +20,21 @@ class Model_lokus_stuntings extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null) {
-        $iterasi    = 1;
-        $num        = count($this->field_search);
-        $where      = NULL;
-        $q          = $this->scurity($q);
-        $field      = $this->scurity($field);
+    public function count_all($q = null, $field = null)
+    {
+        $iterasi = 1;
+        $num = count($this->field_search);
+        $where = NULL;
+        $q = $this->scurity($q);
+        $field = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
-                $f_search = "lokus_stuntings.".$field;
+                $f_search = "analisa_situasi_aksi.".$field;
 
                 if (strpos($field, '.')) {
                     $f_search = $field;
                 }
-
                 if ($iterasi == 1) {
                     $where .=  $f_search . " LIKE '%" . $q . "%' ";
                 } else {
@@ -43,7 +45,7 @@ class Model_lokus_stuntings extends MY_Model {
 
             $where = '('.$where.')';
         } else {
-            $where .= "(" . "lokus_stuntings.".$field . " LIKE '%" . $q . "%' )";
+            $where .= "(" . "analisa_situasi_aksi.".$field . " LIKE '%" . $q . "%' )";
         }
 
         $this->join_avaiable()->filter_avaiable();
@@ -53,7 +55,8 @@ class Model_lokus_stuntings extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
+    {
         $iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
@@ -62,7 +65,7 @@ class Model_lokus_stuntings extends MY_Model {
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
-                $f_search = "lokus_stuntings.".$field;
+                $f_search = "analisa_situasi_aksi.".$field;
                 if (strpos($field, '.')) {
                     $f_search = $field;
                 }
@@ -77,7 +80,7 @@ class Model_lokus_stuntings extends MY_Model {
 
             $where = '('.$where.')';
         } else {
-            $where .= "(" . "lokus_stuntings.".$field . " LIKE '%" . $q . "%' )";
+            $where .= "(" . "analisa_situasi_aksi.".$field . " LIKE '%" . $q . "%' )";
         }
 
         if (is_array($select_field) AND count($select_field)) {
@@ -96,18 +99,18 @@ class Model_lokus_stuntings extends MY_Model {
     }
 
     public function join_avaiable() {
-        $this->db->join('lokus_years', 'lokus_years.lokus_year_id = lokus_stuntings.lokus_year_id', 'LEFT');
-        $this->db->join('kelurahans', 'kelurahans.kelurahan_id = lokus_stuntings.kelurahan_id', 'LEFT');
+        $this->db->join('analisa_situasi', 'analisa_situasi.analisa_situasi_id = analisa_situasi_aksi.analisa_situasi_id', 'LEFT');
         
-        $this->db->select('lokus_years.lokus_year_nama,kelurahans.kelurahan_nama,lokus_stuntings.*,lokus_years.lokus_year_nama as lokus_years_lokus_year_nama,lokus_years.lokus_year_nama as lokus_year_nama,kelurahans.kelurahan_nama as kelurahans_kelurahan_nama,kelurahans.kelurahan_nama as kelurahan_nama');
+        $this->db->select('analisa_situasi.analisa_situasi_year,analisa_situasi_aksi.*,analisa_situasi.analisa_situasi_year as analisa_situasi_analisa_situasi_year,analisa_situasi.analisa_situasi_year as analisa_situasi_year');
 
 
         return $this;
     }
 
     public function filter_avaiable() {
+
         if (!$this->aauth->is_admin()) {
-            // $this->db->where($this->table_name.'.lokus_stunting_user', get_user_data('id'));
+            $this->db->where($this->table_name.'.analisa_situasi_aksi_user', get_user_data('id'));
         }
 
         return $this;
@@ -115,5 +118,5 @@ class Model_lokus_stuntings extends MY_Model {
 
 }
 
-/* End of file Model_lokus_stuntings.php */
-/* Location: ./application/models/Model_lokus_stuntings.php */
+/* End of file Model_analisa_situasi_aksi.php */
+/* Location: ./application/models/Model_analisa_situasi_aksi.php */

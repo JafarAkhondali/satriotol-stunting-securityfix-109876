@@ -156,22 +156,10 @@ class Lokus_stuntings extends Admin	{
 				'lokus_year_id' => $this->input->post('lokus_year_id'),
 				'kelurahan_id' 	=> $this->input->post('kelurahan_id'),
 			];
-
-			
-
-			
-
-
-			
 			
 			$save_lokus_stuntings = $this->model_lokus_stuntings->change($id, $save_data);
 
 			if ($save_lokus_stuntings) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -210,8 +198,7 @@ class Lokus_stuntings extends Admin	{
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('lokus_stuntings_delete');
 
 		$this->load->helper('file');
@@ -241,8 +228,7 @@ class Lokus_stuntings extends Admin	{
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('lokus_stuntings_view');
 
 		$this->data['lokus_stuntings'] = $this->model_lokus_stuntings->join_avaiable()->filter_avaiable()->find($id);
@@ -256,11 +242,8 @@ class Lokus_stuntings extends Admin	{
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$lokus_stuntings = $this->model_lokus_stuntings->find($id);
-
-		
 		
 		return $this->model_lokus_stuntings->remove($id);
 	}
@@ -271,8 +254,7 @@ class Lokus_stuntings extends Admin	{
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('lokus_stuntings_export');
 
 		$this->model_lokus_stuntings->export(
@@ -287,16 +269,14 @@ class Lokus_stuntings extends Admin	{
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('lokus_stuntings_export');
 
 		$this->model_lokus_stuntings->pdf('lokus_stuntings', 'lokus_stuntings');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('lokus_stuntings_export');
 
 		$table = $title = 'lokus_stuntings';
@@ -328,8 +308,7 @@ class Lokus_stuntings extends Admin	{
         $this->pdf->Output($table.'.pdf', 'H');
 	}
 
-	public function ajax_lokus_year_id($id = null)
-	{
+	public function ajax_lokus_year_id($id = null) {
 		if (!$this->is_allowed('lokus_stuntings_list', false)) {
 			echo json_encode([
 				'success' => false,
@@ -337,12 +316,17 @@ class Lokus_stuntings extends Admin	{
 				]);
 			exit;
 		}
-		$results = db_get_all_data('lokus_years', ['lokus_year_id' => $id]);
+
+		if ($id != null) {
+			$results = db_get_all_data('lokus_years', ['lokus_year_id' => $id]);
+		}else{
+			$results = db_get_all_data('lokus_years');
+		}
+
 		$this->response($results);	
 	}
 
-	public function ajax_kelurahan_id($id = null)
-	{
+	public function ajax_kelurahan_id($id = null) {
 		if (!$this->is_allowed('lokus_stuntings_list', false)) {
 			echo json_encode([
 				'success' => false,
@@ -350,7 +334,13 @@ class Lokus_stuntings extends Admin	{
 				]);
 			exit;
 		}
-		$results = db_get_all_data('kelurahans', ['kelurahan_id' => $id]);
+
+		if ($id != null) {
+			$results = db_get_all_data('kelurahans', ['kelurahan_id' => $id]);
+		}else{
+			$results = db_get_all_data('kelurahans');
+		}
+
 		$this->response($results);	
 	}
 
