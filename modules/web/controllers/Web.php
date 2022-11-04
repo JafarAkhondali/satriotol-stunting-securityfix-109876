@@ -181,10 +181,6 @@ class Web extends Front {
         }
     }
 
-    public function tahun_lokus() {
-        $this->template->build('tahun-lokus-stunting');
-    }
-
     public function rembuk_stunting() {
         $data['sliders']        = $this->db->get('sliders')->result();
         $data['categories']     = $this->db->get('blog_category')->result();
