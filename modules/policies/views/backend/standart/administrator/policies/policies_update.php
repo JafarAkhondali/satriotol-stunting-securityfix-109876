@@ -44,6 +44,54 @@
 </section>
 
 <style>
+   /* .group-policies-year */
+   .group-policies-year {
+
+   }
+
+   .group-policies-year .control-label {
+
+   }
+
+   .group-policies-year .col-sm-8 {
+
+   }
+
+   .group-policies-year .form-control {
+
+   }
+
+   .group-policies-year .help-block {
+
+   }
+   /* end .group-policies-year */
+
+
+
+   /* .group-policies-file */
+   .group-policies-file {
+
+   }
+
+   .group-policies-file .control-label {
+
+   }
+
+   .group-policies-file .col-sm-8 {
+
+   }
+
+   .group-policies-file .form-control {
+
+   }
+
+   .group-policies-file .help-block {
+
+   }
+   /* end .group-policies-file */
+
+
+
 
 </style>
 <!-- Main content -->
@@ -77,6 +125,18 @@
 
                                                     
                         
+                        <div class="form-group group-policies-nama  ">
+                                <label for="policies_nama" class="col-sm-2 control-label">Nama File                                    </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="policies_nama" id="policies_nama" placeholder="" value="<?= set_value('policies_nama', $policies->policies_nama); ?>">
+                                    <small class="info help-block">
+                                        </small>
+                                </div>
+                            </div>
+                        
+                        
+                                                    
+                        
                         <div class="form-group group-policies-year">
                                 <label for="policies_year" class="col-sm-2 control-label">Tahun                                    <i class="required">*</i>
                                     </label>
@@ -102,7 +162,7 @@
                                     <input class="data_file data_file_uuid" name="policies_policies_file_uuid" id="policies_policies_file_uuid" type="hidden" value="<?= set_value('policies_policies_file_uuid'); ?>">
                                     <input class="data_file" name="policies_policies_file_name" id="policies_policies_file_name" type="hidden" value="<?= set_value('policies_policies_file_name', $policies->policies_file); ?>">
                                     <small class="info help-block">
-                                        </small>
+                                        <b>Max size file</b>  2048 kb.</small>
                                 </div>
                             </div>
                         
@@ -143,7 +203,15 @@
     $(document).ready(function() {
     window.event_submit_and_action = '';
             
-    
+    (function(){
+    var policies_year = $('#policies_year');
+   /* 
+    policies_year.on('change', function() {});
+    */
+    var policies_file = $('#policies_file');
+   
+})()
+      
       
       
       
@@ -182,7 +250,13 @@
         value: save_type
     });
 
-    
+    (function(){
+    data_post.push({
+        name : '_example',
+        value : 'value_of_example',
+    })
+})()
+      
       
     data_post.push({
         name: 'event_submit_and_action',
@@ -267,7 +341,7 @@
                 multiple: false,
                 validation: {
                     allowedExtensions: ["*"],
-                    sizeLimit: 0,
+                    sizeLimit: 2097152,
                                     },
                 showMessage: function(msg) {
                     toastr['error'](msg);

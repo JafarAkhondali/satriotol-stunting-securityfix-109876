@@ -165,10 +165,10 @@
 												<a href="<?= site_url('administrator/lokus_stuntings/view/' . $lokus_stuntings->lokus_stunting_id);?>" class="label-default"><i class="fa fa-newspaper-o"></i>
 													<?= cclang('view_button'); ?>
 													<?php }) ?>
-													<?php is_allowed('lokus_stuntings_update', function() use ($lokus_stuntings){?>
+													<!-- <?php is_allowed('lokus_stuntings_update', function() use ($lokus_stuntings){?>
 													<a href="<?= site_url('administrator/lokus_stuntings/edit/' . $lokus_stuntings->lokus_stunting_id);?>" class="label-default"><i class="fa fa-edit "></i>
 														<?= cclang('update_button'); ?></a>
-													<?php }) ?>
+													<?php }) ?> -->
 													<?php is_allowed('lokus_stuntings_delete', function() use ($lokus_stuntings){?>
 													<a href="javascript:void(0);" data-href="<?= site_url('administrator/lokus_stuntings/delete/' . $lokus_stuntings->lokus_stunting_id);?>" class="label-default remove-data"><i class="fa fa-close"></i>
 														<?= cclang('remove_button'); ?></a>

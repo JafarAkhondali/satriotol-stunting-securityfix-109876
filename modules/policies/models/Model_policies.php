@@ -2,14 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_policies extends MY_Model {
-
     private $primary_key    = 'policies_id';
     private $table_name     = 'policies';
-    public $field_search   = ['policies_year', 'policies_file'];
+    public $field_search   = ['policies_nama', 'policies_year', 'policies_file'];
     public $sort_option = ['policies_id', 'DESC'];
     
-    public function __construct()
-    {
+    public function __construct() {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -20,13 +18,12 @@ class Model_policies extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null)
-    {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+    public function count_all($q = null, $field = null) {
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -55,13 +52,12 @@ class Model_policies extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
-    {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -99,17 +95,13 @@ class Model_policies extends MY_Model {
     }
 
     public function join_avaiable() {
-        
         $this->db->select('policies.*');
-
 
         return $this;
     }
 
     public function filter_avaiable() {
-
-        if (!$this->aauth->is_admin()) {
-            }
+        if (!$this->aauth->is_admin()) {}
 
         return $this;
     }

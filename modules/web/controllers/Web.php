@@ -244,6 +244,17 @@ class Web extends Front {
 
         $this->template->build('data-statistik', $data);
 	}
+
+	public function kebijakan() {
+        $data['sliders']        = $this->db->get('sliders')->result();
+        $data['categories']     = $this->db->get('blog_category')->result();
+        $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+        $data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
+        $data['about']          = $this->db->get('about')->row();
+        $data['policies']       = $this->db->from('policies')->order_by('policies_id', 'desc')->get()->result();
+
+        $this->template->build('kebijakan', $data);
+	}
 }
 
 

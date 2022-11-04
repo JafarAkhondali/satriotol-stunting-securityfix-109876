@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Policies site
 *|
 */
-class Policies extends Admin	
-{
-	
-	public function __construct()
-	{
+class Policies extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_policies');
@@ -26,8 +23,7 @@ class Policies extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('policies_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +49,7 @@ class Policies extends Admin
 	* Add new policiess
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('policies_add');
 
 		$this->template->title('Policies New');
@@ -66,8 +61,7 @@ class Policies extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('policies_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,30 +69,19 @@ class Policies extends Admin
 				]);
 			exit;
 		}
-		
-		
 
+		$this->form_validation->set_rules('policies_nama', 'Nama File', 'trim|required|max_length[255]');
 		$this->form_validation->set_rules('policies_year', 'Tahun', 'trim|required|max_length[4]');
-		
-
 		$this->form_validation->set_rules('policies_policies_file_name', 'Upload File', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
 			$policies_policies_file_uuid = $this->input->post('policies_policies_file_uuid');
 			$policies_policies_file_name = $this->input->post('policies_policies_file_name');
 		
 			$save_data = [
+				'policies_nama' => $this->input->post('policies_nama'),
 				'policies_year' => $this->input->post('policies_year'),
 			];
-
-			
-			
-
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/policies/')) {
 				mkdir(FCPATH . '/uploads/policies/');
@@ -120,16 +103,10 @@ class Policies extends Admin
 
 				$save_data['policies_file'] = $policies_policies_file_name_copy;
 			}
-		
-			
+
 			$save_policies = $id = $this->model_policies->store($save_data);
-            
 
 			if ($save_policies) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_policies;
@@ -171,8 +148,7 @@ class Policies extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('policies_update');
 
 		$this->data['policies'] = $this->model_policies->find($id);
@@ -186,8 +162,7 @@ class Policies extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('policies_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -195,26 +170,18 @@ class Policies extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('policies_year', 'Tahun', 'trim|required|max_length[4]');
-		
 
+		$this->form_validation->set_rules('policies_year', 'Tahun', 'trim|required|max_length[4]');
 		$this->form_validation->set_rules('policies_policies_file_name', 'Upload File', 'trim|required');
-		
-
 		
 		if ($this->form_validation->run()) {
 			$policies_policies_file_uuid = $this->input->post('policies_policies_file_uuid');
 			$policies_policies_file_name = $this->input->post('policies_policies_file_name');
 		
 			$save_data = [
+				'policies_nama' => $this->input->post('policies_nama'),
 				'policies_year' => $this->input->post('policies_year'),
 			];
-
-			
-
-			
-
-
 			
 			if (!is_dir(FCPATH . '/uploads/policies/')) {
 				mkdir(FCPATH . '/uploads/policies/');
@@ -236,16 +203,10 @@ class Policies extends Admin
 
 				$save_data['policies_file'] = $policies_policies_file_name_copy;
 			}
-		
-			
+
 			$save_policies = $this->model_policies->change($id, $save_data);
 
 			if ($save_policies) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -284,8 +245,7 @@ class Policies extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('policies_delete');
 
 		$this->load->helper('file');
@@ -315,8 +275,7 @@ class Policies extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('policies_view');
 
 		$this->data['policies'] = $this->model_policies->join_avaiable()->filter_avaiable()->find($id);
@@ -330,8 +289,7 @@ class Policies extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$policies = $this->model_policies->find($id);
 
 		if (!empty($policies->policies_file)) {
@@ -350,8 +308,7 @@ class Policies extends Admin
 	* Upload Image Policies	* 
 	* @return JSON
 	*/
-	public function upload_policies_file_file()
-	{
+	public function upload_policies_file_file() {
 		if (!$this->is_allowed('policies_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -372,8 +329,7 @@ class Policies extends Admin
 	* Delete Image Policies	* 
 	* @return JSON
 	*/
-	public function delete_policies_file_file($uuid)
-	{
+	public function delete_policies_file_file($uuid) {
 		if (!$this->is_allowed('policies_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -397,8 +353,7 @@ class Policies extends Admin
 	* Get Image Policies	* 
 	* @return JSON
 	*/
-	public function get_policies_file_file($id)
-	{
+	public function get_policies_file_file($id) {
 		if (!$this->is_allowed('policies_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -426,8 +381,7 @@ class Policies extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('policies_export');
 
 		$this->model_policies->export(
@@ -442,16 +396,14 @@ class Policies extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('policies_export');
 
 		$this->model_policies->pdf('policies', 'policies');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('policies_export');
 
 		$table = $title = 'policies';
@@ -483,7 +435,6 @@ class Policies extends Admin
         $this->pdf->Output($table.'.pdf', 'H');
 	}
 
-	
 }
 
 

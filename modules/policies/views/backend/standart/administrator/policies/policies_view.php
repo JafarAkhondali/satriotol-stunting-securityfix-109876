@@ -65,6 +65,14 @@ jQuery(document).ready(domo);
                     </div>
                                         
                     <div class="form-group ">
+                        <label for="content" class="col-sm-2 control-label">Nama File </label>
+
+                        <div class="col-sm-8">
+                        <span class="detail_group-policies-nama"><?= _ent($policies->policies_nama); ?></span>
+                        </div>
+                    </div>
+                                        
+                    <div class="form-group ">
                         <label for="content" class="col-sm-2 control-label">Tahun </label>
 
                         <div class="col-sm-8">
@@ -133,6 +141,10 @@ jQuery(document).ready(domo);
 
 <script>
 $(document).ready(function(){
-   
+   (function(){
+        var policies_year = $('.detail_group-policies-year');
+        var policies_file = $('.detail_group-policies-file');
+    })()
+      
    });
 </script>
