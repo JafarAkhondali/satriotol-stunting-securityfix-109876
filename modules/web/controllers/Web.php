@@ -255,6 +255,16 @@ class Web extends Front {
 
         $this->template->build('kebijakan', $data);
 	}
+
+	public function lokus_stunting() {
+        $data['sliders']        = $this->db->get('sliders')->result();
+        $data['categories']     = $this->db->get('blog_category')->result();
+        $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+        $data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
+        $data['about']          = $this->db->get('about')->row();
+
+        $this->template->build('lokus-stunting', $data);
+	}
 }
 
 
