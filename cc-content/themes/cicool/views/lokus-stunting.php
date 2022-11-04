@@ -12,7 +12,33 @@
             </div>
             <div class="row">
                 <div class="col-xxl-12">
-					String
+                    <div class="contact__form">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-xxl-4 col-xl-4 col-md-4">
+                                    <div class="contact__form-input">
+                                    <select class="form-control chosen chosen-select-deselect" name="kecamatan" id="kecamatan" data-placeholder="Pilih Kecamatan">
+                                            <option>ehehehe</option>
+                                            <option>ehehehe</option>
+                                            <option>ehehehe</option>
+                                            <option>ehehehe</option>
+                                        </select>
+                                        <!-- <input type="text" placeholder="Your Name"> -->
+                                    </div>
+                                </div>
+                                <div class="col-xxl-4 col-xl-4 col-md-4">
+                                    <div class="contact__form-input">
+                                        <input type="email" placeholder="Your Email">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-4 col-xl-4 col-md-4">
+                                    <div class="contact__btn">
+                                        <button class="tp-btn">Send your message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
