@@ -6,13 +6,13 @@
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="section__title-wrapper-2 text-center mb-60">
-                        <h3 class="section__title-2">Rencana Kegiatan</h3>
+                        <h3 class="section__title-2">Data Statistik</h3>
                     </div>
                 </div>
             </div>
             <div class="row">
 				<div class="col-md-12">
-					String
+					<iframe height="860" width="100%" scrolling="yes" style="border: 2px solid black;" src="https://diskominfo.semarangkota.go.id"></iframe>
 				</div>
             </div>
         </div>

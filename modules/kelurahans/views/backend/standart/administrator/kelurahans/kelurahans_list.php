@@ -123,7 +123,6 @@
 											</th>
 											<th data-field="kecamatan_id" data-sort="1" data-primary-key="0"><?= cclang('kecamatan_id') ?></th>
 											<th data-field="kelurahan_nama" data-sort="1" data-primary-key="0"><?= cclang('kelurahan_nama') ?></th>
-											<th data-field="kelurahan_create_at" data-sort="1" data-primary-key="0"><?= cclang('kelurahan_create_at') ?></th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -143,7 +142,6 @@
 											<td>
 												<span class="list_group-kelurahan-nama"><?= _ent($kelurahans->kelurahan_nama).'<br/> <small><i>dibuat oleh : '._ent($kelurahans->user_username);?></i></small></span>
 											</td>
-											<td><span class="list_group-kelurahan-create-at"><?= _ent($kelurahans->kelurahan_create_at);?></span></td>
 											<td width="200">
 												<?php is_allowed('kelurahans_view', function() use ($kelurahans){?>
 												<a href="<?= site_url('administrator/kelurahans/view/' . $kelurahans->kelurahan_id); ?>" class="label-default"><i class="fa fa-newspaper-o"></i>

@@ -110,7 +110,6 @@
 										<tr class="">
 											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
 											<th data-field="kecamatan_nama" data-sort="1" data-primary-key="0"><?= cclang('kecamatan_nama') ?></th>
-											<th data-field="dibuat_tanggal" data-sort="1" data-primary-key="0"><?= cclang('create_at') ?></th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -123,7 +122,6 @@
 													<?= _ent($kecamatans->kecamatan_nama).'<br/><small><i>dibuat oleh : '.$kecamatans->user_username.'</i></small>';?>
 												</span>
 											</td>
-											<td><span class="list_group-kecamatan-create-at"><?= _ent($kecamatans->kecamatan_create_at);?></span></td>
 											<td width="200">
 												<?php is_allowed('kecamatans_view', function() use ($kecamatans){?>
 												<a href="<?= site_url('administrator/kecamatans/view/' . $kecamatans->kecamatan_id); ?>" class="label-default"><i class="fa fa-newspaper-o"></i>

@@ -81,7 +81,7 @@
     						<div class="form-group group-kelurahan-id ">
     							<label for="kelurahan_id" class="col-sm-2 control-label">Nama Kelurahan <i class="required">*</i></label>
     							<div class="col-sm-8">
-    								<select class="form-control chosen chosen-select-deselect" name="kelurahan_id" id="kelurahan_id" data-placeholder="Select Nama Kelurahan">
+    								<select class="form-control chosen chosen-select-deselect" multiple="multiple" name="kelurahan_id[]" id="kelurahan_id" data-placeholder="Select Nama Kelurahan">
     									<option value=""></option>
     								</select>
     								<small class="info help-block"></small>

@@ -29,8 +29,11 @@ class Lokus_stuntings extends Admin	{
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['lokus_stuntingss'] = $this->model_lokus_stuntings->get($filter, $field, $this->limit_page, $offset);
-		$this->data['lokus_stuntings_counts'] = $this->model_lokus_stuntings->count_all($filter, $field);
+		$this->data['lokus_stuntingss'] 		= $this->model_lokus_stuntings->get($filter, $field, $this->limit_page, $offset);
+		// echo $this->db->last_query();
+		// exit;
+		
+		$this->data['lokus_stuntings_counts'] 	= $this->model_lokus_stuntings->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/lokus_stuntings/index/',
@@ -71,16 +74,23 @@ class Lokus_stuntings extends Admin	{
 		}
 
 		$this->form_validation->set_rules('lokus_year_id', 'Tahun Lokus', 'trim|required');
-		$this->form_validation->set_rules('kelurahan_id', 'Nama Kelurahan', 'trim|required');
-		$this->form_validation->set_rules('lokus_stunting_create_at', 'Tanggal Pembuatan', 'trim|required');
+		$this->form_validation->set_rules('kelurahan_id[]', 'Nama Kelurahan', 'trim|required');
 
 		if ($this->form_validation->run()) {
 			$save_data = [
 				'lokus_year_id' 			=> $this->input->post('lokus_year_id'),
-				'kelurahan_id' 				=> $this->input->post('kelurahan_id'),
 				'lokus_stunting_create_at' 	=> date('Y-m-d H:i:s'),
 				'lokus_stunting_user' 		=> get_user_data('id'),
 			];
+
+			$listed_kelurahan = [];
+			if (count((array) $this->input->post('kelurahan_id'))) {
+				foreach ((array) $_POST['kelurahan_id'] as $idx => $kelurahan_id) {
+					$listed_kelurahan[] = $kelurahan_id;
+				}
+			}
+
+			$save_data ['kelurahan_id'] = implode(',', $listed_kelurahan);
 
 			$save_lokus_stuntings = $id = $this->model_lokus_stuntings->store($save_data);
 
