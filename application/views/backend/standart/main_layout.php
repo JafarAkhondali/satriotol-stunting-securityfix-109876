@@ -18,20 +18,20 @@
 	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/dist/css/AdminLTE.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/dist/css/skins/_all-skins.min.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/iCheck/flat/blue.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/morris/morris.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/datepicker/datepicker3.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/admin-lte/plugins/iCheck/all.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/sweet-alert/sweetalert.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/toastr/build/toastr.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/fancy-box/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/chosen/chosen.css">
-	<link rel="stylesheet" href="<?= BASE_ASSET; ?>/css/custom.css?timestamp=201803311528">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/dist/css/AdminLTE.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/dist/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/iCheck/flat/blue.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/morris/morris.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/datepicker/datepicker3.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/iCheck/all.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>sweet-alert/sweetalert.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>toastr/build/toastr.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>fancy-box/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>chosen/chosen.css">
+	<link rel="stylesheet" href="<?= BASE_ASSET; ?>css/custom.css?timestamp=201803311528">
 	<link rel="stylesheet" href="<?= BASE_ASSET; ?>datetimepicker/jquery.datetimepicker.css" />
 	<link rel="stylesheet" href="<?= BASE_ASSET; ?>js-scroll/style/jquery.jscrollpane.css" rel="stylesheet"
 		media="all" />
@@ -55,21 +55,21 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/iCheck/icheck.min.js"></script>
-	<script src="<?= BASE_ASSET; ?>/sweet-alert/sweetalert-dev.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/input-mask/jquery.inputmask.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-	<script src="<?= BASE_ASSET; ?>/toastr/toastr.js"></script>
-	<script src="<?= BASE_ASSET; ?>/fancy-box/source/jquery.fancybox.js?v=2.1.5"></script>
-	<script src="<?= BASE_ASSET; ?>/datetimepicker/build/jquery.datetimepicker.full.js"></script>
-	<script src="<?= BASE_ASSET; ?>/editor/dist/js/medium-editor.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/iCheck/icheck.min.js"></script>
+	<script src="<?= BASE_ASSET; ?>sweet-alert/sweetalert-dev.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/input-mask/jquery.inputmask.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	<script src="<?= BASE_ASSET; ?>toastr/toastr.js"></script>
+	<script src="<?= BASE_ASSET; ?>fancy-box/source/jquery.fancybox.js?v=2.1.5"></script>
+	<script src="<?= BASE_ASSET; ?>datetimepicker/build/jquery.datetimepicker.full.js"></script>
+	<script src="<?= BASE_ASSET; ?>editor/dist/js/medium-editor.js"></script>
 	<script src="<?= BASE_ASSET; ?>js/cc-extension.js"></script>
-	<script src="<?= BASE_ASSET; ?>/js/cc-page-element.js"></script>
+	<script src="<?= BASE_ASSET; ?>js/cc-page-element.js"></script>
 
-	<script src="<?= BASE_ASSET; ?>/stepper/jquery.steps.min.js"></script>
-	<link href="<?= BASE_ASSET; ?>/stepper/css/jquery.steps.css" rel="stylesheet">
+	<script src="<?= BASE_ASSET; ?>stepper/jquery.steps.min.js"></script>
+	<link href="<?= BASE_ASSET; ?>stepper/css/jquery.steps.css" rel="stylesheet">
 	<script>
 		var BASE_URL = "<?= base_url(); ?>";
 		var HTTP_REFERER = "<?= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/'; ?>";
@@ -98,7 +98,7 @@
 	<?= $this->cc_html->getScriptFileTop(); ?>
 </head>
 
-<body class="sidebar-mini skin-black fixed web-body">
+<body class="sidebar-mini skin-red-light fixed web-body">
 	<div class="wrapper" id="app">
 
 		<header class="main-header">

@@ -13,36 +13,107 @@
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="contact__form">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-xxl-4 col-xl-4 col-md-4">
-                                    <div class="contact__form-input">
+                        <div class="row">
+                            <div class="offset-md-4 col-xxl-2 col-xl-2 col-md-2">
+                                <label for="kecamatan" class="col-sm-12 control-label">Nama Kecamatan</label>
+                                <div class="contact__form-input">
                                     <select class="form-control chosen chosen-select-deselect" name="kecamatan" id="kecamatan" data-placeholder="Pilih Kecamatan">
-                                            <option>ehehehe</option>
-                                            <option>ehehehe</option>
-                                            <option>ehehehe</option>
-                                            <option>ehehehe</option>
-                                        </select>
-                                        <!-- <input type="text" placeholder="Your Name"> -->
-                                    </div>
-                                </div>
-                                <div class="col-xxl-4 col-xl-4 col-md-4">
-                                    <div class="contact__form-input">
-                                        <input type="email" placeholder="Your Email">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-4 col-xl-4 col-md-4">
-                                    <div class="contact__btn">
-                                        <button class="tp-btn">Send your message</button>
-                                    </div>
+                                        <option value="">- Pilih Kecamatan -</option>
+                            <?php
+                                foreach ($kecamatans as $kecamatan) {
+                            ?>
+                                <option value="<?= $kecamatan->kecamatan_id;?>"><?= $kecamatan->kecamatan_nama;?></option>
+                            <?php
+                                }
+                            ?>
+                                    </select>
+                                    <!-- <input type="text" placeholder="Your Name"> -->
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-xxl-2 col-xl-2 col-md-2">
+                                <label for="kecamatan" class="col-sm-12 control-label">Tahun</label>
+                                <div class="contact__form-input">
+                                    <select class="form-control chosen chosen-select-deselect" name="tahun" id="tahun" data-placeholder="Select Tahun">
+                                        <option value="">- Pilih Tahun -</option>
+                                        <?php for ($i = 2018; $i < date('Y')+2; $i++){ ?> <option value="<?= $i;?>">
+                                            <?= $i; ?></option>
+                                        <?php }; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xxl-4 col-xl-4 col-md-4">
+                                <div class="contact__btn">
+                                    <button class="tp-btn" name="tombol-cari-lokus" id="tombol-cari-lokus">Cari <i class="fal fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="row mt-25">
+                <div class="col-md-12" id="hasil-lokus-stunting">
+                    <!-- <iframe height="860" width="100%" scrolling="yes" style="border: 2px solid black;" src="<?= base_url().'/uploads/lokus_years/20221102103556-2022-11-02lokus_years103553.pdf';?>"></iframe> -->
                 </div>
             </div>
         </div>
     </section>
     <!-- event area end -->
 </main>
+
+<script src="<?= base_url();?>asset/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+    // $(document).ready(function(){});
+    var BASE_URL = "<?= base_url();?>";
+
+    $('#tombol-cari-lokus').on('click', function(){
+        $.ajax({
+            url 		: BASE_URL + "web/hasil_lokus_stunting",
+            // type		: "POST",
+            // data		: $('#form-cabang').serialize(),
+            // dataType	: "JSON",
+            timeout : 3000,
+            success		: function(data){
+                $("#hasil-lokus-stunting").html(data);
+
+
+                // if (data.datanya.success == true) {
+                //     notify('success', '<b>Successfully!</b> ', data.pesan, '<i class="ti-check"></i>');
+
+                //     $('.form-group').removeClass('has-error').removeClass('has-success');
+
+                //     if (data.methodnya == "insert") {
+                //         $("#form-cabang")[0].reset();
+                //         $("#nama_cabang").focus();
+                //     }else if (data.methodnya == "update") {
+                //         setTimeout(function () {
+                //             window.location.href = site + "cabang.html";
+                //         }, 3000);
+                //     }
+                // }else{
+                //     var namenya = [];
+
+                //     $.each(data.datanya.messages, function(key, value){
+                //         var element = $('#'+key);
+
+                //         element.closest('div.form-group')
+                //             .removeClass('has-success')
+                //             .removeClass('has-error')
+                //             .addClass(value.length > 0 ? 'has-error' : 'has-success')
+                //             .find('.help-block').remove();
+
+                //         namenya.push(value);
+                //     });
+
+                //     notify('danger', '<b>Error!</b> ', namenya, '<i class="ti-close"></i>');
+                // }
+            },
+            // error 		: function (jqXHR, textStatus, errorThrown){
+            //     notify('danger', '<b>Error!</b> ', data.pesan, '<i class="ti-close"></i>');
+            // }
+        });
+
+    });
+</script>
+
+
 <?= get_footer(); ?>

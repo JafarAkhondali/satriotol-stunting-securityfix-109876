@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/font-awesome-pro.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/spacing.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_ASSET?>chosen/chosen.css">
+
 
     <style type="text/css">
         .carousel-caption {

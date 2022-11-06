@@ -104,6 +104,7 @@
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/imagesloaded-pkgd.js"></script>
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/ajax-form.js"></script>
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/main.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js"></script>
 	<script type="text/javascript">
 		$('#pilih-berita').on('change', function (e) {
 			var optionSelected = $("option:selected", this);

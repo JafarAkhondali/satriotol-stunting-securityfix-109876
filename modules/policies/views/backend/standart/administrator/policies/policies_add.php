@@ -84,11 +84,9 @@
 						</div>
 
 						<div class="form-group group-policies-year ">
-							<label for="policies_year" class="col-sm-2 control-label">Tahun <i class="required">*</i>
-							</label>
+							<label for="policies_year" class="col-sm-2 control-label">Tahun <i class="required">*</i></label>
 							<div class="col-sm-2">
-								<select class="form-control chosen chosen-select-deselect" name="policies_year"
-									id="policies_year" data-placeholder="Select Tahun">
+								<select class="form-control chosen chosen-select-deselect" name="policies_year" id="policies_year" data-placeholder="Select Tahun">
 									<option value=""></option>
 									<?php for ($i = 1970; $i < date('Y')+100; $i++){ ?> <option value="<?= $i;?>">
 										<?= $i; ?></option>

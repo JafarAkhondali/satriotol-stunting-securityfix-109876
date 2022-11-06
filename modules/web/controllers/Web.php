@@ -227,6 +227,7 @@ class Web extends Front {
         $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
         $data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
         $data['about']          = $this->db->get('about')->row();
+        $data['rencana']        = $this->db->get('rencana_kegiatans')->row();
 
         $this->template->build('rencana-kegiatan', $data);
 	}
@@ -258,9 +259,14 @@ class Web extends Front {
         $data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
         $data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
         $data['about']          = $this->db->get('about')->row();
+        $data['kecamatans']     = $this->db->get('kecamatans')->result();
 
         $this->template->build('lokus-stunting', $data);
 	}
+
+    public function hasil_lokus_stunting(){
+        $this->template->build('file-lokus-stunting');
+    }
 }
 
 

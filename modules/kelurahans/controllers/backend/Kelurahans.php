@@ -309,13 +309,13 @@ class Kelurahans extends Admin {
 	}
 
 	public function ajax_kecamatan_id($id = null) {
-		if (!$this->is_allowed('kelurahans_list', false)) {
-			echo json_encode([
-				'success' => false,
-				'message' => cclang('sorry_you_do_not_have_permission_to_access')
-				]);
-			exit;
-		}
+		// if (!$this->is_allowed('kelurahans_list', false)) {
+		// 	echo json_encode([
+		// 		'success' => false,
+		// 		'message' => cclang('sorry_you_do_not_have_permission_to_access')
+		// 		]);
+		// 	exit;
+		// }
 
 		if ($id != null) {
 			$results = db_get_all_data('kecamatans', ['kecamatan_id' => $id]);
