@@ -51,9 +51,7 @@
                 </div>
             </div>
             <div class="row mt-25">
-                <div class="col-md-12" id="hasil-lokus-stunting">
-                    <!-- <iframe height="860" width="100%" scrolling="yes" style="border: 2px solid black;" src="<?= base_url().'/uploads/lokus_years/20221102103556-2022-11-02lokus_years103553.pdf';?>"></iframe> -->
-                </div>
+                <div class="col-md-12" id="hasil-lokus-stunting"></div>
             </div>
         </div>
     </section>
@@ -63,17 +61,23 @@
 <script src="<?= base_url();?>asset/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script type="text/javascript">
     // $(document).ready(function(){});
-    var BASE_URL = "<?= base_url();?>";
-
+    var BASE_URL    = "<?= base_url();?>";
+    
     $('#tombol-cari-lokus').on('click', function(){
+        var kecamatan   = $('#kecamatan').val();
+        var tahun       = $('#tahun').val();
+
         $.ajax({
             url 		: BASE_URL + "web/hasil_lokus_stunting",
-            // type		: "POST",
-            // data		: $('#form-cabang').serialize(),
-            // dataType	: "JSON",
-            timeout : 3000,
-            success		: function(data){
-                $("#hasil-lokus-stunting").html(data);
+            type		: "GET",
+            data		: {
+                kecamatan: kecamatan,
+                tahun: tahun,
+            },
+            // dataType	: "HTML",
+            // timeout : 3000,
+            success		: function(responses){
+                $("#hasil-lokus-stunting").html(responses);
 
 
                 // if (data.datanya.success == true) {

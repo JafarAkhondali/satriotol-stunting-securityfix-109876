@@ -1,4 +1,7 @@
 <?php
+
+use Mpdf\Tag\Input;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
@@ -265,7 +268,12 @@ class Web extends Front {
 	}
 
     public function hasil_lokus_stunting(){
-        $this->template->build('file-lokus-stunting');
+        $kecamatan  = $this->input->get('kecamatan');
+        $tahun      = $this->input->get('tahun');
+
+        $data ['results'] = $this->model_web->hasil_lokus_stunting($kecamatan, $tahun)->result();
+
+        $this->template->build('file-lokus-stunting', $data);
     }
 }
 
