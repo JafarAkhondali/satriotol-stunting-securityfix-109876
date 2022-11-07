@@ -76,9 +76,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Sliders <small>
-			<?= cclang('new', ['Sliders']); ?>
-		</small>
+		Sliders <small><?= cclang('new', ['Sliders']);?></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -114,13 +112,12 @@
                             'id' 		=> 'form_sliders',
                             'enctype' 	=> 'multipart/form-data',
                             'method' 	=> 'POST'
-                        ]); ?>
-						<?php
+                        ]);
+
                         	$user_groups = $this->model_group->get_user_group_ids();
                         ?>
 						<div class="form-group group-slider-title ">
-							<label for="slider_title" class="col-sm-2 control-label">Judul <i class="required">*</i>
-							</label>
+							<label for="slider_title" class="col-sm-2 control-label">Judul <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="slider_title" id="slider_title" placeholder="Masukkan Judul" value="<?= set_value('slider_title'); ?>">
 								<small class="info help-block"><b>Input Slider Title</b> Max Length : 255.</small>
@@ -128,9 +125,7 @@
 						</div>
 
 						<div class="form-group group-slider-subtitle ">
-							<label for="slider_subtitle" class="col-sm-2 control-label">Deskripsi <i
-									class="required">*</i>
-							</label>
+							<label for="slider_subtitle" class="col-sm-2 control-label">Deskripsi <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<textarea id="slider_subtitle" name="slider_subtitle" rows="5"
 									cols="80"><?= set_value('Slider Subtitle'); ?></textarea>
@@ -140,61 +135,37 @@
 						</div>
 
 						<div class="form-group group-slider-image ">
-							<label for="slider_image" class="col-sm-2 control-label">Image <i class="required">*</i>
-							</label>
+							<label for="slider_image" class="col-sm-2 control-label">Image <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<div id="sliders_slider_image_galery"></div>
-								<input class="data_file" name="sliders_slider_image_uuid" id="sliders_slider_image_uuid"
-									type="hidden" value="<?= set_value('sliders_slider_image_uuid'); ?>">
-								<input class="data_file" name="sliders_slider_image_name" id="sliders_slider_image_name"
-									type="hidden" value="<?= set_value('sliders_slider_image_name'); ?>">
+								<input class="data_file" name="sliders_slider_image_uuid" id="sliders_slider_image_uuid" type="hidden" value="<?= set_value('sliders_slider_image_uuid'); ?>">
+								<input class="data_file" name="sliders_slider_image_name" id="sliders_slider_image_name" type="hidden" value="<?= set_value('sliders_slider_image_name'); ?>">
 								<small class="info help-block"><b>Extension file must</b> JPG,JPEG,PNG. Ukuran gambar yang disarankan adalah <b>1920 x 775</b></small>
 							</div>
 						</div>
 
-						<!-- <div class="form-group group-slider-status ">
-							<label for="slider_status" class="col-sm-2 control-label">Status <i class="required">*</i>
-							</label>
-							<div class="col-sm-8">
-								<select class="form-control chosen chosen-select" name="slider_status"
-									id="slider_status" data-placeholder="Select Status">
-									<option value=""></option>
-									<option value="0">Tidak Aktif</option>
-									<option value="1">Aktif</option>
-								</select>
-								<small class="info help-block">
-
-								</small>
-							</div>
-						</div> -->
-
 						<div class="message"></div>
 
 						<div class="row-fluid col-md-7 container-button-bottom">
-							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay'
-								title="<?= cclang('save_button'); ?> (Ctrl+s)">
+							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay' title="<?= cclang('save_button'); ?> (Ctrl+s)">
 								<i class="fa fa-save"></i>
 								<?= cclang('save_button'); ?>
 							</button>
-							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save"
-								data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
+							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save" data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
 								<i class="ion ion-ios-list-outline"></i>
 								<?= cclang('save_and_go_the_list_button'); ?>
 							</a>
 
 							<div class="custom-button-wrapper"></div>
 
-							<a class="btn btn-flat btn-default btn_action" id="btn_cancel"
-								title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
+							<a class="btn btn-flat btn-default btn_action" id="btn_cancel" title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
 								<i class="fa fa-undo"></i>
 								<?= cclang('cancel_button'); ?>
 							</a>
 
 							<span class="loading loading-hide">
 								<img src="<?= BASE_ASSET; ?>/img/loading-spin-primary.svg">
-								<i>
-									<?= cclang('loading_saving_data'); ?>
-								</i>
+								<i><?= cclang('loading_saving_data'); ?></i>
 							</span>
 						</div>
 						<?= form_close(); ?>
@@ -212,7 +183,6 @@
 
 <script>
 	$(document).ready(function () {
-
 		window.event_submit_and_action = '';
 
 		(function () {
@@ -222,12 +192,7 @@
 			 */
 			var slider_subtitle = $('#slider_subtitle');
 			var slider_image = $('#slider_image');
-
 		})()
-
-
-
-
 
 		CKEDITOR.replace('slider_subtitle');
 		var slider_subtitle = CKEDITOR.instances.slider_subtitle;
@@ -278,7 +243,6 @@
 				})
 			})()
 
-
 			$('.loading').show();
 
 			$.ajax({
@@ -302,15 +266,16 @@
 						$('.message').printMessage({
 							message: res.message
 						});
+
 						$('.message').fadeIn();
 						resetForm();
+
 						if (typeof id_slider_image !== 'undefined') {
 							$('#sliders_slider_image_galery').fineUploader('deleteFile', id_slider_image);
 						}
+
 						$('.chosen option').prop('selected', false).trigger('chosen:updated');
 						slider_subtitle.setData('');
-
-
 					} else {
 						if (res.errors) {
 
@@ -332,7 +297,6 @@
 							type: 'warning'
 						});
 					}
-
 				})
 				.fail(function () {
 					$('.message').printMessage({
@@ -399,12 +363,5 @@
 				}
 			}
 		}); /*end slider_image galery*/
-
-
-
-
-
-
-
 	}); /*end doc ready*/
 </script>

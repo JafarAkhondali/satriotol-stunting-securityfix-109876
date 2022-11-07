@@ -73,7 +73,6 @@ class Sliders extends Admin	{
 		$this->form_validation->set_rules('slider_title', 'Judul', 'trim|required|max_length[255]');
 		$this->form_validation->set_rules('slider_subtitle', 'Deskripsi', 'trim|required');
 		$this->form_validation->set_rules('sliders_slider_image_name', 'Image', 'trim|required');
-		// $this->form_validation->set_rules('slider_status', 'Status', 'trim|required');
 
 		if ($this->form_validation->run()) {
 			$sliders_slider_image_uuid = $this->input->post('sliders_slider_image_uuid');

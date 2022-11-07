@@ -165,7 +165,7 @@
 													<?= _ent($sliders->slider_title).'<br/><small><i>dibuat oleh : '._ent($sliders->username).'</i></small>';?>
 												</span>
 											</td>
-											<td><span class="list_group-slider-subtitle"><?= _ent($sliders->slider_subtitle); ?></span></td>
+											<td><span class="list_group-slider-subtitle"><?= strip_tags($sliders->slider_subtitle); ?></span></td>
 											<td>
 												<?php if (!empty($sliders->slider_image)): ?>
 												<?php if (is_image($sliders->slider_image)): ?>

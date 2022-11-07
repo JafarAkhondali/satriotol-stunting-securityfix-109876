@@ -73,9 +73,13 @@
 							<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
 								<div class="footer__social footer__social-3 text-md-end">
 									<ul>
-										<li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-										<li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+								<?php
+									foreach ($kontaks as $kontak) {
+								?>
+									<li><a href="<?php echo $kontak->contact_url;?>"><i class="fa-brands <?php echo $kontak->contact_image;?>"></i></a></li>
+								<?php
+									}
+								?>
 									</ul>
 								</div>
 							</div>
