@@ -120,7 +120,7 @@
 							<img class="about__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/about/about-shape-3.png" alt="">
 						</div>
 						<div class="about__thumb-2 mb-10">
-							<img src="<?php echo base_url(); ?>assets_stunting/stunting/pengertian.jpg" alt="Pengertian Stunting" style="width: 100%; border-radius: 20px;">
+							<img src="<?php echo base_url().'uploads/about/'.$about->about_image_pengertian;?>" alt="Gambar Pengertian Stunting" style="width: 100%; border-radius: 20px;">
 						</div>
 					</div>
 				</div>
@@ -138,7 +138,7 @@
 							<img class="about__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/about/about-shape-3.png" alt="">
 						</div>
 						<div class="about__thumb-2 mb-10">
-							<img src="<?php echo base_url(); ?>assets_stunting/stunting/penyebab.jpg" alt="Penyebab Stunting" style="width: 100%; border-radius: 20px;">
+							<img src="<?php echo base_url().'uploads/about/'.$about->about_image_penyebab;?>" alt="Penyebab Stunting" style="width: 100%; border-radius: 20px;">
 						</div>
 					</div>
 				</div>
