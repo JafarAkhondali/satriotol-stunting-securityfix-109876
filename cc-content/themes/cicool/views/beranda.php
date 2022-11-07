@@ -1,4 +1,10 @@
 <?= get_header(); ?>
+<style type="text/css">
+	.about__list ul li {
+    list-style: disc !important;
+}
+</style>
+
 <main>
 	<!-- slider area start -->
 	<section class="slider__area">
