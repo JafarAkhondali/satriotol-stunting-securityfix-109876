@@ -39,9 +39,6 @@
 							<div class="error__content">
 								<h3 class="error__title">Data Not Available</h3>
 								<p>Oops! The data you are looking for does not available.</p>
-								<div class="error__btn">
-									<a href="<?= base_url();?>" class="tp-btn">Back to home</a>
-								</div>
 							</div>
 						</div>
 					</div>
