@@ -1,7 +1,7 @@
 <?php
-	if (count($results) > 0) {
+	if (count($results->result()) > 0) {
 ?>
-<a href="<?= base_url().'uploads/lokus_years/'.$result->file_lokus;?>" target="blank" class="btn btn-danger mb-25">Lihat File</a>
+<a href="<?= base_url().'uploads/lokus_years/'.$results->row()->file_lokus;?>" target="blank" class="btn btn-danger mb-25">Lihat File</a>
 <div class="table-content table-responsive">
 	<table class="table">
 		<thead>
