@@ -29,7 +29,7 @@
 		<div class="container">
 			<div class="certificate__inner grey-bg-9 p-relative">
 				<div class="certificate__thumb">
-					<img src="<?= base_url().'uploads/about/'.$about->about_image;?>" alt="Gambar Kata Pengantar Website Stunting" class="width: 523px;">
+					<img src="<?= base_url().'uploads/about/'.$about->about_image;?>" alt="Gambar Kata Pengantar Website Stunting" style="width: 523px;">
 				</div>
 				<div class="row">
 					<div class="col-xxl-6">
