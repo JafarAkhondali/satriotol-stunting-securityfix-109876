@@ -74,46 +74,12 @@
                 kecamatan: kecamatan,
                 tahun: tahun,
             },
-            // dataType	: "HTML",
-            // timeout : 3000,
+            beforeSend : function(){
+                $("#hasil-lokus-stunting").html('<div class="error__content text-center"><i class="fa fa-refresh fa-spin"></i></div>');
+            },
             success		: function(responses){
                 $("#hasil-lokus-stunting").html(responses);
-
-
-                // if (data.datanya.success == true) {
-                //     notify('success', '<b>Successfully!</b> ', data.pesan, '<i class="ti-check"></i>');
-
-                //     $('.form-group').removeClass('has-error').removeClass('has-success');
-
-                //     if (data.methodnya == "insert") {
-                //         $("#form-cabang")[0].reset();
-                //         $("#nama_cabang").focus();
-                //     }else if (data.methodnya == "update") {
-                //         setTimeout(function () {
-                //             window.location.href = site + "cabang.html";
-                //         }, 3000);
-                //     }
-                // }else{
-                //     var namenya = [];
-
-                //     $.each(data.datanya.messages, function(key, value){
-                //         var element = $('#'+key);
-
-                //         element.closest('div.form-group')
-                //             .removeClass('has-success')
-                //             .removeClass('has-error')
-                //             .addClass(value.length > 0 ? 'has-error' : 'has-success')
-                //             .find('.help-block').remove();
-
-                //         namenya.push(value);
-                //     });
-
-                //     notify('danger', '<b>Error!</b> ', namenya, '<i class="ti-close"></i>');
-                // }
             },
-            // error 		: function (jqXHR, textStatus, errorThrown){
-            //     notify('danger', '<b>Error!</b> ', data.pesan, '<i class="ti-close"></i>');
-            // }
         });
 
     });
