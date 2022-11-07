@@ -55,8 +55,6 @@
 
 	/* end .group-about-description */
 
-
-
 	/* .group-about-image */
 	.group-about-image {}
 
@@ -70,8 +68,6 @@
 
 	/* end .group-about-image */
 
-
-
 	/* .group-about-logo */
 	.group-about-logo {}
 
@@ -84,8 +80,6 @@
 	.group-about-logo .help-block {}
 
 	/* end .group-about-logo */
-
-
 
 	/* .group-about-address */
 	.group-about-address {}
@@ -118,171 +112,104 @@
 							<h5 class="widget-user-desc">Edit About</h5>
 							<hr>
 						</div>
-						<?= form_open(base_url('administrator/about/edit_save/'.$this->uri->segment(4)), [
-                            'name' => 'form_about',
-                            'class' => 'form-horizontal form-step',
-                            'id' => 'form_about',
-                            'method' => 'POST'
-                        ]); ?>
+					<?= 
+						form_open(base_url('administrator/about/edit_save/'.$this->uri->segment(4)), [
+							'name' => 'form_about',
+							'class' => 'form-horizontal form-step',
+							'id' => 'form_about',
+							'method' => 'POST'
+						]);
 
-						<?php
-                        $user_groups = $this->model_group->get_user_group_ids();
-                        ?>
-
-
-
+						$user_groups = $this->model_group->get_user_group_ids();
+					?>
 						<div class="form-group group-about-description  ">
-							<label for="about_description" class="col-sm-2 control-label">Kata Pengantar <i
-									class="required">*</i>
-							</label>
+							<label for="about_description" class="col-sm-2 control-label">Kata Pengantar <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<textarea id="about_description" name="about_description" rows="10"
-									cols="80"> <?= set_value('about_description', $about->about_description); ?></textarea>
-								<small class="info help-block">
-								</small>
+								<textarea id="about_description" name="about_description" rows="10" cols="80"> <?= set_value('about_description', $about->about_description); ?></textarea>
+								<small class="info help-block"></small>
 							</div>
 						</div>
 
-
-
-
 						<div class="form-group group-about-image  ">
-							<label for="about_image" class="col-sm-2 control-label">Gambar Kata Pengantar <i
-									class="required">*</i>
-							</label>
+							<label for="about_image" class="col-sm-2 control-label">Gambar Kata Pengantar <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<div id="about_about_image_galery"></div>
-								<input class="data_file data_file_uuid" name="about_about_image_uuid"
-									id="about_about_image_uuid" type="hidden"
-									value="<?= set_value('about_about_image_uuid'); ?>">
-								<input class="data_file" name="about_about_image_name" id="about_about_image_name"
-									type="hidden"
-									value="<?= set_value('about_about_image_name', $about->about_image); ?>">
+								<input class="data_file data_file_uuid" name="about_about_image_uuid" id="about_about_image_uuid" type="hidden" value="<?= set_value('about_about_image_uuid'); ?>">
+								<input class="data_file" name="about_about_image_name" id="about_about_image_name" type="hidden" value="<?= set_value('about_about_image_name', $about->about_image); ?>">
 								<small class="info help-block"><b>Extension file must</b> JPG,JPEG,PNG.<br/><b>Ukuran gambar yang disarankan : </b>523 x 470 pixels</small>
 							</div>
 						</div>
 
-
-
-
 						<div class="form-group group-about-logo  ">
-							<label for="about_logo" class="col-sm-2 control-label">Logo <i class="required">*</i>
-							</label>
+							<label for="about_logo" class="col-sm-2 control-label">Logo <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<div id="about_about_logo_galery"></div>
-								<input class="data_file data_file_uuid" name="about_about_logo_uuid"
-									id="about_about_logo_uuid" type="hidden"
-									value="<?= set_value('about_about_logo_uuid'); ?>">
-								<input class="data_file" name="about_about_logo_name" id="about_about_logo_name"
-									type="hidden"
-									value="<?= set_value('about_about_logo_name', $about->about_logo); ?>">
-								<small class="info help-block">
-									<b>Extension file must</b> JPG,JPEG,PNG.</small>
+								<input class="data_file data_file_uuid" name="about_about_logo_uuid" id="about_about_logo_uuid" type="hidden" value="<?= set_value('about_about_logo_uuid'); ?>">
+								<input class="data_file" name="about_about_logo_name" id="about_about_logo_name" type="hidden" value="<?= set_value('about_about_logo_name', $about->about_logo); ?>">
+								<small class="info help-block"><b>Extension file must</b> JPG,JPEG,PNG.</small>
 							</div>
 						</div>
-
-
-
 
 						<div class="form-group group-about-address  ">
-							<label for="about_address" class="col-sm-2 control-label">Alamat <i class="required">*</i>
-							</label>
+							<label for="about_address" class="col-sm-2 control-label">Alamat <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<textarea id="about_address" name="about_address" rows="10"
-									cols="80"> <?= set_value('about_address', $about->about_address); ?></textarea>
-								<small class="info help-block">
-								</small>
+								<textarea id="about_address" name="about_address" rows="10" cols="80"> <?= set_value('about_address', $about->about_address); ?></textarea>
+								<small class="info help-block"></small>
 							</div>
 						</div>
-
-
-
 
 						<div class="form-group group-about-pengertian  ">
-							<label for="about_pengertian" class="col-sm-2 control-label">Pengertian Stunting <i
-									class="required">*</i>
+							<label for="about_pengertian" class="col-sm-2 control-label">Pengertian Stunting <i class="required">*</i>
 							</label>
 							<div class="col-sm-8">
-								<textarea id="about_pengertian" name="about_pengertian" rows="10"
-									cols="80"> <?= set_value('about_pengertian', $about->about_pengertian); ?></textarea>
-								<small class="info help-block">
-								</small>
+								<textarea id="about_pengertian" name="about_pengertian" rows="10" cols="80"> <?= set_value('about_pengertian', $about->about_pengertian); ?></textarea>
+								<small class="info help-block"></small>
 							</div>
 						</div>
-
-
-
 
 						<div class="form-group group-about-penyebab  ">
-							<label for="about_penyebab" class="col-sm-2 control-label">Penyebab Stunting <i
-									class="required">*</i>
-							</label>
+							<label for="about_penyebab" class="col-sm-2 control-label">Penyebab Stunting <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<textarea id="about_penyebab" name="about_penyebab" rows="10"
-									cols="80"> <?= set_value('about_penyebab', $about->about_penyebab); ?></textarea>
-								<small class="info help-block">
-								</small>
+								<textarea id="about_penyebab" name="about_penyebab" rows="10" cols="80"> <?= set_value('about_penyebab', $about->about_penyebab); ?></textarea>
+								<small class="info help-block"></small>
 							</div>
 						</div>
 
-
-
-
 						<div class="form-group group-about-image-pengertian  ">
-							<label for="about_image_pengertian" class="col-sm-2 control-label">Gambar Pengertian <i
-									class="required">*</i>
+							<label for="about_image_pengertian" class="col-sm-2 control-label">Gambar Pengertian <i class="required">*</i>
 							</label>
 							<div class="col-sm-8">
 								<div id="about_about_image_pengertian_galery"></div>
-								<input class="data_file data_file_uuid" name="about_about_image_pengertian_uuid"
-									id="about_about_image_pengertian_uuid" type="hidden"
-									value="<?= set_value('about_about_image_pengertian_uuid'); ?>">
-								<input class="data_file" name="about_about_image_pengertian_name"
-									id="about_about_image_pengertian_name" type="hidden"
-									value="<?= set_value('about_about_image_pengertian_name', $about->about_image_pengertian); ?>">
-								<small class="info help-block">
-								</small>
+								<input class="data_file data_file_uuid" name="about_about_image_pengertian_uuid" id="about_about_image_pengertian_uuid" type="hidden" value="<?= set_value('about_about_image_pengertian_uuid'); ?>">
+								<input class="data_file" name="about_about_image_pengertian_name" id="about_about_image_pengertian_name" type="hidden" value="<?= set_value('about_about_image_pengertian_name', $about->about_image_pengertian); ?>">
+								<small class="info help-block"></small>
 							</div>
 						</div>
 
-
-
-
 						<div class="form-group group-about-image-penyebab  ">
-							<label for="about_image_penyebab" class="col-sm-2 control-label">Gambar Penyebab <i
-									class="required">*</i>
+							<label for="about_image_penyebab" class="col-sm-2 control-label">Gambar Penyebab <i class="required">*</i>
 							</label>
 							<div class="col-sm-8">
 								<div id="about_about_image_penyebab_galery"></div>
-								<input class="data_file data_file_uuid" name="about_about_image_penyebab_uuid"
-									id="about_about_image_penyebab_uuid" type="hidden"
-									value="<?= set_value('about_about_image_penyebab_uuid'); ?>">
-								<input class="data_file" name="about_about_image_penyebab_name"
-									id="about_about_image_penyebab_name" type="hidden"
-									value="<?= set_value('about_about_image_penyebab_name', $about->about_image_penyebab); ?>">
-								<small class="info help-block">
-								</small>
+								<input class="data_file data_file_uuid" name="about_about_image_penyebab_uuid" id="about_about_image_penyebab_uuid" type="hidden" value="<?= set_value('about_about_image_penyebab_uuid'); ?>">
+								<input class="data_file" name="about_about_image_penyebab_name" id="about_about_image_penyebab_name" type="hidden" value="<?= set_value('about_about_image_penyebab_name', $about->about_image_penyebab); ?>">
+								<small class="info help-block"></small>
 							</div>
 						</div>
 
-
-
 						<div class="message"></div>
+
 						<div class="row-fluid col-md-7 container-button-bottom">
-							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay'
-								title="<?= cclang('save_button'); ?> (Ctrl+s)">
+							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay' title="<?= cclang('save_button'); ?> (Ctrl+s)">
 								<i class="fa fa-save"></i> <?= cclang('save_button'); ?>
 							</button>
-							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save"
-								data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
+							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save" data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
 								<i class="ion ion-ios-list-outline"></i> <?= cclang('save_and_go_the_list_button'); ?>
 							</a>
 
-							<div class="custom-button-wrapper">
+							<div class="custom-button-wrapper"></div>
 
-							</div>
-							<a class="btn btn-flat btn-default btn_action" id="btn_cancel"
-								title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
+							<a class="btn btn-flat btn-default btn_action" id="btn_cancel" title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
 								<i class="fa fa-undo"></i> <?= cclang('cancel_button'); ?>
 							</a>
 							<span class="loading loading-hide">
@@ -317,37 +244,40 @@
 
 		})()
 
-
-
-
-
-
-		CKEDITOR.replace('about_description');
+		CKEDITOR.replace('about_description', {
+			removePlugins: 'image,about'
+		});
 		var about_description = CKEDITOR.instances.about_description;
-		CKEDITOR.replace('about_address');
+		CKEDITOR.replace('about_address', {
+			removePlugins: 'image,about'
+		});
 		var about_address = CKEDITOR.instances.about_address;
-		CKEDITOR.replace('about_pengertian');
+		CKEDITOR.replace('about_pengertian', {
+			removePlugins: 'image,about'
+		});
 		var about_pengertian = CKEDITOR.instances.about_pengertian;
-		CKEDITOR.replace('about_penyebab');
+		CKEDITOR.replace('about_penyebab', {
+			removePlugins: 'image,about'
+		});
 		var about_penyebab = CKEDITOR.instances.about_penyebab;
 
 		$('#btn_cancel').click(function () {
 			swal({
-					title: "Are you sure?",
-					text: "the data that you have created will be in the exhaust!",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Yes!",
-					cancelButtonText: "No!",
-					closeOnConfirm: true,
-					closeOnCancel: true
-				},
-				function (isConfirm) {
-					if (isConfirm) {
-						window.location.href = BASE_URL + 'administrator/about';
-					}
-				});
+				title: "Are you sure?",
+				text: "the data that you have created will be in the exhaust!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes!",
+				cancelButtonText: "No!",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function (isConfirm) {
+				if (isConfirm) {
+					window.location.href = BASE_URL + 'administrator/about';
+				}
+			});
 
 			return false;
 		}); /*end btn cancel*/
@@ -374,7 +304,6 @@
 				})
 			})()
 
-
 			data_post.push({
 				name: 'event_submit_and_action',
 				value: window.event_submit_and_action
@@ -383,51 +312,51 @@
 			$('.loading').show();
 
 			$.ajax({
-					url: form_about.attr('action'),
-					type: 'POST',
-					dataType: 'json',
-					data: data_post,
-				})
-				.done(function (res) {
-					$('form').find('.form-group').removeClass('has-error');
-					$('form').find('.error-input').remove();
-					$('.steps li').removeClass('error');
-					if (res.success) {
-						var id = $('#about_image_galery').find('li').attr('qq-file-id');
-						if (save_type == 'back') {
-							window.location.href = res.redirect;
-							return;
-						}
-
-						$('.message').printMessage({
-							message: res.message
-						});
-						$('.message').fadeIn();
-						$('.data_file_uuid').val('');
-
-					} else {
-						if (res.errors) {
-							parseErrorField(res.errors);
-						}
-						$('.message').printMessage({
-							message: res.message,
-							type: 'warning'
-						});
+				url: form_about.attr('action'),
+				type: 'POST',
+				dataType: 'json',
+				data: data_post,
+			})
+			.done(function (res) {
+				$('form').find('.form-group').removeClass('has-error');
+				$('form').find('.error-input').remove();
+				$('.steps li').removeClass('error');
+				if (res.success) {
+					var id = $('#about_image_galery').find('li').attr('qq-file-id');
+					if (save_type == 'back') {
+						window.location.href = res.redirect;
+						return;
 					}
 
-				})
-				.fail(function () {
 					$('.message').printMessage({
-						message: 'Error save data',
+						message: res.message
+					});
+					$('.message').fadeIn();
+					$('.data_file_uuid').val('');
+
+				} else {
+					if (res.errors) {
+						parseErrorField(res.errors);
+					}
+					$('.message').printMessage({
+						message: res.message,
 						type: 'warning'
 					});
-				})
-				.always(function () {
-					$('.loading').hide();
-					$('html, body').animate({
-						scrollTop: $(document).height()
-					}, 2000);
+				}
+
+			})
+			.fail(function () {
+				$('.message').printMessage({
+					message: 'Error save data',
+					type: 'warning'
 				});
+			})
+			.always(function () {
+				$('.loading').hide();
+				$('html, body').animate({
+					scrollTop: $(document).height()
+				}, 2000);
+			});
 
 			return false;
 		}); /*end btn save*/
@@ -653,15 +582,9 @@
 			}
 		}); /*end about_image_penyebab galey*/
 
-
-
-
 		async function chain() {}
 
 		chain();
-
-
-
 
 	}); /*end doc ready*/
 </script>
