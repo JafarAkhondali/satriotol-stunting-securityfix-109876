@@ -245,7 +245,9 @@
 		});
 
 
-		CKEDITOR.replace('content');
+		CKEDITOR.replace('content', {
+			removePlugins: 'image,about'
+		});
 		var content = CKEDITOR.instances.content;
 
 		$('#btn_cancel').click(function () {

@@ -276,6 +276,18 @@ class Web extends Front {
 
         $this->template->build('file-lokus-stunting', $data);
     }
+
+    public function aksi_konvergensi(){
+        $data = [
+            'sliders' 		=> $this->db->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row()
+		];
+
+        $this->template->build('aksi-konvergensi', $data);
+    }
 }
 
 

@@ -153,14 +153,15 @@
                                 <nav>
                                     <ul>
                                         <li><a href="<?php echo base_url(); ?>">Beranda</a></li>
-                                        <li class="has-dropdown">
+                                        <!-- <li class="has-dropdown">
                                             <a href="#">Aksi Konvergensi</a>
                                             <ul class="submenu">
                                                 <li><a href="<?= base_url() . 'rembuk-stunting/' ?>">Rembuk Stunting</a></li>
                                                 <li><a href="<?= base_url() . 'analisa-situasi/' ?>">Analisa Situasi</a></li>
                                                 <li><a href="<?= base_url() . 'rencana-kegiatan/' ?>">Rencana Kegiatan</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
+                                        <li><a href="<?php echo base_url(); ?>aksi-konvergensi">Aksi Konvergensi</a></li>
                                         <li><a href="<?php echo base_url(); ?>blog/">Program Kegiatan</a></li>
                                         <?php echo display_menu_website(0, 1); ?>
                                     </ul>
@@ -208,14 +209,15 @@
                                 <nav id="mobile-menu">
                                     <ul>
                                         <li><a href="<?php echo base_url(); ?>">Beranda</a></li>
-                                        <li class="has-dropdown">
+                                        <li><a href="<?php echo base_url(); ?>aksi-konvergensi">Aksi Konvergensi</a></li>
+                                        <!-- <li class="has-dropdown">
                                             <a href="#">Aksi Konvergensi</a>
                                             <ul class="submenu">
                                                 <li><a href="<?= base_url() . 'rembuk-stunting/' ?>">Rembuk Stunting</a></li>
                                                 <li><a href="<?= base_url() . 'analisa-situasi/' ?>">Analisa Situasi</a></li>
                                                 <li><a href="<?= base_url() . 'rencana-kegiatan/' ?>">Rencana Kegiatan</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <li><a href="<?php echo base_url(); ?>blog/">Program Kegiatan</a></li>
                                         <?php echo display_menu_website(0, 1); ?>
                                     </ul>
