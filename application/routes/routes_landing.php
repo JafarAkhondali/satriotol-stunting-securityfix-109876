@@ -11,3 +11,4 @@ $route['rencana-kegiatan'] 				= 'web/rencana_kegiatan';
 $route['data-statistik'] 				= 'web/data_statistik';
 $route['kebijakan'] 					= 'web/kebijakan';
 $route['aksi-konvergensi'] 				= 'web/aksi_konvergensi';
+$route['rencana-kegiatan-dinas'] 		= 'web/rentan_opd';

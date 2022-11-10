@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Rentan Opd site
 *|
 */
-class Rentan_opd extends Admin	
-{
-	
-	public function __construct()
-	{
+class Rentan_opd extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_rentan_opd');
@@ -26,8 +23,7 @@ class Rentan_opd extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('rentan_opd_list');
 
 		$filter = $this->input->get('q');
@@ -53,8 +49,7 @@ class Rentan_opd extends Admin
 	* Add new rentan_opds
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('rentan_opd_add');
 
 		$this->template->title('Rencana Kegiatan OPD New');
@@ -66,8 +61,7 @@ class Rentan_opd extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('rentan_opd_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,40 +69,21 @@ class Rentan_opd extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('opd_id', 'Dinas / OPD / Instansi', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rentan_opd_kegiatan', 'Rencana Kegiatan', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'opd_id' => $this->input->post('opd_id'),
-				'rentan_opd_kegiatan' => $this->input->post('rentan_opd_kegiatan'),
-				'rentan_opd_create_at' => $this->input->post('rentan_opd_create_at'),
-				'rentan_opd_user' => get_user_data('id'),			];
+				'opd_id' 				=> $this->input->post('opd_id'),
+				'rentan_opd_kegiatan' 	=> $this->input->post('rentan_opd_kegiatan'),
+				'rentan_opd_create_at' 	=> date('Y-m-d H:i:s'),
+				'rentan_opd_user' 		=> get_user_data('id'),
+			];
 
-			
-			
-
-
-
-			
-			
 			$save_rentan_opd = $id = $this->model_rentan_opd->store($save_data);
-            
 
 			if ($save_rentan_opd) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_rentan_opd;
@@ -135,7 +110,6 @@ class Rentan_opd extends Admin
 					$this->data['redirect'] = base_url('administrator/rentan_opd');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -150,8 +124,7 @@ class Rentan_opd extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('rentan_opd_update');
 
 		$this->data['rentan_opd'] = $this->model_rentan_opd->find($id);
@@ -165,8 +138,7 @@ class Rentan_opd extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('rentan_opd_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -174,35 +146,19 @@ class Rentan_opd extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('opd_id', 'Dinas / OPD / Instansi', 'trim|required');
-		
 
+		$this->form_validation->set_rules('opd_id', 'Dinas / OPD / Instansi', 'trim|required');
 		$this->form_validation->set_rules('rentan_opd_kegiatan', 'Rencana Kegiatan', 'trim|required');
 		
-
-		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'opd_id' => $this->input->post('opd_id'),
-				'rentan_opd_kegiatan' => $this->input->post('rentan_opd_kegiatan'),
+				'opd_id' 				=> $this->input->post('opd_id'),
+				'rentan_opd_kegiatan' 	=> $this->input->post('rentan_opd_kegiatan'),
 			];
 
-			
-
-			
-
-
-			
-			
 			$save_rentan_opd = $this->model_rentan_opd->change($id, $save_data);
 
 			if ($save_rentan_opd) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -241,8 +197,7 @@ class Rentan_opd extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('rentan_opd_delete');
 
 		$this->load->helper('file');
@@ -272,8 +227,7 @@ class Rentan_opd extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('rentan_opd_view');
 
 		$this->data['rentan_opd'] = $this->model_rentan_opd->join_avaiable()->filter_avaiable()->find($id);
@@ -287,12 +241,9 @@ class Rentan_opd extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$rentan_opd = $this->model_rentan_opd->find($id);
 
-		
-		
 		return $this->model_rentan_opd->remove($id);
 	}
 	
@@ -302,8 +253,7 @@ class Rentan_opd extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('rentan_opd_export');
 
 		$this->model_rentan_opd->export(
@@ -318,16 +268,14 @@ class Rentan_opd extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('rentan_opd_export');
 
 		$this->model_rentan_opd->pdf('rentan_opd', 'rentan_opd');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('rentan_opd_export');
 
 		$table = $title = 'rentan_opd';
@@ -359,8 +307,7 @@ class Rentan_opd extends Admin
         $this->pdf->Output($table.'.pdf', 'H');
 	}
 
-	public function ajax_opd_id($id = null)
-	{
+	public function ajax_opd_id($id = null) {
 		if (!$this->is_allowed('rentan_opd_list', false)) {
 			echo json_encode([
 				'success' => false,
@@ -368,11 +315,15 @@ class Rentan_opd extends Admin
 				]);
 			exit;
 		}
-		$results = db_get_all_data('opd', ['opd_id' => $id]);
+
+		if ($id != NULL) {
+			$results = db_get_all_data('opd', ['opd_id' => $id]);
+		}else{
+			$results = db_get_all_data('opd');
+		}
+
 		$this->response($results);	
 	}
-
-	
 }
 
 

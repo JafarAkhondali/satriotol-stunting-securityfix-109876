@@ -81,52 +81,42 @@
 										</select>
 									</div>
 									<div class="col-sm-2 padd-left-0 ">
-										<button type="button" class="btn btn-flat" name="apply" id="apply"
-											title="<?= cclang('apply_bulk_action'); ?>"><?= cclang('apply_button'); ?></button>
+										<button type="button" class="btn btn-flat" name="apply" id="apply" title="<?= cclang('apply_bulk_action'); ?>"><?= cclang('apply_button'); ?></button>
 									</div>
 									<div class="col-sm-3 padd-left-0  ">
-										<input type="text" class="form-control" name="q" id="filter"
-											placeholder="<?= cclang('filter'); ?>"
-											value="<?= $this->input->get('q'); ?>">
+										<input type="text" class="form-control" name="q" id="filter" placeholder="<?= cclang('filter'); ?>" value="<?= $this->input->get('q'); ?>">
 									</div>
 									<div class="col-sm-3 padd-left-0 ">
-										<select type="text" class="form-control chosen chosen-select" name="f"
-											id="field">
+										<select type="text" class="form-control chosen chosen-select" name="f" id="field">
 											<option value=""><?= cclang('all'); ?></option>
-											<option <?= $this->input->get('f') == 'opd_nama' ? 'selected' :''; ?>
-												value="opd_nama">Nama OPD</option>
+											<option <?= $this->input->get('f') == 'opd_nama' ? 'selected' :''; ?> value="opd_nama">Nama OPD</option>
 										</select>
 									</div>
 									<div class="col-sm-1 padd-left-0 ">
-										<button type="submit" class="btn btn-flat" name="sbtn" id="sbtn" value="Apply"
-											title="<?= cclang('filter_search'); ?>">
+										<button type="submit" class="btn btn-flat" name="sbtn" id="sbtn" value="Apply" title="<?= cclang('filter_search'); ?>">
 											Filter
 										</button>
 									</div>
 									<div class="col-sm-1 padd-left-0 ">
 										<a class="btn btn-default btn-flat" name="reset" id="reset" value="Apply"
-											href="<?= base_url('administrator/opd');?>"
-											title="<?= cclang('reset_filter'); ?>">
+											href="<?= base_url('administrator/opd');?>" title="<?= cclang('reset_filter'); ?>">
 											<i class="fa fa-undo"></i>
 										</a>
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div class="dataTables_paginate paging_simple_numbers pull-right"
-										id="example2_paginate">
+									<div class="dataTables_paginate paging_simple_numbers pull-right" id="example2_paginate">
 										<?= $pagination; ?>
 									</div>
 								</div>
 							</div>
 							<div class="table-responsive">
-
 								<br>
 								<table class="table table-bordered table-striped dataTable">
 									<thead>
 										<tr class="">
 											<th>
-												<input type="checkbox" class="flat-red toltip" id="check_all"
-													name="check_all" title="check all">
+												<input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all">
 											</th>
 											<th data-field="opd_nama" data-sort="1" data-primary-key="0">
 												<?= cclang('opd_nama') ?></th>
@@ -137,14 +127,10 @@
 										<?php foreach($opds as $opd): ?>
 										<tr>
 											<td width="5">
-												<input type="checkbox" class="flat-red check" name="id[]"
-													value="<?= $opd->opd_id; ?>">
+												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $opd->opd_id; ?>">
 											</td>
-
-											<td><span class="list_group-opd-nama"><?= _ent($opd->opd_nama); ?></span>
-											</td>
+											<td><span class="list_group-opd-nama"><?= _ent($opd->opd_nama); ?></span></td>
 											<td width="200">
-
 												<?php is_allowed('opd_view', function() use ($opd){?>
 												<a href="<?= site_url('administrator/opd/view/' . $opd->opd_id); ?>"
 													class="label-default"><i class="fa fa-newspaper-o"></i>
@@ -161,7 +147,6 @@
 														class="label-default remove-data"><i class="fa fa-close"></i>
 														<?= cclang('remove_button'); ?></a>
 													<?php }) ?>
-
 											</td>
 										</tr>
 										<?php endforeach; ?>
@@ -176,11 +161,10 @@
 									</tbody>
 								</table>
 							</div>
+						</form>
 					</div>
 					<hr>
-
 				</div>
-				</form>
 				<!--/box body -->
 			</div>
 			<!--/box -->
@@ -193,11 +177,7 @@
 
 <script>
 	$(document).ready(function () {
-
-
-
 		$('.remove-data').click(function () {
-
 			var url = $(this).attr('data-href');
 
 			swal({
@@ -220,33 +200,30 @@
 			return false;
 		});
 
-
 		$('#apply').click(function () {
-
 			var bulk = $('#bulk');
 			var serialize_bulk = $('#form_opd').serialize();
 
 			if (bulk.val() == 'delete') {
 				swal({
-						title: "<?= cclang('are_you_sure'); ?>",
-						text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
-						type: "warning",
-						showCancelButton: true,
-						confirmButtonColor: "#DD6B55",
-						confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
-						cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
-						closeOnConfirm: true,
-						closeOnCancel: true
-					},
-					function (isConfirm) {
-						if (isConfirm) {
-							document.location.href = BASE_URL + '/administrator/opd/delete?' +
-								serialize_bulk;
-						}
-					});
+					title: "<?= cclang('are_you_sure'); ?>",
+					text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+					cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
+					closeOnConfirm: true,
+					closeOnCancel: true
+				},
+				function (isConfirm) {
+					if (isConfirm) {
+						document.location.href = BASE_URL + '/administrator/opd/delete?' +
+							serialize_bulk;
+					}
+				});
 
 				return false;
-
 			} else if (bulk.val() == '') {
 				swal({
 					title: "Upss",
@@ -263,7 +240,6 @@
 			}
 
 			return false;
-
 		}); /*end appliy click*/
 
 
@@ -285,6 +261,7 @@
 			} else {
 				checkAll.removeProp('checked');
 			}
+
 			checkAll.iCheck('update');
 		});
 		initSortable('opd', $('table.dataTable'));

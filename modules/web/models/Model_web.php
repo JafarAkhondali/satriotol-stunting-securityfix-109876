@@ -62,6 +62,25 @@ class Model_web extends MY_Model {
 
 		return $this->db->order_by('kecamatan_nama', 'ASC')->get();
 	}
+
+	public function rentan_opd(){
+		$this->db->select('rentan_opd.*, opd.*, count(rentan_opd.opd_id) AS jumlah_kegiatan');
+		$this->db->join('opd', 'rentan_opd.opd_id = opd.opd_id', 'LEFT');
+		$this->db->group_by('opd.opd_id');
+
+		$query = $this->db->from('rentan_opd');
+		
+		return $query->get();
+	}
+
+	public function rentan_opd_kegiatan(){
+		$this->db->select('rentan_opd.*, opd.*');
+		$this->db->join('opd', 'rentan_opd.opd_id = opd.opd_id', 'LEFT');
+
+		$query = $this->db->from('rentan_opd');
+		
+		return $query->get();
+	}
 }
 	
 ?>

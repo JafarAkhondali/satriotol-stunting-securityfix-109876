@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start mb-30">
 						<div class="features__icon mr-25">
 							<i class="fa-light fa-gears text-black"></i>
@@ -25,7 +25,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 						<div class="features__icon mr-25">
 							<i class="fa-light fa-head-side-brain text-black"></i>
@@ -37,7 +37,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 						<div class="features__icon mr-25">
 							<i class="fa-light fa-book-open text-black"></i>
@@ -45,6 +45,66 @@
 						<div class="features__content">
 							<h3 class="features__title">
 								<a href="<?= base_url();?>rencana-kegiatan">Rencana Kegiatan</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
+						<div class="features__icon mr-25">
+							<i class="fa-light fa-building-columns text-black"></i>
+						</div>
+						<div class="features__content">
+							<h3 class="features__title">
+								<a href="<?= base_url();?>rencana-kegiatan">Peraturan Bupati/Walikota tentang Peran Desa</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+					<div class="features__item d-sm-flex align-items-start mb-30">
+						<div class="features__icon mr-25">
+							<i class="fa-light fa-gears text-black"></i>
+						</div>
+						<div class="features__content">
+							<h3 class="features__title">
+								<a href="<?= base_url();?>rembuk-stunting/">Rembuk Stunting</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
+						<div class="features__icon mr-25">
+							<i class="fa-light fa-head-side-brain text-black"></i>
+						</div>
+						<div class="features__content">
+							<h3 class="features__title">
+								<a href="<?= base_url();?>analisa-situasi">Analisa Stunting</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
+						<div class="features__icon mr-25">
+							<i class="fa-light fa-book-open text-black"></i>
+						</div>
+						<div class="features__content">
+							<h3 class="features__title">
+								<a href="<?= base_url();?>rencana-kegiatan">Rencana Kegiatan</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
+						<div class="features__icon mr-25">
+							<i class="fa-light fa-building-columns text-black"></i>
+						</div>
+						<div class="features__content">
+							<h3 class="features__title">
+								<a href="<?= base_url();?>rencana-kegiatan">Peraturan Bupati/Walikota tentang Peran Desa</a>
 							</h3>
 						</div>
 					</div>

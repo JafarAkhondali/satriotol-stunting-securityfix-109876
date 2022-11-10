@@ -213,34 +213,34 @@
 			$.LoadingOverlay('show');
 
 			return $.ajax({
-					url: BASE_URL + '/administrator/kelurahans/ajax_kecamatan_id/' + val,
-					dataType: 'JSON',
-				})
-				.done(function (res) {
-					var html = '<option value=""></option>';
-					$.each(res, function (index, val) {
-						html += '<option ' + (selected == val.kecamatan_id ? 'selected' : '') +
-							' value="' + val.kecamatan_id + '">' + val.kecamatan_nama + '</option>'
-					});
-
-					$('#kecamatan_id').html(html);
-					$('#kecamatan_id').trigger('chosen:updated');
-
-					if (typeof complete != 'undefined') {
-						complete();
-					}
-				})
-				.fail(function () {
-					toastr['error']('Error', 'Getting data fail')
-				})
-				.always(function () {
-					$.LoadingOverlay('hide')
+				url: BASE_URL + '/administrator/kelurahans/ajax_kecamatan_id/' + val,
+				dataType: 'JSON',
+			})
+			.done(function (res) {
+				var html = '<option value=""></option>';
+				$.each(res, function (index, val) {
+					html += '<option ' + (selected == val.kecamatan_id ? 'selected' : '') +
+						' value="' + val.kecamatan_id + '">' + val.kecamatan_nama + '</option>'
 				});
+
+				$('#kecamatan_id').html(html);
+				$('#kecamatan_id').trigger('chosen:updated');
+
+				if (typeof complete != 'undefined') {
+					complete();
+				}
+			})
+			.fail(function () {
+				toastr['error']('Error', 'Getting data fail')
+			})
+			.always(function () {
+				$.LoadingOverlay('hide')
+			});
 		}
 
-		$('#kecamatan_id').change(function (event) {
-			chained_kecamatan_id('')
-		});
+		// $('#kecamatan_id').change(function (event) {
+		// 	chained_kecamatan_id('')
+		// });
 
 		async function chain() {
 			await chained_kecamatan_id("<?= $kelurahans->kecamatan_id;?>");

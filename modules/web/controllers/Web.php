@@ -314,6 +314,20 @@ class Web extends Front {
 
 		$this->template->build('aksi-konvergensi', $data);
 	}
+
+	public function rentan_opd(){
+		$data = [
+			'sliders' 		=> $this->db->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row(),
+			'opds' 			=> $this->model_web->rentan_opd()->result(),
+			'rentan_opds' 	=> $this->model_web->rentan_opd_kegiatan()->result(),
+		];
+
+		$this->template->build('rentan_opd', $data);
+	}
 }
 
 
