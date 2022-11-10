@@ -1,13 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Model_rembuk_stuntings extends MY_Model {
-    private $primary_key    = 'rembuk_stunting_id';
-    private $table_name     = 'rembuk_stuntings';
-    public $field_search    = ['rembuk_stunting_deskripsi', 'rembuk_stunting_year', 'rembuk_stunting_file'];
-    public $sort_option     = ['rembuk_stunting_id', 'DESC'];
+class Model_rentan_opd extends MY_Model {
 
-    public function __construct() {
+    private $primary_key    = 'rentan_opd_id';
+    private $table_name     = 'rentan_opd';
+    public $field_search   = ['opd_id', 'rentan_opd_kegiatan', 'opd.opd_nama'];
+    public $sort_option = ['rentan_opd_id', 'DESC'];
+    
+    public function __construct()
+    {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -18,21 +20,21 @@ class Model_rembuk_stuntings extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null) {
-        $iterasi    = 1;
-        $num        = count($this->field_search);
-        $where      = NULL;
-        $q          = $this->scurity($q);
-        $field      = $this->scurity($field);
+    public function count_all($q = null, $field = null)
+    {
+        $iterasi = 1;
+        $num = count($this->field_search);
+        $where = NULL;
+        $q = $this->scurity($q);
+        $field = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
-                $f_search = "rembuk_stuntings.".$field;
+                $f_search = "rentan_opd.".$field;
 
                 if (strpos($field, '.')) {
                     $f_search = $field;
                 }
-
                 if ($iterasi == 1) {
                     $where .=  $f_search . " LIKE '%" . $q . "%' ";
                 } else {
@@ -43,7 +45,7 @@ class Model_rembuk_stuntings extends MY_Model {
 
             $where = '('.$where.')';
         } else {
-            $where .= "(" . "rembuk_stuntings.".$field . " LIKE '%" . $q . "%' )";
+            $where .= "(" . "rentan_opd.".$field . " LIKE '%" . $q . "%' )";
         }
 
         $this->join_avaiable()->filter_avaiable();
@@ -53,16 +55,17 @@ class Model_rembuk_stuntings extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
-        $iterasi    = 1;
-        $num        = count($this->field_search);
-        $where      = NULL;
-        $q          = $this->scurity($q);
-        $field      = $this->scurity($field);
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
+    {
+        $iterasi = 1;
+        $num = count($this->field_search);
+        $where = NULL;
+        $q = $this->scurity($q);
+        $field = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
-                $f_search = "rembuk_stuntings.".$field;
+                $f_search = "rentan_opd.".$field;
                 if (strpos($field, '.')) {
                     $f_search = $field;
                 }
@@ -77,7 +80,7 @@ class Model_rembuk_stuntings extends MY_Model {
 
             $where = '('.$where.')';
         } else {
-            $where .= "(" . "rembuk_stuntings.".$field . " LIKE '%" . $q . "%' )";
+            $where .= "(" . "rentan_opd.".$field . " LIKE '%" . $q . "%' )";
         }
 
         if (is_array($select_field) AND count($select_field)) {
@@ -96,14 +99,18 @@ class Model_rembuk_stuntings extends MY_Model {
     }
 
     public function join_avaiable() {
-        $this->db->select('rembuk_stuntings.*');
+        $this->db->join('opd', 'opd.opd_id = rentan_opd.opd_id', 'LEFT');
+        
+        $this->db->select('opd.opd_nama,rentan_opd.*,opd.opd_nama as opd_opd_nama,opd.opd_nama as opd_nama');
+
 
         return $this;
     }
 
     public function filter_avaiable() {
+
         if (!$this->aauth->is_admin()) {
-            // $this->db->where($this->table_name.'.rembuk_stunting_user', get_user_data('id'));
+            $this->db->where($this->table_name.'.rentan_opd_user', get_user_data('id'));
         }
 
         return $this;
@@ -111,5 +118,5 @@ class Model_rembuk_stuntings extends MY_Model {
 
 }
 
-/* End of file Model_rembuk_stuntings.php */
-/* Location: ./application/models/Model_rembuk_stuntings.php */
+/* End of file Model_rentan_opd.php */
+/* Location: ./application/models/Model_rentan_opd.php */

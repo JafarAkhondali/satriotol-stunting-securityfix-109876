@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="section__title-wrapper-2 text-center mb-60">
-                        <h3 class="section__title-2">Analisa Situasi</h3>
+                        <h3 class="section__title-2">Analisa Stunting</h3>
                     </div>
                 </div>
             </div>

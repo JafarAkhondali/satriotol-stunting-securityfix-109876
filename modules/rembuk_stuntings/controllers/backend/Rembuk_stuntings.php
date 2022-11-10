@@ -69,14 +69,17 @@ class Rembuk_stuntings extends Admin {
 			exit;
 		}
 
+		$this->form_validation->set_rules('rembuk_stunting_deskripsi', 'Deskripsi', 'trim|required');
 		$this->form_validation->set_rules('rembuk_stunting_year', 'Tahun', 'trim|required|max_length[10]');
 		$this->form_validation->set_rules('rembuk_stuntings_rembuk_stunting_file_name', 'File', 'trim|required');
 
 		if ($this->form_validation->run()) {
-			$rembuk_stuntings_rembuk_stunting_file_uuid = $this->input->post('rembuk_stuntings_rembuk_stunting_file_uuid');
-			$rembuk_stuntings_rembuk_stunting_file_name = $this->input->post('rembuk_stuntings_rembuk_stunting_file_name');
+			$rembuk_stuntings_rembuk_stunting_file_uuid 		= $this->input->post('rembuk_stuntings_rembuk_stunting_file_uuid');
+			$rembuk_stuntings_rembuk_stunting_file_default_name = $this->input->post('rembuk_stuntings_rembuk_stunting_file_default_name');
+			$rembuk_stuntings_rembuk_stunting_file_name 		= $this->input->post('rembuk_stuntings_rembuk_stunting_file_name');
 		
 			$save_data = [
+				'rembuk_stunting_deskripsi' => $this->input->post('rembuk_stunting_deskripsi'),
 				'rembuk_stunting_year' 		=> $this->input->post('rembuk_stunting_year'),
 				'rembuk_stunting_create_at' => date('Y-m-d H:i:s'),
 				'rembuk_stunting_user' 		=> get_user_data('id'),
@@ -87,7 +90,8 @@ class Rembuk_stuntings extends Admin {
 			}
 
 			if (!empty($rembuk_stuntings_rembuk_stunting_file_name)) {
-				$rembuk_stuntings_rembuk_stunting_file_name_copy = date('YmdHis') . '-' . $rembuk_stuntings_rembuk_stunting_file_name;
+				// $rembuk_stuntings_rembuk_stunting_file_name_copy = date('YmdHis') . '-' . $rembuk_stuntings_rembuk_stunting_file_name;
+				$rembuk_stuntings_rembuk_stunting_file_name_copy = date('YmdHis') . '_' . str_replace([' ', '_', ' - ', ' _ ', '. '], '-', $rembuk_stuntings_rembuk_stunting_file_default_name);
 
 				rename(FCPATH . 'uploads/tmp/' . $rembuk_stuntings_rembuk_stunting_file_uuid . '/' . $rembuk_stuntings_rembuk_stunting_file_name, 
 						FCPATH . 'uploads/rembuk_stuntings/' . $rembuk_stuntings_rembuk_stunting_file_name_copy);
@@ -134,7 +138,6 @@ class Rembuk_stuntings extends Admin {
 					$this->data['redirect'] = base_url('administrator/rembuk_stuntings');
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -173,14 +176,17 @@ class Rembuk_stuntings extends Admin {
 		}
 
 		$this->form_validation->set_rules('rembuk_stunting_year', 'Tahun', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('rembuk_stunting_deskripsi', 'Deskripsi', 'trim|required');
 		$this->form_validation->set_rules('rembuk_stuntings_rembuk_stunting_file_name', 'File', 'trim|required');
 		
 		if ($this->form_validation->run()) {
-			$rembuk_stuntings_rembuk_stunting_file_uuid = $this->input->post('rembuk_stuntings_rembuk_stunting_file_uuid');
-			$rembuk_stuntings_rembuk_stunting_file_name = $this->input->post('rembuk_stuntings_rembuk_stunting_file_name');
+			$rembuk_stuntings_rembuk_stunting_file_uuid 		= $this->input->post('rembuk_stuntings_rembuk_stunting_file_uuid');
+			$rembuk_stuntings_rembuk_stunting_file_default_name = $this->input->post('rembuk_stuntings_rembuk_stunting_file_default_name');
+			$rembuk_stuntings_rembuk_stunting_file_name 		= $this->input->post('rembuk_stuntings_rembuk_stunting_file_name');
 		
 			$save_data = [
-				'rembuk_stunting_year' => $this->input->post('rembuk_stunting_year'),
+				'rembuk_stunting_deskripsi' => $this->input->post('rembuk_stunting_deskripsi'),
+				'rembuk_stunting_year' 		=> $this->input->post('rembuk_stunting_year'),
 			];
 			
 			if (!is_dir(FCPATH . '/uploads/rembuk_stuntings/')) {
@@ -188,7 +194,8 @@ class Rembuk_stuntings extends Admin {
 			}
 
 			if (!empty($rembuk_stuntings_rembuk_stunting_file_uuid)) {
-				$rembuk_stuntings_rembuk_stunting_file_name_copy = date('YmdHis') . '-' . $rembuk_stuntings_rembuk_stunting_file_name;
+				// $rembuk_stuntings_rembuk_stunting_file_name_copy = date('YmdHis') . '-' . $rembuk_stuntings_rembuk_stunting_file_name;
+				$rembuk_stuntings_rembuk_stunting_file_name_copy = date('YmdHis') . '_' . str_replace([' ', '_', ' - ', ' _ ', '. '], '-', $rembuk_stuntings_rembuk_stunting_file_default_name);
 
 				rename(FCPATH . 'uploads/tmp/' . $rembuk_stuntings_rembuk_stunting_file_uuid . '/' . $rembuk_stuntings_rembuk_stunting_file_name, 
 						FCPATH . 'uploads/rembuk_stuntings/' . $rembuk_stuntings_rembuk_stunting_file_name_copy);
@@ -218,7 +225,7 @@ class Rembuk_stuntings extends Admin {
 						cclang('success_update_data_redirect', [
 					]), 'success');
 
-            		$this->data['success'] = true;
+            		$this->data['success'] 	= true;
 					$this->data['redirect'] = base_url('administrator/rembuk_stuntings');
 				}
 			} else {
@@ -226,15 +233,15 @@ class Rembuk_stuntings extends Admin {
 					$this->data['success'] = false;
 					$this->data['message'] = cclang('data_not_change');
 				} else {
-            		$this->data['success'] = false;
-            		$this->data['message'] = cclang('data_not_change');
+            		$this->data['success'] 	= false;
+            		$this->data['message'] 	= cclang('data_not_change');
 					$this->data['redirect'] = base_url('administrator/rembuk_stuntings');
 				}
 			}
 		} else {
-			$this->data['success'] = false;
-			$this->data['message'] = 'Opss validation failed';
-			$this->data['errors'] = $this->form_validation->error_array();
+			$this->data['success'] 	= false;
+			$this->data['message'] 	= 'Opss validation failed';
+			$this->data['errors'] 	= $this->form_validation->error_array();
 		}
 
 		$this->response($this->data);

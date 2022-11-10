@@ -101,14 +101,22 @@
 								<small class="info help-block"><b>Input Rembuk Stunting Year</b> Max Length : 10.</small>
 							</div>
 						</div>
+
+						<div class="form-group group-rembuk-stunting-deskripsi">
+							<label for="rembuk_stunting_deskripsi" class="col-sm-2 control-label">Deskripsi <i class="required">*</i></label>
+							<div class="col-sm-8">
+								<textarea id="rembuk_stunting_deskripsi" name="rembuk_stunting_deskripsi" rows="5" cols="80"><?= set_value('Rembuk Stunting Deskripsi'); ?></textarea>
+								<small class="info help-block"></small>
+							</div>
+						</div>
+
 						<div class="form-group group-rembuk-stunting-file ">
 							<label for="rembuk_stunting_file" class="col-sm-2 control-label">File <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<div id="rembuk_stuntings_rembuk_stunting_file_galery"></div>
-								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_uuid"
-									id="rembuk_stuntings_rembuk_stunting_file_uuid" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_uuid'); ?>">
-								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_name"
-									id="rembuk_stuntings_rembuk_stunting_file_name" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_name'); ?>">
+								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_uuid" id="rembuk_stuntings_rembuk_stunting_file_uuid" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_uuid'); ?>">
+								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_name" id="rembuk_stuntings_rembuk_stunting_file_name" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_name'); ?>">
+								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_default_name" id="rembuk_stuntings_rembuk_stunting_file_default_name" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_default_name'); ?>">
 								<small class="info help-block"><b>Extension file must</b> PDF.</small>
 							</div>
 						</div>
@@ -146,7 +154,9 @@
 		</div>
 	</div>
 </section>
+
 <!-- /.content -->
+<script src="<?= BASE_ASSET; ?>ckeditor/ckeditor.js"></script>
 <!-- Page script -->
 
 <script>
@@ -159,8 +169,14 @@
 			 rembuk_stunting_year.on('change', function() {});
 			 */
 			var rembuk_stunting_file = $('#rembuk_stunting_file');
+			var rembuk_stunting_deskripsi = $('#rembuk_stunting_deskripsi');
 
 		})()
+
+		CKEDITOR.replace('rembuk_stunting_deskripsi', {
+			removePlugins: 'image,about'
+		});
+		var rembuk_stunting_deskripsi = CKEDITOR.instances.rembuk_stunting_deskripsi;
 
 		$('#btn_cancel').click(function () {
 			swal({
@@ -185,6 +201,8 @@
 
 		$('.btn_save').click(function () {
 			$('.message').fadeOut();
+
+			$('#rembuk_stunting_deskripsi').val(rembuk_stunting_deskripsi.getData());
 
 			var form_rembuk_stuntings = $('#form_rembuk_stuntings');
 			var data_post = form_rembuk_stuntings.serializeArray();
@@ -222,8 +240,7 @@
 					$('form').find('.error-input').remove();
 					if (res.success) {
 						var id_rembuk_stunting_file = $(
-							'#rembuk_stuntings_rembuk_stunting_file_galery').find('li').attr(
-							'qq-file-id');
+							'#rembuk_stuntings_rembuk_stunting_file_galery').find('li').attr('qq-file-id');
 
 						if (save_type == 'back') {
 							window.location.href = res.redirect;
@@ -233,25 +250,26 @@
 						$('.message').printMessage({
 							message: res.message
 						});
+
 						$('.message').fadeIn();
 						resetForm();
+
 						if (typeof id_rembuk_stunting_file !== 'undefined') {
 							$('#rembuk_stuntings_rembuk_stunting_file_galery').fineUploader(
 								'deleteFile', id_rembuk_stunting_file);
 						}
-						$('.chosen option').prop('selected', false).trigger('chosen:updated');
 
+						$('.chosen option').prop('selected', false).trigger('chosen:updated');
+						rembuk_stunting_deskripsi.setData('');
 					} else {
 						if (res.errors) {
 
 							$.each(res.errors, function (index, val) {
 								$('form #' + index).parents('.form-group').addClass(
 									'has-error');
-								$('form #' + index).parents('.form-group').find('small')
-									.prepend(`
-                      <div class="error-input">` + val + `</div>
-                      `);
+								$('form #' + index).parents('.form-group').find('small').prepend(`<div class="error-input">` + val + `</div>`);
 							});
+
 							$('.steps li').removeClass('error');
 							$('.content section').each(function (index, el) {
 								if ($(this).find('.has-error').length) {
@@ -260,6 +278,7 @@
 								}
 							});
 						}
+
 						$('.message').printMessage({
 							message: res.message,
 							type: 'warning'
@@ -314,23 +333,23 @@
 			callbacks: {
 				onComplete: function (id, name, xhr) {
 					if (xhr.success) {
-						var uuid = $('#rembuk_stuntings_rembuk_stunting_file_galery').fineUploader(
-							'getUuid', id);
+						var uuid = $('#rembuk_stuntings_rembuk_stunting_file_galery').fineUploader('getUuid', id);
 						$('#rembuk_stuntings_rembuk_stunting_file_uuid').val(uuid);
 						$('#rembuk_stuntings_rembuk_stunting_file_name').val(xhr.uploadName);
+						$('#rembuk_stuntings_rembuk_stunting_file_default_name').val(name);
 					} else {
 						toastr['error'](xhr.error);
 					}
 				},
 				onSubmit: function (id, name) {
 					var uuid = $('#rembuk_stuntings_rembuk_stunting_file_uuid').val();
-					$.get(BASE_URL +
-						'/administrator/rembuk_stuntings/delete_rembuk_stunting_file_file/' + uuid);
+					$.get(BASE_URL + '/administrator/rembuk_stuntings/delete_rembuk_stunting_file_file/' + uuid);
 				},
 				onDeleteComplete: function (id, xhr, isError) {
 					if (isError == false) {
 						$('#rembuk_stuntings_rembuk_stunting_file_uuid').val('');
 						$('#rembuk_stuntings_rembuk_stunting_file_name').val('');
+						$('#rembuk_stuntings_rembuk_stunting_file_default_name').val('');
 					}
 				}
 			}

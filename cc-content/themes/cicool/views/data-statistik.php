@@ -12,7 +12,7 @@
             </div>
             <div class="row">
 				<div class="col-md-12">
-					<iframe height="860" width="100%" scrolling="yes" style="border: 2px solid black;" src="https://diskominfo.semarangkota.go.id"></iframe>
+					<iframe height="860" width="100%" scrolling="yes" style="border: 2px solid black;" src="http://119.2.50.170:9095/dashboardNew/index.php/home/stunting"></iframe>
 				</div>
             </div>
         </div>

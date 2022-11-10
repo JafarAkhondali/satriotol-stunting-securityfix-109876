@@ -22,20 +22,15 @@
                             </div>
                             <div class="event__content">
                                 <h3 class="event__title">
-                                    <a href="javascript:void(0);">Galeri</a>
+                                    <a href="<?php echo base_url().'rembuk-stunting?id='.$rembuk->rembuk_stunting_id;?>">Deskripsi</a>
                                 </h3>
                                 <div class="row">
                             <?php
-                                $images = explode(',', $rembuk->rembuk_stunting_galery_image);
-
-                                for ($i=0; $i < count($images); $i++) {
-                             ?>
-                                    <div class="col-md-2 mb-1">
-                                        <a href="<?php echo base_url().'uploads/rembuk_stunting_galery/'.$images[$i];?>" target="_blank">
-                                            <img class="img-fluid h-100" src="<?php echo base_url().'uploads/rembuk_stunting_galery/'.$images[$i];?>" alt="">
-                                        </a>
-                                    </div>
-                             <?php
+                                $deskripsi = strip_tags($rembuk->rembuk_stunting_deskripsi);
+                                if (strlen($deskripsi) < 150) {
+                                    echo $deskripsi;
+                                } else {
+                                    echo substr($deskripsi, 0, 150) . '...';
                                 }
                             ?>
                                 </div>
@@ -43,7 +38,7 @@
                         </div>
                         <div class="event__right d-sm-flex align-items-center">
                             <div class="event__more ml-30">
-                                <a href="<?php echo base_url().'uploads/rembuk_stuntings/'.$rembuk->rembuk_stunting_file;?>" target="_blank" class="tp-btn-5 tp-btn-7">Lihat File </a>
+                                <a href="<?php echo base_url().'rembuk-stunting?id='.$rembuk->rembuk_stunting_id;?>" class="tp-btn-5 tp-btn-7">Detail</a>
                             </div>
                         </div>
                     </div>
