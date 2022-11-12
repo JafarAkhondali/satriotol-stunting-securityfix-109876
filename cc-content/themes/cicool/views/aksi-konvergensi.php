@@ -44,7 +44,7 @@
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>rencana-kegiatan">Rencana Kegiatan</a>
+								<a href="<?= base_url();?>rencana-kegiatan-dinas">Rencana Kegiatan Dinas Instansi</a>
 							</h3>
 						</div>
 					</div>
@@ -61,14 +61,16 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="row mt-50">
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start mb-30">
 						<div class="features__icon mr-25">
-							<i class="fa-light fa-gears text-black"></i>
+							<i class="fa-light fa-users text-black"></i>
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>rembuk-stunting/">Rembuk Stunting</a>
+								<a href="javascript:void(0);">Pembinaan Kader Pembangunan Manusia</a>
 							</h3>
 						</div>
 					</div>
@@ -76,11 +78,11 @@
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 						<div class="features__icon mr-25">
-							<i class="fa-light fa-head-side-brain text-black"></i>
+							<i class="fa-light fa-chart-column text-black"></i>
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>analisa-situasi">Analisa Stunting</a>
+								<a href="javascript:void(0);">Sistem Manajemen Data Stunting</a>
 							</h3>
 						</div>
 					</div>
@@ -88,11 +90,11 @@
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 						<div class="features__icon mr-25">
-							<i class="fa-light fa-book-open text-black"></i>
+						<i class="fa-light fa-scale-balanced text-black"></i>
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>rencana-kegiatan">Rencana Kegiatan</a>
+								<a href="javascript:void(0);">Pengukuran dan Publikasi Stunting</a>
 							</h3>
 						</div>
 					</div>
@@ -100,11 +102,11 @@
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
 					<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 						<div class="features__icon mr-25">
-							<i class="fa-light fa-building-columns text-black"></i>
+						<i class="fa-light fa-file-check text-black"></i>
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>rencana-kegiatan">Peraturan Bupati/Walikota tentang Peran Desa</a>
+								<a href="javascript:void(0);">Review Kinerja Tahunan</a>
 							</h3>
 						</div>
 					</div>

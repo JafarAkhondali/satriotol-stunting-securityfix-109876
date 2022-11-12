@@ -316,17 +316,35 @@ class Web extends Front {
 	}
 
 	public function rentan_opd(){
-		$data = [
-			'sliders' 		=> $this->db->get('sliders')->result(),
-			'categories' 	=> $this->db->get('blog_category')->result(),
-			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
-			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
-			'about' 		=> $this->db->get('about')->row(),
-			'opds' 			=> $this->model_web->rentan_opd()->result(),
-			'rentan_opds' 	=> $this->model_web->rentan_opd_kegiatan()->result(),
-		];
+		$id = $this->input->get('id');
+		
+		if ($id == null) {
+			$data = [
+				'sliders' 		=> $this->db->get('sliders')->result(),
+				'categories' 	=> $this->db->get('blog_category')->result(),
+				'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+				'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+				'about' 		=> $this->db->get('about')->row(),
+				'opds' 			=> $this->model_web->rentan_opd()->result(),
+				'rentan_opds' 	=> $this->model_web->rentan_opd_kegiatan()->result(),
+			];
 
-		$this->template->build('rentan_opd', $data);
+			$this->template->build('rentan-opd', $data);
+		}else{
+			$data = [
+				'sliders' 		=> $this->db->get('sliders')->result(),
+				'categories' 	=> $this->db->get('blog_category')->result(),
+				'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+				'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+				'about' 		=> $this->db->get('about')->row(),
+				'galeries' 		=> $this->model_web->rentan_opd_kegiatan($id)->row(),
+			];
+
+			// echo $this->db->last_query();
+			// exit;
+
+			$this->template->build('rentan-opd-galery', $data);
+		}
 	}
 }
 

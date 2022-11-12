@@ -46,7 +46,7 @@
 								if ($dinas->opd_id == $kegiatan->opd_id) {
 					?>
 								<tr>
-									<td><a href="<?php echo $kegiatan->rentan_opd_id;?>"><?php echo $kegiatan->rentan_opd_kegiatan;?> <i class="fa-light fa-arrow-up-right-from-square"></i></a></td>
+									<td><a href="<?php echo base_url().'rencana-kegiatan-dinas?id='.$kegiatan->rentan_opd_id;?>"><?php echo $kegiatan->rentan_opd_kegiatan;?> <i class="fa-light fa-arrow-up-right-from-square"></i></a></td>
 								</tr>
 					<?php
 								}
