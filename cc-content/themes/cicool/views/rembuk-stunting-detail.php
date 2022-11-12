@@ -10,6 +10,11 @@
 					</div>
 				</div>
 			</div>
+			<div class="row mb-25">
+				<div class="col-md-12">
+					<a href="javascript:void(0);" class="tp-btn-5 tp-btn-6">Lihat File PDF <i class="fa-light fa-file-pdf"></i></a>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<?php echo $rembuks->rembuk_stunting_deskripsi;?>
