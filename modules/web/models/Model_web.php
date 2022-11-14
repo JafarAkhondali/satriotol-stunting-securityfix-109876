@@ -36,29 +36,21 @@ class Model_web extends MY_Model {
 		return $this->db->get('rembuk_stuntings');
 	}
 
-	public function hasil_lokus_stunting($kecamatan_id = NULL, $tahun = NULL) {
-		if ($kecamatan_id != NULL AND $tahun != NULL) {
-			$this->db->where(['kelurahans.kecamatan_id' =>  $kecamatan_id, 'lokus_year_nama' => $tahun]);
-		}else{
-			if ($kecamatan_id != NULL) {
-				$this->db->where('kelurahans.kecamatan_id', $kecamatan_id);
-			}elseif ($tahun != NULL) {
-				$this->db->where('lokus_year_nama', $tahun);
-			}
+	public function hasil_lokus_stunting($tahun = NULL) {
+		if ($tahun != NULL) {
+			$this->db->where('lokus_year_nama', $tahun);
 		}
 
-		$this->db->select('lokus_years.lokus_year_nama,
+		$this->db->select('lokus_years.lokus_year_nama AS tahun_lokus,
 							kecamatans.kecamatan_id,
 							kecamatans.kecamatan_nama,
 							kelurahans.kelurahan_id,
 							kelurahans.kelurahan_nama,
-							lokus_stuntings.*,
 							lokus_years.lokus_year_file AS file_lokus');
 		$this->db->from('lokus_stuntings');
 		$this->db->join('lokus_years', 'lokus_years.lokus_year_id = lokus_stuntings.lokus_year_id', 'LEFT');
 		$this->db->join('kelurahans', 'FIND_IN_SET(kelurahans.kelurahan_id, lokus_stuntings.kelurahan_id) > 0', 'LEFT');
 		$this->db->join('kecamatans', 'FIND_IN_SET(kecamatans.kecamatan_id, kelurahans.kecamatan_id) > 0', 'LEFT');
-		// $this->db->where(['kelurahans.kecamatan_id' =>  $kecamatan_id, 'lokus_year_nama' => $tahun]);
 
 		return $this->db->order_by('kecamatan_nama', 'ASC')->get();
 	}

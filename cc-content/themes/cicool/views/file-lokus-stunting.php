@@ -1,42 +1,81 @@
 <?php
+	$array_lokus_kecamatan 	= [];
+	$array_lokus_kelurahan 	= [];
+	$key_array 				= [];
+
 	if (count($results->result()) > 0) {
 ?>
+<link rel="stylesheet" href="<?= BASE_ASSET;?>leaflet/leaflet.css" />
+
 <a href="<?= base_url().'uploads/lokus_years/'.$results->row()->file_lokus;?>" target="blank" class="btn btn-danger mb-25">Lihat File</a>
-<div class="table-content table-responsive">
-	<table class="table">
-		<thead>
-			<tr>
-				<th class="product-price">Nama Kecamatan</th>
-				<th class="cart-product-name">Nama Kelurahan</th>
-			</tr>
-		</thead>
-		<tbody>
-	<?php
+<div id="map" style="width: 1200px; height: 720px; z-index: 1;"></div>
+
+<script type="text/javascript" src="<?= BASE_ASSET;?>leaflet/leaflet.js"></script>
+
+<script type="text/javascript">
+	var map = L.map('map').setView([-7.001574, 110.406562], 12);
+
+	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://semarangkota.go.id/">Kota Semarang</a> | <a href="https://diskominfo.semarangkota.go.id/">Diskominfo</a> contributors'
+	}).addTo(map);
+
+<?php
 		foreach ($results->result() as $result) {
-	?>
-			<tr>
-				<td><?= $result->kecamatan_nama;?></td>
-				<td><?= $result->kelurahan_nama;?></td>
-			</tr>
-	<?php
+			$array_lokus_kecamatan[] 						= $result->kecamatan_id;
+
+			$array_lokus_kelurahan[$result->kecamatan_id][] =  $result->kelurahan_nama;
+
+			$data_kelurahan[$result->kecamatan_id] 			= implode('<br/>&nbsp;&nbsp;&nbsp;&nbsp;- ', $array_lokus_kelurahan[$result->kecamatan_id]);
 		}
-	?>
-		</tbody>
-	</table>
-</div>
-<?php
-	}else{
+
+		for ($i=0; $i < count($kecamatans); $i++) {
 ?>
-		
-			<div class="error__content text-center">
-				<div class="error__thumb m-img">
-					<img src="<?= base_url();?>assets_stunting/img/error/file-not-found.webp" alt="">
-				</div>
-				<div class="error__content">
-					<h3 class="error__title">Data Not Available</h3>
-					<p>Oops! The data you are looking for does not available.</p>
-				</div>
-			</div>
 <?php
+			if (in_array($kecamatans[$i]->kecamatan_id, $array_lokus_kecamatan)) {
+?>
+	$.getJSON('<?= base_url().'peta-administrasi/'.$kecamatans[$i]->kecamatan_geojson;?>', function (data) {
+		geoLayer = L.geoJson(data, {
+			style : function (feature) {
+				return {
+					opacity : 0.5,
+					color : '#007100',
+					weight : 1,
+					fillOpacity : 0.2,
+					fillColor : 'red'
+				}
+			},
+		}).addTo(map);
+
+		geoLayer.eachLayer(function (layer) {
+			layer.bindPopup('<?php echo '<b>'.$kecamatans[$i]->kecamatan_nama.'</b> : <br/>&nbsp;&nbsp;&nbsp;&nbsp;- '.$data_kelurahan[$kecamatans[$i]->kecamatan_id];?>');
+		});
+	});
+<?php
+				}else{
+?>
+	$.getJSON('<?php echo base_url().'peta-administrasi/'.$kecamatans[$i]->kecamatan_geojson;?>', function (data) {
+		geoLayer = L.geoJson(data, {
+			style : function (feature) {
+				return {
+					opacity : 0.5,
+					color : '#007100',
+					weight : 1,
+					fillOpacity : 0.3,
+					fillColor : 'grey'
+				}
+			},
+		}).addTo(map);
+
+		geoLayer.eachLayer(function (layer) {
+			layer.bindPopup('<?php echo $kecamatans[$i]->kecamatan_nama;?>');
+		});
+	});
+<?php
+			}
+		}
+	}else{
+		echo 'Data Not Available !';
 	}
 ?>
+
+</script>

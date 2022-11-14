@@ -295,10 +295,14 @@ class Web extends Front {
 	}
 
 	public function hasil_lokus_stunting(){
-		$kecamatan  = $this->input->get('kecamatan');
+		// $kecamatan  = $this->input->get('kecamatan');
 		$tahun      = $this->input->get('tahun');
 
-		$data ['results'] = $this->model_web->hasil_lokus_stunting($kecamatan, $tahun);
+		$data['kecamatans'] = $this->db->get('kecamatans')->result();
+		$data['results'] 	= $this->model_web->hasil_lokus_stunting($tahun);
+
+		// echo $this->db->last_query();
+		// exit;
 
 		$this->template->build('file-lokus-stunting', $data);
 	}
