@@ -141,7 +141,7 @@
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="analisa_situasi_aksi_cakupan" id="analisa_situasi_aksi_cakupan" placeholder="Cakupan"
 									value="<?= set_value('analisa_situasi_aksi_cakupan'); ?>">
-								<small class="info help-block"><b>Input Analisa Situasi Aksi Cakupan</b> Max Length : 10.</small>
+								<small class="info help-block"><b>Nilai Desimal, gunakan tanda titik (.) sebagai pengganti tanda koma (,)</b></small>
 							</div>
 						</div>
 						<div class="form-group group-analisa_situasi_aksi_warna">
