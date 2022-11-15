@@ -27,16 +27,18 @@
                     <div class="section__title-wrapper-2 text-center mb-60">
                         <h3 class="section__title-2">Analisa Situasi <?php echo $analisa->analisa_situasi_year;?></h3>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <a href="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" target="_blank">
-                                <img src="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-7">
-                            <canvas id="myChart" width="400" height="400"></canvas>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" target="_blank">
+                        <img src="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" class="img-fluid" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
