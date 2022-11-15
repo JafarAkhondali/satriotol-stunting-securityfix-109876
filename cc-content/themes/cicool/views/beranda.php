@@ -54,7 +54,7 @@
 		</div>
 	</section>
 
-	<section class="research__area research__border grey-bg-3 pt-115 pb-90 p-relative z-index-1">
+	<!-- <section class="research__area research__border grey-bg-3 pt-115 pb-90 p-relative z-index-1">
 		<div class="research__shape">
 			<img class="research__shape-1 d-none d-sm-block" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-1.png" alt="">
 			<img class="research__shape-2 d-none d-sm-block" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-2.png" alt="">
@@ -104,7 +104,7 @@
 				</a>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<!-- About Page -->
 	<section id="pengertian-stunting" class="about__area pt-120 pb-120 p-relative">
@@ -163,7 +163,13 @@
 	</section>
 
 	<!-- certificate area end -->
-	<section id="berita-terbaru" class="course__area pt-115 pb-90 grey-bg-3">
+	<section class="research__area research__border grey-bg-3 pt-115 pb-90 p-relative z-index-1">
+		<div class="research__shape">
+			<img class="research__shape-1 d-none d-sm-block" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-1.png" alt="">
+			<img class="research__shape-2 d-none d-sm-block" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-2.png" alt="">
+			<img class="research__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-3.png" alt="">
+		</div>
+	<!-- <section id="berita-terbaru" class="course__area pt-115 pb-90 grey-bg-3"> -->
 		<div class="container">
 			<div class="row">
 				<div class="col-xxl-12">

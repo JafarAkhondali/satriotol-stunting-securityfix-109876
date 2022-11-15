@@ -56,7 +56,7 @@
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>rencana-kegiatan">Peraturan Bupati/Walikota tentang Peran Desa</a>
+								<a href="javascript:void(0);">Peraturan Bupati/Walikota tentang Peran Desa</a>
 							</h3>
 						</div>
 					</div>

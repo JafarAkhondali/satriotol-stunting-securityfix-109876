@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 /**
 *| --------------------------------------------------------------------------
 *| Analisa Situasi Aksi Controller
@@ -73,14 +72,16 @@ class Analisa_situasi_aksi extends Admin {
 		$this->form_validation->set_rules('analisa_situasi_id', 'Reff Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_aksi_indikator', 'Indikator', 'trim|required|max_length[255]');
 		$this->form_validation->set_rules('analisa_situasi_aksi_cakupan', 'Cakupan', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('analisa_situasi_aksi_warna', 'Warna', 'trim|required');
 
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'analisa_situasi_id' => $this->input->post('analisa_situasi_id'),
-				'analisa_situasi_aksi_indikator' => $this->input->post('analisa_situasi_aksi_indikator'),
-				'analisa_situasi_aksi_cakupan' => $this->input->post('analisa_situasi_aksi_cakupan'),
-				'analisa_situasi_aksi_create_at' => date('Y-m-d H:i:s'),
-				'analisa_situasi_aksi_user' => get_user_data('id'),
+				'analisa_situasi_id' 				=> $this->input->post('analisa_situasi_id'),
+				'analisa_situasi_aksi_indikator' 	=> $this->input->post('analisa_situasi_aksi_indikator'),
+				'analisa_situasi_aksi_cakupan' 		=> $this->input->post('analisa_situasi_aksi_cakupan'),
+				'analisa_situasi_aksi_warna' 		=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
+				'analisa_situasi_aksi_create_at' 	=> date('Y-m-d H:i:s'),
+				'analisa_situasi_aksi_user' 		=> get_user_data('id'),
 			];
 			
 			$save_analisa_situasi_aksi = $id = $this->model_analisa_situasi_aksi->store($save_data);
@@ -154,12 +155,14 @@ class Analisa_situasi_aksi extends Admin {
 		$this->form_validation->set_rules('analisa_situasi_id', 'Reff Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_aksi_indikator', 'Indikator', 'trim|required|max_length[255]');
 		$this->form_validation->set_rules('analisa_situasi_aksi_cakupan', 'Cakupan', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('analisa_situasi_aksi_warna', 'Warna', 'trim|required');
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'analisa_situasi_id' => $this->input->post('analisa_situasi_id'),
-				'analisa_situasi_aksi_indikator' => $this->input->post('analisa_situasi_aksi_indikator'),
-				'analisa_situasi_aksi_cakupan' => $this->input->post('analisa_situasi_aksi_cakupan'),
+				'analisa_situasi_id' 				=> $this->input->post('analisa_situasi_id'),
+				'analisa_situasi_aksi_indikator' 	=> $this->input->post('analisa_situasi_aksi_indikator'),
+				'analisa_situasi_aksi_cakupan' 		=> $this->input->post('analisa_situasi_aksi_cakupan'),
+				'analisa_situasi_aksi_warna' 		=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
 			];
 			
 			$save_analisa_situasi_aksi = $this->model_analisa_situasi_aksi->change($id, $save_data);
