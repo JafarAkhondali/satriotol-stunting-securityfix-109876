@@ -341,7 +341,8 @@ class Web extends Front {
 				'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
 				'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
 				'about' 		=> $this->db->get('about')->row(),
-				'galeries' 		=> $this->model_web->rentan_opd_kegiatan($id)->row(),
+				'rentan_opd' 	=> $this->model_web->rentan_opd_kegiatan($id)->row(),
+				'galeries' 		=> $this->model_web->rentan_opd_galeri($id)->result(),
 			];
 
 			// echo $this->db->last_query();

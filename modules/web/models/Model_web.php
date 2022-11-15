@@ -67,16 +67,22 @@ class Model_web extends MY_Model {
 
 	public function rentan_opd_kegiatan($id = NULL){
 		if ($id != NULL) {
-			$this->db->select('rentan_opd.*, opd.*, rentan_opd_galeri.*');
-			$this->db->join('opd', 'rentan_opd.opd_id = opd.opd_id', 'LEFT');
-			$this->db->join('rentan_opd_galeri', 'rentan_opd_galeri.rentan_opd_id = rentan_opd.rentan_opd_id', 'LEFT');
 			$this->db->where('rentan_opd.rentan_opd_id', $id);
-		}else{
-			$this->db->select('rentan_opd.*, opd.*');
-			$this->db->join('opd', 'rentan_opd.opd_id = opd.opd_id', 'LEFT');
 		}
 
+		$this->db->select('rentan_opd.*, opd.*');
+		$this->db->join('opd', 'rentan_opd.opd_id = opd.opd_id', 'LEFT');
+
 		$query = $this->db->from('rentan_opd');
+		
+		return $query->get();
+	}
+
+	public function rentan_opd_galeri($id){
+		$this->db->select('rentan_opd_galeri.*');
+		$this->db->where('rentan_opd_id', $id);
+
+		$query = $this->db->from('rentan_opd_galeri');
 		
 		return $query->get();
 	}

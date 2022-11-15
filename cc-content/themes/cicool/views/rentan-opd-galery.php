@@ -1,3 +1,24 @@
+<?php
+	// if (count($galeries) > 0) {
+	// 	foreach ($galeries as $item) {
+	// 		if (substr_count($item->rentan_opd_galeri_file, ',') > 0) {
+	// 			$galery = explode(',', $item->rentan_opd_galeri_file);
+
+	// 			for ($i=0; $i < count($galery); $i++) {
+	// 				$galeri[] = $galery[$i];
+	// 			}
+	// 		}else{
+	// 			$galeri[] = $item->rentan_opd_galeri_file;
+	// 		}
+	// 	}
+	// }
+
+	// 	echo json_encode($galeri);
+	// echo FCPATH;
+		// exit;
+?>
+
+
 <?= get_header(); ?>
 
 <link rel="stylesheet" href="<?php echo base_url();?>vendor/Magnific-Popup/dist/magnific-popup.css">
@@ -63,24 +84,64 @@
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="section__title-wrapper-2 text-center mb-60">
-                        <h3>Rencana Kegiatan<br/><?php echo $galeries->opd_nama;?></h3>
+                        <h3>Rencana Kegiatan<br/><?php echo $rentan_opd->opd_nama;?></h3>
                     </div>
                     <div class="section__title-wrapper-2 mb-60">
-						<p style="font-size: 14pt;">Kegiatan : <?php echo $galeries->rentan_opd_kegiatan;?></p>
+						<p style="font-size: 14pt;">Kegiatan : <?php echo $rentan_opd->rentan_opd_kegiatan;?></p>
                     </div>
                 </div>
             </div>
 			<div class="row">
 		<?php
-			for ($i=0; $i < 14; $i++) {
+			if (count($galeries) > 0) {
+				foreach ($galeries as $item) {
+					if (substr_count($item->rentan_opd_galeri_file, ',') > 0) {
+						$galery = explode(',', $item->rentan_opd_galeri_file);
+
+						for ($i=0; $i < count($galery); $i++) {
+							$galeri[] = $galery[$i];
+						}
+					}else{
+						$galeri[] = $item->rentan_opd_galeri_file;
+					}
+				}
+
+				for ($i=0; $i < count($galeri); $i++) {
+					if (file_exists(FCPATH.'uploads/rentan_opd_galeri/'.$galeri[$i])) {
 		?>
-				<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-					<div class="course__item-2 transition-3 white-bg mb-30 fix">
-						<div class="course__thumb-2 w-img fix">
-							<a href="https://via.placeholder.com/760x472.png?text=Image+Vendor+POP+UP+<?php echo ($i+1);?>" title="Image vendor Pop up <?php echo ($i+1);?>">
-								<img src="https://via.placeholder.com/760x472.png?text=Image+Vendor+POP+UP+<?php echo ($i+1);?>">
-							</a>
+					<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+						<div class="course__item-2 transition-3 white-bg mb-30 fix">
+							<div class="course__thumb-2 w-img fix">
+								<a href="<?php echo base_url().'uploads/rentan_opd_galeri/'.$galeri[$i];?>">
+									<img src="<?php echo base_url().'uploads/rentan_opd_galeri/'.$galeri[$i];?>">
+								</a>
+							</div>
 						</div>
+					</div>
+		<?php
+					}else{
+		?>
+					<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+						<div class="course__item-2 transition-3 white-bg mb-30 fix">
+							<div class="course__thumb-2 w-img fix">
+								<a href="https://via.placeholder.com/760x472.png?text=Image+Not+Available+<?php echo ($i+1);?>" title="Image Not Available <?php echo ($i+1);?>">
+									<img src="https://via.placeholder.com/760x472.png?text=Image+Not+Available+<?php echo ($i+1);?>">
+								</a>
+							</div>
+						</div>
+					</div>
+		<?php
+					}
+				}
+			}else{
+		?>
+				<div class="error__content text-center">
+					<div class="error__thumb m-img">
+						<img src="<?= base_url();?>assets_stunting/img/error/image-not-available.png" alt="">
+					</div>
+					<div class="error__content">
+						<!-- <h3 class="error__title">Images Not Available</h3> -->
+						<p>Oops! The images you are looking for does not available.</p>
 					</div>
 				</div>
 		<?php
