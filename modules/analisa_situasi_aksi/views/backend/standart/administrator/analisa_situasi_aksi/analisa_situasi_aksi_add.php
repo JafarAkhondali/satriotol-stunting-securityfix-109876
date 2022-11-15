@@ -139,9 +139,9 @@
 						<div class="form-group group-analisa_situasi_aksi_cakupan">
 							<label for="analisa_situasi_aksi_cakupan" class="col-sm-2 control-label">Cakupan <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="analisa_situasi_aksi_cakupan" id="analisa_situasi_aksi_cakupan" placeholder="Cakupan"
+								<input type="text" class="form-control" name="analisa_situasi_aksi_cakupan" id="analisa_situasi_aksi_cakupan" placeholder="00.00"
 									value="<?= set_value('analisa_situasi_aksi_cakupan'); ?>">
-								<small class="info help-block"><b>Nilai Desimal, gunakan tanda titik (.) sebagai pengganti tanda koma (,)</b></small>
+								<small class="info help-block">Nilai Desimal, gunakan <b>tanda titik (.)</b> sebagai pengganti tanda koma</small>
 							</div>
 						</div>
 						<div class="form-group group-analisa_situasi_aksi_warna">
