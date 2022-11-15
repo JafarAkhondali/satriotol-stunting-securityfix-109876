@@ -40,11 +40,11 @@
 						<?= $rencana->rencana_kegiatan_output;?>
 					</div>
 					<div class="event__allow mb-40">
-						<h3>Meliputi:</h3>
+						<h3>Rencana Kegiatan Meliputi:</h3>
 						<?= $rencana->rencana_kegiatan_meliputi;?>
 					</div>
 					<div class="event__allow mb-40">
-						<h3>Peran OPD:</h3>
+						<h3>Peran OPD Kota Semarang dalam Aksi :</h3>
 						<?= $rencana->rencana_kegiatan_peran_opd;?>
 					</div>
 				</div>
