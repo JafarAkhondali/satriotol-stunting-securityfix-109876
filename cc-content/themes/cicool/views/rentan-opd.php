@@ -6,6 +6,7 @@
 
 	.table tbody th{
 		vertical-align: middle;
+		font-size: 14pt;
 	}
 
 	tbody td a:hover{
