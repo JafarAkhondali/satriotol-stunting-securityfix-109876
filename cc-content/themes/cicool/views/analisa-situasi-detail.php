@@ -36,7 +36,7 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-100">
                 <div class="col-md-12">
                     <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
@@ -53,7 +53,6 @@
     const data = {
         labels: <?php echo json_encode($indikators);?>,
         datasets: [{
-            label: 'Analisa Situasi '+<?php echo $analisa->analisa_situasi_year;?>,
             data: <?php echo json_encode($cakupans);?>,
             backgroundColor: <?php echo json_encode($colors);?>,
             hoverOffset: 4,
@@ -68,13 +67,23 @@
         options: {
             responsive: true,
             plugins: {
-            legend: {
-                position: 'right',
-            },
-            title: {
-                display: true,
-                text: 'Analisa Situasi '+<?php echo $analisa->analisa_situasi_year;?>,
-            }
+                legend: {
+                    position: 'right',
+                    labels: {
+                            color: '#000',
+                        font: {
+                            size: 16,
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Chart Analisa Situasi '+<?php echo $analisa->analisa_situasi_year;?>,
+                    color: '#000',
+                    font: {
+                        size: 30,
+                    }
+                }
             }
         },
     });
