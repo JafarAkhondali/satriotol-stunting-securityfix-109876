@@ -32,7 +32,7 @@
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>analisa-situasi">Analisa Situasi</a>
+								<a href="<?= base_url();?>analisa-situasi/">Analisa Situasi</a>
 							</h3>
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 						</div>
 						<div class="features__content">
 							<h3 class="features__title">
-								<a href="<?= base_url();?>rencana-kegiatan-dinas">Rencana Kegiatan Dinas Instansi</a>
+								<a href="<?= base_url();?>rencana-kegiatan/">Rencana Kegiatan</a>
 							</h3>
 						</div>
 					</div>

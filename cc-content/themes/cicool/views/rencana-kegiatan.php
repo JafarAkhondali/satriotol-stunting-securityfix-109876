@@ -1,4 +1,11 @@
 <?= get_header(); ?>
+
+<style type="text/css">
+	.event__allow a:hover{
+		color: blue;
+	}
+</style>
+
 <main>
 	<!-- event area start -->
 	<section class="event__area pt-115 p-relative">
@@ -46,6 +53,9 @@
 					<div class="event__allow mb-40">
 						<h3>Peran OPD Kota Semarang dalam Aksi :</h3>
 						<?= $rencana->rencana_kegiatan_peran_opd;?>
+					</div>
+					<div class="event__allow mb-40">
+						<h3><a href="<?php echo base_url().'rencana-kegiatan-dinas/';?>">Rencana Kegiatan Dinas <i class="fa-light fa-arrow-up-right-from-square"></i></a></h3>
 					</div>
 				</div>
 			</div>
