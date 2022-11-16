@@ -44,6 +44,31 @@ class Kecamatans extends Admin {
 		$this->template->title('Kecamatan List');
 		$this->render('backend/standart/administrator/kecamatans/kecamatans_list', $this->data);
 	}
+
+	public function ajax_data_kelurahan() {
+		$id 	= $this->input->get('id');
+		$list 	= $this->model_kecamatans->get_datatables_kelurahan($id);
+		$data 	= array();
+		$no 	= $_POST['start'];
+		
+		foreach ($list as $field) {
+			$no++;
+			$row 	= array();
+			$row[] 	= $no.'.';
+			$row[] 	= $field->kelurahan_nama;
+
+			$data[] = $row;
+		}
+
+		$output = [
+			"draw" 				=> $_POST['draw'],
+			"recordsTotal" 		=> $this->model_kecamatans->count_all_kelurahan($id),
+			"recordsFiltered" 	=> $this->model_kecamatans->count_filtered(),
+			"data" 				=> $data,
+		];
+
+		echo json_encode($output);
+	}
 	
 	/**
 	* Add new kecamatanss

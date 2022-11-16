@@ -71,28 +71,30 @@
 					<h3 class="box-title">Data Kelurahan</h3>
 				</div>
 				<div class="box-body">
-								<?php is_allowed('kelurahans_add', function(){?>
+		<?php
+			is_allowed('kelurahans_add', function() {
+		?>
 								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('kelurahans')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/kelurahans/add'); ?>">
-									<i class="fa fa-plus-square-o"></i>
-									<?= cclang('add_new_button', [cclang('kelurahans')]); ?></a>
-								<?php }) ?>
-								<?php is_allowed('kelurahans_export', function(){?>
+									<i class="fa fa-plus-square-o"></i><?= cclang('add_new_button', [cclang('kelurahans')]); ?></a>
+		<?php 
+			});
+
+			is_allowed('kelurahans_export', function() {
+		?>
 								<a class="btn btn-flat btn-success" title="<?= cclang('export'); ?> <?= cclang('kelurahans') ?> " href="<?= site_url('administrator/kelurahans/export?q='.$this->input->get('q').'&f='.$this->input->get('f')); ?>">
 									<i class="fa fa-file-excel-o"></i> <?= cclang('export'); ?> XLS</a>
-								<?php }) ?>
+		<?php
+			});
+		?>
 							<br/><br/>
 					<table class="table table-bordered table-striped dataTable">
 						<thead>
-							<tr class="">
-								<th>
-									<input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all">
-								</th>
-								<th data-field="kecamatan_id" data-sort="1" data-primary-key="0"><?= cclang('kecamatan_id') ?></th>
-								<th data-field="kelurahan_nama" data-sort="1" data-primary-key="0"><?= cclang('kelurahan_nama') ?></th>
-								<th>Action</th>
+							<tr>
+								<th><?= cclang('nomor') ?></th>
+								<th><?= cclang('kelurahan_nama') ?></th>
 							</tr>
 						</thead>
-						<tbody id="tbody_kelurahans"></tbody>
+						<tbody></tbody>
 					</table>
 				</div>
 				<!--/box body -->
@@ -105,6 +107,27 @@
 
 <script>
 	$(document).ready(function () {
-		$('.dataTable').DataTable();
+		$('.dataTable').DataTable({
+			'processing' 	: true,
+			'retrieve' 		: true,
+			"pageLength": 20,
+			"lengthChange": false,
+			'ajax' 			: {
+								'url' 	: '<?php echo base_url();?>administrator/kecamatans/ajax_data_kelurahan',
+								'type' 	: "get",
+								'data' 	: {id : '<?php echo $kecamatans->kecamatan_id;?>'}
+			},
+			'columnDefs': [
+				{ 
+					'targets' 	: [ 0 ], 
+					'orderable' : false,
+					'width' 	: '50',
+				},
+			],
+			'language' : {
+							'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json'
+			}
+
+		});
 	});
 </script>
