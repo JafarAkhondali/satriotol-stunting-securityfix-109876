@@ -290,6 +290,47 @@ class Rembuk_stuntings extends Admin {
 		$this->template->title('Rembuk Stunting Detail');
 		$this->render('backend/standart/administrator/rembuk_stuntings/rembuk_stuntings_view', $this->data);
 	}
+
+	public function ajax_galeri_rembuk(){
+		$id 	= $this->input->get('id');
+		$list 	= $this->model_rembuk_stuntings->get_datatables_rembuk_stunting($id);
+		$data 	= array();
+		$no 	= $_POST['start'];
+		
+		foreach ($list as $field) {
+			$no++;
+			$row 	= array();
+
+			if (substr_count($field->rembuk_stunting_galery_image, ',') > 0) {
+				$galery = explode(',', $field->rembuk_stunting_galery_image);
+
+				for ($i=0; $i < count($galery); $i++) {
+					$galeri[] = '<a class="fancybox" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'">
+									<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+								</a>';
+				}
+			}else{
+				$galeri[] = '<a class="fancybox" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$field->rembuk_stunting_galery_image.'">
+								<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$field->rembuk_stunting_galery_image.'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+							</a>';
+			}
+
+			$galerinya = implode($galeri);
+
+			$row[] 	= $galerinya;
+
+			$data[] = $row;
+		}
+
+		$output = [
+			"draw" 				=> $_POST['draw'],
+			"recordsTotal" 		=> $this->model_rembuk_stuntings->count_all_galeri_rembuk($id),
+			"recordsFiltered" 	=> $this->model_rembuk_stuntings->count_filtered($id),
+			"data" 				=> $data,
+		];
+
+		echo json_encode($output);
+	}
 	
 	/**
 	* delete Rembuk Stuntingss

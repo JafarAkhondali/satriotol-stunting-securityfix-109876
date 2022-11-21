@@ -354,19 +354,19 @@
 		type="text/javascript"></script>
 	<script src="<?= BASE_ASSET; ?>jquery-ui/jquery-ui.js"></script>
 	<script src="<?= BASE_ASSET; ?>jquery-switch-button/jquery.switchButton.js"></script>
-	<script src="<?= BASE_ASSET; ?>/js/jquery.ui.touch-punch.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/plugins/fastclick/fastclick.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/dist/js/app.min.js"></script>
-	<script src="<?= BASE_ASSET; ?>/admin-lte/dist/js/adminlte.js"></script>
+	<script src="<?= BASE_ASSET; ?>js/jquery.ui.touch-punch.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/plugins/fastclick/fastclick.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/dist/js/app.min.js"></script>
+	<script src="<?= BASE_ASSET; ?>admin-lte/dist/js/adminlte.js"></script>
 	<script src="<?= BASE_ASSET; ?>js-scroll/script/jquery.jscrollpane.min.js"></script>
 	<script src="<?= BASE_ASSET; ?>jquery-switch-button/jquery.switchButton.js"></script>
 
 
 
 
-	<script src="<?= BASE_ASSET; ?>/js/custom.js"></script>
+	<script src="<?= BASE_ASSET; ?>js/custom.js"></script>
 </body>
 
 </html>

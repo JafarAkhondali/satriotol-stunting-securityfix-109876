@@ -63,7 +63,7 @@ class Kecamatans extends Admin {
 		$output = [
 			"draw" 				=> $_POST['draw'],
 			"recordsTotal" 		=> $this->model_kecamatans->count_all_kelurahan($id),
-			"recordsFiltered" 	=> $this->model_kecamatans->count_filtered(),
+			"recordsFiltered" 	=> $this->model_kecamatans->count_filtered($id),
 			"data" 				=> $data,
 		];
 

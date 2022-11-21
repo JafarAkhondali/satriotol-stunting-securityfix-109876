@@ -153,8 +153,9 @@ class Model_kecamatans extends MY_Model {
 		return $query->result();
 	}
 
-	public function count_filtered(){
+	public function count_filtered($id){
 		$this->_get_datatables_query_kelurahan();
+        $this->db->where('kelurahans.kecamatan_id', $id);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}

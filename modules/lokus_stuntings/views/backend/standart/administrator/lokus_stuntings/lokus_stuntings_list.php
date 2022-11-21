@@ -120,7 +120,7 @@
 							</div>
 							<div class="table-responsive">
 								<br>
-								<table class="table table-bordered table-striped dataTable">
+								<table class="table table-bordered table-striped">
 									<thead>
 										<tr class="">
 											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
@@ -139,7 +139,8 @@
 											<td>
 									<?php
 										if  ($lokus_stuntings->lokus_year_id) {
-                              				echo anchor('administrator/lokus_years/view/'.$lokus_stuntings->lokus_year_id.'?popup=show', $lokus_stuntings->lokus_years_lokus_year_nama, ['class' => 'popup-view']);
+                              				echo $lokus_stuntings->lokus_years_lokus_year_nama;
+                              				// echo anchor('administrator/lokus_years/view/'.$lokus_stuntings->lokus_year_id.'?popup=show', $lokus_stuntings->lokus_years_lokus_year_nama, ['class' => 'popup-view']);
 										}
 									?>
 											</td>
@@ -151,10 +152,11 @@
 
 											$kelurahan = [];
 											for ($i=0; $i < count($kelurahan_id); $i++) {
-												$kelurahan[] = anchor('administrator/kelurahans/view/'.$kelurahan_id[$i].'?popup=show', $kelurahan_nama[$i], ['class' => 'popup-view']);
+												$kelurahan[] = $kelurahan_nama[$i];
+												// $kelurahan[] = anchor('administrator/kelurahans/view/'.$kelurahan_id[$i].'?popup=show', $kelurahan_nama[$i], ['class' => 'popup-view']);
 											}
 
-											$kelurahans = implode(',', $kelurahan);
+											$kelurahans = implode(', ', $kelurahan);
 
                               				echo $kelurahans;
 										}

@@ -283,6 +283,33 @@ class Analisa_situasi extends Admin	{
 		$this->template->title('Analisa Situasi Detail');
 		$this->render('backend/standart/administrator/analisa_situasi/analisa_situasi_view', $this->data);
 	}
+
+	public function ajax_data_aksi_analisa() {
+		$id 	= $this->input->get('id');
+		$list 	= $this->model_analisa_situasi->get_datatables_aksi_analisa($id);
+		$data 	= array();
+		$no 	= $_POST['start'];
+		
+		foreach ($list as $field) {
+			$no++;
+			$row 	= array();
+			$row[] 	= $no.'.';
+			$row[] 	= $field->analisa_situasi_aksi_indikator;
+			$row[] 	= $field->analisa_situasi_aksi_cakupan;
+			$row[] 	= '<div id="colorSelector"><div style="background-color: '.$field->analisa_situasi_aksi_warna.'"></div></div>';
+
+			$data[] = $row;
+		}
+
+		$output = [
+			"draw" 				=> $_POST['draw'],
+			"recordsTotal" 		=> $this->model_analisa_situasi->count_all_aksi_analisa($id),
+			"recordsFiltered" 	=> $this->model_analisa_situasi->count_filtered($id),
+			"data" 				=> $data,
+		];
+
+		echo json_encode($output);
+	}
 	
 	/**
 	* delete Analisa Situasis

@@ -119,7 +119,7 @@
 										<tr class="">
 											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
 											<th data-field="lokus_year_nama" data-sort="1" data-primary-key="0"><?= cclang('lokus_year_nama') ?></th>
-											<th data-field="lokus_year_file" data-sort="0" data-primary-key="0"><?= cclang('lokus_year_file') ?></th>
+											<th width="150" data-field="lokus_year_file" data-sort="0" data-primary-key="0"><?= cclang('lokus_year_file') ?></th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -130,7 +130,7 @@
 												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $lokus_years->lokus_year_id; ?>">
 											</td>
 											<td><span class="list_group-lokus-year-nama"><?= _ent($lokus_years->lokus_year_nama).'<br/><small><i>dibuat oleh : '._ent($lokus_years->user_username);?></span></td>
-											<td>
+											<td style="text-align: center;">
 												<?php if (!empty($lokus_years->lokus_year_file)): ?>
 												<?php if (is_image($lokus_years->lokus_year_file)): ?>
 												<a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/lokus_years/' . $lokus_years->lokus_year_file; ?>">

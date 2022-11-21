@@ -276,10 +276,37 @@ class Lokus_years extends Admin {
 	public function view($id) {
 		$this->is_allowed('lokus_years_view');
 
-		$this->data['lokus_years'] = $this->model_lokus_years->join_avaiable()->filter_avaiable()->find($id);
+		$this->data['lokus_years'] 		= $this->model_lokus_years->join_avaiable()->filter_avaiable()->find($id);
+		$this->data['lokus_kelurahan'] 	= $this->model_lokus_years->query_lokus_stunting($id)->result();
 
 		$this->template->title('Tahun Lokus Detail');
 		$this->render('backend/standart/administrator/lokus_years/lokus_years_view', $this->data);
+	}
+
+	public function ajax_lokus_stunting(){
+		$id 	= $this->input->get('id');
+		$list 	= $this->model_lokus_years->get_datatables_lokus_stunting($id);
+		$data 	= array();
+		$no 	= $_POST['start'];
+		
+		foreach ($list as $field) {
+			$no++;
+			$row 	= array();
+			$row[] 	= $no.'.';
+			$row[] 	= $field->nama_kecamatan;
+			$row[] 	= $field->nama_kelurahan;
+
+			$data[] = $row;
+		}
+
+		$output = [
+			"draw" 				=> $_POST['draw'],
+			"recordsTotal" 		=> $this->model_lokus_years->count_all_kelurahan($id),
+			"recordsFiltered" 	=> $this->model_lokus_years->count_filtered($id),
+			"data" 				=> $data,
+		];
+
+		echo json_encode($output);
 	}
 	
 	/**

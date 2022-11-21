@@ -117,7 +117,7 @@
 							</div>
 							<div class="table-responsive">
 								<br>
-								<table class="table table-bordered table-striped dataTable">
+								<table class="table table-bordered table-striped">
 									<thead>
 										<tr class="">
 											<th>

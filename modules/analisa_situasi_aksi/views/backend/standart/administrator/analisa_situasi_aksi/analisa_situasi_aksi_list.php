@@ -137,11 +137,11 @@
 							</div>
 							<div class="table-responsive">
 								<br>
-								<table class="table table-bordered table-striped dataTable">
+								<table class="table table-bordered table-striped">
 									<thead>
 										<tr class="">
 											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
-											<th data-field="analisa_situasi_id" data-sort="1" data-primary-key="0"><?= cclang('analisa_situasi_id') ?></th>
+											<th data-field="analisa_situasi_id" data-sort="1" data-primary-key="0" width="100"><?= cclang('analisa_situasi_id') ?></th>
 											<th data-field="analisa_situasi_aksi_indikator" data-sort="1" data-primary-key="0"> <?= cclang('analisa_situasi_aksi_indikator') ?></th>
 											<th data-field="analisa_situasi_aksi_cakupan" data-sort="1" data-primary-key="0"> <?= cclang('analisa_situasi_aksi_cakupan') ?></th>
 											<th data-field="analisa_situasi_aksi_warna" data-sort="1" data-primary-key="0"> <?= cclang('analisa_situasi_aksi_warna') ?></th>
@@ -155,7 +155,8 @@
 											<td>
 									<?php
 										if  ($analisa_situasi_aksi->analisa_situasi_id) {
-											echo anchor('administrator/analisa_situasi/view/'.$analisa_situasi_aksi->analisa_situasi_id.'?popup=show', $analisa_situasi_aksi->analisa_situasi_analisa_situasi_year, ['class' => 'popup-view']);
+											echo $analisa_situasi_aksi->analisa_situasi_analisa_situasi_year;
+											// echo anchor('administrator/analisa_situasi/view/'.$analisa_situasi_aksi->analisa_situasi_id.'?popup=show', $analisa_situasi_aksi->analisa_situasi_analisa_situasi_year, ['class' => 'popup-view']);
 										}
 									?>
 											</td>
