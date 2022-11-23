@@ -57,6 +57,11 @@
         // var kecamatan   = $('#kecamatan').val();
         var tahun       = $('#tahun').val();
 
+        if (tahun == '') {
+            alert('Pilih tahun terlebih dahulu !');
+            return false;
+        }
+
         $.ajax({
             url 		: BASE_URL + "web/hasil_lokus_stunting",
             type		: "GET",
