@@ -1,7 +1,63 @@
 <?= get_header(); ?>
+<link rel="stylesheet" href="<?php echo base_url();?>vendor/Magnific-Popup/dist/magnific-popup.css">
+
+<style type="text/css">
+	.image-link {
+		cursor: -webkit-zoom-in;
+		cursor: -moz-zoom-in;
+		cursor: zoom-in;
+	}
+
+	/* This block of CSS adds opacity transition to background */
+	.mfp-with-zoom .mfp-container, .mfp-with-zoom.mfp-bg {
+		opacity: 0;
+		-webkit-backface-visibility: hidden;
+		-webkit-transition: all 0.3s ease-out; 
+		-moz-transition: all 0.3s ease-out; 
+		-o-transition: all 0.3s ease-out; 
+		transition: all 0.3s ease-out;
+	}
+
+	.mfp-with-zoom.mfp-ready .mfp-container {
+		opacity: 1;
+	}
+	.mfp-with-zoom.mfp-ready.mfp-bg {
+		opacity: 0.8;
+	}
+
+	.mfp-with-zoom.mfp-removing .mfp-container, .mfp-with-zoom.mfp-removing.mfp-bg {
+		opacity: 0;
+	}
+
+	/* padding-bottom and top for image */
+	.mfp-no-margins img.mfp-img {
+		padding: 0;
+	}
+	/* position of shadow behind the image */
+	.mfp-no-margins .mfp-figure:after {
+		top: 0;
+		bottom: 0;
+	}
+	/* padding for main container */
+	.mfp-no-margins .mfp-container {
+		padding: 0;
+	}
+
+
+
+	/* aligns caption to center */
+	.mfp-title {
+		text-align: center;
+		padding: 6px 0;
+	}
+	.image-source-link {
+		color: #DDD;
+	}
+</style>
+
 <main>
 	<!-- event area start -->
-	<section class="course__area pt-115">
+	<section class="course__area pt-115 pb-115">
 		<div class="container">
 			<div class="row">
 				<div class="col-xxl-12">
@@ -20,69 +76,83 @@
 					<?php echo $rembuks->rembuk_stunting_deskripsi;?>
 				</div>
 			</div>
+<?php
+	if (!empty($rembuks->rembuk_stunting_galery_image)) {
+?>
 			<div class="row mt-50">
 				<div class="col-xxl-12">
 					<div class="course__tab-conent">
 						<div class="tab-content" id="courseTabContent">
 							<div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
 								<div class="row">
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://stunting.go.id/wp-content/uploads/2020/08/Suasana-Rapat-Koordinasi-TP2AK-di-Enrekang-Bahas-Pencegahan-Stunting-1024x576.jpg" alt="">
-											</div>
-										</div>
-									</div>
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://naganrayakab.go.id/media/2022.07/rembuk_stunting1.jpeg" alt="">
-											</div>
-										</div>
-									</div>
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://via.placeholder.com/650x770.jpg" alt="">
-												<!-- <img src="https://www.tangerangekspres.co.id/wp-content/uploads/2022/07/IMG-20220708-WA0001.jpg" alt=""> -->
-											</div>
-										</div>
-									</div>
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://static.gatra.com/foldershared/images/2021/sumarni/09-Sep/IMG_20210929_122058.jpg" alt="">
-											</div>
-										</div>
-									</div>
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://i0.wp.com/www.purworejo24.com/wp-content/uploads/2021/09/Sekda-Purworejo-Said-Romadhon-menadatangani-komitmen-bersama-pencegahan-serta-percepatan-penurunan-stunting-di-Kabupaten-Purworejo.jpg?fit=1280%2C720&ssl=1" alt="">
-											</div>
-										</div>
-									</div>
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://kutaalamkec.bandaacehkota.go.id/wp-content/uploads/sites/19/2022/08/IMG20220819152031-678x381.jpg" alt="">
-											</div>
-										</div>
-									</div>
-									<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-										<div class="course__item-2 transition-3 white-bg mb-30 fix">
-											<div class="course__thumb-2 w-img fix">
-												<img src="https://disdik.bengkaliskab.go.id/asset/berita/original/62311970649-screenshot_20210913-163208_gallery.jpg" alt="">
-											</div>
-										</div>
-									</div>
+<?php
+	if (substr_count($rembuks->rembuk_stunting_galery_image, ',') > 0) {
+		$galery = explode(',', $rembuks->rembuk_stunting_galery_image);
+
+		for ($i=0; $i < count($galery); $i++) {
+			echo '<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+							<div class="course__item-2 transition-3 white-bg mb-30 fix">
+								<div class="course__thumb-2 w-img fix">
+									<a href="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'">
+										<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'">
+									</a>
+								</div>
+							</div>
+						</div>';
+		}
+	}else{
+		echo '<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+							<div class="course__item-2 transition-3 white-bg mb-30 fix">
+								<div class="course__thumb-2 w-img fix">
+									<a href="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuks->rembuk_stunting_galery_image.'">
+										<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuks->rembuk_stunting_galery_image.'">
+									</a>
+								</div>
+							</div>
+						</div>';
+	}
+?>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+<?php
+	}
+?>
 		</div>
 	</section>
 </main>
+
+
+<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!-- Magnific Popup core JS file -->
+<script src="<?php echo base_url();?>vendor/Magnific-Popup/dist/jquery.magnific-popup.js"></script>
+
+<script type="text/javascript">
+	$('.w-img').magnificPopup({
+		delegate: 'a', // child items selector, by clicking on it popup will open
+		type: 'image',
+		gallery: {
+			enabled: true
+		},
+		closeOnContentClick: true,
+		closeBtnInside: false,
+		mainClass: 'mfp-with-zoom mfp-img-mobile',
+		image: {
+			verticalFit: true,
+			titleSrc: function(item) {
+				return item.el.attr('title');
+			}
+		},
+		zoom: {
+			enabled: true,
+			duration: 300,
+		}
+	});
+</script>
+
 <?= get_footer(); ?>

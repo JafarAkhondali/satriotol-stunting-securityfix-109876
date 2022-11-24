@@ -136,15 +136,23 @@
 				</div>
 				<div class="box-body">
 			<?php
-				is_allowed('rembuk_stunting_galery_update', function() use ($rembuk_stunting_galery) {
+	if (!empty($rembuk_galery)) {
+				is_allowed('rembuk_stunting_galery_update', function() use ($rembuk_galery, $rembuk_stuntings) {
 			?>
-					<a class="btn btn-flat btn-success btn_edit btn_action" id="btn_edit" data-stype='back' title="edit rembuk_stunting_galery (Ctrl+e)" href="<?= site_url('administrator/rembuk_stunting_galery/edit/'.$rembuk_stunting_galery->rembuk_stunting_galery_id); ?>">
-					<i class="fa fa-edit" ></i> <?= cclang('update', ['Rembuk Stunting Galery']); ?> </a>
+					<a class="btn btn-flat btn-success btn_edit btn_action" id="btn_edit" data-stype='back' title="edit rembuk_stunting_galery (Ctrl+e)" href="<?= site_url('administrator/rembuk_stunting_galery/edit/'.$rembuk_galery->rembuk_stunting_galery_id.'?id='.$rembuk_stuntings->rembuk_stunting_id); ?>">
+					<i class="fa fa-edit"></i> <?= cclang('update', ['Rembuk Stunting Galery']); ?> </a>
 			<?php
 				});
+	}else{
+		is_allowed('rembuk_stunting_galery_add', function() use ($rembuk_stuntings) {?>
+			<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('rembuk_stunting_galery')]);?>  (Ctrl+a)" href="<?= site_url('administrator/rembuk_stunting_galery/add?id='.$rembuk_stuntings->rembuk_stunting_id);?>">
+				<i class="fa fa-plus-square-o"></i> <?= cclang('add_new_button', [cclang('rembuk_stunting_galery')]);?></a>
+<?php
+		});
+	}
 			?>
-                    <a class="btn btn-flat btn-default btn_action" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/rembuk_stunting_galery/'); ?>">
-					<i class="fa fa-undo" ></i> <?= cclang('go_list_button', ['Rembuk Stunting Galery']); ?></a>
+                    <!-- <a class="btn btn-flat btn-default btn_action" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/rembuk_stunting_galery/'); ?>">
+					<i class="fa fa-undo" ></i> <?= cclang('go_list_button', ['Rembuk Stunting Galery']); ?></a> -->
 					<br/><br/>
 					<table class="table table-bordered table-striped dataTable">
 						<thead>
@@ -152,7 +160,31 @@
 								<th>Gambar/foto</th>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+<?php
+	if (!empty($rembuk_galery->rembuk_stunting_galery_image)) {
+		if (substr_count($rembuk_galery->rembuk_stunting_galery_image, ',') > 0) {
+			$galery = explode(',', $rembuk_galery->rembuk_stunting_galery_image);
+
+			for ($i=0; $i < count($galery); $i++) {
+				$galeri[] = '<a class="fancybox" data-fancybox="gallery" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'">
+								<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+							</a>';
+			}
+		}else{
+			$galeri[] = '<a class="fancybox" data-fancybox="gallery" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuk_galery->rembuk_stunting_galery_image.'">
+							<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuk_galery->rembuk_stunting_galery_image.'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+						</a>';
+		}
+
+		$galerinya = implode($galeri);
+
+		echo '<tr><td>'.$galerinya.'</td></tr>';
+	}else{
+		echo '<tr><td>Galery Rembuk Stunting data is not available</td></tr>';
+	}
+?>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -173,17 +205,17 @@
 			"pageLength"	: 20,
 			"lengthChange"	: false,
 			"searching"		: false,
-			'ajax' 			: {
-								'url' 	: '<?php echo base_url();?>administrator/rembuk_stuntings/ajax_galeri_rembuk',
-								'type' 	: "get",
-								'data' 	: {id : '<?php echo $rembuk_stuntings->rembuk_stunting_id;?>'}
-			},
-			'columnDefs': [
-				{ 
-					'targets' 	: [ 0 ], 
-					'orderable' : false,
-				},
-			],
+			// 'ajax' 			: {
+			// 					'url' 	: '<?php echo base_url();?>administrator/rembuk_stuntings/ajax_galeri_rembuk',
+			// 					'type' 	: "get",
+			// 					'data' 	: {id : '<?php echo $rembuk_stuntings->rembuk_stunting_id;?>'}
+			// },
+			// 'columnDefs': [
+			// 	{ 
+			// 		'targets' 	: [ 0 ], 
+			// 		'orderable' : false,
+			// 	},
+			// ],
 			'language' : {
 							'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json'
 			}

@@ -286,6 +286,7 @@ class Rembuk_stuntings extends Admin {
 		$this->is_allowed('rembuk_stuntings_view');
 
 		$this->data['rembuk_stuntings'] = $this->model_rembuk_stuntings->join_avaiable()->filter_avaiable()->find($id);
+		$this->data['rembuk_galery'] 	= $this->db->where('rembuk_stunting_id', $id)->get('rembuk_stunting_galery')->row();
 
 		$this->template->title('Rembuk Stunting Detail');
 		$this->render('backend/standart/administrator/rembuk_stuntings/rembuk_stuntings_view', $this->data);

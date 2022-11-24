@@ -23,11 +23,11 @@
 
 <link rel="stylesheet" href="<?php echo base_url();?>vendor/Magnific-Popup/dist/magnific-popup.css">
 
-<style type="txt/css">
+<style type="text/css">
 	.image-link {
-	cursor: -webkit-zoom-in;
-	cursor: -moz-zoom-in;
-	cursor: zoom-in;
+		cursor: -webkit-zoom-in;
+		cursor: -moz-zoom-in;
+		cursor: zoom-in;
 	}
 
 	/* This block of CSS adds opacity transition to background */

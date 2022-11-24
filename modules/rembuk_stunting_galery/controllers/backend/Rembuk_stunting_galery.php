@@ -50,6 +50,12 @@ class Rembuk_stunting_galery extends Admin {
 	*
 	*/
 	public function add() {
+		$id = $this->input->get('id');
+
+		$this->data = [
+			'id' => $id,
+		];
+		
 		$this->is_allowed('rembuk_stunting_galery_add');
 
 		$this->template->title('Rembuk Stunting Galery New');
@@ -112,6 +118,12 @@ class Rembuk_stunting_galery extends Admin {
 
 			$save_rembuk_stunting_galery = $id = $this->model_rembuk_stunting_galery->store($save_data);
 
+			if (!empty($this->input->post('getID'))) {
+				$redirect = base_url('administrator/rembuk_stuntings/view/'.$this->input->post('getID'));
+			}else{
+				$redirect = base_url('administrator/rembuk_stunting_galery');
+			}
+
 			if ($save_rembuk_stunting_galery) {
 				$id = $save_rembuk_stunting_galery;
 				if ($this->input->post('save_type') == 'stay') {
@@ -127,17 +139,17 @@ class Rembuk_stunting_galery extends Admin {
 						anchor('administrator/rembuk_stunting_galery/edit/' . $save_rembuk_stunting_galery, 'Edit Rembuk Stunting Galery')
 					]), 'success');
 
-            		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/rembuk_stunting_galery');
+            		$this->data['success'] 	= true;
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = false;
 					$this->data['message'] = cclang('data_not_change');
 				} else {
-            		$this->data['success'] = false;
-            		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/rembuk_stunting_galery');
+            		$this->data['success'] 	= false;
+            		$this->data['message'] 	= cclang('data_not_change');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {
@@ -155,9 +167,12 @@ class Rembuk_stunting_galery extends Admin {
 	* @var $id String
 	*/
 	public function edit($id) {
+		$getID = $this->input->get('id');
+
 		$this->is_allowed('rembuk_stunting_galery_update');
 
-		$this->data['rembuk_stunting_galery'] = $this->model_rembuk_stunting_galery->find($id);
+		$this->data['rembuk_stunting_galery'] 	= $this->model_rembuk_stunting_galery->find($id);
+		$this->data['id'] 						= $getID;
 
 		$this->template->title('Rembuk Stunting Galery Update');
 		$this->render('backend/standart/administrator/rembuk_stunting_galery/rembuk_stunting_galery_update', $this->data);
@@ -213,6 +228,12 @@ class Rembuk_stunting_galery extends Admin {
 			
 			$save_rembuk_stunting_galery = $this->model_rembuk_stunting_galery->change($id, $save_data);
 
+			if (!empty($this->input->post('getID'))) {
+				$redirect = base_url('administrator/rembuk_stuntings/view/'.$this->input->post('getID'));
+			}else{
+				$redirect = base_url('administrator/rembuk_stunting_galery');
+			}
+
 			if ($save_rembuk_stunting_galery) {
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
@@ -226,7 +247,7 @@ class Rembuk_stunting_galery extends Admin {
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/rembuk_stunting_galery');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -235,7 +256,7 @@ class Rembuk_stunting_galery extends Admin {
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/rembuk_stunting_galery');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {

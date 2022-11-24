@@ -146,18 +146,15 @@
 
 						<div class="message"></div>
 						<div class="row-fluid col-md-7 container-button-bottom">
-							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay'
-								title="<?= cclang('save_button'); ?> (Ctrl+s)">
+							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay' title="<?= cclang('save_button'); ?> (Ctrl+s)">
 								<i class="fa fa-save"></i> <?= cclang('save_button'); ?>
 							</button>
-							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save"
-								data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
+							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save" data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
 								<i class="ion ion-ios-list-outline"></i> <?= cclang('save_and_go_the_list_button'); ?>
 							</a>
 
-							<div class="custom-button-wrapper">
+							<div class="custom-button-wrapper"></div>
 
-							</div>
 							<a class="btn btn-flat btn-default btn_action" id="btn_cancel"
 								title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
 								<i class="fa fa-undo"></i> <?= cclang('cancel_button'); ?>
@@ -180,6 +177,15 @@
 <!-- Page script -->
 <script>
 	$(document).ready(function () {
+		var getID = '<?php echo $id;?>';
+		var redirectURL;
+
+		if (getID != '') {
+			redirectURL = BASE_URL + 'administrator/rembuk_stuntings/view/'+getID;
+		}else{
+			redirectURL = BASE_URL + 'administrator/rembuk_stunting_galery';
+		}
+
 		window.event_submit_and_action = '';
 
 		(function () {
@@ -190,7 +196,6 @@
 			var rembuk_stunting_galery_image = $('#rembuk_stunting_galery_image');
 
 		})()
-
 
 		$('#btn_cancel').click(function () {
 			swal({
@@ -206,7 +211,7 @@
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						window.location.href = BASE_URL + 'administrator/rembuk_stunting_galery';
+						window.location.href = redirectURL;
 					}
 				});
 
@@ -224,13 +229,17 @@
 				value: save_type
 			});
 
+			data_post.push({
+				name: 'getID',
+				value: '<?php echo $id;?>'
+			});
+
 			(function () {
 				data_post.push({
 					name: '_example',
 					value: 'value_of_example',
 				})
 			})()
-
 
 			data_post.push({
 				name: 'event_submit_and_action',
@@ -249,9 +258,9 @@
 					$('form').find('.form-group').removeClass('has-error');
 					$('form').find('.error-input').remove();
 					$('.steps li').removeClass('error');
+
 					if (res.success) {
-						var id = $('#rembuk_stunting_galery_image_galery').find('li').attr(
-							'qq-file-id');
+						var id = $('#rembuk_stunting_galery_image_galery').find('li').attr('qq-file-id');
 						if (save_type == 'back') {
 							window.location.href = res.redirect;
 							return;
@@ -289,8 +298,6 @@
 
 			return false;
 		}); /*end btn save*/
-
-
 
 		var params = {};
 		params[csrf] = token;

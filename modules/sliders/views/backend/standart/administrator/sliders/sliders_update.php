@@ -155,7 +155,6 @@
 		</div>
 		<!--/box -->
 	</div>
-	</div>
 </section>
 <!-- /.content -->
 <script src="<?= BASE_ASSET; ?>ckeditor/ckeditor.js"></script>
