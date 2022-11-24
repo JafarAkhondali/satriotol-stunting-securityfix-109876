@@ -21,16 +21,6 @@
 			</div>
 			<div class="row">
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>rembuk-stunting/">
-						<div class="features__item d-sm-flex align-items-start mb-30">
-							<div class="features__icon mr-25"><i class="fa-light fa-gears text-black"></i></div>
-							<div class="features__content">
-								<h3 class="features__title">Rembuk Stunting</h3>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
 					<a href="<?= base_url();?>analisa-situasi/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-head-side-brain text-black"></i></div>
@@ -51,11 +41,21 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
+					<a href="<?= base_url();?>rembuk-stunting/">
+						<div class="features__item d-sm-flex align-items-start mb-30">
+							<div class="features__icon mr-25"><i class="fa-light fa-gears text-black"></i></div>
+							<div class="features__content">
+								<h3 class="features__title">Rembuk Stunting</h3>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
 					<a href="javascript:void(0);">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-building-columns text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Peraturan Bupati/Walikota tentang Peran Desa
+								<h3 class="features__title">Perwal Percepatan Penurunan Stunting
 								</h3>
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 						<div class="features__item d-sm-flex align-items-start mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-users text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Pembinaan Kader Pembangunan Manusia</h3>
+								<h3 class="features__title">Pembinaan Kader</h3>
 							</div>
 						</div>
 					</a>

@@ -81,6 +81,14 @@ jQuery(document).ready(domo);
                     </div>
                                         
                     <div class="form-group ">
+                        <label for="content" class="col-sm-2 control-label">Link URL </label>
+
+                        <div class="col-sm-8">
+                        <span class="detail_group-slider-url"><?= _ent($sliders->slider_url); ?></span>
+                        </div>
+                    </div>
+                                        
+                    <div class="form-group ">
                         <label for="content" class="col-sm-2 control-label"> Image </label>
                         <div class="col-sm-8">
                              <?php if (is_image($sliders->slider_image)): ?>
@@ -98,22 +106,6 @@ jQuery(document).ready(domo);
                         </div>
                     </div>
                                       
-                    <div class="form-group ">
-                        <label for="content" class="col-sm-2 control-label">Tanggal Dibuat </label>
-
-                        <div class="col-sm-8">
-                        <span class="detail_group-slider-createAt"><?= _ent($sliders->slider_createAt); ?></span>
-                        </div>
-                    </div>
-                                        
-                    <div class="form-group ">
-                        <label for="content" class="col-sm-2 control-label">Status </label>
-
-                        <div class="col-sm-8">
-                        <span class="detail_group-slider-status"><?= _ent($sliders->slider_status); ?></span>
-                        </div>
-                    </div>
-                                        
                     <br>
                     <br>
 

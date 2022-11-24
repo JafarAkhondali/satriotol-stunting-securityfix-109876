@@ -99,6 +99,7 @@
     --tp-theme-2: #258E46;
     --tp-theme-3: #007A70;
     --tp-border-1: #dedede;
+    --tp-theme-red: #bf0426;
     /**
   @font weight declaration
   */
@@ -509,6 +510,10 @@ input[type=color] {
 
 .theme-bg-3 {
     background: var(--tp-theme-3);
+}
+
+.theme-bg-red {
+    background: var(--tp-theme-red);
 }
 
 

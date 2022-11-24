@@ -88,14 +88,16 @@ class Blog extends Admin {
 		$this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[200]');
 		$this->form_validation->set_rules('status', 'Status', 'trim|required|max_length[10]');
 
-		if ($group_id != '1') {
-			$verified_status 	= '0';
-			$verified_by 		= '';
-			$verified_at 		= '';
-		}else{
+		$group_id_approved = ['1', '5'];
+
+		if (in_array($group_id, $group_id_approved)) {
 			$verified_status 	= '1';
 			$verified_by 		= $user_id;
 			$verified_at 		= date('Y-m-d H:i:s');
+		}else{
+			$verified_status 	= '0';
+			$verified_by 		= '';
+			$verified_at 		= '';
 		}
 
 		if ($this->form_validation->run()) {

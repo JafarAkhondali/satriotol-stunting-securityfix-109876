@@ -10,23 +10,53 @@
 	<section class="slider__area">
 		<div class="slider__active swiper-container">
 			<div class="swiper-wrapper">
-				<?php foreach ($sliders as $slider) { ?>
+			<?php 
+				foreach ($sliders as $slider) {
+			?>
 					<div class="slider__item swiper-slide p-relative slider__height slider__height-3 d-flex align-items-center z-index-1">
-						<div class="slider__bg include-bg" data-background="<?php echo base_url(); ?>uploads/sliders/<?php echo $slider->slider_image; ?>">
-						</div>
-						<div class="carousel-caption">
-							<h2><?php echo $slider->slider_title; ?></h2>
-							<div class="carousel-caption-description">
-								<p><?php echo $slider->slider_subtitle; ?></p>
+<?php
+	if (!empty($slider->slider_url)) {
+		echo '<a href="'.$slider->slider_url.'" target="blank">';
+	}
+?>
+						
+							<div class="slider__bg include-bg" data-background="<?php echo base_url(); ?>uploads/sliders/<?php echo $slider->slider_image; ?>"></div>
+<?php
+	if (!empty($slider->slider_title) || !empty($slider->slider_subtitle)) {
+?>
+							<div class="carousel-caption">
+<?php
+	if (!empty($slider->slider_title)) {
+		echo '<h2>'.$slider->slider_title.'</h2>';
+	}
+
+	if (!empty($slider->slider_subtitle)) {
+		echo '<div class="carousel-caption-description"><p>'.$slider->slider_subtitle.'</p></div>';
+	}
+?>
 							</div>
-						</div>
+<?php
+	}
+
+	if (!empty($slider->slider_url)) {
+		echo '</a>';
+	}
+?>
 					</div>
-				<?php } ?>
+			<?php
+				}
+			?>
 			</div>
+<?php
+	if (count($sliders) > 1) {
+?>
 			<div class="main-slider-paginations main-slider-paginations-2">
 				<button class="slider-button-next"><i class="fa-regular fa-arrow-right"></i></button>
 				<button class="slider-button-prev"><i class="fa-regular fa-arrow-left"></i></button>
 			</div>
+<?php
+	}
+?>
 		</div>
 	</section>
 	<!-- slider area end -->
@@ -53,58 +83,6 @@
 			</div>
 		</div>
 	</section>
-
-	<!-- <section class="research__area research__border grey-bg-3 pt-115 pb-90 p-relative z-index-1">
-		<div class="research__shape">
-			<img class="research__shape-1 d-none d-sm-block" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-1.png" alt="">
-			<img class="research__shape-2 d-none d-sm-block" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-2.png" alt="">
-			<img class="research__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/research/research-shape-3.png" alt="">
-		</div>
-		<div class="container">
-			<div class="row">
-				<a href="#pengertian-stunting" class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
-					<div class="research__item research__item-border text-center mb-30 transition-3">
-						<div class="research__thumb mb-35" style="font-size: 100pt;">
-							<i class="fa-light fa-users"></i>
-						</div>
-						<div class="research__content">
-							<h3 class="research__title">Pengertian Stunting</h3>
-						</div>
-					</div>
-				</a>
-				<a href="#penyebab-stunting" class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
-					<div class="research__item research__item-border text-center mb-30 transition-3">
-						<div class="research__thumb mb-35" style="font-size: 100pt; transform: rotate(-90deg);">
-							<i class="fa-light fa-shoe-prints"></i>
-						</div>
-						<div class="research__content">
-							<h3 class="research__title">Penyebab Stunting</h3>
-						</div>
-					</div>
-				</a>
-				<a href="javascript:void(0);" class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
-					<div class="research__item research__item-border text-center mb-30 transition-3">
-						<div class="research__thumb mb-35" style="font-size: 100pt;">
-							<i class="fa-light fa-head-side-cough"></i>
-						</div>
-						<div class="research__content">
-							<h3 class="research__title">Percepatan Penurunan Stunting</h3>
-						</div>
-					</div>
-				</a>
-				<a href="javascript:void(0);" class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
-					<div class="research__item text-center mb-30 transition-3">
-						<div class="research__thumb mb-35" style="font-size: 100pt;">
-							<i class="fa-light fa-map-location-dot"></i>
-						</div>
-						<div class="research__content">
-							<h3 class="research__title">Kota Semarang</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-	</section> -->
 
 	<!-- About Page -->
 	<section id="pengertian-stunting" class="about__area pt-120 pb-120 p-relative">

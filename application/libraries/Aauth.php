@@ -254,7 +254,8 @@ class Aauth
 											aauth_groups.NAME AS group_name");
 		$query = $this->aauth_db->where($db_identifier, $identifier);
 		$query = $this->aauth_db->where('banned', 0);
-		$query = $this->aauth_db->join('aauth_groups', "aauth_groups.id = aauth_users.id");
+		$query = $this->aauth_db->join('aauth_user_to_group', 'aauth_user_to_group.user_id = aauth_users.id', 'LEFT');
+		$query = $this->aauth_db->join('aauth_groups', 'aauth_groups.id =  aauth_user_to_group.group_id', 'LEFT');
 
 		$query = $this->aauth_db->get($this->config_vars['users']);
 

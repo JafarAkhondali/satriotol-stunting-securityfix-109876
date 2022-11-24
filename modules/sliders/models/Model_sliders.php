@@ -5,7 +5,7 @@ class Model_sliders extends MY_Model {
 
     private $primary_key    = 'slider_id';
     private $table_name     = 'sliders';
-    public $field_search   = ['slider_title', 'slider_subtitle', 'slider_image', 'slider_createAt'];
+    public $field_search   = ['slider_title', 'slider_subtitle', 'slider_url', 'slider_image'];
     public $sort_option = ['slider_id', 'DESC'];
     
     public function __construct() {
@@ -20,11 +20,11 @@ class Model_sliders extends MY_Model {
     }
 
     public function count_all($q = null, $field = null) {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -33,6 +33,7 @@ class Model_sliders extends MY_Model {
                 if (strpos($field, '.')) {
                     $f_search = $field;
                 }
+
                 if ($iterasi == 1) {
                     $where .=  $f_search . " LIKE '%" . $q . "%' ";
                 } else {
@@ -48,17 +49,18 @@ class Model_sliders extends MY_Model {
 
         $this->join_avaiable()->filter_avaiable();
         $this->db->where($where);
+
         $query = $this->db->get($this->table_name);
 
         return $query->num_rows();
     }
 
     public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -96,20 +98,16 @@ class Model_sliders extends MY_Model {
     }
 
     public function join_avaiable() {
-        $this->db->select('sliders.*,
-                            aauth_users.id AS user_id,
-                            aauth_users.username AS username,
-                            aauth_users.email AS user_email,
-                            aauth_users.full_name AS full_name');
-        $this->db->join('aauth_users', 'slider_user = id');
+        $this->db->select('sliders.*');
+
 
         return $this;
     }
 
     public function filter_avaiable() {
-
         if (!$this->aauth->is_admin()) {
-            }
+            // $this->db->where($this->table_name.'.slider_user', get_user_data('id'));
+        }
 
         return $this;
     }

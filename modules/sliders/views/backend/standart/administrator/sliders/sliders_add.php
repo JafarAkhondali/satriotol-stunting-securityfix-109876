@@ -8,7 +8,6 @@
 <script src="<?= BASE_ASSET; ?>/js/jquery.hotkeys.js"></script>
 <script type="text/javascript">
 	function domo() {
-
 		// Binding keys
 		$('*').bind('keydown', 'Ctrl+s', function assets() {
 			$('#btn_save').trigger('click');
@@ -24,7 +23,6 @@
 			$('.btn_save_back').trigger('click');
 			return false;
 		});
-
 	}
 
 	jQuery(document).ready(domo);
@@ -90,95 +88,84 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-warning">
+			<div class="box box-danger">
+			<?= form_open('', [
+				'name' 		=> 'form_sliders',
+				// 'class' 	=> 'form-horizontal form-step',
+				'id' 		=> 'form_sliders',
+				'enctype' 	=> 'multipart/form-data',
+				'method' 	=> 'POST'
+			]);
+
+				$user_groups = $this->model_group->get_user_group_ids();
+			?>
+				<div class="box-header">
+					<h3 class="box-title">Tambah Slider</h3>
+				</div>
 				<div class="box-body ">
-					<!-- Widget: user widget style 1 -->
-					<div class="box box-widget widget-user-2">
-						<!-- Add the bg color to the header using any of the bg-* classes -->
-						<div class="widget-user-header ">
-							<div class="widget-user-image">
-								<img class="img-circle" src="<?= BASE_ASSET; ?>/img/add2.png" alt="User Avatar">
-							</div>
-							<!-- /.widget-user-image -->
-							<h3 class="widget-user-username">Sliders</h3>
-							<h5 class="widget-user-desc">
-								<?= cclang('new', ['Sliders']); ?>
-							</h5>
-							<hr>
-						</div>
-						<?= form_open('', [
-                            'name' 		=> 'form_sliders',
-                            'class' 	=> 'form-horizontal form-step',
-                            'id' 		=> 'form_sliders',
-                            'enctype' 	=> 'multipart/form-data',
-                            'method' 	=> 'POST'
-                        ]);
+					<div class="form-group group-slider-title">
+						<label for="slider_title" class="control-label">Judul</label>
+						<input type="text" class="form-control" name="slider_title" id="slider_title" placeholder="Masukkan Judul" value="<?= set_value('slider_title'); ?>">
+						<small class="info help-block"><b>Input Slider Title</b> Max Length : 255.</small>
+					</div>
 
-                        	$user_groups = $this->model_group->get_user_group_ids();
-                        ?>
-						<div class="form-group group-slider-title ">
-							<label for="slider_title" class="col-sm-2 control-label">Judul <i class="required">*</i></label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="slider_title" id="slider_title" placeholder="Masukkan Judul" value="<?= set_value('slider_title'); ?>">
-								<small class="info help-block"><b>Input Slider Title</b> Max Length : 255.</small>
-							</div>
-						</div>
+					<div class="form-group group-slider-subtitle">
+						<label for="slider_subtitle" class="control-label">Deskripsi</label>
+						<textarea class="form-control" id="slider_subtitle" name="slider_subtitle" rows="5" cols="80"><?= set_value('Slider Subtitle'); ?></textarea>
+						<small class="info help-block"></small>
+					</div>
 
-						<div class="form-group group-slider-subtitle ">
-							<label for="slider_subtitle" class="col-sm-2 control-label">Deskripsi <i class="required">*</i></label>
-							<div class="col-sm-8">
-								<textarea id="slider_subtitle" name="slider_subtitle" rows="5"
-									cols="80"><?= set_value('Slider Subtitle'); ?></textarea>
-								<small class="info help-block">
-								</small>
-							</div>
-						</div>
+					<div class="form-group group-slider-url ">
+						<label for="slider_url" class="control-label">Link URL </label>
+						<input type="text" class="form-control" name="slider_url" id="slider_url" placeholder="Link URL" value="<?= set_value('slider_url'); ?>">
+						<small class="info help-block"></small>
+					</div>
 
-						<div class="form-group group-slider-image ">
-							<label for="slider_image" class="col-sm-2 control-label">Image <i class="required">*</i></label>
-							<div class="col-sm-8">
-								<div id="sliders_slider_image_galery"></div>
-								<input class="data_file" name="sliders_slider_image_uuid" id="sliders_slider_image_uuid" type="hidden" value="<?= set_value('sliders_slider_image_uuid'); ?>">
-								<input class="data_file" name="sliders_slider_image_name" id="sliders_slider_image_name" type="hidden" value="<?= set_value('sliders_slider_image_name'); ?>">
-								<small class="info help-block"><b>Extension file must</b> JPG,JPEG,PNG. Ukuran gambar yang disarankan adalah <b>1920 x 775</b></small>
-							</div>
-						</div>
+					<div class="form-group group-slider-image ">
+						<label for="slider_image" class="control-label">Image <i class="required">*</i></label>
+							<div id="sliders_slider_image_galery"></div>
+							<input class="data_file" name="sliders_slider_image_uuid" id="sliders_slider_image_uuid" type="hidden" value="<?= set_value('sliders_slider_image_uuid'); ?>">
+							<input class="data_file" name="sliders_slider_image_name" id="sliders_slider_image_name" type="hidden" value="<?= set_value('sliders_slider_image_name'); ?>">
+							<small class="info help-block">
+								<b>Extension file must</b> JPG,JPEG,PNG.<br/>
+								<b>Dimensi gambar yang disarankan </b>1920 x 775<br/>
+								<b>Ukuran gambar yang diupload maksimal</b> 10MB
+							</small>
+					</div>
 
-						<div class="message"></div>
+					<div class="message"></div>
+				</div>
+				<div class="box-footer">
+					<div class="row-fluid container-button-bottom">
+						<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay' title="<?= cclang('save_button'); ?> (Ctrl+s)">
+							<i class="fa fa-save"></i>
+							<?= cclang('save_button'); ?>
+						</button>
+						<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save" data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
+							<i class="ion ion-ios-list-outline"></i>
+							<?= cclang('save_and_go_the_list_button'); ?>
+						</a>
 
-						<div class="row-fluid col-md-7 container-button-bottom">
-							<button class="btn btn-flat btn-primary btn_save btn_action" id="btn_save" data-stype='stay' title="<?= cclang('save_button'); ?> (Ctrl+s)">
-								<i class="fa fa-save"></i>
-								<?= cclang('save_button'); ?>
-							</button>
-							<a class="btn btn-flat btn-info btn_save btn_action btn_save_back" id="btn_save" data-stype='back' title="<?= cclang('save_and_go_the_list_button'); ?> (Ctrl+d)">
-								<i class="ion ion-ios-list-outline"></i>
-								<?= cclang('save_and_go_the_list_button'); ?>
-							</a>
+						<div class="custom-button-wrapper"></div>
 
-							<div class="custom-button-wrapper"></div>
+						<a class="btn btn-flat btn-default btn_action" id="btn_cancel" title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
+							<i class="fa fa-undo"></i>
+							<?= cclang('cancel_button'); ?>
+						</a>
 
-							<a class="btn btn-flat btn-default btn_action" id="btn_cancel" title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
-								<i class="fa fa-undo"></i>
-								<?= cclang('cancel_button'); ?>
-							</a>
-
-							<span class="loading loading-hide">
-								<img src="<?= BASE_ASSET; ?>/img/loading-spin-primary.svg">
-								<i><?= cclang('loading_saving_data'); ?></i>
-							</span>
-						</div>
-						<?= form_close(); ?>
+						<span class="loading loading-hide">
+							<img src="<?= BASE_ASSET; ?>/img/loading-spin-primary.svg">
+							<i><?= cclang('loading_saving_data'); ?></i>
+						</span>
 					</div>
 				</div>
-				<!--/box body -->
+				<?= form_close(); ?>
 			</div>
-			<!--/box -->
 		</div>
 	</div>
 </section>
 <!-- /.content -->
-<script src="<?= BASE_ASSET; ?>ckeditor/ckeditor.js"></script>
+<!-- <script src="<?= BASE_ASSET; ?>ckeditor/ckeditor.js"></script> -->
 <!-- Page script -->
 
 <script>
@@ -194,8 +181,8 @@
 			var slider_image = $('#slider_image');
 		})()
 
-		CKEDITOR.replace('slider_subtitle');
-		var slider_subtitle = CKEDITOR.instances.slider_subtitle;
+		// CKEDITOR.replace('slider_subtitle');
+		// var slider_subtitle = CKEDITOR.instances.slider_subtitle;
 
 		$('#btn_cancel').click(function () {
 			swal({
@@ -220,7 +207,7 @@
 
 		$('.btn_save').click(function () {
 			$('.message').fadeOut();
-			$('#slider_subtitle').val(slider_subtitle.getData());
+			// $('#slider_subtitle').val(slider_subtitle.getData());
 
 			var form_sliders = $('#form_sliders');
 			var data_post = form_sliders.serializeArray();
@@ -275,7 +262,7 @@
 						}
 
 						$('.chosen option').prop('selected', false).trigger('chosen:updated');
-						slider_subtitle.setData('');
+						// slider_subtitle.setData('');
 					} else {
 						if (res.errors) {
 

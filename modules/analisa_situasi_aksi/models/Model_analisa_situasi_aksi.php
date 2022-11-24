@@ -108,9 +108,8 @@ class Model_analisa_situasi_aksi extends MY_Model {
     }
 
     public function filter_avaiable() {
-
         if (!$this->aauth->is_admin()) {
-            $this->db->where($this->table_name.'.analisa_situasi_aksi_user', get_user_data('id'));
+            // $this->db->where($this->table_name.'.analisa_situasi_aksi_user', get_user_data('id'));
         }
 
         return $this;

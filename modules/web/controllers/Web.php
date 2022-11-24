@@ -19,7 +19,7 @@ class Web extends Front {
 	}
 
 	public function index() {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -188,7 +188,7 @@ class Web extends Front {
 	public function rembuk_stunting() {
 		$id                     = $this->input->get('id');
 		
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -211,7 +211,7 @@ class Web extends Front {
 	public function detail_rembuk_stunting() {
 		$id                     = $this->input->get('id');
 
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -225,7 +225,7 @@ class Web extends Front {
 	}
 
 	public function analisa_situasi() {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -238,7 +238,7 @@ class Web extends Front {
 	}
 
 	public function analisa_situasi_detail($id) {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -252,7 +252,7 @@ class Web extends Front {
 	}
 
 	public function rencana_kegiatan() {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -263,7 +263,7 @@ class Web extends Front {
 	}
 
 	public function data_statistik() {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -273,7 +273,7 @@ class Web extends Front {
 	}
 
 	public function kebijakan() {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -284,7 +284,7 @@ class Web extends Front {
 	}
 
 	public function lokus_stunting() {
-		$data['sliders']        = $this->db->get('sliders')->result();
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
@@ -309,7 +309,7 @@ class Web extends Front {
 
 	public function aksi_konvergensi(){
 		$data = [
-			'sliders' 		=> $this->db->get('sliders')->result(),
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
 			'categories' 	=> $this->db->get('blog_category')->result(),
 			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
 			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
@@ -324,7 +324,7 @@ class Web extends Front {
 		
 		if ($id == null) {
 			$data = [
-				'sliders' 		=> $this->db->get('sliders')->result(),
+				'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
 				'categories' 	=> $this->db->get('blog_category')->result(),
 				'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
 				'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
@@ -336,7 +336,7 @@ class Web extends Front {
 			$this->template->build('rentan-opd', $data);
 		}else{
 			$data = [
-				'sliders' 		=> $this->db->get('sliders')->result(),
+				'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
 				'categories' 	=> $this->db->get('blog_category')->result(),
 				'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
 				'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),

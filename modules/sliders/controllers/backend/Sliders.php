@@ -70,8 +70,6 @@ class Sliders extends Admin	{
 			exit;
 		}
 
-		$this->form_validation->set_rules('slider_title', 'Judul', 'trim|required|max_length[255]');
-		$this->form_validation->set_rules('slider_subtitle', 'Deskripsi', 'trim|required');
 		$this->form_validation->set_rules('sliders_slider_image_name', 'Image', 'trim|required');
 
 		if ($this->form_validation->run()) {
@@ -81,6 +79,7 @@ class Sliders extends Admin	{
 			$save_data = [
 				'slider_title' 		=> $this->input->post('slider_title'),
 				'slider_subtitle' 	=> $this->input->post('slider_subtitle'),
+				'slider_url' 		=> $this->input->post('slider_url'),
 				'slider_createAt' 	=> date('Y-m-d H:i:s'),
 				'slider_user' 		=> $this->session->userdata('id'),
 				'slider_status' 	=> '1',
@@ -174,10 +173,7 @@ class Sliders extends Admin	{
 			exit;
 		}
 
-		$this->form_validation->set_rules('slider_title', 'Judul', 'trim|required|max_length[255]');
-		$this->form_validation->set_rules('slider_subtitle', 'Deskripsi', 'trim|required');
 		$this->form_validation->set_rules('sliders_slider_image_name', 'Image', 'trim|required');
-		// $this->form_validation->set_rules('slider_status', 'Status', 'trim|required');
 		
 		if ($this->form_validation->run()) {
 			$sliders_slider_image_uuid = $this->input->post('sliders_slider_image_uuid');
@@ -186,6 +182,7 @@ class Sliders extends Admin	{
 			$save_data = [
 				'slider_title' 		=> $this->input->post('slider_title'),
 				'slider_subtitle' 	=> $this->input->post('slider_subtitle'),
+				'slider_url' 		=> $this->input->post('slider_url'),
 			];
 			
 			if (!is_dir(FCPATH . '/uploads/sliders/')) {
