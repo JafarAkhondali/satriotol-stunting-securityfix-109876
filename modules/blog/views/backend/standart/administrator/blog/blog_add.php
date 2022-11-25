@@ -212,7 +212,8 @@
 							<div id="blog_image_galery_listed"></div>
 							<small class="info help-block">
 								<b>Extension file must</b> JPG,JPEG,PNG.<br/>
-								Ukuran gambar yang disarankan : <b>760 x 405</b>
+								<b>Dimensi gambar yang disarankan : </b>760 x 405<br/>
+								<b>Ukuran gambar maksimal </b> 10 Mb
 							</small>
 						</div>
 					</div>

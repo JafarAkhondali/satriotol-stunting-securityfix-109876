@@ -110,7 +110,10 @@
 									id="analisa_situasi_analisa_situasi_image_uuid" type="hidden" value="<?= set_value('analisa_situasi_analisa_situasi_image_uuid'); ?>">
 								<input class="data_file" name="analisa_situasi_analisa_situasi_image_name"
 									id="analisa_situasi_analisa_situasi_image_name" type="hidden" value="<?= set_value('analisa_situasi_analisa_situasi_image_name'); ?>">
-								<small class="info help-block"></small>
+								<small class="info help-block">
+								<b>Extension file must</b> JPG,JPEG,PNG.<br/>
+								<b>Ukuran gambar maksimal </b> 10 Mb
+								</small>
 							</div>
 						</div>
 

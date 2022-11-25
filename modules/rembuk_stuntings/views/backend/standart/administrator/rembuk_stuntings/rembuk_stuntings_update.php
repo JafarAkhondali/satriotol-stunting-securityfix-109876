@@ -120,7 +120,10 @@
 								<input class="data_file data_file_uuid" name="rembuk_stuntings_rembuk_stunting_file_uuid" id="rembuk_stuntings_rembuk_stunting_file_uuid" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_uuid'); ?>">
 								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_name" id="rembuk_stuntings_rembuk_stunting_file_name" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_name', $rembuk_stuntings->rembuk_stunting_file); ?>">
 								<input class="data_file" name="rembuk_stuntings_rembuk_stunting_file_default_name" id="rembuk_stuntings_rembuk_stunting_file_default_name" type="hidden" value="<?= set_value('rembuk_stuntings_rembuk_stunting_file_default_name', $rembuk_stuntings->rembuk_stunting_file); ?>">
-								<small class="info help-block"><b>Extension file must</b> PDF.</small>
+								<small class="info help-block">
+									<b>Extension file must</b> PDF.<br/>
+									<b>Ukuran file maksimal </b> 10 Mb
+								</small>
 							</div>
 						</div>
 

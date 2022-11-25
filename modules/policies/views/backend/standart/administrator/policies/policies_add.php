@@ -108,7 +108,7 @@
 								<input class="data_file" name="policies_policies_file_name"
 									id="policies_policies_file_name" type="hidden" value="<?= set_value('policies_policies_file_name'); ?>">
 								<small class="info help-block">
-									<b>Max file size : </b>2mb
+								<b>Ukuran file maksimal </b> 10 Mb
 								</small>
 							</div>
 						</div>

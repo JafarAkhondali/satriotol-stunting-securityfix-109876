@@ -86,7 +86,10 @@
 								<div id="lokus_years_lokus_year_file_galery"></div>
 								<input class="data_file data_file_uuid" name="lokus_years_lokus_year_file_uuid" id="lokus_years_lokus_year_file_uuid" type="hidden" value="<?= set_value('lokus_years_lokus_year_file_uuid'); ?>">
 								<input class="data_file" name="lokus_years_lokus_year_file_name" id="lokus_years_lokus_year_file_name" type="hidden" value="<?= set_value('lokus_years_lokus_year_file_name', $lokus_years->lokus_year_file); ?>">
-								<small class="info help-block"><b>Extension file must</b> PDF.</small>
+								<small class="info help-block">
+									<b>Extension file must</b> PDF.<br/>
+									<b>Ukuran file maksimal </b> 10 Mb
+								</small>
 							</div>
 						</div>
 
