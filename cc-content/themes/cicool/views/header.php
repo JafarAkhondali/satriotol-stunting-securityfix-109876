@@ -95,9 +95,8 @@
 						<div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-6">
 							<div class="logo text-lg-center">
 								<a href="<?= base_url();?>">
-									<img src="<?= base_url() . 'uploads/about/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
-									<h1>PEMERINTAH KOTA SEMARANG</h1>&nbsp;&nbsp;&nbsp;
-									<img src="<?= base_url() . 'uploads/about/' . $about->about_logo; ?>" alt="logo">
+									<img src="<?= base_url().'uploads/about/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
+									<img src="<?= base_url().'uploads/about/' . $about->about_logo;?>" alt="logo">
 								</a>
 							</div>
 						</div>
