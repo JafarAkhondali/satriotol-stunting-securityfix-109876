@@ -71,7 +71,8 @@
 	<div id="loading">
 		<div id="loading-center">
 			<div id="loading-center-absolute">
-				<img src="<?= base_url(); ?>assets_stunting/favicon/android-chrome-192x192.png" alt="">
+				<!-- <img src="<?= base_url(); ?>assets_stunting/favicon/android-chrome-192x192.png" alt=""> -->
+				<img src="<?= base_url() . 'uploads/about/' . $about->about_logo;?>" alt="" width="400">
 			</div>
 		</div>
 	</div>
@@ -95,7 +96,7 @@
 						<div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-6">
 							<div class="logo text-lg-center">
 								<a href="<?= base_url();?>">
-									<img src="<?= base_url().'uploads/about/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
+									<img src="<?= base_url().'assets_stunting/img/logo/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
 									<img src="<?= base_url().'uploads/about/' . $about->about_logo;?>" alt="logo">
 								</a>
 							</div>
@@ -211,8 +212,8 @@
 						<div class="header__bottom-left d-flex align-items-center">
 							<div class="logo">
 								<a href="<?= base_url(); ?>">
-									<img src="<?= base_url() . 'uploads/about/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
-									<img src="<?= base_url() . 'uploads/about/' . $about->about_logo; ?>" alt="logo">
+									<img src="<?= base_url() . 'assets_stunting/img/logo/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
+									<img src="<?= base_url() . 'uploads/about/' . $about->about_logo;?>" alt="logo">
 								</a>
 							</div>
 							<div class="main-menu main-menu-2 main-menu-mobile ml-10 pl-10">

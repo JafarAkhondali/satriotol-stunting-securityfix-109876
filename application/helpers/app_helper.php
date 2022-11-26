@@ -1536,6 +1536,23 @@ if (!function_exists('send_notification')) {
 	}
 }
 
+
+if (!function_exists('kode_acak')) {
+	function kode_acak() {
+		return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+	// function kode_acak($panjang) {
+	// 	$karakter= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+	// 	$string = '';
+
+	// 	for ($i = 0; $i < $panjang; $i++) {
+	// 		$pos 	= rand(0, strlen($karakter)-1);
+	// 		$string .= $karakter{$pos};
+	// 	}
+
+	// 	return $string;
+	}
+}
+
 // if (!function_exists('array_group_by')) {
 	/* function array_group_by($arrays, $key) {
 		$i 				= 0;

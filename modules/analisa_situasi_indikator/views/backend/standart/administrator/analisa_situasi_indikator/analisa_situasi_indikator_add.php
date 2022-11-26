@@ -23,13 +23,13 @@
 </script>
 
 <style type="text/css"></style>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>Indikator Analisa Situasi <small><?= cclang('new', ['Indikator Analisa Situasi']);?> </small></h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class=""><a href="<?= site_url('administrator/analisa_situasi_indikator'); ?>">Indikator Analisa Situasi</a>
-		</li>
+		<li class=""><a href="<?= site_url('administrator/analisa_situasi_indikator'); ?>">Indikator Analisa Situasi</a></li>
 		<li class="active"><?= cclang('new'); ?></li>
 	</ol>
 </section>
@@ -96,32 +96,25 @@
 <!-- Page script -->
 <script type="text/javascript">
 	$(document).ready(function () {
-
 		window.event_submit_and_action = '';
-
-
-
-
-
-
 
 		$('#btn_cancel').click(function () {
 			swal({
-					title: "<?= cclang('are_you_sure'); ?>",
-					text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Yes!",
-					cancelButtonText: "No!",
-					closeOnConfirm: true,
-					closeOnCancel: true
-				},
-				function (isConfirm) {
-					if (isConfirm) {
-						window.location.href = BASE_URL + 'administrator/analisa_situasi_indikator';
-					}
-				});
+				title: "<?= cclang('are_you_sure'); ?>",
+				text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes!",
+				cancelButtonText: "No!",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function (isConfirm) {
+				if (isConfirm) {
+					window.location.href = BASE_URL + 'administrator/analisa_situasi_indikator';
+				}
+			});
 
 			return false;
 		}); /*end btn cancel*/
@@ -148,77 +141,69 @@
 			$('.loading').show();
 
 			$.ajax({
-					url: BASE_URL + '/administrator/analisa_situasi_indikator/add_save',
-					type: 'POST',
-					dataType: 'json',
-					data: data_post,
-				})
-				.done(function (res) {
-					$('form').find('.form-group').removeClass('has-error');
-					$('.steps li').removeClass('error');
-					$('form').find('.error-input').remove();
-					if (res.success) {
+				url: BASE_URL + '/administrator/analisa_situasi_indikator/add_save',
+				type: 'POST',
+				dataType: 'json',
+				data: data_post,
+			})
+			.done(function (res) {
+				$('form').find('.form-group').removeClass('has-error');
+				$('.steps li').removeClass('error');
+				$('form').find('.error-input').remove();
+				if (res.success) {
 
-						if (save_type == 'back') {
-							window.location.href = res.redirect;
-							return;
-						}
-
-						$('.message').printMessage({
-							message: res.message
-						});
-						$('.message').fadeIn();
-						resetForm();
-						$('.chosen option').prop('selected', false).trigger('chosen:updated');
-
-					} else {
-						if (res.errors) {
-
-							$.each(res.errors, function (index, val) {
-								$('form #' + index).parents('.form-group').addClass(
-									'has-error');
-								$('form #' + index).parents('.form-group').find('small')
-									.prepend(`
-					  <div class="error-input">` + val + `</div>
-					  `);
-							});
-							$('.steps li').removeClass('error');
-							$('.content section').each(function (index, el) {
-								if ($(this).find('.has-error').length) {
-									$('.steps li:eq(' + index + ')').addClass('error').find(
-										'a').trigger('click');
-								}
-							});
-						}
-						$('.message').printMessage({
-							message: res.message,
-							type: 'warning'
-						});
+					if (save_type == 'back') {
+						window.location.href = res.redirect;
+						return;
 					}
 
-				})
-				.fail(function () {
 					$('.message').printMessage({
-						message: 'Error save data',
+						message: res.message
+					});
+					$('.message').fadeIn();
+					resetForm();
+					$('.chosen option').prop('selected', false).trigger('chosen:updated');
+
+				} else {
+					if (res.errors) {
+
+						$.each(res.errors, function (index, val) {
+							$('form #' + index).parents('.form-group').addClass(
+								'has-error');
+							$('form #' + index).parents('.form-group').find('small')
+								.prepend(`
+					<div class="error-input">` + val + `</div>
+					`);
+						});
+						$('.steps li').removeClass('error');
+						$('.content section').each(function (index, el) {
+							if ($(this).find('.has-error').length) {
+								$('.steps li:eq(' + index + ')').addClass('error').find(
+									'a').trigger('click');
+							}
+						});
+					}
+					$('.message').printMessage({
+						message: res.message,
 						type: 'warning'
 					});
-				})
-				.always(function () {
-					$('.loading').hide();
-					$('html, body').animate({
-						scrollTop: $(document).height()
-					}, 2000);
+				}
+
+			})
+			.fail(function () {
+				$('.message').printMessage({
+					message: 'Error save data',
+					type: 'warning'
 				});
+			})
+			.always(function () {
+				$('.loading').hide();
+				$('html, body').animate({
+					scrollTop: $(document).height()
+				}, 2000);
+			});
 
 			return false;
 		}); /*end btn save*/
-
-
-
-
-
-
-
-
 	}); /*end doc ready*/
 </script>

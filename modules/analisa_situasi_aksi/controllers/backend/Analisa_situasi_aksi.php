@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 /**
 *| --------------------------------------------------------------------------
 *| Analisa Situasi Aksi Controller
@@ -15,6 +16,8 @@ class Analisa_situasi_aksi extends Admin {
 		$this->load->model('model_analisa_situasi_aksi');
 		$this->load->model('group/model_group');
 		$this->lang->load('web_lang', $this->current_lang);
+		$this->load->helper('app');
+		
 	}
 
 	/**
@@ -28,8 +31,8 @@ class Analisa_situasi_aksi extends Admin {
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['analisa_situasi_aksis'] = $this->model_analisa_situasi_aksi->get($filter, $field, $this->limit_page, $offset);
-		$this->data['analisa_situasi_aksi_counts'] = $this->model_analisa_situasi_aksi->count_all($filter, $field);
+		$this->data['analisa_situasi_aksis'] 		= $this->model_analisa_situasi_aksi->get($filter, $field, $this->limit_page, $offset);
+		$this->data['analisa_situasi_aksi_counts'] 	= $this->model_analisa_situasi_aksi->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/analisa_situasi_aksi/index/',
@@ -51,6 +54,10 @@ class Analisa_situasi_aksi extends Admin {
 	public function add() {
 		$this->is_allowed('analisa_situasi_aksi_add');
 
+		$this->data = [
+			'warna' => strtoupper(kode_acak()),
+		];
+
 		$this->template->title('Analisa Situasi Aksi New');
 		$this->render('backend/standart/administrator/analisa_situasi_aksi/analisa_situasi_aksi_add', $this->data);
 	}
@@ -66,22 +73,22 @@ class Analisa_situasi_aksi extends Admin {
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
 				]);
+
 			exit;
 		}
 
-		$this->form_validation->set_rules('analisa_situasi_id', 'Reff Analisa Situasi', 'trim|required');
-		$this->form_validation->set_rules('analisa_situasi_aksi_indikator', 'Indikator', 'trim|required|max_length[255]');
+		$this->form_validation->set_rules('analisa_situasi_id', 'Tahun Analisa Situasi', 'trim|required');
+		$this->form_validation->set_rules('analisa_situasi_indikator_id', 'Indikator Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_aksi_cakupan', 'Cakupan', 'trim|required|max_length[10]');
-		$this->form_validation->set_rules('analisa_situasi_aksi_warna', 'Warna', 'trim|required');
 
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'analisa_situasi_id' 				=> $this->input->post('analisa_situasi_id'),
-				'analisa_situasi_aksi_indikator' 	=> $this->input->post('analisa_situasi_aksi_indikator'),
-				'analisa_situasi_aksi_cakupan' 		=> $this->input->post('analisa_situasi_aksi_cakupan'),
-				'analisa_situasi_aksi_warna' 		=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
-				'analisa_situasi_aksi_create_at' 	=> date('Y-m-d H:i:s'),
-				'analisa_situasi_aksi_user' 		=> get_user_data('id'),
+				'analisa_situasi_id' 					=> $this->input->post('analisa_situasi_id'),
+				'analisa_situasi_indikator_id' 			=> $this->input->post('analisa_situasi_indikator_id'),
+				'analisa_situasi_aksi_cakupan' 			=> $this->input->post('analisa_situasi_aksi_cakupan'),
+				'analisa_situasi_aksi_warna' 			=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
+				'analisa_situasi_aksi_create_author' 	=> get_user_data('id'),
+				'analisa_situasi_aksi_create_at' 		=> date('Y-m-d H:i:s'),
 			];
 			
 			$save_analisa_situasi_aksi = $id = $this->model_analisa_situasi_aksi->store($save_data);
@@ -149,20 +156,22 @@ class Analisa_situasi_aksi extends Admin {
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
 				]);
+
 			exit;
 		}
 
-		$this->form_validation->set_rules('analisa_situasi_id', 'Reff Analisa Situasi', 'trim|required');
-		$this->form_validation->set_rules('analisa_situasi_aksi_indikator', 'Indikator', 'trim|required|max_length[255]');
+		$this->form_validation->set_rules('analisa_situasi_id', 'Tahun Analisa Situasi', 'trim|required');
+		$this->form_validation->set_rules('analisa_situasi_indikator_id', 'Indikator Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_aksi_cakupan', 'Cakupan', 'trim|required|max_length[10]');
-		$this->form_validation->set_rules('analisa_situasi_aksi_warna', 'Warna', 'trim|required');
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'analisa_situasi_id' 				=> $this->input->post('analisa_situasi_id'),
-				'analisa_situasi_aksi_indikator' 	=> $this->input->post('analisa_situasi_aksi_indikator'),
-				'analisa_situasi_aksi_cakupan' 		=> $this->input->post('analisa_situasi_aksi_cakupan'),
-				'analisa_situasi_aksi_warna' 		=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
+				'analisa_situasi_id' 					=> $this->input->post('analisa_situasi_id'),
+				'analisa_situasi_indikator_id' 			=> $this->input->post('analisa_situasi_indikator_id'),
+				'analisa_situasi_aksi_cakupan' 			=> $this->input->post('analisa_situasi_aksi_cakupan'),
+				'analisa_situasi_aksi_warna' 			=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
+				'analisa_situasi_aksi_update_author' 	=> get_user_data('id'),
+				'analisa_situasi_aksi_update_at' 		=> date('Y-m-d H:i:s'),
 			];
 			
 			$save_analisa_situasi_aksi = $this->model_analisa_situasi_aksi->change($id, $save_data);
@@ -322,6 +331,7 @@ class Analisa_situasi_aksi extends Admin {
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
 				]);
+
 			exit;
 		}
 
@@ -329,6 +339,24 @@ class Analisa_situasi_aksi extends Admin {
 			$results = db_get_all_data('analisa_situasi', ['analisa_situasi_id' => $id]);
 		}else{
 			$results = db_get_all_data('analisa_situasi');
+		}
+
+		$this->response($results);	
+	}
+
+	public function ajax_analisa_situasi_indikator_id($id = null) {
+		if (!$this->is_allowed('analisa_situasi_aksi_list', false)) {
+			echo json_encode([
+				'success' => false,
+				'message' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		if ($id != null) {
+			$results = db_get_all_data('analisa_situasi_indikator', ['analisa_situasi_indikator_id' => $id]);
+		}else{
+			$results = db_get_all_data('analisa_situasi_indikator');
 		}
 
 		$this->response($results);	

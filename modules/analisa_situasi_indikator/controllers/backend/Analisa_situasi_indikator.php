@@ -153,7 +153,7 @@ class Analisa_situasi_indikator extends Admin {
 				'analisa_situasi_indikator_nama' 			=> $this->input->post('analisa_situasi_indikator_nama'),
 				'analisa_situasi_indikator_deskripsi' 		=> $this->input->post('analisa_situasi_indikator_deskripsi'),
 				'analisa_situasi_indikator_update_author' 	=> get_user_data('id'),
-				'analisa_situasi_indikator_update_at' 		=> $this->input->post('analisa_situasi_indikator_update_at'),
+				'analisa_situasi_indikator_update_at' 		=> date('Y-m-d H:i:s'),
 			];
 
 			$save_analisa_situasi_indikator = $this->model_analisa_situasi_indikator->change($id, $save_data);
