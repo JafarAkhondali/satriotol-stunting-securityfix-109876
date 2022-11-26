@@ -39,7 +39,6 @@ phploy
 phploy.ini
 
 /vendor/*
-!/vendor/Magnific-Popup
 
 # IDE Files
 #-------------------------
