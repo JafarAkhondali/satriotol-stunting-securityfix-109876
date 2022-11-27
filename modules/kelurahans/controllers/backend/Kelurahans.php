@@ -50,7 +50,13 @@ class Kelurahans extends Admin {
 	*
 	*/
 	public function add() {
+		$getID = $this->input->get('id');
+		
 		$this->is_allowed('kelurahans_add');
+
+		$this->data = [
+			'id' => $getID,
+		];
 
 		$this->template->title('Kelurahan New');
 		$this->render('backend/standart/administrator/kelurahans/kelurahans_add', $this->data);
@@ -62,6 +68,8 @@ class Kelurahans extends Admin {
 	* @return JSON
 	*/
 	public function add_save() {
+		$id_kecamatan = $this->input->get('id');
+
 		if (!$this->is_allowed('kelurahans_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -73,8 +81,13 @@ class Kelurahans extends Admin {
 		$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_nama', 'Nama Kelurahan', 'trim|required|max_length[255]');
 
+		if (!empty($id_kecamatan)) {
+			$redirect = base_url('administrator/kecamatans/view/'.$id_kecamatan);
+		}else{
+			$redirect = base_url('administrator/kelurahans');
+		}
+
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
 				'kecamatan_id' 			=> $this->input->post('kecamatan_id'),
 				'kelurahan_nama' 		=> $this->input->post('kelurahan_nama'),
@@ -99,7 +112,7 @@ class Kelurahans extends Admin {
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/kelurahans');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -108,7 +121,7 @@ class Kelurahans extends Admin {
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/kelurahans');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {
@@ -126,6 +139,12 @@ class Kelurahans extends Admin {
 	* @var $id String
 	*/
 	public function edit($id) {
+		$getID = $this->input->get('id');
+
+		$this->data = [
+			'id' => $getID,
+		];
+
 		$this->is_allowed('kelurahans_update');
 
 		$this->data['kelurahans'] = $this->model_kelurahans->find($id);
@@ -140,6 +159,8 @@ class Kelurahans extends Admin {
 	* @var $id String
 	*/
 	public function edit_save($id) {
+		$id_kecamatan = $this->input->get('id');
+
 		if (!$this->is_allowed('kelurahans_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -150,6 +171,12 @@ class Kelurahans extends Admin {
 
 		$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_nama', 'Nama Kelurahan', 'trim|required|max_length[255]');
+
+		if (!empty($id_kecamatan)) {
+			$redirect = base_url('administrator/kecamatans/view/'.$id_kecamatan);
+		}else{
+			$redirect = base_url('administrator/kelurahans');
+		}
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
@@ -172,7 +199,7 @@ class Kelurahans extends Admin {
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/kelurahans');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -181,7 +208,7 @@ class Kelurahans extends Admin {
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/kelurahans');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {

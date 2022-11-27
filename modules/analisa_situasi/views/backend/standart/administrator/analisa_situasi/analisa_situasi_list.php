@@ -125,29 +125,21 @@
 									<tbody id="tbody_analisa_situasi">
 										<?php foreach($analisa_situasis as $analisa_situasi): ?>
 										<tr>
-											<td width="5">
-												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $analisa_situasi->analisa_situasi_id; ?>">
-											</td>
+											<td width="5"><input type="checkbox" class="flat-red check" name="id[]" value="<?= $analisa_situasi->analisa_situasi_id; ?>"></td>
 											<td><span class="list_group-analisa-situasi-year"><?= _ent($analisa_situasi->analisa_situasi_year); ?></span></td>
 											<td>
 												<?php if (!empty($analisa_situasi->analisa_situasi_image)): ?>
 												<?php if (is_image($analisa_situasi->analisa_situasi_image)): ?>
-												<a class="fancybox" rel="group"
-													href="<?= BASE_URL . 'uploads/analisa_situasi/' . $analisa_situasi->analisa_situasi_image; ?>">
-													<img src="<?= BASE_URL . 'uploads/analisa_situasi/' . $analisa_situasi->analisa_situasi_image; ?>"
-														class="image-responsive" alt="image analisa_situasi" title="analisa_situasi_image analisa_situasi" width="40px">
+												<a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/analisa_situasi/' . $analisa_situasi->analisa_situasi_image; ?>">
+													<img src="<?= BASE_URL . 'uploads/analisa_situasi/' . $analisa_situasi->analisa_situasi_image; ?>" class="image-responsive" alt="image analisa_situasi" title="analisa_situasi_image analisa_situasi" width="40px">
 												</a>
 												<?php else: ?>
-												<a href="<?= BASE_URL . 'uploads/analisa_situasi/' . $analisa_situasi->analisa_situasi_image; ?>"
-													target="blank">
-													<img src="<?= get_icon_file($analisa_situasi->analisa_situasi_image); ?>"
-														class="image-responsive image-icon" alt="image analisa_situasi"
-														title="analisa_situasi_image <?= $analisa_situasi->analisa_situasi_image; ?>" width="40px">
+												<a href="<?= BASE_URL . 'uploads/analisa_situasi/' . $analisa_situasi->analisa_situasi_image; ?>" target="blank">
+													<img src="<?= get_icon_file($analisa_situasi->analisa_situasi_image); ?>" class="image-responsive image-icon" alt="image analisa_situasi" title="analisa_situasi_image <?= $analisa_situasi->analisa_situasi_image; ?>" width="40px">
 												</a>
 												<?php endif; ?>
 												<?php endif; ?>
 											</td>
-
 											<td width="200">
 												<?php is_allowed('analisa_situasi_view', function() use ($analisa_situasi){?>
 												<a href="<?= site_url('administrator/analisa_situasi/view/' . $analisa_situasi->analisa_situasi_id); ?>"

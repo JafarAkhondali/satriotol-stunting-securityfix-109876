@@ -121,6 +121,15 @@
 
     <script>
     	$(document).ready(function () {
+			var getID = '<?php echo $id;?>';
+			var redirectURL;
+
+			if (getID != '') {
+				redirectURL = BASE_URL + 'administrator/kecamatans/view/'+getID;
+			}else{
+				redirectURL = BASE_URL + 'administrator/kelurahans';
+			}
+
     		window.event_submit_and_action = '';
 
     		$('#btn_cancel').click(function () {
@@ -137,7 +146,7 @@
     				},
     				function (isConfirm) {
     					if (isConfirm) {
-    						window.location.href = BASE_URL + 'administrator/kelurahans';
+    						window.location.href = redirectURL;
     					}
     				});
 
@@ -224,7 +233,7 @@
     			return false;
     		}); /*end btn save*/
 
-			function chained_kecamatan_id(complete) {
+			function chained_kecamatan_id(selected, complete) {
 				$.LoadingOverlay('show');
 
 				return $.ajax({
@@ -235,7 +244,7 @@
 					var html = '<option value=""></option>';
 
 					$.each(res, function(index, val) {
-						html += '<option value="' + val.kecamatan_id + '">' + val.kecamatan_nama + '</option>'
+						html += '<option value="' + val.kecamatan_id + '" '+(selected == val.kecamatan_id ? 'selected' : '')+'>' + val.kecamatan_nama + '</option>'
 					});
 
 					$('#kecamatan_id').html(html);
@@ -255,7 +264,7 @@
 			}
 
 			async function chain() {
-				await chained_kecamatan_id();
+				await chained_kecamatan_id('<?php echo $id;?>');
 			}
 
 			chain();

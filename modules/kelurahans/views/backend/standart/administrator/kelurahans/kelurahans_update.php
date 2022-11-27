@@ -119,6 +119,15 @@
 <!-- Page script -->
 <script>
 	$(document).ready(function () {
+		var getID = '<?php echo $id;?>';
+		var redirectURL;
+
+		if (getID != '') {
+			redirectURL = BASE_URL + 'administrator/kecamatans/view/'+getID;
+		}else{
+			redirectURL = BASE_URL + 'administrator/kelurahans';
+		}
+
 		window.event_submit_and_action = '';
 
 		$('#btn_cancel').click(function () {
@@ -135,7 +144,7 @@
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						window.location.href = BASE_URL + 'administrator/kelurahans';
+						window.location.href = redirectURL;
 					}
 				});
 

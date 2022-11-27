@@ -174,6 +174,15 @@
 
 	<script type="text/javascript">
 		$(document).ready(function () {
+			var getID = '<?php echo $id;?>';
+			var redirectURL;
+
+			if (getID != '') {
+				redirectURL = BASE_URL + 'administrator/analisa_situasi/view/'+getID;
+			}else{
+				redirectURL = BASE_URL + 'administrator/analisa_situasi_aksi';
+			}
+
 			window.event_submit_and_action = '';
 
 			(function () {
@@ -213,7 +222,7 @@
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						window.location.href = BASE_URL + 'administrator/analisa_situasi_aksi';
+						window.location.href = redirectURL;
 					}
 				});
 

@@ -108,6 +108,13 @@ class Model_analisa_situasi extends MY_Model {
 		return $this;
 	}
 
+	public function query_analisa_aksi($id) {
+		$this->db->join('analisa_situasi_indikator', 'analisa_situasi_indikator.analisa_situasi_indikator_id = analisa_situasi_aksi.analisa_situasi_indikator_id', 'LEFT');
+		$this->db->where('analisa_situasi_aksi.analisa_situasi_id', $id);
+		
+		return $this->db->get('analisa_situasi_aksi');
+	}
+
     public function _get_datatables_query_aksi_analisa(){
 		$this->db->from('analisa_situasi_aksi');
 		
@@ -140,6 +147,8 @@ class Model_analisa_situasi extends MY_Model {
 
 	public function get_datatables_aksi_analisa($id){
 		$this->_get_datatables_query_aksi_analisa($id);
+		$this->db->join('analisa_situasi_indikator', 'analisa_situasi_indikator.analisa_situasi_indikator_id = analisa_situasi_aksi.analisa_situasi_indikator_id', 'LEFT');
+		
         $this->db->where('analisa_situasi_id', $id);
 
 		if($_POST['length'] != -1) {

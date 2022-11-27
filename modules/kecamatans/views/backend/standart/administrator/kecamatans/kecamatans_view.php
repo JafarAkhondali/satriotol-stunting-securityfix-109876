@@ -72,9 +72,9 @@
 				</div>
 				<div class="box-body">
 		<?php
-			is_allowed('kelurahans_add', function() {
+			is_allowed('kelurahans_add', function() use ($kecamatans){
 		?>
-								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('kelurahans')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/kelurahans/add'); ?>">
+								<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('kelurahans')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/kelurahans/add').'?id='.$kecamatans->kecamatan_id; ?>">
 									<i class="fa fa-plus-square-o"></i><?= cclang('add_new_button', [cclang('kelurahans')]); ?></a>
 		<?php 
 			});
@@ -90,33 +90,88 @@
 					<table class="table table-bordered table-striped dataTable">
 						<thead>
 							<tr>
-								<th width="50"><?= cclang('nomor') ?></th>
-								<th><?= cclang('kelurahan_nama') ?></th>
+								<th width="50"><?= cclang('nomor');?></th>
+								<th><?= cclang('kelurahan_nama');?></th>
+								<th>Action</th>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+					<?php
+						if (count($kelurahans) > 0) {
+							$no = 1; 
+							foreach($kelurahans as $kelurahan) {
+					?>
+							<tr>
+								<td width="50"><?php echo $no++;?></td>
+								<td><?php echo _ent($kelurahan->kelurahan_nama);?></td>
+								<td width="200">
+							<?php 
+								is_allowed('kelurahans_update', function() use ($kelurahan) {
+							?>
+									<a href="<?= site_url('administrator/kelurahans/edit/' . $kelurahan->kelurahan_id).'?id='.$kelurahan->kecamatan_id;?>" class="label-default">
+										<i class="fa fa-edit "></i> <?= cclang('update_button');?>
+									</a>
+							<?php
+								});
+
+								is_allowed('kelurahans_delete', function() use ($kelurahan) {
+							?>
+									<a href="javascript:void(0);" data-href="<?= site_url('administrator/kelurahans/delete/' . $kelurahan->kelurahan_id).'?id='.$kelurahan->kecamatan_id;?>" class="label-default remove-data">
+										<i class="fa fa-close"></i> <?= cclang('remove_button'); ?></a>
+							<?php
+								});
+							?>
+								</td>
+							</tr>
+					<?php 
+							}
+						} else {
+					?>
+							<tr>
+								<td colspan="100">Kelurahan data is not available</td>
+							</tr>
+					<?php 
+						}
+					?>
+						</tbody>
 					</table>
 				</div>
-				<!--/box body -->
 			</div>
-			<!--/box -->
 		</div>
 	</div>
 </section>
 <!-- /.content -->
 
-<script>
+<script type="text/javascript">
 	$(document).ready(function () {
+		$('.remove-data').click(function () {
+			var url = $(this).attr('data-href');
+
+			swal({
+				title: "<?= cclang('are_you_sure'); ?>",
+				text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+				cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function (isConfirm) {
+				if (isConfirm) {
+					document.location.href = url;
+				}
+			});
+
+			return false;
+		});
+
 		$('.dataTable').DataTable({
 			'processing' 	: true,
 			'retrieve' 		: true,
-			"pageLength": 20,
-			"lengthChange": false,
-			'ajax' 			: {
-								'url' 	: '<?php echo base_url();?>administrator/kecamatans/ajax_data_kelurahan',
-								'type' 	: "get",
-								'data' 	: {id : '<?php echo $kecamatans->kecamatan_id;?>'}
-			},
+			"pageLength" 	: 20,
+			"lengthChange" 	: false,
 			'columnDefs': [
 				{ 
 					'targets' 	: [ 0 ], 

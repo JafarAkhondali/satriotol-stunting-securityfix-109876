@@ -252,6 +252,7 @@ class Kecamatans extends Admin {
 		$this->is_allowed('kecamatans_view');
 
 		$this->data['kecamatans'] = $this->model_kecamatans->join_avaiable()->filter_avaiable()->find($id);
+		$this->data['kelurahans'] = $this->model_kecamatans->query_kelurahan($id)->result();
 
 		$this->template->title('Kecamatan Detail');
 		$this->render('backend/standart/administrator/kecamatans/kecamatans_view', $this->data);

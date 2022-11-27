@@ -88,6 +88,8 @@ class Model_rentan_opd extends MY_Model {
 		$this->join_avaiable()->filter_avaiable();
 		$this->db->where($where);
 		$this->db->limit($limit, $offset);
+		$this->db->order_by('rentan_opd_id', 'DESC');
+		
 		
 		$this->sortable();
 		

@@ -641,15 +641,15 @@ input[type=color] {
 }
 
 .tp-btn-5:hover {
-    background-color: var(--tp-theme-2);
+    background-color: var(--tp-theme-red);
     color: var(--tp-common-white);
-    border-color: var(--tp-theme-2);
+    border-color: var(--tp-theme-red);
 }
 
 .tp-btn-5:focus {
-    background-color: var(--tp-theme-2);
+    background-color: var(--tp-theme-red);
     color: var(--tp-common-white);
-    border-color: var(--tp-theme-2);
+    border-color: var(--tp-theme-red);
 }
 
 .tp-btn-6 {
@@ -7993,7 +7993,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
     bottom: 0;
     width: 30px;
     height: 0;
-    background-color: var(--tp-theme-2);
+    background-color: var(--tp-theme-red);
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -o-border-radius: 10px;
@@ -8083,7 +8083,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .event__title a:hover {
-    color: var(--tp-theme-2);
+    color: var(--tp-theme-red);
 }
 
 .event__person ul li {

@@ -232,12 +232,28 @@ class Web extends Front {
 		$data['blogs']          = $this->model_web->berita_terbaru()->result();
 		$data['faqs']           = $this->db->from('faqs')->get()->result();
 		$data['about']          = $this->db->get('about')->row();
-		$data['analisas'] 		= $this->db->get('analisa_situasi')->result();
+		$data['indikators'] 	= $this->db->get('analisa_situasi_indikator')->result();
 
 		$this->template->build('analisa-situasi-stunting', $data);
 	}
 
-	public function analisa_situasi_detail($id) {
+	public function analisa_situasi_detail() {
+		$id = $this->input->get('id');
+		
+		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
+		$data['categories']     = $this->db->get('blog_category')->result();
+		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
+		$data['blogs']          = $this->model_web->berita_terbaru()->result();
+		$data['faqs']           = $this->db->from('faqs')->get()->result();
+		$data['about']          = $this->db->get('about')->row();
+		$data['indikator'] 		= $this->db->where(['analisa_situasi_indikator_id' => $id])->get('analisa_situasi_indikator')->row();
+		$data['analisa'] 		= $this->model_web->query_analisa_stunting($id)->result();
+
+		$this->template->build('analisa-situasi-detail', $data);
+	}
+
+	/* public function analisa_situasi_detail($id) {
 		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
 		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
@@ -249,7 +265,7 @@ class Web extends Front {
 		$data['details'] 		= $this->db->where(['analisa_situasi_id' => $id])->get('analisa_situasi_aksi')->result();
 
 		$this->template->build('analisa-situasi-detail', $data);
-	}
+	} */
 
 	public function rencana_kegiatan() {
 		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();

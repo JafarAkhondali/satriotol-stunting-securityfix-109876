@@ -138,7 +138,8 @@
 											<td>
 									<?php
 										if  ($rentan_opd->opd_id) {
-											echo anchor('administrator/opd/view/'.$rentan_opd->opd_id.'?popup=show', $rentan_opd->opd_opd_nama, ['class' => 'popup-view']);
+											echo $rentan_opd->opd_opd_nama;
+											// echo anchor('administrator/opd/view/'.$rentan_opd->opd_id.'?popup=show', $rentan_opd->opd_opd_nama, ['class' => 'popup-view']);
 										}
 									?>
 											</td>

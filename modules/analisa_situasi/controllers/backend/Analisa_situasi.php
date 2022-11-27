@@ -278,7 +278,10 @@ class Analisa_situasi extends Admin	{
 	public function view($id) {
 		$this->is_allowed('analisa_situasi_view');
 
-		$this->data['analisa_situasi'] = $this->model_analisa_situasi->join_avaiable()->filter_avaiable()->find($id);
+		$this->data = [
+			'analisa_situasi' 		=> $this->model_analisa_situasi->join_avaiable()->filter_avaiable()->find($id),
+			'analisa_situasi_aksi' 	=> $this->model_analisa_situasi->query_analisa_aksi($id)->result(),
+		];
 
 		$this->template->title('Analisa Situasi Detail');
 		$this->render('backend/standart/administrator/analisa_situasi/analisa_situasi_view', $this->data);
@@ -287,6 +290,7 @@ class Analisa_situasi extends Admin	{
 	public function ajax_data_aksi_analisa() {
 		$id 	= $this->input->get('id');
 		$list 	= $this->model_analisa_situasi->get_datatables_aksi_analisa($id);
+
 		$data 	= array();
 		$no 	= $_POST['start'];
 		
@@ -294,9 +298,10 @@ class Analisa_situasi extends Admin	{
 			$no++;
 			$row 	= array();
 			$row[] 	= $no.'.';
-			$row[] 	= $field->analisa_situasi_aksi_indikator;
+			$row[] 	= $field->analisa_situasi_indikator_nama;
 			$row[] 	= $field->analisa_situasi_aksi_cakupan;
 			$row[] 	= '<div id="colorSelector"><div style="background-color: '.$field->analisa_situasi_aksi_warna.'"></div></div>';
+			$row[] 	= '';
 
 			$data[] = $row;
 		}

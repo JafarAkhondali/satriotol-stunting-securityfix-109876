@@ -104,10 +104,10 @@
 				</div>
 				<div class="box-body">
 			<?php
-				is_allowed('analisa_situasi_aksi_add', function() {
+				is_allowed('analisa_situasi_aksi_add', function() use ($analisa_situasi){
 			?>
 					<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('analisa_situasi_aksi')]); ?>  (Ctrl+a)"
-						href="<?=  site_url('administrator/analisa_situasi_aksi/add'); ?>"><i class="fa fa-plus-square-o"></i>
+						href="<?=  site_url('administrator/analisa_situasi_aksi/add').'?id='.$analisa_situasi->analisa_situasi_id; ?>"><i class="fa fa-plus-square-o"></i>
 						<?= cclang('add_new_button', [cclang('analisa_situasi_aksi')]); ?></a>
 			<?php
 				});
@@ -128,9 +128,40 @@
 								<th><?= cclang('analisa_situasi_aksi_indikator')?></th>
 								<th width="200"><?= cclang('analisa_situasi_aksi_cakupan')?></th>
 								<th width="200"><?= cclang('analisa_situasi_aksi_warna')?></th>
+								<th width="200">Aksi</th>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+<?php
+	if (count($analisa_situasi_aksi) > 0) {
+		$no = 1;
+		foreach ($analisa_situasi_aksi as $item) {
+?>
+							<tr>
+								<td><?php echo $no++;?>.</td>
+								<td><?php echo $item->analisa_situasi_indikator_nama;?></td>
+								<td><?php echo $item->analisa_situasi_aksi_cakupan;?></td>
+								<td><div id="colorSelector"><div style="background-color: <?php echo $item->analisa_situasi_aksi_warna;?>"></div></div></td>
+								<td>
+									<?php is_allowed('analisa_situasi_aksi_update', function() use ($item, $analisa_situasi){?>
+										<a href="<?= site_url('administrator/analisa_situasi_aksi/edit/' . $item->analisa_situasi_aksi_id).'?id='.$analisa_situasi->analisa_situasi_id; ?>" class="label-default">
+											<i class="fa fa-edit"></i> <?= cclang('update_button');?>
+										</a>
+									<?php }) ?>
+									<?php is_allowed('analisa_situasi_aksi_delete', function() use ($item, $analisa_situasi){?>
+										<a href="javascript:void(0);" data-href="<?= site_url('administrator/analisa_situasi_aksi/delete/' . $item->analisa_situasi_aksi_id).'?id='.$analisa_situasi->analisa_situasi_id; ?>" class="label-default remove-data">
+											<i class="fa fa-close"></i> <?= cclang('remove_button');?>
+										</a>
+									<?php }) ?>
+								</td>
+							</tr>
+<?php
+		}
+	}else{
+		echo '<tr><td colspan="100">Data Analisa Situasi Aksi is not available</td></tr>';
+	}
+?>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -150,11 +181,11 @@
 			'retrieve' 		: true,
 			"pageLength" 	: 20,
 			"lengthChange" 	: false,
-			'ajax' 			: {
-								'url' 	: '<?php echo base_url();?>administrator/analisa_situasi/ajax_data_aksi_analisa',
-								'type' 	: "get",
-								'data' 	: {id : '<?php echo $analisa_situasi->analisa_situasi_id;?>'}
-			},
+			// 'ajax' 			: {
+			// 					'url' 	: '<?php echo base_url();?>administrator/analisa_situasi/ajax_data_aksi_analisa',
+			// 					'type' 	: "get",
+			// 					'data' 	: {id : '<?php echo $analisa_situasi->analisa_situasi_id;?>'}
+			// },
 			'columnDefs': [
 				{ 
 					'targets' 	: [ 0 ], 

@@ -167,6 +167,12 @@ class Model_kecamatans extends MY_Model {
 		return $this->db->count_all_results();
 	}
 
+    public function query_kelurahan($id) {
+        $this->db->join('kecamatans', 'kecamatans.kecamatan_id = kelurahans.kecamatan_id', 'LEFT');
+        $this->db->where('kelurahans.kecamatan_id', $id);
+        
+        return $this->db->get('kelurahans');
+    }
 
 }
 

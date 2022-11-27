@@ -1,22 +1,16 @@
-<?= get_header(); ?>
-
 <?php
-    $indikators = [];
-    $cakupans   = [];
-    $colors     = [];
+    $tahun_cakupans   = [];
+    // $colors     = [];
 
-    foreach ($details as $item) {
-        $indikators[]   = $item->analisa_situasi_aksi_indikator;
-        $cakupans[]     = $item->analisa_situasi_aksi_cakupan;
-        $colors[]       = $item->analisa_situasi_aksi_warna;
+    foreach ($analisa as $item) {
+        $tahun_cakupans[] = [
+            'name'  => $item->tahun,
+            'y'     => (float)$item->cakupan,
+        ];
     }
-
-    $data = [
-        $indikators,
-        $cakupans,
-        $colors,
-    ];
 ?>
+
+<?= get_header(); ?>
 
 <main>
     <!-- event area start -->
@@ -25,20 +19,20 @@
             <div class="row">
                 <div class="col-xxl-12">
                     <div class="section__title-wrapper-2 text-center mb-60">
-                        <h3 class="section__title-2">Analisa Situasi <?php echo $analisa->analisa_situasi_year;?></h3>
+                        <h4 class="section__title-2">Indikator Analisa Situasi</h4>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-20">
                 <div class="col-md-12">
-                    <a href="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" target="_blank">
-                        <img src="<?php echo base_url().'uploads/analisa_situasi/'.$analisa->analisa_situasi_image;?>" class="img-fluid" alt="">
-                    </a>
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                    </figure>
                 </div>
             </div>
-            <div class="row mt-100">
+            <div class="row mt-20">
                 <div class="col-md-12">
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <?php echo $indikator->analisa_situasi_indikator_deskripsi;?>
                 </div>
             </div>
         </div>
@@ -46,46 +40,55 @@
 </main>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets_stunting/js/highcharts.js"></script>
 <script type="text/javascript">
-    const ctx           = document.getElementById('myChart').getContext('2d');
-
-    const data = {
-        labels: <?php echo json_encode($indikators);?>,
-        datasets: [{
-            data: <?php echo json_encode($cakupans);?>,
-            backgroundColor: <?php echo json_encode($colors);?>,
-            hoverOffset: 4,
-            borderColor: '#a4a4a4',
-            borderWidth: 1,
-        }]
-    };
-
-    const myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'right',
-                    labels: {
-                            color: '#000',
-                        font: {
-                            size: 16,
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Chart Analisa Situasi '+<?php echo $analisa->analisa_situasi_year;?>,
-                    color: '#000',
-                    font: {
-                        size: 30,
-                    }
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            align: 'left',
+            text: '<?php echo $indikator->analisa_situasi_indikator_nama;?>'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            type: 'category',
+            title: {
+                text: 'Tahun'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Tingkat Persentase'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}'
                 }
             }
         },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span>{point.name}</span> : <b>{point.y:.2f}</b><br/>'
+        },
+        series: [
+            {
+                name: "<?php echo $indikator->analisa_situasi_indikator_nama;?>",
+                colorByPoint: true,
+                data : <?php echo json_encode($tahun_cakupans);?>
+            }
+        ],
     });
 </script>
 

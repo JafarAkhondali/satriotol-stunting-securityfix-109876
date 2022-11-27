@@ -12,18 +12,18 @@
             </div>
             <div class="row">
         <?php
-            foreach ($analisas as $analisa) {
+            foreach ($indikators as $indikator) {
         ?>
-                <div class="col-xxl-4">
+                <div class="col-xxl-12">
                     <div class="event__item white-bg mb-10 transition-3 p-relative d-lg-flex align-items-center justify-content-between">
                         <div class="event__left d-sm-flex align-items-center">
-                            <div class="event__date">
-                                <h4><?php echo $analisa->analisa_situasi_year;?></h4>
+                            <div class="event__title">
+                                <a href="<?php echo base_url().'analisa-situasi-detail?id='.$indikator->analisa_situasi_indikator_id;?>"><?php echo $indikator->analisa_situasi_indikator_nama;?></a>
                             </div>
                         </div>
                         <div class="event__right d-sm-flex align-items-center">
                             <div class="event__more ml-30">
-                                <a href="<?= base_url() . 'analisa-situasi-detail/'.$analisa->analisa_situasi_id;?>" class="tp-btn-5 tp-btn-7">Detail</a>
+                                <a href="<?php echo base_url().'analisa-situasi-detail?id='.$indikator->analisa_situasi_indikator_id;?>" class="tp-btn-5 tp-btn-7">Detail</a>
                             </div>
                         </div>
                     </div>

@@ -86,6 +86,27 @@ class Model_web extends MY_Model {
 		
 		return $query->get();
 	}
+
+	public function query_analisa_stunting($id) {
+		$year = [
+			date('Y', strtotime('-2 year')),
+			date('Y', strtotime('-1 year')),
+			date('Y'),
+		];
+
+		$this->db->select('analisa_situasi.analisa_situasi_year AS tahun,
+							analisa_situasi_indikator.analisa_situasi_indikator_nama AS nama_indikator,
+							analisa_situasi_aksi.analisa_situasi_aksi_cakupan AS cakupan,
+							analisa_situasi_aksi.analisa_situasi_aksi_warna AS warna_cakupan');
+		$this->db->join('analisa_situasi', 'analisa_situasi.analisa_situasi_id = analisa_situasi_aksi.analisa_situasi_id', 'LEFT');
+		$this->db->join('analisa_situasi_indikator', 'analisa_situasi_indikator.analisa_situasi_indikator_id = analisa_situasi_aksi.analisa_situasi_indikator_id', 'LEFT');
+		$this->db->where('analisa_situasi_aksi.analisa_situasi_indikator_id', $id);
+		$this->db->where_in('analisa_situasi.analisa_situasi_year', $year);
+		$this->db->order_by('tahun', 'ASC');
+		
+		
+		return $this->db->get('analisa_situasi_aksi');
+	}
 }
 	
 ?>
