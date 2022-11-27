@@ -12,7 +12,8 @@
             </div>
             <div class="row">
         <?php
-            foreach ($indikators as $indikator) {
+            if (count($indikators) > 0) {
+                foreach ($indikators as $indikator) {
         ?>
                 <div class="col-xxl-12">
                     <div class="event__item white-bg mb-10 transition-3 p-relative d-lg-flex align-items-center justify-content-between">
@@ -28,7 +29,20 @@
                         </div>
                     </div>
                 </div>
-        <?php
+<?php
+                }
+            }else{
+?>
+                        <div class="error__content text-center">
+							<div class="error__thumb m-img">
+								<img src="<?= base_url();?>assets_stunting/img/error/file-not-found.webp" alt="">
+							</div>
+							<div class="error__content">
+								<h3 class="error__title">Data Not Available</h3>
+								<p>Oops! The data you are looking for does not available.</p>
+							</div>
+						</div>
+<?php
             }
         ?>
             </div>
