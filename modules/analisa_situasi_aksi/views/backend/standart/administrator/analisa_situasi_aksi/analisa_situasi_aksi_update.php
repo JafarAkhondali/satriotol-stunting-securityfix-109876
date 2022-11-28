@@ -172,6 +172,15 @@
 	$(document).ready(function () {
 		window.event_submit_and_action = '';
 
+		var getID = '<?php echo $id;?>';
+		var redirectURL;
+
+		if (getID != '') {
+			redirectURL = BASE_URL + 'administrator/analisa_situasi/view/'+getID;
+		}else{
+			redirectURL = BASE_URL + 'administrator/analisa_situasi_aksi';
+		}
+
 		(function () {
 			var analisa_situasi_id = $('#analisa_situasi_id');
 			var analisa_situasi_aksi_indikator = $('#analisa_situasi_aksi_indikator');
@@ -209,7 +218,7 @@
 			},
 			function (isConfirm) {
 				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/analisa_situasi_aksi';
+					window.location.href = redirectURL;
 				}
 			});
 
@@ -233,6 +242,11 @@
 					value: 'value_of_example',
 				})
 			})()
+
+			data_post.push({
+				name: 'getID',
+				value: '<?php echo $id;?>'
+			});
 
 			data_post.push({
 				name: 'event_submit_and_action',

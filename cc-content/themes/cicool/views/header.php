@@ -212,7 +212,7 @@
 						<div class="header__bottom-left d-flex align-items-center">
 							<div class="logo">
 								<a href="<?= base_url(); ?>">
-									<img src="<?= base_url() . 'assets_stunting/img/logo/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;">
+									<!-- <img src="<?php //echo base_url() . 'assets_stunting/img/logo/Logo-Kota-Semarang.png';?>" alt="Logo Pemerintah Kota Semarang" style="width: 40px;"> -->
 									<img src="<?= base_url() . 'uploads/about/' . $about->about_logo;?>" alt="logo">
 								</a>
 							</div>

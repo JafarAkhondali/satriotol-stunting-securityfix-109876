@@ -133,9 +133,8 @@
 						</thead>
 						<tbody>
 <?php
-	if (count($analisa_situasi_aksi) > 0) {
-		$no = 1;
-		foreach ($analisa_situasi_aksi as $item) {
+	$no = 1;
+	foreach ($analisa_situasi_aksi as $item) {
 ?>
 							<tr>
 								<td><?php echo $no++;?>.</td>
@@ -156,9 +155,6 @@
 								</td>
 							</tr>
 <?php
-		}
-	}else{
-		echo '<tr><td colspan="100">Data Analisa Situasi Aksi is not available</td></tr>';
 	}
 ?>
 						</tbody>
@@ -181,21 +177,33 @@
 			'retrieve' 		: true,
 			"pageLength" 	: 20,
 			"lengthChange" 	: false,
-			// 'ajax' 			: {
-			// 					'url' 	: '<?php echo base_url();?>administrator/analisa_situasi/ajax_data_aksi_analisa',
-			// 					'type' 	: "get",
-			// 					'data' 	: {id : '<?php echo $analisa_situasi->analisa_situasi_id;?>'}
-			// },
-			'columnDefs': [
-				{ 
-					'targets' 	: [ 0 ], 
-					'orderable' : false,
-				},
-			],
 			'language' : {
-							'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json'
+							'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json',
+							'emptyTable': 'Data Analisa Situasi Aksi tidak tersedia'
 			}
 
+		});
+
+		$('.remove-data').click(function () {
+			var url = $(this).attr('data-href');
+			swal({
+					title: "<?= cclang('are_you_sure'); ?>",
+					text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+					cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
+					closeOnConfirm: true,
+					closeOnCancel: true
+				},
+				function (isConfirm) {
+					if (isConfirm) {
+						document.location.href = url;
+					}
+				});
+
+			return false;
 		});
 	});
 </script>

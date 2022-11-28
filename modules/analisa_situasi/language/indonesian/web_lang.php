@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$lang['analisa_situasi_aksi'] 		= 'Analisa Situasi Aksi';
 $lang['analisa_situasi'] 			= 'Analisa Situasi';
 $lang['nomor'] 						= 'No.';
 $lang['analisa_situasi_id'] 		= 'ID';

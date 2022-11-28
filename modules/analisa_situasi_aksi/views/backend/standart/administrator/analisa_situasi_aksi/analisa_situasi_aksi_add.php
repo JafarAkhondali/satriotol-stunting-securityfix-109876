@@ -91,7 +91,19 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class=""><a href="<?= site_url('administrator/analisa_situasi_aksi'); ?>">Analisa Situasi Aksi</a></li>
+			<li>
+<?php
+	if (!empty($id)) {
+?>
+				<a href="<?= site_url('administrator/analisa_situasi/view/').$id;?>">Analisa Situasi</a>
+<?php
+	}else{
+?>
+				<a href="<?= site_url('administrator/analisa_situasi_aksi');?>">Analisa Situasi Aksi</a>
+<?php
+	}
+?>
+			</li>
 			<li class="active"><?= cclang('new'); ?></li>
 		</ol>
 	</section>
@@ -242,6 +254,11 @@
 				});
 
 				data_post.push({
+					name: 'getID',
+					value: '<?php echo $id;?>'
+				});
+
+				data_post.push({
 					name: 'event_submit_and_action',
 					value: window.event_submit_and_action
 				});
@@ -266,7 +283,6 @@
 						$('.steps li').removeClass('error');
 						$('form').find('.error-input').remove();
 						if (res.success) {
-
 							if (save_type == 'back') {
 								window.location.href = res.redirect;
 								return;
@@ -280,7 +296,6 @@
 							$('.chosen option').prop('selected', false).trigger('chosen:updated');
 						} else {
 							if (res.errors) {
-
 								$.each(res.errors, function (index, val) {
 									$('form #' + index).parents('.form-group').addClass('has-error');
 									$('form #' + index).parents('.form-group').find('small').prepend(`<div class="error-input">` + val + `</div>`);
@@ -298,7 +313,6 @@
 								type: 'warning'
 							});
 						}
-
 					})
 					.fail(function () {
 						$('.message').printMessage({
@@ -316,7 +330,7 @@
 				return false;
 			}); /*end btn save*/
 
-			function chained_tahun_analisa_situasi(complete) {
+			function chained_tahun_analisa_situasi(selected, complete) {
 				$.LoadingOverlay('show');
 
 				$.ajax({
@@ -326,7 +340,7 @@
 				.done(function (res) {
 					var html = '<option value=""></option>';
 					$.each(res, function (index, val) {
-						html += '<option value="' + val.analisa_situasi_id + '">' + val.analisa_situasi_year + '</option>';
+						html += '<option value="' + val.analisa_situasi_id + '" '+(selected == val.analisa_situasi_id ? 'selected' : '')+'>' + val.analisa_situasi_year + '</option>';
 					});
 
 					$('#analisa_situasi_id').html(html);
@@ -368,7 +382,7 @@
 			};
 
 			async function chain() {
-				await chained_tahun_analisa_situasi();
+				await chained_tahun_analisa_situasi('<?php echo $id;?>');
 				await chained_analisa_situasi_indikator();
 			}
 

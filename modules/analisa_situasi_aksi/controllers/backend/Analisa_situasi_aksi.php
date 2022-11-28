@@ -54,8 +54,11 @@ class Analisa_situasi_aksi extends Admin {
 	public function add() {
 		$this->is_allowed('analisa_situasi_aksi_add');
 
+		$getID = $this->input->get('id');
+
 		$this->data = [
 			'warna' => strtoupper(kode_acak()),
+			'id' 	=> $getID,
 		];
 
 		$this->template->title('Analisa Situasi Aksi New');
@@ -68,6 +71,8 @@ class Analisa_situasi_aksi extends Admin {
 	* @return JSON
 	*/
 	public function add_save() {
+		$getID 	= $this->input->post('getID');
+
 		if (!$this->is_allowed('analisa_situasi_aksi_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -80,6 +85,12 @@ class Analisa_situasi_aksi extends Admin {
 		$this->form_validation->set_rules('analisa_situasi_id', 'Tahun Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_indikator_id', 'Indikator Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_aksi_cakupan', 'Cakupan', 'trim|required|max_length[10]');
+
+		if (!empty($getID)) {
+			$redirect = base_url('administrator/analisa_situasi/view/'.$getID);
+		}else{
+			$redirect = base_url('administrator/analisa_situasi_aksi');
+		}
 
 		if ($this->form_validation->run()) {
 			$save_data = [
@@ -110,7 +121,7 @@ class Analisa_situasi_aksi extends Admin {
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/analisa_situasi_aksi');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -119,7 +130,7 @@ class Analisa_situasi_aksi extends Admin {
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/analisa_situasi_aksi');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {
@@ -139,6 +150,12 @@ class Analisa_situasi_aksi extends Admin {
 	public function edit($id) {
 		$this->is_allowed('analisa_situasi_aksi_update');
 
+		$getID = $this->input->get('id');
+
+		$this->data = [
+			'id' 	=> $getID,
+		];
+
 		$this->data['analisa_situasi_aksi'] = $this->model_analisa_situasi_aksi->find($id);
 
 		$this->template->title('Analisa Situasi Aksi Update');
@@ -151,6 +168,8 @@ class Analisa_situasi_aksi extends Admin {
 	* @var $id String
 	*/
 	public function edit_save($id) {
+		$getID 	= $this->input->post('getID');
+
 		if (!$this->is_allowed('analisa_situasi_aksi_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -163,6 +182,12 @@ class Analisa_situasi_aksi extends Admin {
 		$this->form_validation->set_rules('analisa_situasi_id', 'Tahun Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_indikator_id', 'Indikator Analisa Situasi', 'trim|required');
 		$this->form_validation->set_rules('analisa_situasi_aksi_cakupan', 'Cakupan', 'trim|required|max_length[10]');
+
+		if (!empty($getID)) {
+			$redirect = base_url('administrator/analisa_situasi/view/'.$getID);
+		}else{
+			$redirect = base_url('administrator/analisa_situasi_aksi');
+		}
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
@@ -189,7 +214,7 @@ class Analisa_situasi_aksi extends Admin {
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/analisa_situasi_aksi');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -198,7 +223,7 @@ class Analisa_situasi_aksi extends Admin {
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/analisa_situasi_aksi');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {
