@@ -1661,7 +1661,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .header__bottom-3 {
     /* padding-top: 18px;
     padding-bottom: 18px; */
-    padding: 5px 0px;
+    padding: 5px 0px !important;
 }
 
 .header__hamburger {
