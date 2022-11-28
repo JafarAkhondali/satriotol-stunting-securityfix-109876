@@ -21,12 +21,10 @@
 </script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>
-		Kecamatan <small><?= cclang('detail', ['Kecamatan']); ?> </small>
-	</h1>
+	<h1>Kecamatan <small><?= cclang('detail', ['Kecamatan']);?> </small></h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class=""><a href="<?= site_url('administrator/kecamatans'); ?>">Kecamatan</a></li>
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="<?= site_url('administrator/kecamatans'); ?>">Kecamatan</a></li>
 		<li class="active"><?= cclang('detail'); ?></li>
 	</ol>
 </section>
@@ -128,7 +126,7 @@
 						} else {
 					?>
 							<tr>
-								<td colspan="100">Kelurahan data is not available</td>
+								<td colspan="3">Kelurahan data is not available</td>
 							</tr>
 					<?php 
 						}

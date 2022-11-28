@@ -162,27 +162,23 @@
 						</thead>
 						<tbody>
 <?php
-	if (!empty($rembuk_galery->rembuk_stunting_galery_image)) {
-		if (substr_count($rembuk_galery->rembuk_stunting_galery_image, ',') > 0) {
-			$galery = explode(',', $rembuk_galery->rembuk_stunting_galery_image);
+	if (substr_count($rembuk_galery->rembuk_stunting_galery_image, ',') > 0) {
+		$galery = explode(',', $rembuk_galery->rembuk_stunting_galery_image);
 
-			for ($i=0; $i < count($galery); $i++) {
-				$galeri[] = '<a class="fancybox" data-fancybox="gallery" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'">
-								<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
-							</a>';
-			}
-		}else{
-			$galeri[] = '<a class="fancybox" data-fancybox="gallery" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuk_galery->rembuk_stunting_galery_image.'">
-							<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuk_galery->rembuk_stunting_galery_image.'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+		for ($i=0; $i < count($galery); $i++) {
+			$galeri[] = '<a class="fancybox" data-fancybox="gallery" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'">
+							<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$galery[$i].'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
 						</a>';
 		}
-
-		$galerinya = implode($galeri);
-
-		echo '<tr><td>'.$galerinya.'</td></tr>';
 	}else{
-		echo '<tr><td>Galery Rembuk Stunting data is not available</td></tr>';
+		$galeri[] = '<a class="fancybox" data-fancybox="gallery" rel="group" href="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuk_galery->rembuk_stunting_galery_image.'">
+						<img src="'.base_url().'uploads/rembuk_stunting_galery/'.$rembuk_galery->rembuk_stunting_galery_image.'" class="image-responsive" alt="image rembuk_stunting_galery" title="rembuk_stunting_galery_image rembuk_stunting_galery" width="40px">
+					</a>';
 	}
+
+	$galerinya = implode($galeri);
+
+	echo '<tr><td>'.$galerinya.'</td></tr>';
 ?>
 						</tbody>
 					</table>
@@ -217,7 +213,8 @@
 			// 	},
 			// ],
 			'language' : {
-							'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json'
+							'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json',
+							'emptyTable' : 'Galery Rembuk Stunting tidak tersedia',
 			}
 
 		});

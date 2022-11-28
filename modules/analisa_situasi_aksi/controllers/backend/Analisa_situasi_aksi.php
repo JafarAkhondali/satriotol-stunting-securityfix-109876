@@ -97,7 +97,7 @@ class Analisa_situasi_aksi extends Admin {
 				'analisa_situasi_id' 					=> $this->input->post('analisa_situasi_id'),
 				'analisa_situasi_indikator_id' 			=> $this->input->post('analisa_situasi_indikator_id'),
 				'analisa_situasi_aksi_cakupan' 			=> $this->input->post('analisa_situasi_aksi_cakupan'),
-				'analisa_situasi_aksi_warna' 			=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
+				'analisa_situasi_aksi_warna' 			=> strtoupper(kode_acak()),
 				'analisa_situasi_aksi_create_author' 	=> get_user_data('id'),
 				'analisa_situasi_aksi_create_at' 		=> date('Y-m-d H:i:s'),
 			];
@@ -194,7 +194,6 @@ class Analisa_situasi_aksi extends Admin {
 				'analisa_situasi_id' 					=> $this->input->post('analisa_situasi_id'),
 				'analisa_situasi_indikator_id' 			=> $this->input->post('analisa_situasi_indikator_id'),
 				'analisa_situasi_aksi_cakupan' 			=> $this->input->post('analisa_situasi_aksi_cakupan'),
-				'analisa_situasi_aksi_warna' 			=> strtoupper($this->input->post('analisa_situasi_aksi_warna')),
 				'analisa_situasi_aksi_update_author' 	=> get_user_data('id'),
 				'analisa_situasi_aksi_update_at' 		=> date('Y-m-d H:i:s'),
 			];

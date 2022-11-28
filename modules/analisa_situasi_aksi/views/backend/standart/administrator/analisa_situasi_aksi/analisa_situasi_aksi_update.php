@@ -29,8 +29,15 @@
 <section class="content-header">
 	<h1>Analisa Situasi Aksi <small>Edit Analisa Situasi Aksi</small></h1>
 	<ol class="breadcrumb">
-		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="<?= site_url('administrator/analisa_situasi_aksi'); ?>">Analisa Situasi Aksi</a></li>
+			<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li>
+<?php
+	if (!empty($id)) {
+		echo '<a href="'.site_url('administrator/analisa_situasi/view/').$id.'">Analisa Situasi</a>';
+	}else{
+		echo '<a href="'.site_url('administrator/analisa_situasi_aksi').$id.'">Analisa Situasi</a>';
+	}
+?>
 		<li class="active">Edit</li>
 	</ol>
 </section>
@@ -132,12 +139,12 @@
 						<input type="text" class="form-control" name="analisa_situasi_aksi_cakupan" id="analisa_situasi_aksi_cakupan" placeholder="" value="<?= set_value('analisa_situasi_aksi_cakupan', $analisa_situasi_aksi->analisa_situasi_aksi_cakupan); ?>">
 						<small class="info help-block"><b>Input Analisa Situasi Aksi Cakupan</b> Max Length : 10.</small>
 					</div>
-					<div class="form-group group-analisa-situasi-aksi-warna">
+					<!-- <div class="form-group group-analisa-situasi-aksi-warna">
 						<label for="analisa_situasi_aksi_warna" class="control-label">Warna Indikator</label>
 						<input type="hidden" class="form-control" name="analisa_situasi_aksi_warna" id="analisa_situasi_aksi_warna" placeholder="" value="<?= set_value('analisa_situasi_aksi_warna', strtoupper($analisa_situasi_aksi->analisa_situasi_aksi_warna)); ?>">
 						<div id="colorSelector"><div style="background-color: <?php echo $analisa_situasi_aksi->analisa_situasi_aksi_warna; ?>"></div></div>
 						<small class="info help-block">Optional pilih warna</small>
-					</div>
+					</div> -->
 
 					<div class="message"></div>
 				</div>

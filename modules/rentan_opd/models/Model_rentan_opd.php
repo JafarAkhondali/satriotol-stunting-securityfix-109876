@@ -114,6 +114,13 @@ class Model_rentan_opd extends MY_Model {
 		return $this;
 	}
 
+	public function query_galeri_rentan($id) {
+		$this->db->join('rentan_opd', 'rentan_opd.rentan_opd_id = rentan_opd_galeri.rentan_opd_id', 'LEFT');
+		$this->db->where('rentan_opd.rentan_opd_id', $id);
+		
+		return $this->db->get('rentan_opd_galeri');
+	}
+
 }
 
 /* End of file Model_rentan_opd.php */

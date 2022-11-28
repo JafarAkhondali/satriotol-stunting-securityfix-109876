@@ -90,17 +90,13 @@
 			Analisa Situasi Aksi <small><?= cclang('new', ['Analisa Situasi Aksi']); ?> </small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li>
 <?php
 	if (!empty($id)) {
-?>
-				<a href="<?= site_url('administrator/analisa_situasi/view/').$id;?>">Analisa Situasi</a>
-<?php
+		echo '<a href="'.site_url('administrator/analisa_situasi/view/').$id.'">Analisa Situasi</a>';
 	}else{
-?>
-				<a href="<?= site_url('administrator/analisa_situasi_aksi');?>">Analisa Situasi Aksi</a>
-<?php
+		echo '<a href="'.site_url('administrator/analisa_situasi_aksi').$id.'">Analisa Situasi</a>';
 	}
 ?>
 			</li>
@@ -147,12 +143,12 @@
 								Nilai Desimal, gunakan <b>tanda titik (.)</b> sebagai pengganti tanda koma
 							</small>
 						</div>
-						<div class="form-group group-analisa-situasi-aksi-warna ">
+						<!-- <div class="form-group group-analisa-situasi-aksi-warna ">
 							<label for="analisa_situasi_aksi_warna" class="control-label">Warna Indikator</label>
 							<input type="hidden" class="form-control" name="analisa_situasi_aksi_warna" id="analisa_situasi_aksi_warna" placeholder="Warna Indikator" value="<?php echo $warna; ?>">
 							<div id="colorSelector"><div style="background-color: <?php echo $warna; ?>"></div></div>
 							<small class="info help-block">Optional pilih warna</small>
-						</div>
+						</div> -->
 
 						<div class="message"></div>
 					</div>

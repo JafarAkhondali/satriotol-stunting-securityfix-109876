@@ -127,7 +127,7 @@
 								<th width="50"><?= cclang('nomor')?></th>
 								<th><?= cclang('analisa_situasi_aksi_indikator')?></th>
 								<th width="200"><?= cclang('analisa_situasi_aksi_cakupan')?></th>
-								<th width="200"><?= cclang('analisa_situasi_aksi_warna')?></th>
+								<!-- <th width="200"><?php //echo cclang('analisa_situasi_aksi_warna')?></th> -->
 								<th width="200">Aksi</th>
 							</tr>
 						</thead>
@@ -140,7 +140,7 @@
 								<td><?php echo $no++;?>.</td>
 								<td><?php echo $item->analisa_situasi_indikator_nama;?></td>
 								<td><?php echo $item->analisa_situasi_aksi_cakupan;?></td>
-								<td><div id="colorSelector"><div style="background-color: <?php echo $item->analisa_situasi_aksi_warna;?>"></div></div></td>
+								<!-- <td><div id="colorSelector"><div style="background-color: <?php //echo $item->analisa_situasi_aksi_warna;?>"></div></div></td> -->
 								<td>
 									<?php is_allowed('analisa_situasi_aksi_update', function() use ($item, $analisa_situasi){?>
 										<a href="<?= site_url('administrator/analisa_situasi_aksi/edit/' . $item->analisa_situasi_aksi_id).'?id='.$analisa_situasi->analisa_situasi_id; ?>" class="label-default">

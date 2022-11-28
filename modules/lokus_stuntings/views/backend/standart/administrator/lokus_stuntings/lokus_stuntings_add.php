@@ -30,12 +30,18 @@
     </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-    	<h1>
-    		Lokus Stuntings <small><?= cclang('new', ['Lokus Stuntings']); ?> </small>
-    	</h1>
+    	<h1>Lokus Stuntings <small><?= cclang('new', ['Lokus Stuntings']); ?> </small></h1>
     	<ol class="breadcrumb">
-    		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    		<li class=""><a href="<?= site_url('administrator/lokus_stuntings'); ?>">Lokus Stuntings</a></li>
+    		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+    		<li>
+<?php
+	if (!empty($id)) {
+		echo '<a href="'.site_url('administrator/lokus_years/view/'.$id).'">Lokus Stuntings</a>';
+	}else{
+		echo '<a href="'.site_url('administrator/lokus_stuntings').'">Lokus Stuntings</a>';
+	}
+?>
+			</li>
     		<li class="active"><?= cclang('new'); ?></li>
     	</ol>
     </section>
@@ -121,27 +127,36 @@
     <!-- /.content -->
     <!-- Page script -->
 
-    <script>
+    <script type="text/javascript">
     	$(document).ready(function () {
+			var getID = '<?php echo $id;?>';
+			var redirectURL;
+
+			if (getID != '') {
+				redirectURL = BASE_URL + 'administrator/lokus_years/view/'+getID;
+			}else{
+				redirectURL = BASE_URL + 'administrator/lokus_stuntings';
+			}
+
     		window.event_submit_and_action = '';
 
     		$('#btn_cancel').click(function () {
     			swal({
-    					title: "<?= cclang('are_you_sure'); ?>",
-    					text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
-    					type: "warning",
-    					showCancelButton: true,
-    					confirmButtonColor: "#DD6B55",
-    					confirmButtonText: "Yes!",
-    					cancelButtonText: "No!",
-    					closeOnConfirm: true,
-    					closeOnCancel: true
-    				},
-    				function (isConfirm) {
-    					if (isConfirm) {
-    						window.location.href = BASE_URL + 'administrator/lokus_stuntings';
-    					}
-    				});
+					title: "<?= cclang('are_you_sure'); ?>",
+					text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yes!",
+					cancelButtonText: "No!",
+					closeOnConfirm: true,
+					closeOnCancel: true
+				},
+				function (isConfirm) {
+					if (isConfirm) {
+						window.location.href = redirectURL;
+					}
+				});
 
     			return false;
     		}); /*end btn cancel*/
@@ -159,6 +174,11 @@
     			});
 
     			data_post.push({
+    				name: 'id',
+    				value: '<?php echo $id;?>'
+    			});
+
+    			data_post.push({
     				name: 'event_submit_and_action',
     				value: window.event_submit_and_action
     			});
@@ -166,67 +186,67 @@
     			$('.loading').show();
 
     			$.ajax({
-    					url: BASE_URL + '/administrator/lokus_stuntings/add_save',
-    					type: 'POST',
-    					dataType: 'json',
-    					data: data_post,
-    				})
-    				.done(function (res) {
-    					$('form').find('.form-group').removeClass('has-error');
-    					$('.steps li').removeClass('error');
-    					$('form').find('.error-input').remove();
+					url: BASE_URL + '/administrator/lokus_stuntings/add_save',
+					type: 'POST',
+					dataType: 'json',
+					data: data_post,
+				})
+				.done(function (res) {
+					$('form').find('.form-group').removeClass('has-error');
+					$('.steps li').removeClass('error');
+					$('form').find('.error-input').remove();
 
-    					if (res.success) {
-    						if (save_type == 'back') {
-    							window.location.href = res.redirect;
-    							return;
-    						}
+					if (res.success) {
+						if (save_type == 'back') {
+							window.location.href = res.redirect;
+							return;
+						}
 
-    						$('.message').printMessage({
-    							message: res.message
-    						});
-    						$('.message').fadeIn();
-    						resetForm();
-    						$('.chosen option').prop('selected', false).trigger('chosen:updated');
-    					} else {
-    						if (res.errors) {
-    							$.each(res.errors, function (index, val) {
-    								$('form #' + index).parents('.form-group').addClass(
-    									'has-error');
-    								$('form #' + index).parents('.form-group').find('small')
-    									.prepend(`<div class="error-input">` + val + `</div>`);
-    							});
-    							$('.steps li').removeClass('error');
-    							$('.content section').each(function (index, el) {
-    								if ($(this).find('.has-error').length) {
-    									$('.steps li:eq(' + index + ')').addClass('error').find('a').trigger('click');
-    								}
-    							});
-    						}
+						$('.message').printMessage({
+							message: res.message
+						});
+						$('.message').fadeIn();
+						resetForm();
+						$('.chosen option').prop('selected', false).trigger('chosen:updated');
+					} else {
+						if (res.errors) {
+							$.each(res.errors, function (index, val) {
+								$('form #' + index).parents('.form-group').addClass(
+									'has-error');
+								$('form #' + index).parents('.form-group').find('small')
+									.prepend(`<div class="error-input">` + val + `</div>`);
+							});
+							$('.steps li').removeClass('error');
+							$('.content section').each(function (index, el) {
+								if ($(this).find('.has-error').length) {
+									$('.steps li:eq(' + index + ')').addClass('error').find('a').trigger('click');
+								}
+							});
+						}
 
-    						$('.message').printMessage({
-    							message: res.message,
-    							type: 'warning'
-    						});
-    					}
-    				})
-    				.fail(function () {
-    					$('.message').printMessage({
-    						message: 'Error save data',
-    						type: 'warning'
-    					});
-    				})
-    				.always(function () {
-    					$('.loading').hide();
-    					$('html, body').animate({
-    						scrollTop: $(document).height()
-    					}, 2000);
-    				});
+						$('.message').printMessage({
+							message: res.message,
+							type: 'warning'
+						});
+					}
+				})
+				.fail(function () {
+					$('.message').printMessage({
+						message: 'Error save data',
+						type: 'warning'
+					});
+				})
+				.always(function () {
+					$('.loading').hide();
+					$('html, body').animate({
+						scrollTop: $(document).height()
+					}, 2000);
+				});
 
     			return false;
     		}); /*end btn save*/
 
-			function chained_tahun_lokus_id(complete) {
+			function chained_tahun_lokus_id(selected, complete) {
 				$.LoadingOverlay('show');
 
 				return $.ajax({
@@ -237,7 +257,7 @@
 					var html = '<option value=""></option>';
 
 					$.each(res, function(index, val) {
-						html += '<option value="' + val.lokus_year_id + '">' + val.lokus_year_nama + '</option>'
+						html += '<option value="' + val.lokus_year_id + '"'+(selected == val.lokus_year_id ? 'selected' : '')+'>' + val.lokus_year_nama + '</option>'
 					});
 
 					$('#lokus_year_id').html(html);
@@ -288,7 +308,7 @@
 
 			async function chain() {
 				await chained_kelurahan_id();
-				await chained_tahun_lokus_id();
+				await chained_tahun_lokus_id('<?php echo $id;?>');
 			}
 
 			chain();

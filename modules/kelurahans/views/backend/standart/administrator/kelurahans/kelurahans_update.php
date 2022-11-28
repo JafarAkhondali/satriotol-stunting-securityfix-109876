@@ -29,8 +29,16 @@
 		Kelurahan <small>Edit Kelurahan</small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class=""><a href="<?= site_url('administrator/kelurahans'); ?>">Kelurahan</a></li>
+    		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+    		<li>
+<?php
+	if (!empty($id)) {
+		echo '<a href="'.site_url('administrator/kecamatans/view/'.$id).'">Kelurahan</a>';
+	}else{
+		echo '<a href="'.site_url('administrator/kelurahans/').'">Kelurahan</a>';
+	}
+?>
+			</li>
 		<li class="active">Edit</li>
 	</ol>
 </section>
@@ -157,10 +165,17 @@
 			var form_kelurahans = $('#form_kelurahans');
 			var data_post = form_kelurahans.serializeArray();
 			var save_type = $(this).attr('data-stype');
+
 			data_post.push({
 				name: 'save_type',
 				value: save_type
 			});
+
+			data_post.push({
+				name: 'id',
+				value: '<?php echo $id;?>'
+			});
+
 			data_post.push({
 				name: 'event_submit_and_action',
 				value: window.event_submit_and_action

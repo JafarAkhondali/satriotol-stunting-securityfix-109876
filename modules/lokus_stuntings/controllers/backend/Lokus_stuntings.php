@@ -55,6 +55,12 @@ class Lokus_stuntings extends Admin	{
 	public function add() {
 		$this->is_allowed('lokus_stuntings_add');
 
+		$getID = $this->input->get('id');
+
+		$this->data = [
+			'id' => $getID,
+		];
+
 		$this->template->title('Lokus Stuntings New');
 		$this->render('backend/standart/administrator/lokus_stuntings/lokus_stuntings_add', $this->data);
 	}
@@ -76,21 +82,28 @@ class Lokus_stuntings extends Admin	{
 		$this->form_validation->set_rules('lokus_year_id', 'Tahun Lokus', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_id[]', 'Nama Kelurahan', 'trim|required');
 
+		$getID = $this->input->post('id');
+
+		if (!empty($getID)) {
+			$redirect = base_url('administrator/lokus_years/view/'.$getID);
+		}else{
+			$redirect = base_url('administrator/lokus_stuntings');
+		}
+
+		$listed_kelurahan = [];
+		if (count((array) $this->input->post('kelurahan_id'))) {
+			foreach ((array) $_POST['kelurahan_id'] as $idx => $kelurahan_id) {
+				$listed_kelurahan[] = $kelurahan_id;
+			}
+		}
+
 		if ($this->form_validation->run()) {
 			$save_data = [
 				'lokus_year_id' 			=> $this->input->post('lokus_year_id'),
+				'kelurahan_id' 				=> implode(',', $listed_kelurahan),
 				'lokus_stunting_create_at' 	=> date('Y-m-d H:i:s'),
 				'lokus_stunting_user' 		=> get_user_data('id'),
 			];
-
-			$listed_kelurahan = [];
-			if (count((array) $this->input->post('kelurahan_id'))) {
-				foreach ((array) $_POST['kelurahan_id'] as $idx => $kelurahan_id) {
-					$listed_kelurahan[] = $kelurahan_id;
-				}
-			}
-
-			$save_data ['kelurahan_id'] = implode(',', $listed_kelurahan);
 
 			$save_lokus_stuntings = $id = $this->model_lokus_stuntings->store($save_data);
 
@@ -109,7 +122,7 @@ class Lokus_stuntings extends Admin	{
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/lokus_stuntings');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -118,7 +131,7 @@ class Lokus_stuntings extends Admin	{
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/lokus_stuntings');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {
@@ -138,7 +151,12 @@ class Lokus_stuntings extends Admin	{
 	public function edit($id) {
 		$this->is_allowed('lokus_stuntings_update');
 
-		$this->data['lokus_stuntings'] = $this->model_lokus_stuntings->find($id);
+		$getID = $this->input->get('id');
+
+		$this->data = [
+			'id' 				=> $getID,
+			'lokus_stuntings' 	=> $this->model_lokus_stuntings->find($id),
+		];
 
 		$this->template->title('Lokus Stuntings Update');
 		$this->render('backend/standart/administrator/lokus_stuntings/lokus_stuntings_update', $this->data);
@@ -159,12 +177,27 @@ class Lokus_stuntings extends Admin	{
 		}
 
 		$this->form_validation->set_rules('lokus_year_id', 'Tahun Lokus', 'trim|required');
-		$this->form_validation->set_rules('kelurahan_id', 'Nama Kelurahan', 'trim|required');
+		$this->form_validation->set_rules('kelurahan_id[]', 'Nama Kelurahan', 'trim|required');
+
+		$listed_kelurahan = [];
+		if (count((array) $this->input->post('kelurahan_id'))) {
+			foreach ((array) $_POST['kelurahan_id'] as $idx => $kelurahan_id) {
+				$listed_kelurahan[] = $kelurahan_id;
+			}
+		}
+
+		$getID = $this->input->post('id');
+
+		if (!empty($getID)) {
+			$redirect = base_url('administrator/lokus_years/view/'.$getID);
+		}else{
+			$redirect = base_url('administrator/lokus_stuntings');
+		}
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
 				'lokus_year_id' => $this->input->post('lokus_year_id'),
-				'kelurahan_id' 	=> $this->input->post('kelurahan_id'),
+				'kelurahan_id' 	=> implode(',', $listed_kelurahan),
 			];
 			
 			$save_lokus_stuntings = $this->model_lokus_stuntings->change($id, $save_data);
@@ -182,7 +215,7 @@ class Lokus_stuntings extends Admin	{
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/lokus_stuntings');
+					$this->data['redirect'] = $redirect;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -191,7 +224,7 @@ class Lokus_stuntings extends Admin	{
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/lokus_stuntings');
+					$this->data['redirect'] = $redirect;
 				}
 			}
 		} else {
@@ -345,11 +378,11 @@ class Lokus_stuntings extends Admin	{
 			exit;
 		}
 
-		if ($id != null) {
-			$results = db_get_all_data('kelurahans', ['kelurahan_id' => $id]);
-		}else{
+		// if ($id != null) {
+		// 	$results = db_get_all_data('kelurahans', ['kelurahan_id' => $id]);
+		// }else{
 			$results = db_get_all_data('kelurahans');
-		}
+		// }
 
 		$this->response($results);	
 	}

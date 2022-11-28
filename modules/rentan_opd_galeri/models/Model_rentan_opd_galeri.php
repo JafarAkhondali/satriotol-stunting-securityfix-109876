@@ -8,8 +8,7 @@ class Model_rentan_opd_galeri extends MY_Model {
     public $field_search   = ['rentan_opd_galeri_file', 'rentan_opd_id', 'rentan_opd.rentan_opd_kegiatan'];
     public $sort_option = ['rentan_opd_galeri_id', 'DESC'];
     
-    public function __construct()
-    {
+    public function __construct() {
         $config = array(
             'primary_key'   => $this->primary_key,
             'table_name'    => $this->table_name,
@@ -20,13 +19,12 @@ class Model_rentan_opd_galeri extends MY_Model {
         parent::__construct($config);
     }
 
-    public function count_all($q = null, $field = null)
-    {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+    public function count_all($q = null, $field = null) {
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -35,11 +33,13 @@ class Model_rentan_opd_galeri extends MY_Model {
                 if (strpos($field, '.')) {
                     $f_search = $field;
                 }
+
                 if ($iterasi == 1) {
                     $where .=  $f_search . " LIKE '%" . $q . "%' ";
                 } else {
                     $where .= "OR " .  $f_search . " LIKE '%" . $q . "%' ";
                 }
+
                 $iterasi++;
             }
 
@@ -55,13 +55,12 @@ class Model_rentan_opd_galeri extends MY_Model {
         return $query->num_rows();
     }
 
-    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
-    {
-        $iterasi = 1;
-        $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-        $field = $this->scurity($field);
+    public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = []) {
+        $iterasi    = 1;
+        $num        = count($this->field_search);
+        $where      = NULL;
+        $q          = $this->scurity($q);
+        $field      = $this->scurity($field);
 
         if (empty($field)) {
             foreach ($this->field_search as $field) {
@@ -75,6 +74,7 @@ class Model_rentan_opd_galeri extends MY_Model {
                 } else {
                     $where .= "OR " .$f_search . " LIKE '%" . $q . "%' ";
                 }
+
                 $iterasi++;
             }
 
@@ -108,7 +108,6 @@ class Model_rentan_opd_galeri extends MY_Model {
     }
 
     public function filter_avaiable() {
-
         if (!$this->aauth->is_admin()) {
             // $this->db->where($this->table_name.'.rentan_opd_galeri_user', get_user_data('id'));
         }

@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Rentan Opd Galeri site
 *|
 */
-class Rentan_opd_galeri extends Admin	
-{
-	
-	public function __construct()
-	{
+class Rentan_opd_galeri extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_rentan_opd_galeri');
@@ -26,8 +23,7 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('rentan_opd_galeri_list');
 
 		$filter = $this->input->get('q');
@@ -53,9 +49,14 @@ class Rentan_opd_galeri extends Admin
 	* Add new rentan_opd_galeris
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('rentan_opd_galeri_add');
+
+		$getID = $this->input->get('id');
+		
+		$this->data = [
+			'id' => $getID,
+		];
 
 		$this->template->title('Galeri Rencana Kegiatan OPD New');
 		$this->render('backend/standart/administrator/rentan_opd_galeri/rentan_opd_galeri_add', $this->data);
@@ -66,8 +67,7 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('rentan_opd_galeri_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -75,29 +75,24 @@ class Rentan_opd_galeri extends Admin
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('rentan_opd_galeri_rentan_opd_galeri_file_name[]', 'Gambar', 'trim|required');
-		
-
 		$this->form_validation->set_rules('rentan_opd_id', 'Kegiatan', 'trim|required');
-		
 
-		
+		$getID = $this->input->post('id');
+
+		if (!empty($getID)) {
+			$redirectURL = base_url('administrator/rentan_opd/view/'.$getID);
+		}else{
+			$redirectURL = base_url('administrator/rentan_opd_galeri');
+		}
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'rentan_opd_id' => $this->input->post('rentan_opd_id'),
-				'rentan_opd_galeri_create_at' => $this->input->post('rentan_opd_galeri_create_at'),
-				'rentan_opd_galeri_user' => get_user_data('id'),			];
-
-			
-			
-
-
-
+				'rentan_opd_id' 				=> $this->input->post('rentan_opd_id'),
+				'rentan_opd_galeri_create_at' 	=> date('Y-m-d H:i:s'),
+				'rentan_opd_galeri_user' 		=> get_user_data('id'),
+			];
 			
 			if (!is_dir(FCPATH . '/uploads/rentan_opd_galeri/')) {
 				mkdir(FCPATH . '/uploads/rentan_opd_galeri/');
@@ -121,18 +116,12 @@ class Rentan_opd_galeri extends Admin
 					}
 				}
 
-				$save_data['rentan_opd_galeri_file'] = implode($listed_image, ',');
+				$save_data['rentan_opd_galeri_file'] = implode(',', $listed_image);
 			}
-		
 			
 			$save_rentan_opd_galeri = $id = $this->model_rentan_opd_galeri->store($save_data);
-            
 
 			if ($save_rentan_opd_galeri) {
-				
-				
-					
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $save_rentan_opd_galeri;
@@ -147,7 +136,7 @@ class Rentan_opd_galeri extends Admin
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/rentan_opd_galeri');
+					$this->data['redirect'] = $redirectURL;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -156,10 +145,9 @@ class Rentan_opd_galeri extends Admin
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/rentan_opd_galeri');
+					$this->data['redirect'] = $redirectURL;
 				}
 			}
-
 		} else {
 			$this->data['success'] = false;
 			$this->data['message'] = 'Opss validation failed';
@@ -174,11 +162,16 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('rentan_opd_galeri_update');
 
-		$this->data['rentan_opd_galeri'] = $this->model_rentan_opd_galeri->find($id);
+		$getID = $this->input->get('id');
+		
+		$this->data = [
+			'id' 				=> $getID,
+			'rentan_opd_galeri' => $this->model_rentan_opd_galeri->find($id),
+		];
+
 
 		$this->template->title('Galeri Rencana Kegiatan OPD Update');
 		$this->render('backend/standart/administrator/rentan_opd_galeri/rentan_opd_galeri_update', $this->data);
@@ -189,8 +182,7 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('rentan_opd_galeri_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -198,25 +190,23 @@ class Rentan_opd_galeri extends Admin
 				]);
 			exit;
 		}
-				$this->form_validation->set_rules('rentan_opd_galeri_rentan_opd_galeri_file_name[]', 'Gambar', 'trim|required');
-		
 
+		$this->form_validation->set_rules('rentan_opd_galeri_rentan_opd_galeri_file_name[]', 'Gambar', 'trim|required');
 		$this->form_validation->set_rules('rentan_opd_id', 'Kegiatan', 'trim|required');
-		
 
+		$getID = $this->input->post('id');
+
+		if (!empty($getID)) {
+			$redirectURL = base_url('administrator/rentan_opd/view/'.$getID);
+		}else{
+			$redirectURL = base_url('administrator/rentan_opd_galeri');
+		}
 		
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
 				'rentan_opd_id' => $this->input->post('rentan_opd_id'),
 			];
 
-			
-
-			
-
-
-			
 			$listed_image = [];
 			if (count((array) $this->input->post('rentan_opd_galeri_rentan_opd_galeri_file_name'))) {
 				foreach ((array) $_POST['rentan_opd_galeri_rentan_opd_galeri_file_name'] as $idx => $file_name) {
@@ -241,17 +231,11 @@ class Rentan_opd_galeri extends Admin
 				}
 			}
 			
-			$save_data['rentan_opd_galeri_file'] = implode($listed_image, ',');
-		
+			$save_data['rentan_opd_galeri_file'] = implode(',', $listed_image);
 			
 			$save_rentan_opd_galeri = $this->model_rentan_opd_galeri->change($id, $save_data);
 
 			if ($save_rentan_opd_galeri) {
-
-				
-
-				
-				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
@@ -264,7 +248,7 @@ class Rentan_opd_galeri extends Admin
 					]), 'success');
 
             		$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/rentan_opd_galeri');
+					$this->data['redirect'] = $redirectURL;
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -273,7 +257,7 @@ class Rentan_opd_galeri extends Admin
 				} else {
             		$this->data['success'] = false;
             		$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/rentan_opd_galeri');
+					$this->data['redirect'] = $redirectURL;
 				}
 			}
 		} else {
@@ -290,8 +274,7 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('rentan_opd_galeri_delete');
 
 		$this->load->helper('file');
@@ -321,8 +304,7 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('rentan_opd_galeri_view');
 
 		$this->data['rentan_opd_galeri'] = $this->model_rentan_opd_galeri->join_avaiable()->filter_avaiable()->find($id);
@@ -336,11 +318,9 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$rentan_opd_galeri = $this->model_rentan_opd_galeri->find($id);
 
-		
 		if (!empty($rentan_opd_galeri->rentan_opd_galeri_file)) {
 			foreach ((array) explode(',', $rentan_opd_galeri->rentan_opd_galeri_file) as $filename) {
 				$path = FCPATH . '/uploads/rentan_opd_galeri/' . $filename;
@@ -359,8 +339,7 @@ class Rentan_opd_galeri extends Admin
 	* Upload Image Rentan Opd Galeri	* 
 	* @return JSON
 	*/
-	public function upload_rentan_opd_galeri_file_file()
-	{
+	public function upload_rentan_opd_galeri_file_file() {
 		if (!$this->is_allowed('rentan_opd_galeri_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -381,8 +360,7 @@ class Rentan_opd_galeri extends Admin
 	* Delete Image Rentan Opd Galeri	* 
 	* @return JSON
 	*/
-	public function delete_rentan_opd_galeri_file_file($uuid)
-	{
+	public function delete_rentan_opd_galeri_file_file($uuid) {
 		if (!$this->is_allowed('rentan_opd_galeri_delete', false)) {
 			echo json_encode([
 				'success' => false,
@@ -406,8 +384,7 @@ class Rentan_opd_galeri extends Admin
 	* Get Image Rentan Opd Galeri	* 
 	* @return JSON
 	*/
-	public function get_rentan_opd_galeri_file_file($id)
-	{
+	public function get_rentan_opd_galeri_file_file($id) {
 		if (!$this->is_allowed('rentan_opd_galeri_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -434,8 +411,7 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('rentan_opd_galeri_export');
 
 		$this->model_rentan_opd_galeri->export(
@@ -450,16 +426,14 @@ class Rentan_opd_galeri extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('rentan_opd_galeri_export');
 
 		$this->model_rentan_opd_galeri->pdf('rentan_opd_galeri', 'rentan_opd_galeri');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('rentan_opd_galeri_export');
 
 		$table = $title = 'rentan_opd_galeri';
@@ -491,8 +465,7 @@ class Rentan_opd_galeri extends Admin
         $this->pdf->Output($table.'.pdf', 'H');
 	}
 
-	public function ajax_rentan_opd_id($id = null)
-	{
+	public function ajax_rentan_opd_id($id = null) {
 		if (!$this->is_allowed('rentan_opd_galeri_list', false)) {
 			echo json_encode([
 				'success' => false,
@@ -500,7 +473,13 @@ class Rentan_opd_galeri extends Admin
 				]);
 			exit;
 		}
-		$results = db_get_all_data('rentan_opd', ['rentan_opd_id' => $id]);
+
+		if ($id != null) {
+			$results = db_get_all_data('rentan_opd', ['rentan_opd_id' => $id]);
+		}else{
+			$results = db_get_all_data('rentan_opd');
+		}
+
 		$this->response($results);	
 	}
 

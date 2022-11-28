@@ -34,8 +34,16 @@
     		Kelurahan <small><?= cclang('new', ['Kelurahan']); ?> </small>
     	</h1>
     	<ol class="breadcrumb">
-    		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    		<li class=""><a href="<?= site_url('administrator/kelurahans'); ?>">Kelurahan</a></li>
+    		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+    		<li>
+<?php
+	if (!empty($id)) {
+		echo '<a href="'.site_url('administrator/kecamatans/view/'.$id).'">Kelurahan</a>';
+	}else{
+		echo '<a href="'.site_url('administrator/kelurahans/').'">Kelurahan</a>';
+	}
+?>
+			</li>
     		<li class="active"><?= cclang('new'); ?></li>
     	</ol>
     </section>
@@ -163,6 +171,11 @@
     			data_post.push({
     				name: 'save_type',
     				value: save_type
+    			});
+
+    			data_post.push({
+    				name: 'id',
+    				value: '<?php echo $id;?>'
     			});
 
     			data_post.push({

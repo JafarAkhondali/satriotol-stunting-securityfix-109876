@@ -150,7 +150,9 @@ class Lokus_years extends Admin {
 	public function edit($id) {
 		$this->is_allowed('lokus_years_update');
 
-		$this->data['lokus_years'] = $this->model_lokus_years->find($id);
+		$this->data = [
+			'lokus_years' 	=> $this->model_lokus_years->find($id),
+		];
 
 		$this->template->title('Tahun Lokus Update');
 		$this->render('backend/standart/administrator/lokus_years/lokus_years_update', $this->data);
@@ -277,7 +279,7 @@ class Lokus_years extends Admin {
 		$this->is_allowed('lokus_years_view');
 
 		$this->data['lokus_years'] 		= $this->model_lokus_years->join_avaiable()->filter_avaiable()->find($id);
-		$this->data['lokus_kelurahan'] 	= $this->model_lokus_years->query_lokus_stunting($id)->result();
+		$this->data['lokus_kelurahan'] 	= $this->model_lokus_years->query_lokus_stunting($id)->row();
 
 		$this->template->title('Tahun Lokus Detail');
 		$this->render('backend/standart/administrator/lokus_years/lokus_years_view', $this->data);

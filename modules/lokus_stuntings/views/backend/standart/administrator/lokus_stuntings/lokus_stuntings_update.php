@@ -28,8 +28,16 @@
 		Lokus Stuntings <small>Edit Lokus Stuntings</small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class=""><a href="<?= site_url('administrator/lokus_stuntings'); ?>">Lokus Stuntings</a></li>
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li>
+<?php
+	if (!empty($id)) {
+		echo '<a href="'.site_url('administrator/lokus_years/view/'.$id).'">Lokus Stuntings</a>';
+	}else{
+		echo '<a href="'.site_url('administrator/lokus_stuntings').'">Lokus Stuntings</a>';
+	}
+?>
+		</li>
 		<li class="active">Edit</li>
 	</ol>
 </section>
@@ -78,7 +86,7 @@
 						<div class="form-group group-kelurahan-id">
 							<label for="kelurahan_id" class="col-sm-2 control-label">Nama Kelurahan <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<select class="form-control chosen chosen-select-deselect" name="kelurahan_id" id="kelurahan_id" data-placeholder="Select Nama Kelurahan">
+								<select class="form-control chosen chosen-select-deselect" multiple="multiple" name="kelurahan_id[]" id="kelurahan_id" data-placeholder="Select Nama Kelurahan">
 									<option value=""></option>
 								</select>
 								<small class="info help-block"></small>
@@ -108,9 +116,7 @@
 						<?= form_close(); ?>
 					</div>
 				</div>
-				<!--/box body -->
 			</div>
-			<!--/box -->
 		</div>
 	</div>
 </section>
@@ -119,6 +125,14 @@
 <script>
 	$(document).ready(function () {
 		window.event_submit_and_action = '';
+		var getID = '<?php echo $id;?>';
+		var redirectURL;
+
+		if (getID != '') {
+			redirectURL = BASE_URL + 'administrator/lokus_years/view/'+getID;
+		}else{
+			redirectURL = BASE_URL + 'administrator/lokus_stuntings';
+		}
 
 		$('#btn_cancel').click(function () {
 			swal({
@@ -134,7 +148,7 @@
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						window.location.href = BASE_URL + 'administrator/lokus_stuntings';
+						window.location.href = redirectURL;
 					}
 				});
 
@@ -147,10 +161,17 @@
 			var form_lokus_stuntings = $('#form_lokus_stuntings');
 			var data_post = form_lokus_stuntings.serializeArray();
 			var save_type = $(this).attr('data-stype');
+
 			data_post.push({
 				name: 'save_type',
 				value: save_type
 			});
+
+			data_post.push({
+				name: 'id',
+				value: '<?php echo $id;?>'
+			});
+
 			data_post.push({
 				name: 'event_submit_and_action',
 				value: window.event_submit_and_action
@@ -159,50 +180,50 @@
 			$('.loading').show();
 
 			$.ajax({
-					url: form_lokus_stuntings.attr('action'),
-					type: 'POST',
-					dataType: 'json',
-					data: data_post,
-				})
-				.done(function (res) {
-					$('form').find('.form-group').removeClass('has-error');
-					$('form').find('.error-input').remove();
-					$('.steps li').removeClass('error');
-					if (res.success) {
-						var id = $('#lokus_stuntings_image_galery').find('li').attr('qq-file-id');
-						if (save_type == 'back') {
-							window.location.href = res.redirect;
-							return;
-						}
-
-						$('.message').printMessage({
-							message: res.message
-						});
-						$('.message').fadeIn();
-						$('.data_file_uuid').val('');
-
-					} else {
-						if (res.errors) {
-							parseErrorField(res.errors);
-						}
-						$('.message').printMessage({
-							message: res.message,
-							type: 'warning'
-						});
+				url: form_lokus_stuntings.attr('action'),
+				type: 'POST',
+				dataType: 'json',
+				data: data_post,
+			})
+			.done(function (res) {
+				$('form').find('.form-group').removeClass('has-error');
+				$('form').find('.error-input').remove();
+				$('.steps li').removeClass('error');
+				if (res.success) {
+					var id = $('#lokus_stuntings_image_galery').find('li').attr('qq-file-id');
+					if (save_type == 'back') {
+						window.location.href = res.redirect;
+						return;
 					}
-				})
-				.fail(function () {
+
 					$('.message').printMessage({
-						message: 'Error save data',
+						message: res.message
+					});
+					$('.message').fadeIn();
+					$('.data_file_uuid').val('');
+
+				} else {
+					if (res.errors) {
+						parseErrorField(res.errors);
+					}
+					$('.message').printMessage({
+						message: res.message,
 						type: 'warning'
 					});
-				})
-				.always(function () {
-					$('.loading').hide();
-					$('html, body').animate({
-						scrollTop: $(document).height()
-					}, 2000);
+				}
+			})
+			.fail(function () {
+				$('.message').printMessage({
+					message: 'Error save data',
+					type: 'warning'
 				});
+			})
+			.always(function () {
+				$('.loading').hide();
+				$('html, body').animate({
+					scrollTop: $(document).height()
+				}, 2000);
+			});
 
 			return false;
 		}); /*end btn save*/
@@ -234,25 +255,29 @@
 				});
 		}
 
-		$('#lokus_year_id').change(function (event) {
-			chained_lokus_year_id('');
-		});
-
 		function chained_kelurahan_id(selected, complete) {
-			var val = $('#kelurahan_id').val();
+			var val 	= $('#kelurahan_id').val();
+
 			$.LoadingOverlay('show')
 			return $.ajax({
 				url: BASE_URL + '/administrator/lokus_stuntings/ajax_kelurahan_id/' + val,
 				dataType: 'JSON',
 			})
 			.done(function (res) {
+				var kelurahan_selected 	= selected.split(',');
+
 				var html = '<option value=""></option>';
+
 				$.each(res, function (index, val) {
-					html += '<option ' + (selected == val.kelurahan_id ? 'selected' : '') +
-						' value="' + val.kelurahan_id + '">' + val.kelurahan_nama + '</option>'
+					// if((kelurahan_selected.includes(val.kelurahan_id)))
+					// (kelurahan_selected.includes(val.kelurahan_id) ? 'selected' : '')
+
+					html += '<option value="' + val.kelurahan_id + '">' + val.kelurahan_nama + '</option>'
 				});
+
 				$('#kelurahan_id').html(html);
-				$('#kelurahan_id').trigger('chosen:updated');
+				$('#kelurahan_id').val(kelurahan_selected).trigger('chosen:updated');
+
 				if (typeof complete != 'undefined') {
 					complete();
 				}
@@ -264,10 +289,6 @@
 				$.LoadingOverlay('hide')
 			});
 		}
-
-		$('#kelurahan_id').change(function (event) {
-			chained_kelurahan_id('')
-		});
 
 		async function chain() {
 			await chained_lokus_year_id("<?= $lokus_stuntings->lokus_year_id ?>");

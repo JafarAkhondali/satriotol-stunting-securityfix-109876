@@ -68,8 +68,6 @@ class Kelurahans extends Admin {
 	* @return JSON
 	*/
 	public function add_save() {
-		$id_kecamatan = $this->input->get('id');
-
 		if (!$this->is_allowed('kelurahans_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -81,8 +79,10 @@ class Kelurahans extends Admin {
 		$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_nama', 'Nama Kelurahan', 'trim|required|max_length[255]');
 
-		if (!empty($id_kecamatan)) {
-			$redirect = base_url('administrator/kecamatans/view/'.$id_kecamatan);
+		$getID = $this->input->post('id');
+
+		if (!empty($getID)) {
+			$redirect = base_url('administrator/kecamatans/view/'.$getID);
 		}else{
 			$redirect = base_url('administrator/kelurahans');
 		}
@@ -159,8 +159,6 @@ class Kelurahans extends Admin {
 	* @var $id String
 	*/
 	public function edit_save($id) {
-		$id_kecamatan = $this->input->get('id');
-
 		if (!$this->is_allowed('kelurahans_update', false)) {
 			echo json_encode([
 				'success' => false,
@@ -172,8 +170,10 @@ class Kelurahans extends Admin {
 		$this->form_validation->set_rules('kecamatan_id', 'Nama Kecamatan', 'trim|required');
 		$this->form_validation->set_rules('kelurahan_nama', 'Nama Kelurahan', 'trim|required|max_length[255]');
 
-		if (!empty($id_kecamatan)) {
-			$redirect = base_url('administrator/kecamatans/view/'.$id_kecamatan);
+		$getID = $this->input->post('id');
+
+		if (!empty($getID)) {
+			$redirect = base_url('administrator/kecamatans/view/'.$getID);
 		}else{
 			$redirect = base_url('administrator/kelurahans');
 		}

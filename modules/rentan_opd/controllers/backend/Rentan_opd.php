@@ -29,8 +29,8 @@ class Rentan_opd extends Admin {
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['rentan_opds'] = $this->model_rentan_opd->get($filter, $field, $this->limit_page, $offset);
-		$this->data['rentan_opd_counts'] = $this->model_rentan_opd->count_all($filter, $field);
+		$this->data['rentan_opds'] 			= $this->model_rentan_opd->get($filter, $field, $this->limit_page, $offset);
+		$this->data['rentan_opd_counts'] 	= $this->model_rentan_opd->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/rentan_opd/index/',
@@ -230,7 +230,10 @@ class Rentan_opd extends Admin {
 	public function view($id) {
 		$this->is_allowed('rentan_opd_view');
 
-		$this->data['rentan_opd'] = $this->model_rentan_opd->join_avaiable()->filter_avaiable()->find($id);
+		$this->data = [
+			'rentan_opd' 	=> $this->model_rentan_opd->join_avaiable()->filter_avaiable()->find($id),
+			'rentan_galeri' => $this->model_rentan_opd->query_galeri_rentan($id)->row(),
+		];
 
 		$this->template->title('Rencana Kegiatan OPD Detail');
 		$this->render('backend/standart/administrator/rentan_opd/rentan_opd_view', $this->data);

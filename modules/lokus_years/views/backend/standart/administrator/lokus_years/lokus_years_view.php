@@ -80,9 +80,6 @@
 			</div>
 		</div>
 	</div>
-<?php
-	if (count($lokus_kelurahan) > 0) {
-?>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-danger">
@@ -90,13 +87,22 @@
 					<h3 class="box-title">Data Lokus Stunting Kelurahan <?php echo $lokus_years->lokus_year_nama;?></h3>
 				</div>
 				<div class="box-body">
-				<?php
-					is_allowed('lokus_stuntings_add', function() {
-				?>
-					<a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('lokus_stuntings')]);?> (Ctrl+a)" href="<?=  site_url('administrator/lokus_stuntings/add'); ?>">
-						<i class="fa fa-plus-square-o"></i> <?= cclang('add_new_button', [cclang('lokus_stuntings')]); ?></a>
-				<?php
-					});
+<?php
+	if (!empty($lokus_kelurahan->kelurahan_id)) {
+		is_allowed('lokus_stuntings_update', function() use ($lokus_kelurahan, $lokus_years) {
+?>
+		<a class="btn btn-flat btn-success btn_update" id="btn_update" title="<?= cclang('add_update', [cclang('lokus_stuntings')]);?> (Ctrl+a)" href="<?= site_url('administrator/lokus_stuntings/edit/'.$lokus_kelurahan->lokus_stunting_id.'?id=').$lokus_years->lokus_year_id; ?>">
+			<i class="fa fa-plus-square-o"></i> <?= cclang('add_update', [cclang('lokus_stuntings')]); ?></a>
+<?php
+		});
+	}else{
+		is_allowed('lokus_stuntings_add', function() use ($lokus_years) {
+?>
+		<a class="btn btn-flat btn-success btn_update" id="btn_update" title="<?= cclang('add_new', [cclang('lokus_stuntings')]);?> (Ctrl+a)" href="<?= site_url('administrator/lokus_stuntings/add?id=').$lokus_years->lokus_year_id; ?>">
+			<i class="fa fa-plus-square-o"></i> <?= cclang('add_new', [cclang('lokus_stuntings')]); ?></a>
+<?php
+		});
+	}
 
 					is_allowed('lokus_stuntings_export', function() {
 				?>
@@ -120,9 +126,6 @@
 			</div>
 		</div>
 	</div>
-<?php
-	}
-?>
 </section>
 <!-- /.content -->
 
