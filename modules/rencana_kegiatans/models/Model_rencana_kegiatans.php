@@ -109,8 +109,8 @@ class Model_rencana_kegiatans extends MY_Model {
     public function filter_avaiable() {
 
         if (!$this->aauth->is_admin()) {
-            $this->db->where($this->table_name.'.rencana_kegiatan_create_user', get_user_data('id'));
-        $this->db->where($this->table_name.'.rencana_kegiatan_update_user', get_user_data('id'));
+            // $this->db->where($this->table_name.'.rencana_kegiatan_create_user', get_user_data('id'));
+            // $this->db->where($this->table_name.'.rencana_kegiatan_update_user', get_user_data('id'));
         }
 
         return $this;

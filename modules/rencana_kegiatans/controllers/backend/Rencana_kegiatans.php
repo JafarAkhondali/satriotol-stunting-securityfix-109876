@@ -29,7 +29,7 @@ class Rencana_kegiatans extends Admin {
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['rencana_kegiatanss'] = $this->model_rencana_kegiatans->get($filter, $field, $this->limit_page, $offset);
+		$this->data['rencana_kegiatanss'] 		= $this->model_rencana_kegiatans->get($filter, $field, $this->limit_page, $offset);
 		$this->data['rencana_kegiatans_counts'] = $this->model_rencana_kegiatans->count_all($filter, $field);
 
 		$config = [
