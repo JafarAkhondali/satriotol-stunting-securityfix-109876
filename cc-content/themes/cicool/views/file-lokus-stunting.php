@@ -47,7 +47,7 @@
 		}).addTo(map);
 
 		geoLayer.eachLayer(function (layer) {
-			layer.bindPopup('<?php echo '<b>'.$kecamatans[$i]->kecamatan_nama.'</b> : <br/>&nbsp;&nbsp;&nbsp;&nbsp;- '.$data_kelurahan[$kecamatans[$i]->kecamatan_id];?>');
+			layer.bindPopup('<?php echo '<b>Kecamatan '.$kecamatans[$i]->kecamatan_nama.'</b> : <br/>&nbsp;&nbsp;&nbsp;&nbsp;- '.$data_kelurahan[$kecamatans[$i]->kecamatan_id];?>');
 		});
 	});
 <?php
@@ -67,7 +67,7 @@
 		}).addTo(map);
 
 		geoLayer.eachLayer(function (layer) {
-			layer.bindPopup('<?php echo $kecamatans[$i]->kecamatan_nama;?>');
+			layer.bindPopup('<?php echo 'Kecamatan '.$kecamatans[$i]->kecamatan_nama;?>');
 		});
 	});
 <?php
