@@ -58,7 +58,7 @@
 									</p>
 								</div>
 								<div class="postbox__read-more">
-									<a href="<?= base_url() . 'blog/' . $blog->slug; ?>" class="tp-btn">read more</a>
+									<a href="<?= base_url() . 'blog/' . $blog->slug; ?>" class="tp-btn">Baca Selengkapnya</a>
 								</div>
 							</div>
 						</article>
@@ -94,7 +94,7 @@
 
 						<div class="sidebar__widget mb-55">
 							<div class="sidebar__widget-head mb-35">
-								<h3 class="sidebar__widget-title">Category</h3>
+								<h3 class="sidebar__widget-title">Kategori</h3>
 							</div>
 							<div class="sidebar__widget-content">
 								<ul>

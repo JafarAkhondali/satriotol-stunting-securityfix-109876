@@ -134,7 +134,7 @@
 				?>
 					<div class="sidebar__widget mb-55">
 						<div class="sidebar__widget-head mb-35">
-							<h3 class="sidebar__widget-title">Category</h3>
+							<h3 class="sidebar__widget-title">Kategori</h3>
 						</div>
 						<div class="sidebar__widget-content">
 							<ul>
