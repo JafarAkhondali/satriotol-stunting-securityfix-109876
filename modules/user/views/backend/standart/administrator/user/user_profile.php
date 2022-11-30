@@ -75,6 +75,7 @@
 							</div>
 							<div class="box-footer no-padding">
 								<ul class="nav nav-stacked">
+									<li><a href="javascript:void(0);"><i class="fa fa-chevron-right"></i> <?= $user->opd_nama; ?></a></li>
 									<?php foreach($this->aauth->get_user_groups() as $row): ?>
 									<li><a href="#"><i class="fa fa-chevron-right"></i> <?= _ent($row->name); ?></a>
 									</li>
