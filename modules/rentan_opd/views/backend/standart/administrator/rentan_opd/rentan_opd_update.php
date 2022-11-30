@@ -118,6 +118,8 @@
 	$(document).ready(function () {
 		window.event_submit_and_action = '';
 
+		var opdID = '<?php echo $opdID;?>';
+
 		$('#btn_cancel').click(function () {
 			swal({
 				title: "Are you sure?",
@@ -145,10 +147,18 @@
 			var form_rentan_opd = $('#form_rentan_opd');
 			var data_post = form_rentan_opd.serializeArray();
 			var save_type = $(this).attr('data-stype');
+
 			data_post.push({
 				name: 'save_type',
 				value: save_type
 			});
+
+			if (opdID != '') {
+				data_post.push({
+					name: 'opd_id',
+					value: opdID
+				});
+			}
 
 			data_post.push({
 				name: 'event_submit_and_action',
@@ -221,6 +231,10 @@
 					html += '<option ' + (selected == val.opd_id ? 'selected' : '') + ' value="' +
 						val.opd_id + '">' + val.opd_nama + '</option>'
 				});
+
+				if (opdID != '') {
+					$('#opd_id').attr('disabled', 'disabled');
+				}
 				$('#opd_id').html(html);
 				$('#opd_id').trigger('chosen:updated');
 				if (typeof complete != 'undefined') {

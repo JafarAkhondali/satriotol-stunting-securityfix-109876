@@ -39,7 +39,7 @@
 	<div class="row">
 
 		<div class="col-md-7">
-			<div class="box box-warning">
+			<div class="box box-danger">
 				<div class="box-body ">
 
 					<!-- /.col -->

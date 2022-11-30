@@ -79,7 +79,7 @@ class Rentan_opd_galeri extends Admin {
 		$this->form_validation->set_rules('rentan_opd_galeri_rentan_opd_galeri_file_name[]', 'Gambar', 'trim|required');
 		$this->form_validation->set_rules('rentan_opd_id', 'Kegiatan', 'trim|required');
 
-		$getID = $this->input->post('id');
+		$getID = $this->input->post('rentan_opd_id');
 
 		if (!empty($getID)) {
 			$redirectURL = base_url('administrator/rentan_opd/view/'.$getID);
@@ -89,7 +89,7 @@ class Rentan_opd_galeri extends Admin {
 
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'rentan_opd_id' 				=> $this->input->post('rentan_opd_id'),
+				'rentan_opd_id' 				=> $getID,
 				'rentan_opd_galeri_create_at' 	=> date('Y-m-d H:i:s'),
 				'rentan_opd_galeri_user' 		=> get_user_data('id'),
 			];
@@ -194,7 +194,7 @@ class Rentan_opd_galeri extends Admin {
 		$this->form_validation->set_rules('rentan_opd_galeri_rentan_opd_galeri_file_name[]', 'Gambar', 'trim|required');
 		$this->form_validation->set_rules('rentan_opd_id', 'Kegiatan', 'trim|required');
 
-		$getID = $this->input->post('id');
+		$getID = $this->input->post('rentan_opd_id');
 
 		if (!empty($getID)) {
 			$redirectURL = base_url('administrator/rentan_opd/view/'.$getID);
@@ -204,7 +204,7 @@ class Rentan_opd_galeri extends Admin {
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'rentan_opd_id' => $this->input->post('rentan_opd_id'),
+				'rentan_opd_id' => $getID,
 			];
 
 			$listed_image = [];

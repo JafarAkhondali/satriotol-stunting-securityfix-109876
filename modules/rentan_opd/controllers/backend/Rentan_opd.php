@@ -52,6 +52,12 @@ class Rentan_opd extends Admin {
 	public function add() {
 		$this->is_allowed('rentan_opd_add');
 
+		$opd_id = $this->session->userdata('opd_id');
+		
+		$this->data = [
+			'opdID' => $opd_id,
+		];
+
 		$this->template->title('Rencana Kegiatan OPD New');
 		$this->render('backend/standart/administrator/rentan_opd/rentan_opd_add', $this->data);
 	}
@@ -69,8 +75,8 @@ class Rentan_opd extends Admin {
 				]);
 			exit;
 		}
-
-		$this->form_validation->set_rules('opd_id', 'Dinas / OPD / Instansi', 'trim|required');
+	
+		$this->form_validation->set_rules('opd_id', 'Dinas / Instansi', 'trim|required');
 		$this->form_validation->set_rules('rentan_opd_kegiatan', 'Rencana Kegiatan', 'trim|required');
 
 		if ($this->form_validation->run()) {
@@ -127,7 +133,12 @@ class Rentan_opd extends Admin {
 	public function edit($id) {
 		$this->is_allowed('rentan_opd_update');
 
-		$this->data['rentan_opd'] = $this->model_rentan_opd->find($id);
+		$opd_id = $this->session->userdata('opd_id');
+		
+		$this->data = [
+			'opdID' 		=> $opd_id,
+			'rentan_opd' 	=> $this->model_rentan_opd->find($id),
+		];
 
 		$this->template->title('Rencana Kegiatan OPD Update');
 		$this->render('backend/standart/administrator/rentan_opd/rentan_opd_update', $this->data);

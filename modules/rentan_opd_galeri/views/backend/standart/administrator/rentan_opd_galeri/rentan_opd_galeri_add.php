@@ -164,10 +164,12 @@
 					value: save_type
 				});
 
-				data_post.push({
-					name: 'id',
-					value: '<?php echo $id;?>'
-				});
+				if (getID != '') {
+					data_post.push({
+						name: 'rentan_opd_id',
+						value: '<?php echo $id;?>'
+					});
+				}
 
 				data_post.push({
 					name: 'event_submit_and_action',
@@ -309,8 +311,10 @@
 						html += '<option value="' + val.rentan_opd_id + '" ' + (selected == val.rentan_opd_id ? 'selected' : '') + '>' + val.rentan_opd_kegiatan + '</option>'
 					});
 
+					if (getID != '') {
+						$('#rentan_opd_id').attr('disabled', 'disabled');
+					}
 					$('#rentan_opd_id').html(html);
-					disabled_combo;
 					$('#rentan_opd_id').trigger('chosen:updated');
 
 					if (typeof complete != 'undefined') {
@@ -326,7 +330,7 @@
 			}
 
 			async function chain() {
-				await chained_rentan_opd("<?php echo $id;?>");
+				await chained_rentan_opd(getID);
 			}
 
 			chain();

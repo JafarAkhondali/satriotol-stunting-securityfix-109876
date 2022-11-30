@@ -168,7 +168,7 @@
 			});
 
 			data_post.push({
-				name: 'id',
+				name: 'rentan_opd_id',
 				value: '<?php echo $id;?>'
 			});
 
@@ -299,6 +299,10 @@
 				$.each(res, function (index, val) {
 					html += '<option ' + (selected == val.rentan_opd_id ? 'selected' : '') + ' value="' + val.rentan_opd_id + '">' + val.rentan_opd_kegiatan + '</option>';
 				});
+
+				if (getID != '') {
+					$('#rentan_opd_id').attr('disabled', 'disabled');
+				}
 				$('#rentan_opd_id').html(html);
 				$('#rentan_opd_id').trigger('chosen:updated');
 				if (typeof complete != 'undefined') {

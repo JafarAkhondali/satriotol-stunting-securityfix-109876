@@ -67,24 +67,19 @@
 							$user_groups = $this->model_group->get_user_group_ids();
                         ?>
     						<div class="form-group group-opd-id ">
-    							<label for="opd_id" class="col-sm-2 control-label">Dinas / OPD / Instansi <i
-    									class="required">*</i>
-    							</label>
+    							<label for="opd_id" class="col-sm-2 control-label">Dinas / Instansi <i class="required">*</i></label>
     							<div class="col-sm-8">
-    								<select class="form-control chosen chosen-select-deselect" name="opd_id" id="opd_id"
-    									data-placeholder="Select Dinas / OPD / Instansi">
+    								<select class="form-control chosen chosen-select-deselect" name="opd_id" id="opd_id" data-placeholder="Select Dinas / OPD / Instansi">
     									<option value=""></option>
     								</select>
-    								<small class="info help-block">
-    								</small>
+    								<small class="info help-block"></small>
     							</div>
     						</div>
 
     						<div class="form-group group-rentan-opd-kegiatan ">
     							<label for="rentan_opd_kegiatan" class="col-sm-2 control-label">Rencana Kegiatan <i class="required">*</i></label>
     							<div class="col-sm-8">
-    								<textarea id="rentan_opd_kegiatan" name="rentan_opd_kegiatan" rows="5" class="textarea form-control"
-    									placeholder="Rencana Kegiatan"><?= set_value('rentan_opd_kegiatan'); ?></textarea>
+    								<textarea id="rentan_opd_kegiatan" name="rentan_opd_kegiatan" rows="5" class="textarea form-control" placeholder="Rencana Kegiatan"><?= set_value('rentan_opd_kegiatan'); ?></textarea>
     								<small class="info help-block"></small>
     							</div>
     						</div>
@@ -128,6 +123,8 @@
     	$(document).ready(function () {
     		window.event_submit_and_action = '';
 
+			var opdID = '<?php echo $opdID;?>';
+
     		$('#btn_cancel').click(function () {
     			swal({
 					title: "<?= cclang('are_you_sure'); ?>",
@@ -161,12 +158,22 @@
     				value: save_type
     			});
 
+				if (opdID != '') {
+					data_post.push({
+						name: 'opd_id',
+						value: opdID
+					});
+				}
+
+    			data_post.push({
+    				name: 'save_type',
+    				value: save_type
+    			});
+
     			data_post.push({
     				name: 'event_submit_and_action',
     				value: window.event_submit_and_action
     			});
-
-
 
     			$('.loading').show();
 
@@ -181,7 +188,6 @@
 					$('.steps li').removeClass('error');
 					$('form').find('.error-input').remove();
 					if (res.success) {
-
 						if (save_type == 'back') {
 							window.location.href = res.redirect;
 							return;
@@ -193,10 +199,8 @@
 						$('.message').fadeIn();
 						resetForm();
 						$('.chosen option').prop('selected', false).trigger('chosen:updated');
-
 					} else {
 						if (res.errors) {
-
 							$.each(res.errors, function (index, val) {
 								$('form #' + index).parents('.form-group').addClass(
 									'has-error');
@@ -216,7 +220,6 @@
 							type: 'warning'
 						});
 					}
-
 				})
 				.fail(function () {
 					$('.message').printMessage({
@@ -259,7 +262,7 @@
 				});
     		}); */
 			
-			function chained_opd_id(complete) {
+			function chained_opd_id(selected, complete) {
 				$.LoadingOverlay('show');
 
 				return $.ajax({
@@ -270,8 +273,12 @@
 					var html = '<option value=""></option>';
 
 					$.each(res, function(index, val) {
-						html += '<option value="' + val.opd_id + '">' + val.opd_nama + '</option>'
+						html += '<option value="' + val.opd_id + '" '+(selected == val.opd_id ? 'selected' : '')+'>' + val.opd_nama + '</option>';
 					});
+
+					if (opdID != '') {
+						$('#opd_id').attr('disabled', 'disabled');
+					}
 
 					$('#opd_id').html(html);
 					$('#opd_id').trigger('chosen:updated');
@@ -289,7 +296,7 @@
 			}
 
 			async function chain() {
-				await chained_opd_id();
+				await chained_opd_id(opdID);
 			}
 
 			chain();
