@@ -17,51 +17,6 @@ class Model_blog extends MY_Model {
 		parent::__construct($config);
 	}
 
-	public function count_all($q = null, $field = null,$category = null, $tag = null) {
-		$user_id 	= $this->session->userdata('id');
-		$group_id 	= $this->session->userdata('group_id');
-
-		$iterasi 	= 1;
-        $num 		= count($this->field_search);
-        $where 		= NULL;
-        $q 			= $this->scurity($q);
-		$field 		= $this->scurity($field);
-
-        if (empty($field)) {
-	        foreach ($this->field_search as $field) {
-	            if ($iterasi == 1) {
-	                $where .= "blog.".$field . " LIKE '%" . $q . "%' ";
-	            } else {
-	                $where .= "OR " . "blog.".$field . " LIKE '%" . $q . "%' ";
-	            }
-	            $iterasi++;
-	        }
-
-	        $where = '('.$where.')';
-        } else {
-        	$where .= "(" . "blog.".$field . " LIKE '%" . $q . "%' )";
-        }
-
-        if ($tag) {
-        	$this->db->where('tags LIKE "%'.$tag.'%"');
-        }
-		
-		if ($category) {
-			$this->db->where('category', $category);
-		}
-
-		if ($group_id == '6') {
-			$this->query_per_operator($user_id);
-		}
-
-		$this->join_avaiable()->filter_avaiable();
-        $this->db->where($where);
-        $this->db->where_not_in('group_id', ['3']);
-		$query = $this->db->get($this->table_name);
-
-		return $query->num_rows();
-	}
-
 	public function query_berita($q = null, $field = null, $limit = 0, $offset = 0, $category = null, $tag = null) {
 		$iterasi 	= 1;
         $num 		= count($this->field_search);
@@ -106,6 +61,95 @@ class Model_blog extends MY_Model {
 		$query = $this->db->get($this->table_name);
 
 		return $query->result();
+	}
+
+	public function count_all_berita($q = null, $field = null,$category = null, $tag = null) {
+		$user_id 	= $this->session->userdata('id');
+		$group_id 	= $this->session->userdata('group_id');
+
+		$iterasi 	= 1;
+        $num 		= count($this->field_search);
+        $where 		= NULL;
+        $q 			= $this->scurity($q);
+		$field 		= $this->scurity($field);
+
+        if (empty($field)) {
+	        foreach ($this->field_search as $field) {
+	            if ($iterasi == 1) {
+	                $where .= "blog.".$field . " LIKE '%" . $q . "%' ";
+	            } else {
+	                $where .= "OR " . "blog.".$field . " LIKE '%" . $q . "%' ";
+	            }
+	            $iterasi++;
+	        }
+
+	        $where = '('.$where.')';
+        } else {
+        	$where .= "(" . "blog.".$field . " LIKE '%" . $q . "%' )";
+        }
+
+        if ($tag) {
+        	$this->db->where('tags LIKE "%'.$tag.'%"');
+        }
+		
+		if ($category) {
+			$this->db->where('category', $category);
+		}
+
+		$this->join_avaiable()->filter_avaiable();
+        $this->db->where($where);
+        $this->db->where('verified_status', '1');
+		$query = $this->db->get($this->table_name);
+
+		return $query->num_rows();
+	}
+
+	public function count_all($q = null, $field = null,$category = null, $tag = null) {
+		$user_id 	= $this->session->userdata('id');
+		$group_id 	= $this->session->userdata('group_id');
+
+		$iterasi 	= 1;
+        $num 		= count($this->field_search);
+        $where 		= NULL;
+        $q 			= $this->scurity($q);
+		$field 		= $this->scurity($field);
+
+        if (empty($field)) {
+	        foreach ($this->field_search as $field) {
+	            if ($iterasi == 1) {
+	                $where .= "blog.".$field . " LIKE '%" . $q . "%' ";
+	            } else {
+	                $where .= "OR " . "blog.".$field . " LIKE '%" . $q . "%' ";
+	            }
+	            $iterasi++;
+	        }
+
+	        $where = '('.$where.')';
+        } else {
+        	$where .= "(" . "blog.".$field . " LIKE '%" . $q . "%' )";
+        }
+
+        if ($tag) {
+        	$this->db->where('tags LIKE "%'.$tag.'%"');
+        }
+		
+		if ($category) {
+			$this->db->where('category', $category);
+		}
+
+		if ($group_id == '6') {
+			$this->query_per_operator($user_id);
+		}
+
+		$this->join_avaiable();
+		$this->db->join('aauth_user_to_group', 'aauth_user_to_group.user_id = blog.author', 'LEFT');
+
+		$this->filter_avaiable();
+        $this->db->where($where);
+        $this->db->where_not_in('group_id', ['3']);
+		$query = $this->db->get($this->table_name);
+
+		return $query->num_rows();
 	}
 
 	public function get($q = null, $field = null, $limit = 0, $offset = 0, $category = null, $tag = null) {
