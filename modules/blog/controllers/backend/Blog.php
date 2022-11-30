@@ -26,22 +26,13 @@ class Blog extends Admin {
 	* @var $offset String
 	*/
 	public function index($offset = 0) {
-		$sessionnya = $this->session->all_userdata();
-
-		// echo json_encode($sessionnya);
-		// exit;
-
 		$this->is_allowed('blog_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['blogs'] = $this->model_blog->get($filter, $field, $this->limit_page, $offset);
-
-		echo $this->db->last_query();
-		exit;
-
-		$this->data['blog_counts'] = $this->model_blog->count_all($filter, $field);
+		$this->data['blogs'] 		= $this->model_blog->get($filter, $field, $this->limit_page, $offset);
+		$this->data['blog_counts'] 	= $this->model_blog->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/blog/index/',
