@@ -56,7 +56,6 @@ class Model_blog extends MY_Model {
 	public function get($q = null, $field = null, $limit = 0, $offset = 0, $category = null, $tag = null) {
 		$user_id 	= $this->session->userdata('id');
 		$group_id 	= $this->session->userdata('group_id');
-		$opd_id 	= $this->session->userdata('opd_id');
 
 		$iterasi 	= 1;
         $num 		= count($this->field_search);
@@ -95,9 +94,9 @@ class Model_blog extends MY_Model {
         $this->db->where($where);
         $this->db->where_not_in('group_id', ['3']);
 
-		if ($group_id == '6') {
-			$this->per_operator($user_id);
-		}
+		// if ($group_id == '6') {
+		// 	$this->per_operator($user_id);
+		// }
 
         $this->db->limit($limit, $offset);
 		$this->db->order_by('blog.id', 'DESC');
@@ -107,12 +106,11 @@ class Model_blog extends MY_Model {
 		return $query->result();
 	}
 
-	public function per_operator($id){
-		$this->db->where('id', $id);
-		$this->db->where_in('group_id', ['6']);
-		
-		return $this;
-	}
+	// public function per_operator($id){
+	// 	$this->db->where(['id' => $id, 'group_id' => '6']);
+
+	// 	return $this;
+	// }
 
     public function join_avaiable() {
         $this->db->join('aauth_users', 'aauth_users.id = blog.author', 'LEFT');

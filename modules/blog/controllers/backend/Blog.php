@@ -26,6 +26,11 @@ class Blog extends Admin {
 	* @var $offset String
 	*/
 	public function index($offset = 0) {
+		$sessionnya = $this->session->all_userdata();
+
+		// echo json_encode($sessionnya);
+		// exit;
+
 		$this->is_allowed('blog_list');
 
 		$filter = $this->input->get('q');
