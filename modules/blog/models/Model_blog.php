@@ -54,6 +54,10 @@ class Model_blog extends MY_Model {
 	}
 
 	public function get($q = null, $field = null, $limit = 0, $offset = 0, $category = null, $tag = null) {
+		$user_id 	= $this->session->userdata('id');
+		$group_id 	= $this->session->userdata('group_id');
+		$opd_id 	= $this->session->userdata('opd_id');
+
 		$iterasi 	= 1;
         $num 		= count($this->field_search);
         $where 		= NULL;
@@ -77,7 +81,7 @@ class Model_blog extends MY_Model {
         if ($tag) {
         	$this->db->where('tags LIKE "%'.$tag.'%"');
         }
-				
+
 		if ($category) {
 			$this->db->where('category', $category);
 		}
@@ -85,9 +89,16 @@ class Model_blog extends MY_Model {
 		$this->db->select('blog.*, blog_category.*,
 							aauth_users.id as user_id,
 							aauth_users.username as user_username');
-		// $this->join_avaiable()->filter_avaiable();
+
 		$this->join_avaiable();
+
         $this->db->where($where);
+        $this->db->where_not_in('group_id', ['3']);
+
+		if ($group_id == '6') {
+			$this->per_operator($user_id);
+		}
+
         $this->db->limit($limit, $offset);
 		$this->db->order_by('blog.id', 'DESC');
         $this->sortable();
@@ -96,9 +107,17 @@ class Model_blog extends MY_Model {
 		return $query->result();
 	}
 
+	public function per_operator($id){
+		$this->db->where('id', $id);
+		$this->db->where_in('group_id', ['6']);
+		
+		return $this;
+	}
+
     public function join_avaiable() {
         $this->db->join('aauth_users', 'aauth_users.id = blog.author', 'LEFT');
         $this->db->join('blog_category', 'blog_category.category_id = blog.category', 'LEFT');
+		$this->db->join('aauth_user_to_group', 'aauth_user_to_group.user_id = blog.author', 'LEFT');
         
         return $this;
     }

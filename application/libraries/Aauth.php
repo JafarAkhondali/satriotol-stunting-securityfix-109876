@@ -277,6 +277,7 @@ class Aauth
 				'email' 		=> $row->email,
 				'group_id' 		=> $row->group_id,
 				'group_name' 	=> $row->group_name,
+				'opd_id' 		=> $row->opd_id,
 				'loggedin' 		=> TRUE
 			);
 
@@ -740,7 +741,7 @@ class Aauth
 		if ($this->aauth_db->insert($this->config_vars['users'], $data)) {
 			$user_id = $this->aauth_db->insert_id();
 			// set default group
-			$this->add_member($user_id, $this->config_vars['default_group']);
+			// $this->add_member($user_id, $this->config_vars['default_group']);
 
 			// if verification activated
 			if ($this->config_vars['verification'] && !$this->is_admin()) {

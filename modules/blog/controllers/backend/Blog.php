@@ -26,12 +26,15 @@ class Blog extends Admin {
 	* @var $offset String
 	*/
 	public function index($offset = 0) {
-		//$this->is_allowed('blog_list');
+		$this->is_allowed('blog_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
 		$this->data['blogs'] = $this->model_blog->get($filter, $field, $this->limit_page, $offset);
+
+		echo $this->db->last_query();
+		exit;
 
 		$this->data['blog_counts'] = $this->model_blog->count_all($filter, $field);
 
@@ -72,6 +75,7 @@ class Blog extends Admin {
 	public function add_save() {
 		$user_id 	= $this->session->userdata('id');
 		$group_id 	= $this->session->userdata('group_id');
+		$opd_id 	= $this->session->userdata('opd_id');
 
 		if (!$this->is_allowed('blog_add', false)) {
 			echo json_encode([
@@ -115,6 +119,7 @@ class Blog extends Admin {
 				'verified_status' 	=> $verified_status,
 				'verified_by' 		=> $verified_by,
 				'verified_at' 		=> $verified_at,
+				'opd_id' 			=> $opd_id,
 			];
 
 			if (!is_dir(FCPATH . '/uploads/blog/')) {
