@@ -9,11 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| user site
 *|
 */
-class User extends Admin	
-{
-	
-	public function __construct()
-	{
+class User extends Admin {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('model_user');
@@ -24,15 +21,14 @@ class User extends Admin
 	*
 	* @var $offset String
 	*/
-	public function index($offset = 0)
-	{
+	public function index($offset = 0) {
 		$this->is_allowed('user_list');
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
 
-		$this->data['users'] = $this->model_user->get($filter, $field, $this->limit_page, $offset);
-		$this->data['user_counts'] = $this->model_user->count_all($filter, $field);
+		$this->data['users'] 		= $this->model_user->get($filter, $field, $this->limit_page, $offset);
+		$this->data['user_counts'] 	= $this->model_user->count_all($filter, $field);
 
 		$config = [
 			'base_url'     => 'administrator/user/index/',
@@ -51,8 +47,7 @@ class User extends Admin
 	* show all users
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('user_add');
 
 		$this->template->title('User New');
@@ -64,13 +59,12 @@ class User extends Admin
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('user_add', false)) {
 			return $this->response([
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
-				]);
+			]);
 		}
 
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[aauth_users.username]');
@@ -85,11 +79,11 @@ class User extends Admin
 			$save_data = [
 				'full_name' 	=> $this->input->post('full_name'),
 				'avatar' 		=> 'default.png',
-				'date_created'	=> date('Y-m-d H:i:s')
+				'date_created'	=> date('Y-m-d H:i:s'),
+				'opd_id' 		=> $this->input->post('opd_id'),
 			];
 
 			if (!empty($user_avatar_name)) {
-
 				$user_avatar_name_copy = date('YmdHis') . '-' . $user_avatar_name;
 
 				if (!is_dir(FCPATH . '/uploads/user')) {
@@ -112,6 +106,7 @@ class User extends Admin
 						$this->aauth->add_member($user_id, $group_id);				
 					}
 				}
+
 				if ($this->input->post('save_type') == 'stay') {
 					$this->response['success'] = true;
 					$this->response['message'] = cclang('success_save_data_stay', [
@@ -131,7 +126,6 @@ class User extends Admin
 				$this->response['success'] = false;
 				$this->response['message'] = $this->aauth->print_errors();
 			}
-
 		} else {
 			$this->response['success'] = false;
 			$this->response['message'] = validation_errors();
@@ -145,8 +139,7 @@ class User extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('user_update');
 
 		$this->data = [
@@ -163,13 +156,12 @@ class User extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_save($id)
-	{
+	public function edit_save($id) {
 		if (!$this->is_allowed('user_update', false)) {
 			return $this->response([
 				'success' => false,
 				'message' => cclang('sorry_you_do_not_have_permission_to_access')
-				]);
+			]);
 		}
 
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
@@ -181,6 +173,7 @@ class User extends Admin
 
 			$save_data = [
 				'full_name' 	=> $this->input->post('full_name'),
+				'opd_id' 		=> $this->input->post('opd_id'),
 			];
 
 			if (!empty($user_avatar_name)) {
@@ -250,8 +243,7 @@ class User extends Admin
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('user_delete');
 
 		$this->load->helper('file');
@@ -281,11 +273,10 @@ class User extends Admin
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('user_view');
 
-		$this->data['user'] = $this->model_user->find($id);
+		$this->data['user'] = $this->model_user->join_available()->find($id);
 
 		$this->template->title('User Detail');
 		$this->render('backend/standart/administrator/user/user_view', $this->data);
@@ -295,8 +286,7 @@ class User extends Admin
 	* Profile user
 	*
 	*/
-	public function profile()
-	{
+	public function profile() {
 		$this->is_allowed('user_profile');
 
 		$this->data['user'] = $this->model_user->find($this->aauth->get_user()->id);
@@ -309,8 +299,7 @@ class User extends Admin
 	* Update view profile
 	*
 	*/
-	public function edit_profile()
-	{
+	public function edit_profile() {
 		$this->is_allowed('user_update_profile');
 		$id_user = $this->aauth->get_user()->id;
 		$this->data = [
@@ -327,8 +316,7 @@ class User extends Admin
 	*
 	* @var $id String
 	*/
-	public function edit_profile_save($id)
-	{
+	public function edit_profile_save($id) {
 		if (!$this->is_allowed('user_update_profile', false)) {
 			return $this->response([
 				'success' => false,
@@ -526,8 +514,7 @@ class User extends Admin
 	* 
 	* @return JSON
 	*/
-	public function get_avatar_file($id)
-	{
+	public function get_avatar_file($id) {
 		if (!$this->is_allowed('user_update', false)) {
 			return $this->response([
 				'success' => false,
@@ -566,8 +553,7 @@ class User extends Admin
 	*
 	* @return JSON
 	*/
-	public function set_status()
-	{
+	public function set_status() {
 		if (!$this->is_allowed('user_update_status', false)) {
 			return $this->response([
 				'success' => false,
@@ -601,8 +587,7 @@ class User extends Admin
 	*
 	* @return Files Excel .xls
 	*/
-	public function export()
-	{
+	public function export() {
 		$this->is_allowed('user_export');
 		$this->model_user->export('aauth_users', 'user');
 	}
@@ -612,11 +597,28 @@ class User extends Admin
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('user_export');
 
 		$this->model_user->pdf('aauth_users', 'User');
+	}
+
+	public function ajax_opd_id($id = null) {
+		if (!$this->is_allowed('user_list', false)) {
+			echo json_encode([
+				'success' => false,
+				'message' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		if ($id != null) {
+			$results = db_get_all_data('opd', ['opd_id' => $id]);
+		}else{
+			$results = db_get_all_data('opd');
+		}
+
+		$this->response($results);	
 	}
 }
 
