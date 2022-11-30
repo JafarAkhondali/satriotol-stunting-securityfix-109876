@@ -24,6 +24,7 @@ class Model_rentan_opd extends MY_Model {
 		$where 		= NULL;
 		$q 			= $this->scurity($q);
 		$field 		= $this->scurity($field);
+		$opd_id 	= $this->session->userdata('opd_id');
 
 		if (empty($field)) {
 			foreach ($this->field_search as $field) {
@@ -48,6 +49,7 @@ class Model_rentan_opd extends MY_Model {
 		}
 
 		$this->join_avaiable()->filter_avaiable();
+
 		$this->db->where($where);
 		$query = $this->db->get($this->table_name);
 
@@ -90,7 +92,6 @@ class Model_rentan_opd extends MY_Model {
 		$this->db->limit($limit, $offset);
 		$this->db->order_by('rentan_opd_id', 'DESC');
 		
-		
 		$this->sortable();
 		
 		$query = $this->db->get($this->table_name);
@@ -108,7 +109,7 @@ class Model_rentan_opd extends MY_Model {
 
 	public function filter_avaiable() {
 		if (!$this->aauth->is_admin()) {
-			// $this->db->where($this->table_name.'.rentan_opd_user', get_user_data('id'));
+			$this->db->where($this->table_name.'.opd_id', get_user_data('opd_id'));
 		}
 
 		return $this;

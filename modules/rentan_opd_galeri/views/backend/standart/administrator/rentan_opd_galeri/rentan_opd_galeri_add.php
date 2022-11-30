@@ -121,11 +121,14 @@
 
 			var getID = '<?php echo $id;?>';
 			var redirectURL;
+			var disabled_combo;
 
 			if (getID != '') {
 				redirectURL = BASE_URL + 'administrator/rentan_opd/view/'+getID;
+				disabled_combo = $('#rentan_opd_id').prop('disabled', true);
 			}else{
 				redirectURL = BASE_URL + 'administrator/rentan_opd_galeri';
+				disabled_combo = '';
 			}
 
 			$('#btn_cancel').click(function () {
@@ -307,7 +310,7 @@
 					});
 
 					$('#rentan_opd_id').html(html);
-					$('#rentan_opd_id').prop('disabled', true);
+					disabled_combo;
 					$('#rentan_opd_id').trigger('chosen:updated');
 
 					if (typeof complete != 'undefined') {
