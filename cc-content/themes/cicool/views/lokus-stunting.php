@@ -74,7 +74,6 @@
                 $("#hasil-lokus-stunting").html('<div class="row"><div class="col-xxl-12">'+
                                                 '<div class="section__title-wrapper text-center mb-60">' +
                                                     '<h2 class="section__title section__title-44">Pencarian Data...</h2>' +
-                                                    '<p>Lorem ipsum dolor sit amet, consectetur adipiscing aelit, sed do eiusmod</p>' +
                                                 '</div></div></div><div class="text-center"><div class="spinner-border"></div></div>');
             },
             success		: function(responses){

@@ -145,6 +145,7 @@ class Model_blog extends MY_Model {
 							aauth_users.username as user_username');
 
 		$this->join_avaiable();
+		$this->db->join('aauth_user_to_group', 'aauth_user_to_group.user_id = blog.author', 'LEFT');
 
         $this->db->where($where);
         $this->db->where_not_in('group_id', ['3']);
@@ -170,7 +171,6 @@ class Model_blog extends MY_Model {
     public function join_avaiable() {
         $this->db->join('aauth_users', 'aauth_users.id = blog.author', 'LEFT');
         $this->db->join('blog_category', 'blog_category.category_id = blog.category', 'LEFT');
-		$this->db->join('aauth_user_to_group', 'aauth_user_to_group.user_id = blog.author', 'LEFT');
         
         return $this;
     }
