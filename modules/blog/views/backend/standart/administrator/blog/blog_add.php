@@ -164,11 +164,10 @@
 					<!-- Add the bg color to the header using any of the bg-* classes -->
 					<div class="clear"></div>
 					<br>
-					<div class="form-group ">
+					<div class="form-group">
 						<label for="category" class="col-sm-3 control-label">Kategori</label>
 						<div class="col-sm-9">
-							<select class="form-control chosen chosen-select-deselect" name="category" id="category"
-								data-placeholder="Select Category">
+							<select class="form-control chosen chosen-select-deselect" name="category" id="category" data-placeholder="Select Category">
 								<option value=""></option>
 								<?php foreach (db_get_all_data('blog_category') as $row): ?>
 								<option value="<?= $row->category_id ?>">
@@ -181,16 +180,15 @@
 					<div class="row"></div>
 					<br>
 
-					<div class="form-group ">
+					<!-- <div class="form-group">
 						<label for="tags" class="col-sm-3 control-label">Tags</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" name="tags" id="tags" placeholder="Holiday,Hunting"
-								value="<?= set_value('tags'); ?>">
+								value="<?php //echo set_value('tags'); ?>">
 							<small class="info help-block">
 							</small>
 						</div>
-					</div>
-
+					</div> -->
 				</div>
 			</div>
 		</div>

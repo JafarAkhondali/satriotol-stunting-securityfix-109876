@@ -134,8 +134,7 @@
 										</td>
 										<td width="200">
 											<?php is_allowed('sliders_view', function() use ($sliders){?>
-											<a href="<?= site_url('administrator/sliders/view/' . $sliders->slider_id); ?>"
-												class="label-default"><i class="fa fa-newspaper-o"></i>
+											<a href="<?= site_url('administrator/sliders/view/' . $sliders->slider_id); ?>" class="label-default"><i class="fa fa-newspaper-o"></i>
 												<?= cclang('view_button'); ?>
 												<?php }) ?>
 												<?php is_allowed('sliders_update', function() use ($sliders){?>

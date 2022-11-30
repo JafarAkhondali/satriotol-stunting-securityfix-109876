@@ -175,15 +175,15 @@
 					<div class="row"></div>
 					<br>
 
-					<div class="form-group ">
+					<!-- <div class="form-group ">
 						<label for="tags" class="col-sm-3 control-label">Tags </label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" name="tags" id="tags" placeholder="Tags"
-								value="<?= set_value('tags', $blog->tags); ?>">
+								value="<?php //echo set_value('tags', $blog->tags); ?>">
 							<small class="info help-block">
 							</small>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
