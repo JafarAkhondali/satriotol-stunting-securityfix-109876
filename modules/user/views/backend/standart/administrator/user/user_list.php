@@ -219,10 +219,8 @@
 
 		$('.switch-button').switchButton({
 			labels_placement: 'right',
-			on_label: '<?= cclang('
-			active '); ?>',
-			off_label: '<?= cclang('
-			inactive '); ?>'
+			on_label: '<?= cclang('active');?>',
+			off_label: '<?= cclang('inactive'); ?>'
 		});
 
 		$(document).on('change', 'input.switch-button', function () {
@@ -295,10 +293,7 @@
 			var serialize_bulk = $('#form_user').serialize();
 
 			if (bulk.val() == 'delete') {
-
-				<
-				? php
-				if ($this - > aauth - > is_allowed('user_delete')): ? >
+				<?php if ($this->aauth->is_allowed('user_delete')): ?>
 					swal({
 							title: "<?= cclang('are_you_sure'); ?>",
 							text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
@@ -314,10 +309,9 @@
 							if (isConfirm) {
 								document.location.href = url;
 							}
-						}); < ? php endif; ? >
+						}); <?php endif;?>
 
 				return false;
-
 			} else if (bulk.val() == '') {
 				swal({
 					title: "Upss",
