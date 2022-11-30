@@ -39,8 +39,11 @@
 			<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li>
 <?php
+	$disabled = '';
+
 	if (!empty($id)) {
 		echo '<a href="'.site_url('administrator/rentan_opd/view/'.$id).'">Galeri Rencana Kegiatan OPD</a>';
+		$disabled = 'disabled';
 	}else{
 		echo '<a href="'.site_url('administrator/rentan_opd_galeri').'">Galeri Rencana Kegiatan OPD</a>';
 	}
@@ -304,6 +307,7 @@
 					});
 
 					$('#rentan_opd_id').html(html);
+					$('#rentan_opd_id').prop('disabled', true);
 					$('#rentan_opd_id').trigger('chosen:updated');
 
 					if (typeof complete != 'undefined') {

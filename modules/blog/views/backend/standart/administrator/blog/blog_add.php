@@ -290,51 +290,51 @@
 			$('.loading').show();
 
 			$.ajax({
-					url: BASE_URL + '/administrator/blog/add_save',
-					type: 'POST',
-					dataType: 'json',
-					data: data_post,
-				})
-				.done(function (res) {
-					if (res.success) {
+				url: BASE_URL + '/administrator/blog/add_save',
+				type: 'POST',
+				dataType: 'json',
+				data: data_post,
+			})
+			.done(function (res) {
+				if (res.success) {
 
-						if (save_type == 'back') {
-							window.location.href = res.redirect;
-							return;
-						}
-
-						$('.message').printMessage({
-							message: res.message
-						});
-						$('.message').fadeIn();
-						resetForm();
-						$('#blog_image_galery').find('li').each(function () {
-							$('#blog_image_galery').fineUploader('deleteFile', $(this).attr(
-								'qq-file-id'));
-						});
-						$('.chosen option').prop('selected', false).trigger('chosen:updated');
-						content.setData('');
-
-					} else {
-						$('.message').printMessage({
-							message: res.message,
-							type: 'warning'
-						});
+					if (save_type == 'back') {
+						window.location.href = res.redirect;
+						return;
 					}
 
-				})
-				.fail(function () {
 					$('.message').printMessage({
-						message: 'Error save data',
+						message: res.message
+					});
+					$('.message').fadeIn();
+					resetForm();
+					$('#blog_image_galery').find('li').each(function () {
+						$('#blog_image_galery').fineUploader('deleteFile', $(this).attr(
+							'qq-file-id'));
+					});
+					$('.chosen option').prop('selected', false).trigger('chosen:updated');
+					content.setData('');
+
+				} else {
+					$('.message').printMessage({
+						message: res.message,
 						type: 'warning'
 					});
-				})
-				.always(function () {
-					$('.loading').hide();
-					$('html, body').animate({
-						scrollTop: $(document).height()
-					}, 2000);
+				}
+
+			})
+			.fail(function () {
+				$('.message').printMessage({
+					message: 'Error save data',
+					type: 'warning'
 				});
+			})
+			.always(function () {
+				$('.loading').hide();
+				$('html, body').animate({
+					scrollTop: $(document).height()
+				}, 2000);
+			});
 
 			return false;
 		}); /*end btn save*/

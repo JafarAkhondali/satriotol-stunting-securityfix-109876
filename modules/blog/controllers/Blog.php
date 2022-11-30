@@ -20,7 +20,7 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs']                = $this->model_blog->get($filter, $field, $this->limit_page, $offset);
+        $this->data['blogs']                = $this-> model_blog->query_berita($filter, $field, $this->limit_page, $offset);
         $this->data['blog_counts']          = $this->model_blog->count_all($filter, $field);
         $this->data['categories']           = $this->db->get('blog_category')->result();
         $this->data['count_categories']     = $this->model_blog->count_category();
@@ -45,7 +45,7 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs']                = $this->model_blog->get($filter, $field, $this->limit_page, $offset, $category_id);
+        $this->data['blogs']                = $this-> model_blog->query_berita($filter, $field, $this->limit_page, $offset, $category_id);
         $this->data['blog_counts']          = $this->model_blog->count_all($filter, $field, $category_id);
         $this->data['about']                = $this->db->get('about')->row();
         $this->data['categories']           = $this->db->get('blog_category')->result();
@@ -69,7 +69,7 @@ class Blog extends Front {
         $filter = $this->input->get('q');
         $field  = $this->input->get('f');
 
-        $this->data['blogs']        = $this->model_blog->get($filter, $field, $this->limit_page, $offset, null, $tag);
+        $this->data['blogs']        = $this-> model_blog->query_berita($filter, $field, $this->limit_page, $offset, null, $tag);
         $this->data['blog_counts']  = $this->model_blog->count_all($filter, $field, null, $tag);
         $this->data['about']        = $this->db->get('about')->row();
         $this->data['categories']   = $this->model_blog->count_category();
@@ -95,7 +95,7 @@ class Blog extends Front {
         }
 
         $blog->viewers  = $this->model_blog->add_viewers($blog->id, $blog->viewers);
-        $related        = $this->model_blog->get(null, null, 3, 0, $blog->category);
+        $related        = $this-> model_blog->query_berita(null, null, 3, 0, $blog->category);
 
         $this->register_unparse_html($blog);
         $blog->content = $this->cc_page_element->unParseHtml($blog->content);

@@ -62,6 +62,52 @@ class Model_blog extends MY_Model {
 		return $query->num_rows();
 	}
 
+	public function query_berita($q = null, $field = null, $limit = 0, $offset = 0, $category = null, $tag = null) {
+		$iterasi 	= 1;
+        $num 		= count($this->field_search);
+        $where 		= NULL;
+        $q 			= $this->scurity($q);
+		$field 		= $this->scurity($field);
+
+        if (empty($field)) {
+	        foreach ($this->field_search as $field) {
+	            if ($iterasi == 1) {
+	                $where .= "blog.".$field . " LIKE '%" . $q . "%' ";
+	            } else {
+	                $where .= "OR " . "blog.".$field . " LIKE '%" . $q . "%' ";
+	            }
+	            $iterasi++;
+	        }
+
+	        $where = '('.$where.')';
+        } else {
+        	$where .= "(" . "blog.".$field . " LIKE '%" . $q . "%' )";
+        }
+        if ($tag) {
+        	$this->db->where('tags LIKE "%'.$tag.'%"');
+        }
+
+		if ($category) {
+			$this->db->where('category', $category);
+		}
+
+		$this->db->select('blog.*, blog_category.*,
+							aauth_users.id as user_id,
+							aauth_users.username as user_username');
+
+		$this->join_avaiable();
+
+        $this->db->where($where);
+        $this->db->where('verified_status', '1');
+        $this->db->limit($limit, $offset);
+		$this->db->order_by('blog.id', 'DESC');
+        $this->sortable();
+
+		$query = $this->db->get($this->table_name);
+
+		return $query->result();
+	}
+
 	public function get($q = null, $field = null, $limit = 0, $offset = 0, $category = null, $tag = null) {
 		$user_id 	= $this->session->userdata('id');
 		$group_id 	= $this->session->userdata('group_id');
