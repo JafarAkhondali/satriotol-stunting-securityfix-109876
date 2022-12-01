@@ -23,8 +23,8 @@
 <section class="content-header">
 	<h1>Tahun Lokus <small><?= cclang('detail', ['Tahun Lokus']);?></small></h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class=""><a href="<?= site_url('administrator/lokus_years'); ?>">Tahun Lokus</a></li>
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="<?= site_url('administrator/lokus_years'); ?>">Tahun Lokus</a></li>
 		<li class="active"><?= cclang('detail'); ?></li>
 	</ol>
 </section>
@@ -37,13 +37,11 @@
 					<h3 class="box-title">Detail Tahun Lokus Stunting</h3>
 					<div class="pull-right">
 						<?php is_allowed('lokus_years_update', function() use ($lokus_years){?>
-						<a class="btn btn-flat btn-primary btn_edit btn_action" id="btn_edit" data-stype='back'
-							title="edit lokus_years (Ctrl+e)" href="<?= site_url('administrator/lokus_years/edit/'.$lokus_years->lokus_year_id); ?>">
+						<a class="btn btn-flat btn-primary btn_edit btn_action" id="btn_edit" data-stype='back' title="edit lokus_years (Ctrl+e)" href="<?= site_url('administrator/lokus_years/edit/'.$lokus_years->lokus_year_id);?>">
 							<i class="fa fa-edit"></i> <?= cclang('update', ['Tahun Lokus']);?> </a>
 						<?php }) ?>
-						<a class="btn btn-flat btn-default btn_action" id="btn_back" title="back (Ctrl+x)"
-							href="<?= site_url('administrator/lokus_years/'); ?>"><i class="fa fa-undo"></i>
-							<?= cclang('go_list_button', ['Tahun Lokus']); ?></a>
+						<a class="btn btn-flat btn-default btn_action" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/lokus_years/');?>">
+							<i class="fa fa-undo"></i> <?= cclang('go_list_button', ['Tahun Lokus']); ?></a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -73,7 +71,6 @@
 							echo '<b style="color: red;">File not available</b>';
 						}
 					?>
-					
 						</dd>
 					</dl>
 				</div>
