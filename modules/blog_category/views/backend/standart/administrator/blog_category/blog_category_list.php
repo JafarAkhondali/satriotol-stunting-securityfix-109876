@@ -204,9 +204,7 @@
 <!-- Page script -->
 <script>
 	$(document).ready(function () {
-
 		$('.remove-data').click(function () {
-
 			var url = $(this).attr('data-href');
 
 			swal({
@@ -220,18 +218,17 @@
 				closeOnConfirm: true,
 				closeOnCancel: true
 			},
-				function (isConfirm) {
-					if (isConfirm) {
-						document.location.href = url;
-					}
-				});
+			function (isConfirm) {
+				if (isConfirm) {
+					document.location.href = url;
+				}
+			});
 
 			return false;
 		});
 
 
 		$('#apply').click(function () {
-
 			var bulk = $('#bulk');
 			var serialize_bulk = $('#form_blog_category').serialize();
 

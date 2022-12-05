@@ -145,7 +145,10 @@
 								<div id="about_about_logo_galery"></div>
 								<input class="data_file data_file_uuid" name="about_about_logo_uuid" id="about_about_logo_uuid" type="hidden" value="<?= set_value('about_about_logo_uuid'); ?>">
 								<input class="data_file" name="about_about_logo_name" id="about_about_logo_name" type="hidden" value="<?= set_value('about_about_logo_name', $about->about_logo); ?>">
-								<small class="info help-block"><b>Extension file must</b> JPG,JPEG,PNG.</small>
+								<small class="info help-block">
+									<b>Extension file must</b> JPG,JPEG,PNG.<br />
+									<b>Ukuran gambar yang disarankan : </b>150 x 55 pixels
+								</small>
 							</div>
 						</div>
 
