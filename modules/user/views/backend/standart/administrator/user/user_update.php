@@ -113,8 +113,8 @@
 								<small class="info help-block">The full name of user.</small>
 							</div>
 						</div>
-						<div class="form-group group-kecamatan-id ">
-							<label for="opd_id" class="col-sm-2 control-label">Nama Dinas <i class="required">*</i></label>
+						<div class="form-group group-opd-id ">
+							<label for="opd_id" class="col-sm-2 control-label">Nama Dinas</label>
 							<div class="col-sm-8">
 								<select class="form-control chosen chosen-select-deselect" name="opd_id" id="opd_id" data-placeholder="Pilih Nama Dinas Instansi">
 									<option value=""></option>
@@ -128,9 +128,8 @@
 							</label>
 
 							<div class="col-sm-8">
-								<select class="form-control chosen-select" name="group[]" id="group" multiple
-									placeholder="Select groups">
-									<?php
+								<select class="form-control chosen-select" name="group[]" id="group" multiple placeholder="Select groups">
+							<?php
 								$group_id = $this->session->userdata('group_id');
 
 								if ($group_id == '1') {
@@ -141,13 +140,8 @@
 								
 								foreach ($data as $row):
 							?>
-									<option
-										<?=array_search($row->id, $group_user) !== false? 'selected="selected"' : ''; ?>
-										value="
-										<?= $row->id; ?>">
-										<?= ucwords($row->name); ?>
-									</option>
-									<?php endforeach; ?>
+									<option <?=array_search($row->id, $group_user) !== false? 'selected="selected"' : ''; ?> value="<?= $row->id;?>"><?= ucwords($row->name);?></option>
+							<?php endforeach; ?>
 								</select>
 								<small class="info help-block">
 									Select one or more groups.

@@ -1343,13 +1343,10 @@ class Aauth
 	 * @param int|string $group_par Group id or name to add user to
 	 * @return bool Add success/failure
 	 */
-	public function add_member($user_id, $group_par)
-	{
-
+	public function add_member($user_id, $group_par) {
 		$group_id = $this->get_group_id($group_par);
 
 		if (!$group_id) {
-
 			$this->error($this->CI->lang->line('aauth_error_no_group'));
 			return FALSE;
 		}
@@ -1366,6 +1363,7 @@ class Aauth
 
 			return $this->aauth_db->insert($this->config_vars['user_to_group'], $data);
 		}
+
 		$this->info($this->CI->lang->line('aauth_info_already_member'));
 		return TRUE;
 	}

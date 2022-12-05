@@ -55,6 +55,7 @@ require_once $route_path . 'routes_landing.php';
 $route['404_override'] = 'not_found';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['administrator'] = 'auth/backend/auth/login';
 $route['administrator/login'] = 'auth/backend/auth/login';
 $route['administrator/register'] = 'auth/backend/auth/register';
 $route['administrator/forgot-password'] = 'auth/backend/auth/forgot_password';

@@ -106,7 +106,7 @@
 							</div>
 						</div>
     						<div class="form-group group-kecamatan-id ">
-    							<label for="opd_id" class="col-sm-2 control-label">Nama Dinas <i class="required">*</i></label>
+    							<label for="opd_id" class="col-sm-2 control-label">Nama Dinas</label>
     							<div class="col-sm-8">
     								<select class="form-control chosen chosen-select-deselect" name="opd_id" id="opd_id" data-placeholder="Pilih Nama Dinas Instansi">
     									<option value=""></option>

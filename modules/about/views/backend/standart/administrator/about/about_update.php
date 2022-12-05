@@ -8,7 +8,6 @@
 <script src="<?= BASE_ASSET; ?>/js/jquery.hotkeys.js"></script>
 <script type="text/javascript">
 	function domo() {
-
 		// Binding keys
 		$('*').bind('keydown', 'Ctrl+s', function assets() {
 			$('#btn_save').trigger('click');
@@ -24,19 +23,16 @@
 			$('.btn_save_back').trigger('click');
 			return false;
 		});
-
 	}
 
 	jQuery(document).ready(domo);
 </script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>
-		About <small>Edit About</small>
-	</h1>
+	<h1>About <small>Edit About</small></h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class=""><a href="<?= site_url('administrator/about'); ?>">About</a></li>
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="<?= site_url('administrator/about'); ?>">About</a></li>
 		<li class="active">Edit</li>
 	</ol>
 </section>
@@ -112,7 +108,7 @@
 							<h5 class="widget-user-desc">Edit About</h5>
 							<hr>
 						</div>
-					<?= 
+						<?= 
 						form_open(base_url('administrator/about/edit_save/'.$this->uri->segment(4)), [
 							'name' => 'form_about',
 							'class' => 'form-horizontal form-step',
@@ -136,7 +132,10 @@
 								<div id="about_about_image_galery"></div>
 								<input class="data_file data_file_uuid" name="about_about_image_uuid" id="about_about_image_uuid" type="hidden" value="<?= set_value('about_about_image_uuid'); ?>">
 								<input class="data_file" name="about_about_image_name" id="about_about_image_name" type="hidden" value="<?= set_value('about_about_image_name', $about->about_image); ?>">
-								<small class="info help-block"><b>Extension file must</b> JPG,JPEG,PNG.<br/><b>Ukuran gambar yang disarankan : </b>523 x 470 pixels</small>
+								<small class="info help-block">
+									<b>Extension file must</b> JPG,JPEG,PNG.<br />
+									<b>Ukuran gambar yang disarankan : </b>523 x 470 pixels
+								</small>
 							</div>
 						</div>
 
@@ -159,8 +158,7 @@
 						</div>
 
 						<div class="form-group group-about-pengertian  ">
-							<label for="about_pengertian" class="col-sm-2 control-label">Pengertian Stunting <i class="required">*</i>
-							</label>
+							<label for="about_pengertian" class="col-sm-2 control-label">Pengertian Stunting <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<textarea id="about_pengertian" name="about_pengertian" rows="10" cols="80"> <?= set_value('about_pengertian', $about->about_pengertian); ?></textarea>
 								<small class="info help-block"></small>
@@ -176,24 +174,28 @@
 						</div>
 
 						<div class="form-group group-about-image-pengertian  ">
-							<label for="about_image_pengertian" class="col-sm-2 control-label">Gambar Pengertian <i class="required">*</i>
-							</label>
+							<label for="about_image_pengertian" class="col-sm-2 control-label">Gambar Pengertian <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<div id="about_about_image_pengertian_galery"></div>
 								<input class="data_file data_file_uuid" name="about_about_image_pengertian_uuid" id="about_about_image_pengertian_uuid" type="hidden" value="<?= set_value('about_about_image_pengertian_uuid'); ?>">
 								<input class="data_file" name="about_about_image_pengertian_name" id="about_about_image_pengertian_name" type="hidden" value="<?= set_value('about_about_image_pengertian_name', $about->about_image_pengertian); ?>">
-								<small class="info help-block"></small>
+								<small class="info help-block">
+									<b>Extension file must</b> JPG,JPEG,PNG.<br />
+									<b>Ukuran gambar yang disarankan : </b>560 x 370 pixels
+								</small>
 							</div>
 						</div>
 
 						<div class="form-group group-about-image-penyebab  ">
-							<label for="about_image_penyebab" class="col-sm-2 control-label">Gambar Penyebab <i class="required">*</i>
-							</label>
+							<label for="about_image_penyebab" class="col-sm-2 control-label">Gambar Penyebab <i class="required">*</i></label>
 							<div class="col-sm-8">
 								<div id="about_about_image_penyebab_galery"></div>
 								<input class="data_file data_file_uuid" name="about_about_image_penyebab_uuid" id="about_about_image_penyebab_uuid" type="hidden" value="<?= set_value('about_about_image_penyebab_uuid'); ?>">
 								<input class="data_file" name="about_about_image_penyebab_name" id="about_about_image_penyebab_name" type="hidden" value="<?= set_value('about_about_image_penyebab_name', $about->about_image_penyebab); ?>">
-								<small class="info help-block"></small>
+								<small class="info help-block">
+									<b>Extension file must</b> JPG,JPEG,PNG.<br />
+									<b>Ukuran gambar yang disarankan : </b>560 x 370 pixels
+								</small>
 							</div>
 						</div>
 
@@ -209,7 +211,8 @@
 
 							<div class="custom-button-wrapper"></div>
 
-							<a class="btn btn-flat btn-default btn_action" id="btn_cancel" title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
+							<a class="btn btn-flat btn-default btn_action" id="btn_cancel"
+								title="<?= cclang('cancel_button'); ?> (Ctrl+x)">
 								<i class="fa fa-undo"></i> <?= cclang('cancel_button'); ?>
 							</a>
 							<span class="loading loading-hide">
@@ -263,21 +266,21 @@
 
 		$('#btn_cancel').click(function () {
 			swal({
-				title: "Are you sure?",
-				text: "the data that you have created will be in the exhaust!",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Yes!",
-				cancelButtonText: "No!",
-				closeOnConfirm: true,
-				closeOnCancel: true
-			},
-			function (isConfirm) {
-				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/about';
-				}
-			});
+					title: "Are you sure?",
+					text: "the data that you have created will be in the exhaust!",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yes!",
+					cancelButtonText: "No!",
+					closeOnConfirm: true,
+					closeOnCancel: true
+				},
+				function (isConfirm) {
+					if (isConfirm) {
+						window.location.href = BASE_URL + 'administrator/about';
+					}
+				});
 
 			return false;
 		}); /*end btn cancel*/
@@ -312,51 +315,51 @@
 			$('.loading').show();
 
 			$.ajax({
-				url: form_about.attr('action'),
-				type: 'POST',
-				dataType: 'json',
-				data: data_post,
-			})
-			.done(function (res) {
-				$('form').find('.form-group').removeClass('has-error');
-				$('form').find('.error-input').remove();
-				$('.steps li').removeClass('error');
-				if (res.success) {
-					var id = $('#about_image_galery').find('li').attr('qq-file-id');
-					if (save_type == 'back') {
-						window.location.href = res.redirect;
-						return;
+					url: form_about.attr('action'),
+					type: 'POST',
+					dataType: 'json',
+					data: data_post,
+				})
+				.done(function (res) {
+					$('form').find('.form-group').removeClass('has-error');
+					$('form').find('.error-input').remove();
+					$('.steps li').removeClass('error');
+					if (res.success) {
+						var id = $('#about_image_galery').find('li').attr('qq-file-id');
+						if (save_type == 'back') {
+							window.location.href = res.redirect;
+							return;
+						}
+
+						$('.message').printMessage({
+							message: res.message
+						});
+						$('.message').fadeIn();
+						$('.data_file_uuid').val('');
+
+					} else {
+						if (res.errors) {
+							parseErrorField(res.errors);
+						}
+						$('.message').printMessage({
+							message: res.message,
+							type: 'warning'
+						});
 					}
 
+				})
+				.fail(function () {
 					$('.message').printMessage({
-						message: res.message
-					});
-					$('.message').fadeIn();
-					$('.data_file_uuid').val('');
-
-				} else {
-					if (res.errors) {
-						parseErrorField(res.errors);
-					}
-					$('.message').printMessage({
-						message: res.message,
+						message: 'Error save data',
 						type: 'warning'
 					});
-				}
-
-			})
-			.fail(function () {
-				$('.message').printMessage({
-					message: 'Error save data',
-					type: 'warning'
+				})
+				.always(function () {
+					$('.loading').hide();
+					$('html, body').animate({
+						scrollTop: $(document).height()
+					}, 2000);
 				});
-			})
-			.always(function () {
-				$('.loading').hide();
-				$('html, body').animate({
-					scrollTop: $(document).height()
-				}, 2000);
-			});
 
 			return false;
 		}); /*end btn save*/
@@ -516,7 +519,7 @@
 				onSubmit: function (id, name) {
 					var uuid = $('#about_about_image_pengertian_uuid').val();
 					$.get(BASE_URL + '/administrator/about/delete_about_image_pengertian_file/' +
-					uuid);
+						uuid);
 				},
 				onDeleteComplete: function (id, xhr, isError) {
 					if (isError == false) {

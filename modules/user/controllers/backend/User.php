@@ -171,9 +171,17 @@ class User extends Admin {
 			$user_avatar_uuid = $this->input->post('user_avatar_uuid');
 			$user_avatar_name = $this->input->post('user_avatar_name');
 
+			$_opd_id = $this->input->post('opd_id');
+
+			if (!empty($_opd_id) || $_opd_id != 0) {
+				$opd_id = $_opd_id;
+			}else{
+				$opd_id = NULL;
+			}
+
 			$save_data = [
 				'full_name' 	=> $this->input->post('full_name'),
-				'opd_id' 		=> $this->input->post('opd_id'),
+				'opd_id' 		=> $opd_id,
 			];
 
 			if (!empty($user_avatar_name)) {
