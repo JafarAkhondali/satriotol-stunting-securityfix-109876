@@ -18,14 +18,6 @@ class Rentan_opd extends Admin {
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
-	public function coba() {
-		$this->model_rentan_opd->join_avaiable()->filter_avaiable();
-		$this->db->get('rentan_opd');
-
-		echo $this->db->last_query();
-		// echo json_encode($this->session->all_userdata());
-	}
-
 	/**
 	* show all Rentan Opds
 	*
