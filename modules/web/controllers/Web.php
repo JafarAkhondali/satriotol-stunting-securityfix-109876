@@ -21,7 +21,7 @@ class Web extends Front {
 	public function index() {
 		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
-		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+		$data['links']          = $this->db->where('menu_type_id = 3')->order_by('sort', 'ASC')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
 		$data['blogs']          = $this->model_web->berita_terbaru()->result();
 		$data['faqs']           = $this->db->from('faqs')->get()->result();

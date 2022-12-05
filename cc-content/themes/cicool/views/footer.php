@@ -33,7 +33,7 @@
 									<ul>
 								<?php
 									foreach ($links as $link) {
-										echo '<li><a href="'.base_url().$link->link.'">'.$link->label.'</a></li>';
+										echo '<li><a href="'.$link->link.'" target="_blank">'.$link->label.'</a></li>';
 									}
 								?>
 									</ul>
