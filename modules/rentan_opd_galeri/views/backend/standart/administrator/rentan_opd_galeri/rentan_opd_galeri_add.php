@@ -82,7 +82,10 @@
 							<label for="rentan_opd_galeri_file" class="control-label">Gambar <i class="required">*</i></label>
 							<div id="rentan_opd_galeri_rentan_opd_galeri_file_galery"></div>
 							<div id="rentan_opd_galeri_rentan_opd_galeri_file_galery_listed"></div>
-							<small class="info help-block"></small>
+							<small class="info help-block">
+								<b>Extension file must :</b> JPG,JPEG,PNG.<br/>
+								<b>Ukuran file gambar maksimal :</b> 10 Mb
+							</small>
 						</div>
 
 						<div class="message"></div>

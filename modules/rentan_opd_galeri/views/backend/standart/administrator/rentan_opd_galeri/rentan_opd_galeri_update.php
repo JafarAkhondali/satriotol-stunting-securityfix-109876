@@ -88,7 +88,10 @@
 								value="<?= $filename; ?>" />
 							<?php endforeach; ?>
 						</div>
-						<small class="info help-block"></small>
+						<small class="info help-block">
+							<b>Extension file must :</b> JPG,JPEG,PNG.<br/>
+							<b>Ukuran file gambar maksimal :</b> 10 Mb
+						</small>
 					</div>
 
 					<div class="message"></div>

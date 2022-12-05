@@ -353,6 +353,7 @@ class Rentan_opd_galeri extends Admin {
 		echo $this->upload_file([
 			'uuid' 		 	=> $uuid,
 			'table_name' 	=> 'rentan_opd_galeri',
+			'allowed_types' => 'jpg|png|jpeg',
 		]);
 	}
 
