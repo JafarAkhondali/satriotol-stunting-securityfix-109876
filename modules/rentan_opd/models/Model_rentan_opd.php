@@ -100,16 +100,23 @@ class Model_rentan_opd extends MY_Model {
 	}
 
 	public function join_avaiable() {
-		$this->db->join('opd', 'opd.opd_id = rentan_opd.opd_id', 'LEFT');
-		
 		$this->db->select('opd.opd_nama,rentan_opd.*,opd.opd_nama as opd_opd_nama,opd.opd_nama as opd_nama');
+		
+		$this->db->join('opd', 'opd.opd_id = rentan_opd.opd_id', 'LEFT');
 
 		return $this;
 	}
 
 	public function filter_avaiable() {
+		$group_id = $this->session->userdata('group_id');
+
 		if (!$this->aauth->is_admin()) {
-			$this->db->where($this->table_name.'.opd_id', get_user_data('opd_id'));
+			if ($group_id == '1' || $group_id == '5') {
+				$this->db->join('aauth_user_to_group', 'aauth_user_to_group.user_id = rentan_opd.rentan_opd_user', 'LEFT');
+				$this->db->where_not_in('aauth_user_to_group.group_id', ['1', '5']);
+			}else{
+				$this->db->where($this->table_name.'.opd_id', get_user_data('opd_id'));
+			}
 		}
 
 		return $this;

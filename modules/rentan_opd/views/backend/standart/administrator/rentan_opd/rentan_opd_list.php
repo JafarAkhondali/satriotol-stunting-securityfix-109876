@@ -42,8 +42,8 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-warning">
-				<div class="box-body ">
+			<div class="box box-danger">
+				<div class="box-body">
 					<!-- Widget: user widget style 1 -->
 					<div class="box box-widget widget-user-2">
 						<!-- Add the bg color to the header using any of the bg-* classes -->
