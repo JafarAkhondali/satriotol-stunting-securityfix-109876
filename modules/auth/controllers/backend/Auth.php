@@ -20,12 +20,15 @@ class Auth extends Admin
 	 * Login user
 	 *
 	 */
-	public function login()
-	{
-
+	public function login() {
 		if ($this->aauth->is_loggedin()) {
-			redirect('administrator/user/profile', 'refresh');
+			if (!$this->aauth->is_admin()) {
+				redirect('/administrator/user/profile', 'refresh');
+			}else{
+				redirect('/administrator/dashboard', 'refresh');
+			}
 		}
+
 		$data = [];
 		$this->config->load('site');
 
@@ -39,7 +42,11 @@ class Auth extends Admin
 				if ($ref) {
 					redirect($ref, 'refresh');
 				} else {
-					redirect('/administrator/user/profile', 'refresh');
+					if (!$this->aauth->is_admin()) {
+						redirect('/administrator/user/profile', 'refresh');
+					}else{
+						redirect('/', 'refresh');
+					}
 				}
 			} else {
 				$data['error'] = $this->aauth->print_errors(TRUE);

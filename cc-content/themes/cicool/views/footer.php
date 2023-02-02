@@ -64,7 +64,7 @@
 							<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
 								<div class="footer__bottom-link">
 									<ul>
-										<li><a href="javascript:void(0);">Disclaimer & Copyright</a></li>
+										<li><a href="javascript:void(0);">Disclaimer & Copyright &copy;2022</a></li>
 										<li><a href="https://semarangkota.go.id/">Kota Semarang</a></li>
 										<li><a href="https://diskominfo.semarangkota.go.id/">Diskominfo Kota Semarang</a></li>
 									</ul>

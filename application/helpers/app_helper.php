@@ -1537,6 +1537,23 @@ if (!function_exists('send_notification')) {
 }
 
 
+if (!function_exists('array_group_by')) {
+	function array_group_by($param, $data) {
+		$result = [];
+
+		foreach($data as $val) {
+			if(array_key_exists($param, $val)){
+				$result[$val[$param]][] = $val;
+			}else{
+				$result[""][] = $val;
+			}
+		}
+
+		return $result;
+	}
+}
+
+
 if (!function_exists('kode_acak')) {
 	function kode_acak() {
 		return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);

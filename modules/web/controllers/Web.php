@@ -367,6 +367,118 @@ class Web extends Front {
 			$this->template->build('rentan-opd-galery', $data);
 		}
 	}
+
+	public function data_stunting() {
+		$data_kecamatan 	= $this->db->get('kecamatans')->result();
+		$data_kelurahan 	= $this->db->get('kelurahans')->result();
+		
+		$stunting_jenkel 	= $this->model_web->query_stuntingByAge()->result_array();
+		$stunting_kelurahan = [];
+
+		$query_stunting_kecamatan = $this->model_web->query_data_stunting_kecamatan()->result();
+		$query_stunting_kelurahan = $this->model_web->query_data_stunting_kelurahan()->result();
+
+		for ($i=0; $i < count($stunting_jenkel) ; $i++) {
+			if ($stunting_jenkel[$i]['jenis_kel'] == 'L') {
+				$jenkel = 'Laki-Laki';
+			}elseif ($stunting_jenkel[$i]['jenis_kel'] == 'P') {
+				$jenkel = 'Perempuan';
+			}
+
+			$chart_jenkel[] = [
+				'label' => $jenkel,
+				'value' => $stunting_jenkel[$i]['total'],
+			];
+		}
+
+		for ($i=0; $i < 5 ; $i++) { 
+			$chart_umur[$i] = [
+				'label' => $i + 1 ." Tahun",
+			];
+
+			$stunting_umur = $this->model_web->query_stuntingByAge($i + 1)->result();
+
+			foreach($stunting_umur as $item){
+				if($item->jenis_kel == "L"){
+					$chart_umur[$i]['male'] = $item->total;
+				}else {
+					$chart_umur[$i]['female'] = $item->total;
+				}
+			}
+		}
+
+		for ($i=0; $i < count($data_kecamatan); $i++) {
+			$chart_kecamatan[$i]['label'] = $data_kecamatan[$i]->kecamatan_nama;
+
+			$stunting_kecamatan = $this->model_web->query_stuntingByWilayah($data_kecamatan[$i]->kecamatan_id, 'kecamatan')->result();
+
+			foreach ($stunting_kecamatan as $item) {
+				if($item->jenis_kel == "L"){
+					$chart_kecamatan[$i]['male'] = $item->total;
+				}else if($item->jenis_kel == "P"){
+					$chart_kecamatan[$i]['female'] = $item->total;
+				}
+			}
+		}
+
+		for ($i=0; $i < count($query_stunting_kecamatan); $i++) {
+			$data_stunting_kecamatan[$i]['name'] 		= $query_stunting_kecamatan[$i]->kecamatan_nama;
+			$data_stunting_kecamatan[$i]['y'] 			= $query_stunting_kecamatan[$i]->total;
+			$data_stunting_kecamatan[$i]['drilldown'] 	= $query_stunting_kecamatan[$i]->kecamatan;
+
+			$query_data_stunting_kelurahan[$i] = $this->model_web->query_data_stunting_kelurahan($query_stunting_kecamatan[$i]->kecamatan)->result();
+
+			if (count($query_data_stunting_kelurahan[$i]) > 0) {
+				$data_stunting_kelurahan[$i]['name'] 	= $query_stunting_kecamatan[$i]->kecamatan_nama;
+				$data_stunting_kelurahan[$i]['id'] 		= $query_stunting_kecamatan[$i]->kecamatan;
+
+				for ($j=0; $j < count($query_data_stunting_kelurahan[$i]); $j++) {
+					$kelurahan_id[$i][$j] 	= $query_data_stunting_kelurahan[$i][$j]->kelurahan_id;
+					$kelurahan_nama[$i][$j] = $query_data_stunting_kelurahan[$i][$j]->kelurahan_nama;
+
+					$data_stunting_kelurahan[$i]['data'][] = [
+						'name' 		=> $query_data_stunting_kelurahan[$i][$j]->kelurahan_nama,
+						'y' 		=> $query_data_stunting_kelurahan[$i][$j]->total,
+						'drilldown' => str_replace(' ', '', $kelurahan_nama[$i][$j]).''.$kelurahan_id[$i][$j],
+					];
+				}
+			}
+		}
+
+		for ($i=0; $i < count($query_stunting_kelurahan); $i++) {
+			$kelurahan_id[$i] = $query_stunting_kelurahan[$i]->kelurahan_id;
+			$query_kelurahan_by_jenkel[$i] = $this->model_web->query_data_stunting_kelurahan_by_jenkel($query_stunting_kelurahan[$i]->kelurahan_id)->result();
+
+			for ($j=0; $j < count($query_kelurahan_by_jenkel[$i]); $j++) {
+				$data_stunting_kelurahan_by_jenkel[$i]['name'] 	= 'Jenis Kelamin';
+				$data_stunting_kelurahan_by_jenkel[$i]['id'] 	= str_replace(' ', '', $query_stunting_kelurahan[$i]->kelurahan_nama).''.$kelurahan_id[$i];
+
+				if($query_kelurahan_by_jenkel[$i][$j]->jenis_kel == "L"){
+					$data_stunting_kelurahan_by_jenkel[$i]['data'][$j] = ['Laki-Laki', $query_kelurahan_by_jenkel[$i][$j]->total];
+				}else if($query_kelurahan_by_jenkel[$i][$j]->jenis_kel == "P"){
+					$data_stunting_kelurahan_by_jenkel[$i]['data'][$j] = ['Perempuan', $query_kelurahan_by_jenkel[$i][$j]->total];
+				}
+			}
+		}
+
+		$merge_kelurahan = array_merge($data_stunting_kelurahan, $data_stunting_kelurahan_by_jenkel);
+
+		$data = [
+			'about' 			=> $this->db->get('about')->row(),
+			'categories' 		=> $this->db->get('blog_category')->result(),
+			'links'				=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 		=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'kontaks'        	=> $this->db->get('contacts')->result(),
+
+			'stunting_jenkel' 	=> $chart_jenkel,
+			'stunting_umur' 	=> $chart_umur,
+			'stunting_kecamatan' 	=> $chart_kecamatan,
+			'data_stunting_kecamatan' => $data_stunting_kecamatan,
+			'data_stunting_kelurahan' => $merge_kelurahan,
+		];
+
+		$this->template->build('chart-stunting', $data);
+	}
 }
 
 

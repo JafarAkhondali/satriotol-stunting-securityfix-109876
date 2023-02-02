@@ -9,26 +9,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| For see your board
 *|
 */
-class Dashboard extends Admin	
-{
-	
-	public function __construct()
-	{
+class Dashboard extends Admin {
+	public function __construct() {
 		parent::__construct();
 	}
 
-	public function index()
-	{
+	public function index() {
+        if (!$this->aauth->is_admin()) {
 		// if (!$this->aauth->is_allowed('dashboard')) {
 			// redirect('/', 'refresh');
 			redirect(base_url().'administrator/user/profile', 'refresh');
-		// }
-		// $data = [];
-		// $this->render('backend/standart/dashboard', $data);
+			// }
+			// $data = [];
+			// $this->render('backend/standart/dashboard', $data);
+		}else{
+			$this->data = [];
+			$this->render('backend/standart/administrator/dashboard', $this->data);
+		}
 	}
 
-	public function chart()
-	{
+	public function chart() {
 		if (!$this->aauth->is_allowed('dashboard')) {
 			redirect('/','refresh');
 		}

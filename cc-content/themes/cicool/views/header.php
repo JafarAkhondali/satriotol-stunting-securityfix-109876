@@ -112,7 +112,7 @@
 											<?php
 										} else {
 											?>
-												<a href="<?= base_url(); ?>administrator/user/profile">
+												<a href="<?= base_url(); ?>administrator">
 												<?php
 											}
 												?>
@@ -130,7 +130,7 @@
 										<?php
 										} else {
 										?>
-											<p><a href="<?= base_url(); ?>administrator/user/profile">Dashboard</a></p>
+											<p><a href="<?= base_url(); ?>administrator">Dashboard</a></p>
 										<?php
 										}
 										?>
@@ -171,9 +171,10 @@
 											</ul>
 										</li> -->
 										<li><a href="<?php echo base_url(); ?>aksi-konvergensi">Aksi Konvergensi</a></li>
-										<li><a href="<?php echo base_url(); ?>blog/">Program Kegiatan</a></li>
+										<li><a href="<?php echo base_url(); ?>data-stunting">Data Stunting</a></li>
 										<li><a href="http://119.2.50.170:9095/dashboardNew/index.php/home/stunting" target="blank">Data Statistik</a></li>
 										<?php echo display_menu_website(0, 1); ?>
+										<li><a href="<?php echo base_url(); ?>blog/">Berita</a></li>
 									</ul>
 								</nav>
 							</div>
@@ -229,9 +230,10 @@
 												<li><a href="<?= base_url() . 'rencana-kegiatan/' ?>">Rencana Kegiatan</a></li>
 											</ul>
 										</li> -->
-										<li><a href="<?php echo base_url(); ?>blog/">Program Kegiatan</a></li>
+										<li><a href="<?php echo base_url(); ?>data-stunting">Data Stunting</a></li>
 										<li><a href="http://119.2.50.170:9095/dashboardNew/index.php/home/stunting" target="blank">Data Statistik</a></li>
 										<?php echo display_menu_website(0, 1); ?>
+										<li><a href="<?php echo base_url(); ?>blog/">Berita</a></li>
 									</ul>
 								</nav>
 							</div>
