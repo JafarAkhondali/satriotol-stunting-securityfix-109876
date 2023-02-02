@@ -24,7 +24,6 @@ application/controllers/api/Example.php
 application/controllers/api/Key.php
 cc-content/themes/cicool/views/*.old
 index.php
-.htaccess
 
 cc-content/themes/cicool/views/coba_chart.php
 

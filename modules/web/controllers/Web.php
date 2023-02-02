@@ -253,20 +253,6 @@ class Web extends Front {
 		$this->template->build('analisa-situasi-detail', $data);
 	}
 
-	/* public function analisa_situasi_detail($id) {
-		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
-		$data['categories']     = $this->db->get('blog_category')->result();
-		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
-		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
-		$data['blogs']          = $this->model_web->berita_terbaru()->result();
-		$data['faqs']           = $this->db->from('faqs')->get()->result();
-		$data['about']          = $this->db->get('about')->row();
-		$data['analisa'] 		= $this->db->where(['analisa_situasi_id' => $id])->get('analisa_situasi')->row();
-		$data['details'] 		= $this->db->where(['analisa_situasi_id' => $id])->get('analisa_situasi_aksi')->result();
-
-		$this->template->build('analisa-situasi-detail', $data);
-	} */
-
 	public function rencana_kegiatan() {
 		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
@@ -311,14 +297,10 @@ class Web extends Front {
 	}
 
 	public function hasil_lokus_stunting(){
-		// $kecamatan  = $this->input->get('kecamatan');
 		$tahun      = $this->input->get('tahun');
 
 		$data['kecamatans'] = $this->db->get('kecamatans')->result();
 		$data['results'] 	= $this->model_web->hasil_lokus_stunting($tahun);
-
-		// echo $this->db->last_query();
-		// exit;
 
 		$this->template->build('file-lokus-stunting', $data);
 	}
@@ -360,9 +342,6 @@ class Web extends Front {
 				'rentan_opd' 	=> $this->model_web->rentan_opd_kegiatan($id)->row(),
 				'galeries' 		=> $this->model_web->rentan_opd_galeri($id)->result(),
 			];
-
-			// echo $this->db->last_query();
-			// exit;
 
 			$this->template->build('rentan-opd-galery', $data);
 		}
