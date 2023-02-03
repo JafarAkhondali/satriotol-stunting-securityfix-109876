@@ -23,7 +23,15 @@ class Model_web extends MY_Model {
 		return $this->db->from('blog_category')->get();
 	}
 
-	public function rembuk_stunting($id = NULL){
+	public function rembuk_stunting(){
+		$this->db->join('rembuk_stuntings', 'rembuk_stuntings.rembuk_stunting_id = rembuk_stunting_galery.rembuk_stunting_id', 'RIGHT');
+		$this->db->where('rembuk_stuntings.rembuk_stunting_year', date('Y', strtotime('-1 year')));
+		$query = $this->db->get('rembuk_stunting_galery');
+
+		return $query;
+	}
+
+	/* public function rembuk_stunting($id = NULL){
 		if ($id != NULL) {
 			$this->db->select('rembuk_stuntings.*, rembuk_stunting_galery.*');
 
@@ -34,7 +42,7 @@ class Model_web extends MY_Model {
 		}
 
 		return $this->db->get('rembuk_stuntings');
-	}
+	} */
 
 	public function hasil_lokus_stunting($tahun = NULL) {
 		if ($tahun != NULL) {

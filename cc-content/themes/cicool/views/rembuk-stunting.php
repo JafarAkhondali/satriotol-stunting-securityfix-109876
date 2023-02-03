@@ -153,7 +153,7 @@ swiper-slide img {
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section__title-wrapper-2 text-center mb-60">
-						<h3 class="section__title-2">Rembuk Stunting <?= date('Y', strtotime('-1 year'));;?></h3>
+						<h3 class="section__title-2">Rembuk Stunting <?= $rembuks->rembuk_stunting_year;?></h3>
 					</div>
 				</div>
 			</div>
@@ -164,113 +164,50 @@ swiper-slide img {
 		<div class="container">
 			<div class="certificate__inner grey-bg-9 p-relative" style="padding: 35px 45px;">
 				<div class="row">
+			<?php
+				if (!empty($rembuks->rembuk_stunting_galery_image) || $rembuks->rembuk_stunting_galery_image != NULL) {
+					$expl_galery = explode(',', $rembuks->rembuk_stunting_galery_image);
+			?>
 					<div class="col-md-6">
 						<div class="certificate__content">
 							<div class="outer">
 								<div id="big" class="owl-carousel owl-theme">
-							<?php
-								for ($i=0; $i < 10; $i++) {
-							?>
+			<?php
+
+					for ($i=0; $i < count($expl_galery); $i++) {
+			?>
 									<div class="item">
-										<img src="https://swiperjs.com/demos/images/nature-<?php echo $i+1;?>.jpg" />
+										<img src="<?= base_url()."uploads/rembuk_stunting_galery".$expl_galery[$i];?>" />
 									</div>
-							<?php
-								}
-							?>
+			<?php
+					}
+			?>
 								</div>
 								<div id="thumbs" class="owl-carousel owl-theme">
-							<?php
-								for ($i=0; $i < 10; $i++) {
-							?>
+			<?php
+
+					for ($i=0; $i < count($expl_galery); $i++) {
+			?>
 									<div class="item">
-										<img src="https://swiperjs.com/demos/images/nature-<?php echo $i+1;?>.jpg" />
+										<img src="<?= base_url()."uploads/rembuk_stunting_galery".$expl_galery[$i];?>" />
 									</div>
-							<?php
-								}
-							?>
+			<?php
+					}
+			?>
 								</div>
 							</div>
-
-
-						<!-- 	<swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper" thumbs-swiper=".mySwiper2" loop="true" space-between="10" navigation="true">
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-								</swiper-slide>
-							</swiper-container>
-
-							<swiper-container class="mySwiper2" loop="true" space-between="10" slides-per-view="4" free-mode="true" watch-slides-progress="true">
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-								</swiper-slide>
-								<swiper-slide>
-								<img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-								</swiper-slide>
-							</swiper-container> -->
-
-							<!-- <div class="swiper">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide">Slide 1</div>
-									<div class="swiper-slide">Slide 2</div>
-									<div class="swiper-slide">Slide 3</div>
-								</div>
-								<div class="swiper-pagination"></div>
-							</div> -->
 						</div>
 					</div>
 					<div class="col-md-6">
+			<?php
+				}else{
+			?>
+					<div class="col-md-12">
+			<?php
+				}
+			?>
 						<div class="certificate__content">
-							<p><?php echo $about->about_description; ?></p>
+							<p><?php echo $rembuks->rembuk_stunting_deskripsi; ?></p>
 						</div>
 					</div>
 				</div>

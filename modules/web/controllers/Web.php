@@ -186,6 +186,30 @@ class Web extends Front {
 	}
 
 	public function rembuk_stunting() {
+		$data['categories']     = $this->db->get('blog_category')->result();
+		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
+		$data['about']          = $this->db->get('about')->row();
+
+		$data['rembuks'] 		= $this->model_web->rembuk_stunting()->row();
+
+		// echo json_encode($rembuks);
+		// exit;
+
+		$this->template->build('rembuk-stunting', $data);
+
+		// if (!empty($id)) {
+		// 	$data['rembuks'] 		= $rembuks->row();
+			
+		// 	$this->template->build('rembuk-stunting-detail', $data);
+		// }else{
+		// 	$data['rembuks'] 		= $rembuks->result();
+
+		// 	$this->template->build('rembuk-stunting', $data);
+		// }
+	}
+
+	/* public function rembuk_stunting() {
 		$id                     = $this->input->get('id');
 		
 		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
@@ -206,7 +230,7 @@ class Web extends Front {
 
 			$this->template->build('rembuk-stunting', $data);
 		}
-	}
+	} */
 
 	public function detail_rembuk_stunting() {
 		$id                     = $this->input->get('id');
