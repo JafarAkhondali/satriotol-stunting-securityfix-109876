@@ -160,6 +160,9 @@ swiper-slide img {
 		</div>
 	</section>
 
+	<?php
+		if (!empty($rembuks->rembuk_stunting_id)) {
+	?>
 	<section class="certificate__area pb-120 pt-30">
 		<div class="container">
 			<div class="certificate__inner grey-bg-9 p-relative" style="padding: 35px 45px;">
@@ -214,59 +217,9 @@ swiper-slide img {
 			</div>
 		</div>
 	</section>
-
-
-	<!-- <section class="event__area pt-115 pb-115">
-		<div class="container">
-			<div class="row">
-				<div class="col-xxl-12">
-					<div class="section__title-wrapper-2 text-center mb-60">
-						<h3 class="section__title-2">Rembuk Stunting <?= date('Y', strtotime('-1 year'));;?></h3>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="project-details-area default-padding">
-					<div class="container">
-						<div class="project-details-items">
-							<div class="thumb">
-								<img src="assets/img/1500x700.png" alt="Thumb">
-							</div>
-							<div class="top-info">
-								<div class="row">
-									<div class="col-lg-12">
-										<h2>Business Planing & Solution</h2>
-										<p>
-											New had happen unable uneasy. Drawings can followed improved out sociable not. Earnestly so do instantly pretended. See general few civilly amiable pleased account carried. Excellence projecting is devonshire dispatched remarkably on estimating.
-										</p>
-										<p>
-											Netus lorem rutrum arcu dignissim at sit morbi phasellus nascetur eget urna potenti cum vestibulum cras. Tempor nonummy metus lobortis. Sociis velit etiam, dapibus. Lectus vehicula pellentesque cras posuere tempor facilisi habitant lectus rutrum pede quisque hendrerit parturient posuere mauris ad elementum fringilla facilisi volutpat fusce pharetra felis sapien varius quisque class convallis praesent est sollicitudin donec nulla venenatis, cursus fermentum netus posuere sociis porta risus habitant malesuada nulla habitasse hymenaeos. Viverra curabitur nisi vel sollicitudin dictum natoqu.
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="main-content">
-								
-								<p>
-									Give lady of they such they sure it. Me contained explained my education. Vulgar as hearts by garret. Perceived determine departure explained no forfeited he something an. Contrasted dissimilar get joy you instrument out reasonably. Again keeps at no meant stuff. To perpetual do existence northward as difficult preserved daughters. Continued at up to zealously necessary breakfast. Surrounded sir motionless she end literature. Gay direction neglected but supported yet her.  Facilisis inceptos nec, potenti nostra aenean lacinia varius semper ant nullam nulla primis placerat facilisis. Netus lorem rutrum arcu dignissim at sit morbi phasellus nascetur eget urna potenti cum vestibulum cras. Tempor nonummy metus lobortis. Sociis velit etiam, dapibus. Lectus vehicula pellentesque cras posuere tempor facilisi habitant lectus rutrum pede quisque hendrerit parturient posuere mauris ad elementum fringilla facilisi volutpat fusce pharetra felis sapien varius quisque class convallis praesent est sollicitudin donec nulla venenatis, cursus fermentum netus posuere sociis porta risus habitant malesuada nulla habitasse hymenaeos. Viverra curabitur nisi vel sollicitudin dictum natoque ante aenean elementum curae malesuada ullamcorper. vivamus nonummy nisl posuere rutrum
-								</p>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<img src="assets/img/800x600.png" alt="Thumb">
-									</div>
-									<div class="col-lg-6 col-md-6">
-										<img src="assets/img/800x600.png" alt="Thumb">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!-- event area end -->
+	<?php
+		}
+	?>
 </main>
 
 
