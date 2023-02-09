@@ -96,7 +96,7 @@
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/vendor/waypoints.js"></script>
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/bootstrap-bundle.js"></script>
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/meanmenu.js"></script>
-	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/swiper-bundle.js"></script>
+	<!-- <script type="text/javascript" src="<?= base_url();?>assets_stunting/js/swiper-bundle.js"></script> -->
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/owl-carousel.js"></script>
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/magnific-popup.js"></script>
 	<script type="text/javascript" src="<?= base_url();?>assets_stunting/js/parallax.js"></script>
