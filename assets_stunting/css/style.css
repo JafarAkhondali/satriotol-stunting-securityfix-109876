@@ -6312,7 +6312,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .postbox__meta span {
-    font-size: 14px;
+    font-size: 10pt;
     font-weight: 500;
     color: #6a727f;
     text-transform: capitalize;
@@ -12114,5 +12114,143 @@ only screen and (min-width: 576px) and (max-width: 767px),
     background-color: var(--tp-common-white);
 }
 
+
+/* ============================================================== 
+     # Career
+=================================================================== */
+
+.earna-career ul.job-list {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.earna-career ul.job-list li {
+    display: inline-block;
+    margin: 0 30px;
+    text-align: center;
+}
+
+.earna-career ul.job-list li:last-child {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.earna-career ul.job-list li .counter {
+  position: relative;
+}
+
+.earna-career ul.job-list li .counter {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 600;
+    color: #232323;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.earna-career ul.job-list li .counter .operator {
+  font-size: 30px;
+  margin-left: 2px;
+}
+
+.earna-career ul.job-list li .medium {
+    font-weight: 500;
+    color: #666666;
+    font-size: 14px;
+}
+
+
+.earna-career .job-lists .item {
+    box-shadow: 1px 4px 20px -2px rgb(0 0 0 / 10%);
+    padding: 20px;
+    border-radius: 7px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+}
+
+.earna-career .job-lists .item:last-child {
+    margin-bottom: 0;
+}
+
+.earna-career .job-lists .item .info {
+    padding-right: 30px;
+}
+
+.earna-career .job-lists .item .info h4 {
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 24px;
+    margin-right: 50px;
+}
+
+.earna-career .job-lists .item .info h4 span {
+    background: rgba(18, 115, 235, 0.2);
+    color: rgba(18, 115, 235, 1);
+    font-weight: 500;
+    font-size: 12px;
+    padding: 5px 10px;
+    position: relative;
+    z-index: 1;
+    top: -18px;
+}
+
+.earna-career .job-lists .item .info h4 span::after {
+    position: absolute;
+    left: 5px;
+    bottom: -8px;
+    content: "";
+    border-left: 2px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(18, 115, 235, 0.2);
+}
+
+.earna-career .job-lists .item .info .top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.earna-career .job-lists .item .info .top i {
+    display: inline-block;
+    font-size: 40px;
+    margin-right: 9px;
+    color: #1273eb;
+}
+
+.earna-career .job-lists .item .info .top i.fa-wordpress {
+  font-weight: 500;
+}
+
+.earna-career .job-lists .item .info ul li {
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.earna-career .job-lists .item .info ul li::after {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    content: "";
+    height: 5px;
+    width: 5px;
+    background: #666666;
+    border-radius: 50%;
+    margin-top: -2px;
+}
+
+.earna-career .job-lists .item .info ul li:last-child::after {
+    display: none;
+}
 
 /*# sourceMappingURL=style.css.map */

@@ -26,7 +26,11 @@ cc-content/themes/cicool/views/*.old
 index.php
 .htaccess
 
+modules/pembinaan_kader
+
 cc-content/themes/cicool/views/coba_chart.php
+cc-content/themes/cicool/views/*.old
+cc-content/themes/cicool/views/blog/*.old
 
 apidoc/api_data.js
 

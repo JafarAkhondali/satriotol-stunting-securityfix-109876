@@ -371,6 +371,22 @@ class Web extends Front {
 		}
 	}
 
+	public function pembinaan_kader(){
+		$data = [
+			'pembinaan' => $this->db->where(['aksi_koko_status' => '1', 'aksi_koko_kategori' => '1'])->get('aksi_koko')->row(),
+		];
+
+		$this->template->build('pembinaan-kader', $data);
+	}
+
+	public function manajemen_data_stunting(){
+		$data = [
+			'mantastu' => $this->db->where(['aksi_koko_status' => '1', 'aksi_koko_kategori' => '2'])->get('aksi_koko')->row(),
+		];
+
+		$this->template->build('manajemen-data-stunting', $data);
+	}
+
 	public function data_stunting() {
 		$data_kecamatan 	= $this->db->get('kecamatans')->result();
 		$data_kelurahan 	= $this->db->get('kelurahans')->result();
@@ -481,6 +497,29 @@ class Web extends Front {
 		];
 
 		$this->template->build('chart-stunting', $data);
+	}
+
+	public function pengukuran_stunting() {
+		$id 					= $this->input->get('id');
+
+		$data['categories']     = $this->db->get('blog_category')->result();
+		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
+		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
+		$data['about']          = $this->db->get('about')->row();
+
+		if (!empty($id)) {
+			$data['pustu'] 	= db_get_all_data('publikasi_stunting', ['pustun_id' => $id]);
+			$konten 		= 'pengukuran-stunting-detail';
+		} else {
+			$data['pustu'] = db_get_all_data('publikasi_stunting');
+			$konten 		= 'pengukuran-stunting';
+		}
+
+		// echo $this->db->last_query();
+// echo json_encode($data['pustu']);
+// 		exit;
+
+		$this->template->build($konten, $data);
 	}
 }
 

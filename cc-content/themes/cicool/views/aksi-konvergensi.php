@@ -51,7 +51,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="javascript:void(0);">
+					<a href="<?= base_url();?>kebijakan/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-building-columns text-black"></i></div>
 							<div class="features__content">
@@ -64,7 +64,7 @@
 			</div>
 			<div class="row mt-50">
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="javascript:void(0);">
+					<a href="<?= base_url();?>pembinaan-kader/">
 						<div class="features__item d-sm-flex align-items-start mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-users text-black"></i></div>
 							<div class="features__content">
@@ -74,7 +74,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="javascript:void(0);">
+					<a href="<?= base_url();?>manajemen-data-stunting/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-chart-column text-black"></i></div>
 							<div class="features__content">
@@ -84,7 +84,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="javascript:void(0);">
+					<a href="<?= base_url();?>pengukuran-dan-publikasi-stunting/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-scale-balanced text-black"></i></div>
 							<div class="features__content">
