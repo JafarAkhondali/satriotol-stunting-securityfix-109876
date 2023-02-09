@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/meanmenu.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/animate.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/owl-carousel.css">
-	<!-- <link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/swiper-bundle.css"> -->
+	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/swiper-bundle.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/backtotop.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/magnific-popup.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/nice-select.css">
