@@ -111,7 +111,7 @@ class Model_data_stunting extends MY_Model {
     public function filter_avaiable() {
 
         if (!$this->aauth->is_admin()) {
-            $this->db->where($this->table_name.'.user_created', get_user_data('id'));
+            // $this->db->where($this->table_name.'.user_created', get_user_data('id'));
         }
 
         return $this;
