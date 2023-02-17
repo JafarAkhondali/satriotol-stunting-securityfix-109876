@@ -1554,6 +1554,34 @@ if (!function_exists('array_group_by')) {
 }
 
 
+if (!function_exists('dateOfBirth')) {
+	function dateOfBirth($date) {
+		$dob 	= new DateTime($date);
+
+		$now 	= new DateTime();
+		$diff 	= $now->diff($dob);
+
+		$tahun 	= '';
+		$bulan 	= '';
+		$hari 	= '';
+		
+		if ($diff->y != 0) {
+			$tahun = $diff->y.' Tahun ';
+		}
+
+		if ($diff->m != 0) {
+			$bulan = $diff->m.' Bulan ';
+		}
+
+		if ($diff->d != 0) {
+			$hari = $diff->d.' Hari';
+		}
+
+		return $tahun.$bulan.$hari;
+	}
+}
+
+
 if (!function_exists('kode_acak')) {
 	function kode_acak() {
 		return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
