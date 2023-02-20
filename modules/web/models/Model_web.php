@@ -131,6 +131,7 @@ class Model_web extends MY_Model {
 		}
 
 		$this->db->where("tanggal_lahir != '0000-00-00'");
+		$this->db->where("jenis_kel != ''");
 
 		$query = $this->db->group_by("jenis_kel")->get('data_stunting');
 

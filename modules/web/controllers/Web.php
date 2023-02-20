@@ -392,6 +392,8 @@ class Web extends Front {
 		$data_kelurahan 	= $this->db->get('kelurahans')->result();
 		
 		$stunting_jenkel 	= $this->model_web->query_stuntingByAge()->result_array();
+		// echo $this->db->last_query();
+		// exit;
 		$stunting_kelurahan = [];
 
 		$query_stunting_kecamatan = $this->model_web->query_data_stunting_kecamatan()->result();
@@ -405,40 +407,44 @@ class Web extends Front {
 			}
 
 			$chart_jenkel[] = [
-				'label' => $jenkel,
-				'value' => $stunting_jenkel[$i]['total'],
+				'name' => $jenkel,
+				'y' => $stunting_jenkel[$i]['total'],
 			];
 		}
 
 		for ($i=0; $i < 5 ; $i++) { 
-			$chart_umur[$i] = [
-				'label' => $i + 1 ." Tahun",
-			];
+			$kategori_umur[$i] = $i + 1 ." Tahun";
 
 			$stunting_umur = $this->model_web->query_stuntingByAge($i + 1)->result();
 
 			foreach($stunting_umur as $item){
+				// $male[$i] 		= 0;
+				// $femalemale[$i] = 0;
+
 				if($item->jenis_kel == "L"){
-					$chart_umur[$i]['male'] = $item->total;
+					$male_umur[$i] 	= $item->total;
 				}else {
-					$chart_umur[$i]['female'] = $item->total;
+					$female_umur[$i] = $item->total;
 				}
 			}
 		}
 
 		for ($i=0; $i < count($data_kecamatan); $i++) {
-			$chart_kecamatan[$i]['label'] = $data_kecamatan[$i]->kecamatan_nama;
+			$nama_kecamatan[$i] = $data_kecamatan[$i]->kecamatan_nama;
 
 			$stunting_kecamatan = $this->model_web->query_stuntingByWilayah($data_kecamatan[$i]->kecamatan_id, 'kecamatan')->result();
 
 			foreach ($stunting_kecamatan as $item) {
 				if($item->jenis_kel == "L"){
-					$chart_kecamatan[$i]['male'] = $item->total;
+					$male_kecamatan[$i] = $item->total;
 				}else if($item->jenis_kel == "P"){
-					$chart_kecamatan[$i]['female'] = $item->total;
+					$female_kecamatan[$i] = $item->total;
 				}
 			}
 		}
+
+		// echo json_encode($nama_kecamatan);
+		// exit;
 
 		for ($i=0; $i < count($query_stunting_kecamatan); $i++) {
 			$data_stunting_kecamatan[$i]['name'] 		= $query_stunting_kecamatan[$i]->kecamatan_nama;
@@ -489,11 +495,17 @@ class Web extends Front {
 			'navigation' 		=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
 			'kontaks'        	=> $this->db->get('contacts')->result(),
 
-			'stunting_jenkel' 	=> $chart_jenkel,
-			'stunting_umur' 	=> $chart_umur,
-			'stunting_kecamatan' 	=> $chart_kecamatan,
-			'data_stunting_kecamatan' => $data_stunting_kecamatan,
-			'data_stunting_kelurahan' => $merge_kelurahan,
+			'stunting_jenkel' 			=> $chart_jenkel,
+			'kategori_umur' 			=> $kategori_umur,
+			'umur_male' 				=> $male_umur,
+			'umur_female' 				=> $female_umur,
+			// 'stunting_umur' 			=> $chart_umur,
+			'nama_kecamatan' 			=> $nama_kecamatan,
+			'male_kecamatan' 			=> $male_kecamatan,
+			'female_kecamatan' 			=> $female_kecamatan,
+			// 'stunting_kecamatan' 		=> $chart_kecamatan,
+			'data_stunting_kecamatan' 	=> $data_stunting_kecamatan,
+			'data_stunting_kelurahan' 	=> $merge_kelurahan,
 		];
 
 		$this->template->build('chart-stunting', $data);
