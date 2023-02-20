@@ -14,6 +14,7 @@ $route['kebijakan'] 						= 'web/kebijakan';
 $route['aksi-konvergensi'] 					= 'web/aksi_konvergensi';
 $route['rencana-kegiatan-dinas'] 			= 'web/rentan_opd';
 $route['data-stunting'] 					= 'web/data_stunting';
+$route['data-dtks'] 						= 'web/data_dtks';
 $route['pembinaan-kader'] 					= 'web/pembinaan_kader';
 $route['manajemen-data-stunting'] 			= 'web/manajemen_data_stunting';
 $route['pengukuran-dan-publikasi-stunting'] = 'web/pengukuran_stunting';

@@ -120,13 +120,13 @@ class Model_web extends MY_Model {
 		// select count(id_data_stunting) as total, TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) as umur, jenis_kel from data_stunting
 		// where TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) = 2 AND tanggal_lahir != '0000-00-00'
 		// GROUP BY jenis_kel
-		$this->db->select("count(id_data_stunting) as total, TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) as umur, jenis_kel");
+		$this->db->select("count(id_data_stunting) as total, TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) as umur, jenis_kel");
 
 		if ($age != NULL) {
 			if($age == 1){
-				$this->db->where("TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) <= 1");
+				$this->db->where("TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) <= 1");
 			}else {
-				$this->db->where("TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) = $age");
+				$this->db->where("TIMESTAMPDIFF(YEAR,tanggal_lahir,NOW()) = $age");
 			}
 		}
 
@@ -196,6 +196,91 @@ class Model_web extends MY_Model {
 		$query = $this->db->where("tanggal_lahir != '0000-00-00'");
 		
 		return $query->get('data_stunting');
+	}
+
+
+
+	public function query_dtksByAge($age = NULL){
+		$this->db->select("dtks_jenkel, TIMESTAMPDIFF(YEAR, dtks_tgl_lhr, CURDATE()) AS umur, COUNT(*) AS total");
+
+		if ($age != NULL) {
+			if($age == 1){
+				$this->db->where("TIMESTAMPDIFF(YEAR, dtks_tgl_lhr, CURDATE()) >= 0");
+				$this->db->where("TIMESTAMPDIFF(YEAR, dtks_tgl_lhr, CURDATE()) <= 1");
+			}else {
+				$this->db->where("TIMESTAMPDIFF(YEAR, dtks_tgl_lhr, CURDATE()) = $age");
+			}
+		// }else{
+		// 	$this->db->where('TIMESTAMPDIFF(YEAR, dtks_tgl_lhr, CURDATE()) >= 0 ');
+		// 	$this->db->where('TIMESTAMPDIFF(YEAR, dtks_tgl_lhr, CURDATE()) <= 5 ');
+		}
+
+		$this->db->where("dtks_tgl_lhr != '0000-00-00'");
+		$this->db->where("dtks_jenkel != ''");
+
+		$query = $this->db->group_by("dtks_jenkel")->get('data_dtks');
+
+		return $query;
+	}
+
+	public function query_data_dtks_kecamatan() {
+		$this->db->select('dtks_kecamatan, kecamatan_nama, count( * ) AS total');
+		$this->db->join('kecamatans', 'kecamatans.kecamatan_id = data_dtks.dtks_kecamatan', 'LEFT');
+		$this->db->where("dtks_tgl_lhr != '0000-00-00'");
+		$this->db->where("dtks_jenkel != ''");
+		$query = $this->db->group_by('dtks_kecamatan')->order_by('kecamatan_nama')->get('data_dtks');
+		
+		return $query;
+	}
+
+	public function query_data_dtks_kelurahan($kecamatan = NULL) {
+		if ($kecamatan != NULL) {
+			$this->db->where('dtks_kecamatan', $kecamatan);
+		}
+
+		$this->db->select('kecamatans.kecamatan_id, kecamatans.kecamatan_nama, kelurahans.kelurahan_nama, kelurahan_id, count( * ) AS total');
+		$this->db->join('kecamatans', 'kecamatans.kecamatan_id = dtks_kecamatan', 'LEFT');
+		$this->db->join('kelurahans', 'kelurahans.kelurahan_id = dtks_kelurahan', 'LEFT');
+		$this->db->where("dtks_tgl_lhr != '0000-00-00'");
+		$this->db->where("dtks_jenkel != ''");
+		$query = $this->db->group_by('dtks_kelurahan')->order_by('kecamatan_nama, kelurahan_nama')->get('data_dtks');
+		
+		return $query;
+	}
+
+	public function query_dtksByWilayah($id, $param){
+		$this->db->select("dtks_jenkel, count(*) as total");
+
+		if ($param == 'kecamatan') {
+			$this->db->select('dtks_kecamatan, kecamatan_nama');
+			$this->db->where("dtks_kecamatan", $id);
+			$this->db->join('kecamatans', 'kecamatan_id = dtks_kecamatan', 'LEFT');
+			$this->db->order_by('kecamatan_nama');
+		}else if ($param == 'kelurahan') {
+			$this->db->select('dtks_kelurahan, kelurahan_nama');
+			$this->db->where('dtks_kelurahan', $id);
+			$this->db->join('kelurahans', 'kelurahans.kelurahan_id = dtks_kelurahan', 'LEFT');
+			$this->db->order_by('kelurahan_nama');
+		}
+
+		$this->db->where("dtks_tgl_lhr != '0000-00-00'");
+		$this->db->where("dtks_jenkel != ''");
+
+		$query = $this->db->group_by("dtks_jenkel")->get('data_dtks');
+
+		return $query;
+	}
+
+	public function query_data_dtks_kelurahan_by_jenkel($kelurahan) {
+		$this->db->select('dtks_jenkel, count( * ) AS total, dtks_kelurahan, kelurahan_nama');
+		$this->db->join('kecamatans', 'kecamatans.kecamatan_id = dtks_kecamatan', 'LEFT');
+		$this->db->join('kelurahans', 'kelurahans.kelurahan_id = dtks_kelurahan', 'LEFT');
+		$this->db->where('dtks_kelurahan', $kelurahan);
+		$this->db->where("dtks_jenkel != ''");
+		$this->db->group_by('dtks_jenkel');
+		$query = $this->db->where("dtks_tgl_lhr != '0000-00-00'");
+		
+		return $query->get('data_dtks');
 	}
 }
 	
