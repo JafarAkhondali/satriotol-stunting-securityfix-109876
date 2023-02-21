@@ -1,7 +1,5 @@
 <?= get_header(); ?>
 
-<link rel="stylesheet" href="<?= BASE_ASSET; ?>admin-lte/plugins/morris/morris.css">
-
 <main>
     <!-- event area start -->
     <section class="event__area pt-115 pb-115">
@@ -12,10 +10,15 @@
 						<div class="card-body">
 							<h5 class="card-title">Grafik Data Terpadu Kesejahteraan Sosial (DTKS)</h5>
 							<ul class="nav nav-tabs" id="myTab">
-								<li class="nav-item"> <button class="nav-link active" id="jenkel-tab" data-bs-toggle="tab" data-bs-target="#jenkel" type="button"aria-selected="true">berdasarkan Jenis Kelamin</button></li>
-								<!-- <li class="nav-item"> <button class="nav-link" id="umur-tab" data-bs-toggle="tab" data-bs-target="#umur" type="button"aria-selected="false">berdasarkan Umur</button></li> -->
+								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-jenkel" target="_blank" class="nav-link active">berdasarkan Jenis Kelamin</a></li>
+								<!-- <li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-jenkel" target="_blank" class="nav-link">berdasarkan Umur</a></li> -->
+								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-kecamatan" target="_blank" class="nav-link">berdasarkan Jenis Kelamin per Kecamatan</a></li>
+								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-kelurahan" target="_blank" class="nav-link">berdasarkan Jenis Kelamin per Kelurahan</a></li>
+
+								<!-- <li class="nav-item"> <button class="nav-link active" id="jenkel-tab" data-bs-toggle="tab" data-bs-target="#jenkel" type="button"aria-selected="true">berdasarkan Jenis Kelamin</button></li>
+								<li class="nav-item"> <button class="nav-link" id="umur-tab" data-bs-toggle="tab" data-bs-target="#umur" type="button"aria-selected="false">berdasarkan Umur</button></li>
 								<li class="nav-item"> <button class="nav-link" id="kecamatan-tab" data-bs-toggle="tab" data-bs-target="#kecamatan" type="button" aria-selected="false">berdasarkan Jenis Kelamin per Kecamatan</button></li>
-								<li class="nav-item"> <button class="nav-link" id="kelurahan-tab" data-bs-toggle="tab" data-bs-target="#kelurahan" type="button" aria-selected="false">berdasarkan Jenis Kelamin per Kelurahan</button></li>
+								<li class="nav-item"> <button class="nav-link" id="kelurahan-tab" data-bs-toggle="tab" data-bs-target="#kelurahan" type="button" aria-selected="false">berdasarkan Jenis Kelamin per Kelurahan</button></li> -->
 							</ul>
 							<div class="tab-content pt-2" id="myTabContent">
 								<div class="tab-pane fade show active" id="jenkel">
@@ -23,7 +26,7 @@
 										<div class="chart" id="chart-jenkel"></div>
 									</div>
 								</div>
-								<div class="tab-pane fade" id="umur">
+								<!-- <div class="tab-pane fade" id="umur">
 									<div class="box-body chart-responsive">
 										<div class="chart" id="chart-umur"></div>
 									</div>
@@ -37,7 +40,7 @@
 									<div class="box-body chart-responsive">
 										<div class="chart" id="chart-kelurahan"></div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -58,15 +61,16 @@
 
 <script type="text/javascript">
 	var data_jenkel 		= <?= json_encode($dtks_jenkel, JSON_NUMERIC_CHECK);?>;
-	var kategori_umur 		= <?= json_encode($kategori_umur, JSON_NUMERIC_CHECK);?>;
-	var umur_male 			= <?= json_encode($umur_male, JSON_NUMERIC_CHECK);?>;
-	var umur_female 		= <?= json_encode($umur_female, JSON_NUMERIC_CHECK);?>;
-	var nama_kecamatan 		= <?= json_encode($nama_kecamatan, JSON_NUMERIC_CHECK);?>;
-	var male_kecamatan 		= <?= json_encode($male_kecamatan, JSON_NUMERIC_CHECK);?>;
-	var female_kecamatan 	= <?= json_encode($female_kecamatan, JSON_NUMERIC_CHECK);?>;
+	
+	// var kategori_umur 		= <?= json_encode($kategori_umur, JSON_NUMERIC_CHECK);?>;
+	// var umur_male 			= <?= json_encode($umur_male, JSON_NUMERIC_CHECK);?>;
+	// var umur_female 		= <?= json_encode($umur_female, JSON_NUMERIC_CHECK);?>;
+	// var nama_kecamatan 		= <?= json_encode($nama_kecamatan, JSON_NUMERIC_CHECK);?>;
+	// var male_kecamatan 		= <?= json_encode($male_kecamatan, JSON_NUMERIC_CHECK);?>;
+	// var female_kecamatan 	= <?= json_encode($female_kecamatan, JSON_NUMERIC_CHECK);?>;
 
-	var statistik_kecamatan = <?= json_encode($data_dtks_kecamatan, JSON_NUMERIC_CHECK );?>;
-	var statistik_kelurahan = <?= json_encode($data_dtks_kelurahan, JSON_NUMERIC_CHECK );?>;
+	// var statistik_kecamatan = <?= json_encode($data_dtks_kecamatan, JSON_NUMERIC_CHECK );?>;
+	// var statistik_kelurahan = <?= json_encode($data_dtks_kelurahan, JSON_NUMERIC_CHECK );?>;
 
 	Highcharts.chart('chart-jenkel', {
 		chart: {
@@ -165,7 +169,7 @@
 		]
 	}); */
 
-	Highcharts.chart('chart-kecamatan', {
+	/* Highcharts.chart('chart-kecamatan', {
 		chart: {
 			type: 'column',
 			zoomType: 'y',
@@ -283,6 +287,6 @@
 			},
 			series: statistik_kelurahan,
 		}
-	});
+	}); */
 </script>
 <?= get_footer(); ?>
