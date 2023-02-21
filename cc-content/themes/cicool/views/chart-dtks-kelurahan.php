@@ -19,7 +19,7 @@
 		},
 		title: {
 			align: 'left',
-			text: 'Data Stunting Pemerintah Kota Semarang <?= date('Y');?>'
+			text: 'Data DTKS Pemerintah Kota Semarang <?= date('Y');?>'
 		},
 		credits: {
 			text: 'Data Stunting Pemerintah Kota Semarang',

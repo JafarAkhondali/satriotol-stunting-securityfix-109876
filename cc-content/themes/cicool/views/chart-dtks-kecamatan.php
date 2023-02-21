@@ -21,7 +21,7 @@
 			width: 1920,
 		},
 		title: {
-			text: 'Data Stunting berdasarkan Jenis Kelamin per Kecamatan Tahun <?= date('Y');?>',
+			text: 'Data DTKS berdasarkan Jenis Kelamin per Kecamatan Tahun <?= date('Y');?>',
 			align: 'left',
 		},
 		credits: {
