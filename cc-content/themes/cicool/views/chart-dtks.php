@@ -87,6 +87,10 @@
 			text: 'Data DTKS Pemerintah Kota Semarang',
 			href: 'http://119.2.50.170:9095/dashboardNew/index.php',
 		},
+		exporting: {
+			filename: 'DTKS berdasarkan Jenis Kelamin <?= date('Y');?>',
+			sourceWidth: 1920,
+		},
 		tooltip: {
 			pointFormat: '{series.name}: <b>{point.y}</b>'
 		},
