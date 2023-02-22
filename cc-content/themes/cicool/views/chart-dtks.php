@@ -89,7 +89,6 @@
 		},
 		exporting: {
 			filename: 'DTKS berdasarkan Jenis Kelamin <?= date('Y');?>',
-			sourceWidth: 1920,
 		},
 		tooltip: {
 			pointFormat: '{series.name}: <b>{point.y}</b>'
