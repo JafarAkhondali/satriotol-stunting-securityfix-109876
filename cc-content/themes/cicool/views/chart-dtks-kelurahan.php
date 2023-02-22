@@ -13,7 +13,6 @@
 		chart: {
 			type: 'column',
 			height: 700,
-			width: 1920,
 			spacingBottom: 30,
 			marginTop: 50,
 		},

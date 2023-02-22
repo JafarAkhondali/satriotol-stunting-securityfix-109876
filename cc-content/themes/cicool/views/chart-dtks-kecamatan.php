@@ -18,7 +18,6 @@
 			type: 'column',
 			zoomType: 'y',
 			height: 700,
-			width: 1920,
 		},
 		title: {
 			text: 'Data DTKS berdasarkan Jenis Kelamin per Kecamatan Tahun <?= date('Y');?>',
