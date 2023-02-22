@@ -61,6 +61,7 @@
 	var kecamatan_female 	= <?= json_encode($kecamatan_female, JSON_NUMERIC_CHECK);?>;
 
 	Highcharts.chart('chart-kecamatan', {
+		colors: ['#0DB240', '#E51C3A', '#58390C', '#D0A92B', '#A3BE63', '#EE6950', '#BB6ED7', '#13284C', '#4C6DB6', '#9F6948', '#F0BB33'],
 		chart: {
 			type: 'column',
 			zoomType: 'y',
@@ -77,6 +78,15 @@
 		exporting: {
 			filename: 'DTKS per Kecamatan Tahun <?= date('Y');?>',
 			sourceWidth: 1920,
+			chartOptions: {
+				plotOptions: {
+					series: {
+						dataLabels: {
+							enabled: true
+						}
+					}
+				}
+			}
 		},
 		xAxis: {
 			categories: kecamatan_nama,
@@ -104,7 +114,9 @@
 		},
 		tooltip: {
 			stickOnContact: true,
-			backgroundColor: 'rgba(255, 255, 255, 0.93)'
+			backgroundColor: 'rgba(255, 255, 255, 0.93)',
+			crosshairs: true,
+			shared: true,
 		},
 		legend: {
 			enabled: true
@@ -113,11 +125,13 @@
 			{
 				name: 'Laki-Laki',
 				data: kecamatan_male,
-				borderColor: '#949494'
+				colorByPoint: true,
+				// borderColor: '#949494'
 			},
 			{
 				name: 'Perempuan',
-				data: kecamatan_female
+				data: kecamatan_female,
+				colorByPoint: true,
 			}
 		]
 	});

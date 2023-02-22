@@ -122,6 +122,8 @@
 	var statistik_kecamatan = <?= json_encode($data_stunting_kecamatan, JSON_NUMERIC_CHECK );?>;
 	var statistik_kelurahan = <?= json_encode($data_stunting_kelurahan, JSON_NUMERIC_CHECK );?>;
 
+	var colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
+
 	/* var donut = new Morris.Donut({
 		element: 'chart-jenkel',
 		resize: true,
@@ -166,6 +168,7 @@
 	// });
 
 	Highcharts.chart('chart-jenkel', {
+		colors: ['#001EFF', '#F000FF'],
 		chart: {
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
@@ -245,7 +248,9 @@
 		},
 		tooltip: {
 			stickOnContact: true,
-			backgroundColor: 'rgba(255, 255, 255, 0.93)'
+			backgroundColor: 'rgba(255, 255, 255, 0.93)',
+			crosshairs: true,
+			shared: true,
 		},
 		legend: {
 			enabled: true
@@ -254,16 +259,18 @@
 			{
 				name: 'Laki-Laki',
 				data: umur_male,
-				borderColor: '#949494'
+				color: '#008744',
 			},
 			{
 				name: 'Perempuan',
-				data: umur_female
+				data: umur_female,
+				color: '#D62D20',
 			}
 		]
 	});
 
 	Highcharts.chart('chart-kecamatan', {
+		colors: ['#0DB240', '#E51C3A', '#58390C', '#D0A92B', '#A3BE63', '#EE6950', '#BB6ED7', '#13284C', '#4C6DB6', '#9F6948', '#F0BB33'],
 		chart: {
 			type: 'column',
 			zoomType: 'y',
@@ -303,7 +310,9 @@
 		},
 		tooltip: {
 			stickOnContact: true,
-			backgroundColor: 'rgba(255, 255, 255, 0.93)'
+			backgroundColor: 'rgba(255, 255, 255, 0.93)',
+			crosshairs: true,
+			shared: true,
 		},
 		legend: {
 			enabled: true
@@ -311,11 +320,13 @@
 		series: [
 			{
 				name: 'Laki-Laki',
+				colorByPoint: true,
 				data: male_kecamatan,
-				borderColor: '#949494'
+				// borderColor: '#999999'
 			},
 			{
 				name: 'Perempuan',
+				colorByPoint: true,
 				data: female_kecamatan
 			}
 		]
@@ -362,14 +373,16 @@
 		},
 		tooltip: {
 			headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-			pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> data<br/>'
+			pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> data<br/>',
+			crosshairs: true,
+			shared: true,
 		},
 		series: [
 			{
 				name: 'Kecamatan',
 				colorByPoint: true,
 				data: statistik_kecamatan,
-			}
+			},
 		],
 		drilldown: {
 			allowPointDrilldown: false,
