@@ -10,7 +10,7 @@
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Grafik Data Stunting</h5>
+						<h5 class="card-title">Grafik Data Terpadu Kesejahteraan Sosial (DTKS)</h5>
 							<ul class="nav nav-tabs" id="myTab">
 								<li class="nav-item"> <a href="<?= base_url(); ?>data-dtks" class="nav-link">berdasarkan Jenis Kelamin</a></li>
 								<!-- <li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-jenkel" target="_blank" class="nav-link">berdasarkan Umur</a></li> -->
