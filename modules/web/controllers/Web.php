@@ -470,6 +470,9 @@ class Web extends Front {
 			$kelurahan_id[$i] = $query_stunting_kelurahan[$i]->kelurahan_id;
 			$query_kelurahan_by_jenkel[$i] = $this->model_web->query_data_stunting_kelurahan_by_jenkel($query_stunting_kelurahan[$i]->kelurahan_id)->result();
 
+			// echo $this->db->last_query();
+			// exit;
+
 			for ($j=0; $j < count($query_kelurahan_by_jenkel[$i]); $j++) {
 				$data_stunting_kelurahan_by_jenkel[$i]['name'] 	= 'Jenis Kelamin';
 				$data_stunting_kelurahan_by_jenkel[$i]['id'] 	= str_replace(' ', '', $query_stunting_kelurahan[$i]->kelurahan_nama).''.$kelurahan_id[$i];
@@ -503,6 +506,9 @@ class Web extends Front {
 			'data_stunting_kecamatan' 	=> $data_stunting_kecamatan,
 			'data_stunting_kelurahan' 	=> $merge_kelurahan,
 		];
+
+		// echo json_encode($merge_kelurahan);
+		// exit;
 
 		$this->template->build('chart-stunting', $data);
 	}
@@ -670,7 +676,9 @@ class Web extends Front {
 
 	public function chart_dtks_kelurahan() {
 		$dtks_kecamatan 	= $this->model_web->query_data_dtks_kecamatan()->result();
-		$dtks_kelurahan 	= $this->model_web->query_data_stunting_kelurahan()->result();
+		$dtks_kelurahan 	= $this->model_web->query_data_dtks_kelurahan()->result();
+		// echo $this->db->last_query();
+		// exit;
 
 		for ($i=0; $i < count($dtks_kecamatan); $i++) {
 			$data_dtks_kecamatan[$i]['name'] 		= $dtks_kecamatan[$i]->kecamatan_nama;

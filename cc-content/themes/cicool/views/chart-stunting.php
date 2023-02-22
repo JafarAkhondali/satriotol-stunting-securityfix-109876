@@ -270,7 +270,7 @@
 	});
 
 	Highcharts.chart('chart-kecamatan', {
-		colors: ['#0DB240', '#E51C3A', '#58390C', '#D0A92B', '#A3BE63', '#EE6950', '#BB6ED7', '#13284C', '#4C6DB6', '#9F6948', '#F0BB33'],
+		colors: ['#0DB240', '#E51C3A', '#58390C', '#D0A92B', '#A3BE63', '#EE6950', '#BB6ED7', '#13284C', '#4C6DB6', '#9F6948', '#F7B801', '#F92E91', '#3D348B'],
 		chart: {
 			type: 'column',
 			zoomType: 'y',
