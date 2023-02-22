@@ -59,7 +59,7 @@
 	Highcharts.chart('chart-kelurahan', {
 		chart: {
 			type: 'column',
-			height: 700,,
+			height: 700,
 			spacingBottom: 30,
 			marginTop: 50,
 		},

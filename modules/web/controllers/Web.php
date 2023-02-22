@@ -654,6 +654,12 @@ class Web extends Front {
 		}
 
 		$data = [
+			'about' 			=> $this->db->get('about')->row(),
+			'categories' 		=> $this->db->get('blog_category')->result(),
+			'links'				=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 		=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'kontaks'        	=> $this->db->get('contacts')->result(),
+
 			'kecamatan_nama' 	=> $nama_kecamatan,
 			'kecamatan_male' 	=> $male_kecamatan,
 			'kecamatan_female' 	=> $female_kecamatan,
@@ -715,6 +721,12 @@ class Web extends Front {
 		$merge_kelurahan = array_merge($data_dtks_kelurahan, $data_dtks_kelurahan_by_jenkel);
 
 		$data = [
+			'about' 			=> $this->db->get('about')->row(),
+			'categories' 		=> $this->db->get('blog_category')->result(),
+			'links'				=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 		=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'kontaks'        	=> $this->db->get('contacts')->result(),
+
 			'data_dtks_kecamatan' 	=> $data_dtks_kecamatan,
 			'data_dtks_kelurahan' 	=> $merge_kelurahan,
 		];
