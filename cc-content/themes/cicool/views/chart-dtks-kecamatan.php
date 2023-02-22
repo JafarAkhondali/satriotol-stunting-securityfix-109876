@@ -12,7 +12,7 @@
 						<div class="card-body">
 							<h5 class="card-title">Grafik Data Stunting</h5>
 							<ul class="nav nav-tabs" id="myTab">
-								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks" class="nav-link">berdasarkan Jenis Kelamin</a></li>
+								<li class="nav-item"> <a href="<?= base_url(); ?>data-dtks" class="nav-link">berdasarkan Jenis Kelamin</a></li>
 								<!-- <li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-jenkel" target="_blank" class="nav-link">berdasarkan Umur</a></li> -->
 								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-kecamatan" class="nav-link active">berdasarkan Jenis Kelamin per Kecamatan</a></li>
 								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-kelurahan" class="nav-link">berdasarkan Jenis Kelamin per Kelurahan</a></li>
