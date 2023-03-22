@@ -107,6 +107,7 @@
 										<th data-field="slider_subtitle" data-sort="1" data-primary-key="0"><?= cclang('slider_subtitle') ?></th>
 										<th data-field="slider_url" data-sort="1" data-primary-key="0"><?= cclang('slider_url') ?></th>
 										<th data-field="slider_image" data-sort="0" data-primary-key="0"><?= cclang('slider_image') ?></th>
+										<th>Status</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -132,20 +133,46 @@
 											<?php endif; ?>
 											<?php endif; ?>
 										</td>
-										<td width="200">
-											<?php is_allowed('sliders_view', function() use ($sliders){?>
-											<a href="<?= site_url('administrator/sliders/view/' . $sliders->slider_id); ?>" class="label-default"><i class="fa fa-newspaper-o"></i>
-												<?= cclang('view_button'); ?>
-												<?php }) ?>
-												<?php is_allowed('sliders_update', function() use ($sliders){?>
-												<a href="<?= site_url('administrator/sliders/edit/' . $sliders->slider_id); ?>" class="label-default"><i class="fa fa-edit "></i>
-													<?= cclang('update_button'); ?></a>
-												<?php }) ?>
-												<?php is_allowed('sliders_delete', function() use ($sliders){?>
-												<a href="javascript:void(0);" data-href="<?= site_url('administrator/sliders/delete/' . $sliders->slider_id); ?>" class="label-default remove-data"><i class="fa fa-close"></i>
-													<?= cclang('remove_button'); ?></a>
-												<?php }) ?>
-
+										<td>
+									<?php
+										if (_ent($sliders->slider_status) == 0) {
+									?>
+											<label class="label label-danger">Non-Aktif</label>
+									<?php
+										}else{
+									?>
+											<label class="label label-primary">Aktif</label>
+									<?php
+										}
+									?>
+										</td>
+										<td width="300">
+									<?php is_allowed('sliders_view', function() use ($sliders){?>
+										<a href="<?= site_url('administrator/sliders/view/' . $sliders->slider_id); ?>" class="label-default">
+											<i class="fa fa-newspaper-o"></i> <?= cclang('view_button'); ?></a>
+									<?php }) ?>
+									<?php is_allowed('sliders_status', function() use ($sliders){
+											if ($sliders->slider_status == 0 || empty($sliders->slider_status) || $sliders->slider_status == null) {
+									?>
+												<a href="javascript:void(0);" data-href="<?= site_url('administrator/sliders/status/' . $sliders->slider_id); ?>" class="label-default aktif-data">
+													<i class="fa fa-check"></i> Aktifkan Slider</a>
+									<?php
+											}else if ($sliders->slider_status == 1) {
+									?>
+												<a href="javascript:void(0);" data-href="<?= site_url('administrator/sliders/status/' . $sliders->slider_id); ?>" class="label-default nonaktif-data">
+													<i class="fa fa-ban"></i> Nonaktifkan Slider</a>
+									<?php
+											}
+									?>
+									<?php }) ?>
+									<?php is_allowed('sliders_update', function() use ($sliders){?>
+										<a href="<?= site_url('administrator/sliders/edit/' . $sliders->slider_id); ?>" class="label-default">
+											<i class="fa fa-edit "></i> <?= cclang('update_button'); ?></a>
+									<?php }) ?>
+									<?php is_allowed('sliders_delete', function() use ($sliders){?>
+										<a href="javascript:void(0);" data-href="<?= site_url('administrator/sliders/delete/' . $sliders->slider_id); ?>" class="label-default remove-data">
+											<i class="fa fa-close"></i> <?= cclang('remove_button'); ?></a>
+									<?php }) ?>
 										</td>
 									</tr>
 									<?php endforeach; ?>
@@ -193,6 +220,52 @@
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
 				confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+				cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function (isConfirm) {
+				if (isConfirm) {
+					document.location.href = url;
+				}
+			});
+
+			return false;
+		});
+
+		$('.aktif-data').click(function () {
+			var url = $(this).attr('data-href');
+
+			swal({
+				title: "<?= cclang('are_you_sure'); ?>",
+				text: "Slider akan tampil otomatis jika diaktifkan",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Ya, Lanjutkan!",
+				cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function (isConfirm) {
+				if (isConfirm) {
+					document.location.href = url;
+				}
+			});
+
+			return false;
+		});
+
+		$('.nonaktif-data').click(function () {
+			var url = $(this).attr('data-href');
+
+			swal({
+				title: "<?= cclang('are_you_sure'); ?>",
+				text: "Slider tidak akan tampil otomatis jika dinonaktifkan",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Ya, Lanjutkan!",
 				cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
 				closeOnConfirm: true,
 				closeOnCancel: true

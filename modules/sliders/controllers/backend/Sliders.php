@@ -435,6 +435,33 @@ class Sliders extends Admin	{
         $this->pdf->writeHTML($content);
         $this->pdf->Output($table.'.pdf', 'H');
 	}
+
+	public function status($id) {
+		if (!$this->is_allowed('sliders_status', false)) {
+			echo json_encode([
+				'success' => false,
+				'error' => cclang('sorry_you_do_not_have_permission_to_access')
+				]);
+			exit;
+		}
+
+		$slider = db_get_all_data('sliders', ['slider_id' => $id])[0];
+		$status = $slider->slider_status;
+
+		if ($status == 0 || empty($status) || $status == null) {
+			$update_status = [
+				'slider_status' => '1',
+			];
+		}else if ($status == 1) {
+			$update_status = [
+				'slider_status' => '0',
+			];
+		}
+
+		$save_sliders = $this->model_sliders->change($id, $update_status);
+
+		redirect_back();
+	}
 }
 
 
