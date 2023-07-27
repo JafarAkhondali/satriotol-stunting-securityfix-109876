@@ -173,15 +173,19 @@
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
 			plotShadow: false,
-			type: 'pie'
+			type: 'pie',
 		},
 		title: {
 			text: 'Data Stunting berdasarkan Jenis Kelamin',
 			align: 'left',
 		},
 		credits: {
-			text: 'Data Stunting Pemerintah Kota Semarang',
-			href: 'http://119.2.50.170:9095/dashboardNew/index.php',
+			text: 'Sumber Data : Data Stunting dari Dinas Kesehatan Kota Semarang <?= date('Y');?>',
+			href: 'http://119.2.50.170:9095/dashboardNew/index.php/home/stunting?bulan=06&tahun=2023',
+			style: {
+				color: '#6e6e6e',
+				fontSize: 14,
+			},
 		},
 		tooltip: {
 			pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -219,8 +223,12 @@
 			align: 'left',
 		},
 		credits: {
-			text: 'Data Stunting Pemerintah Kota Semarang',
-			href: 'http://119.2.50.170:9095/dashboardNew/index.php',
+			text: 'Sumber Data : Data Stunting dari Dinas Kesehatan Kota Semarang <?= date('Y');?>',
+			href: 'http://119.2.50.170:9095/dashboardNew/index.php/home/stunting?bulan=06&tahun=2023',
+			style: {
+				color: '#6e6e6e',
+				fontSize: 14,
+			},
 		},
 		xAxis: {
 			categories: kategori_umur,
@@ -281,8 +289,12 @@
 			align: 'left',
 		},
 		credits: {
-			text: 'Data Stunting Pemerintah Kota Semarang',
-			href: 'http://119.2.50.170:9095/dashboardNew/index.php',
+			text: 'Sumber Data : Data Stunting dari Dinas Kesehatan Kota Semarang <?= date('Y');?>',
+			href: 'http://119.2.50.170:9095/dashboardNew/index.php/home/stunting?bulan=06&tahun=2023',
+			style: {
+				color: '#6e6e6e',
+				fontSize: 14,
+			},
 		},
 		xAxis: {
 			categories: nama_kecamatan,

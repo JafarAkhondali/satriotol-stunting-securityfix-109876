@@ -80,12 +80,16 @@
 			type: 'pie'
 		},
 		title: {
-			text: 'Data DTKS berdasarkan Jenis Kelamin',
+			text: 'Data DTKS berdasarkan Jenis Kelamin <?= date("Y");?>',
 			align: 'left',
 		},
 		credits: {
-			text: 'Data DTKS Pemerintah Kota Semarang',
-			href: 'http://119.2.50.170:9095/dashboardNew/index.php',
+			text: '- Data DTKS Pemerintah Kota Semarang <?= date("Y");?> -',
+			href: 'http://119.2.50.170:9095/dashboardNew/index.php/home/stunting?bulan=06&tahun=2023',
+			style: {
+				color: '#6e6e6e',
+				fontSize: 14,
+			},
 		},
 		exporting: {
 			filename: 'DTKS berdasarkan Jenis Kelamin <?= date('Y');?>',
