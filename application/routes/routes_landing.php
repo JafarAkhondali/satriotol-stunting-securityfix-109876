@@ -20,3 +20,6 @@ $route['chart-dtks-kelurahan'] 				= 'web/chart_dtks_kelurahan';
 $route['pembinaan-kader'] 					= 'web/pembinaan_kader';
 $route['manajemen-data-stunting'] 			= 'web/manajemen_data_stunting';
 $route['pengukuran-dan-publikasi-stunting'] = 'web/pengukuran_stunting';
+$route['penurunan-percepatan-stunting'] 	= 'web/ppstunting';
+$route['program-intervensi-balita'] 		= 'web/intervensibalita';
+$route['wisata-edukasi-gizi'] 				= 'web/edukasigizi';

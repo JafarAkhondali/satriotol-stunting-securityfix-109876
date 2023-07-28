@@ -373,7 +373,12 @@ class Web extends Front {
 
 	public function pembinaan_kader(){
 		$data = [
-			'pembinaan' => $this->db->where(['aksi_koko_status' => '1', 'aksi_koko_kategori' => '1'])->get('aksi_koko')->row(),
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row(),
+			'pembinaan' 	=> $this->db->where(['aksi_koko_status' => '1', 'aksi_koko_kategori' => '1'])->get('aksi_koko')->row(),
 		];
 
 		$this->template->build('pembinaan-kader', $data);
@@ -381,7 +386,12 @@ class Web extends Front {
 
 	public function manajemen_data_stunting(){
 		$data = [
-			'mantastu' => $this->db->where(['aksi_koko_status' => '1', 'aksi_koko_kategori' => '2'])->get('aksi_koko')->row(),
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row(),
+			'mantastu' 		=> $this->db->where(['aksi_koko_status' => '1', 'aksi_koko_kategori' => '2'])->get('aksi_koko')->row(),
 		];
 
 		$this->template->build('manajemen-data-stunting', $data);
@@ -763,6 +773,54 @@ class Web extends Front {
 // 		exit;
 
 		$this->template->build($konten, $data);
+	}
+
+	public function ppstunting() {
+		$data = [
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row()
+		];
+
+		$this->template->build('penurunan-percepatan-stunting', $data);
+	}
+
+	public function intervensibalita() {
+		$data = [
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row()
+		];
+
+		$this->template->build('program-intervensi-balita', $data);
+	}
+
+	public function edukasigizi() {
+		$data = [
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row()
+		];
+
+		$this->template->build('wisata-edukasi-gizi', $data);
+	}
+
+	public function penghargaan() {
+		$data = [
+			'sliders' 		=> $this->db->where('slider_status', '1')->get('sliders')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row()
+		];
+
+		$this->template->build('penghargaan', $data);
 	}
 }
 

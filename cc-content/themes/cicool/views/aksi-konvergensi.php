@@ -41,11 +41,11 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>rembuk-stunting/">
+					<a href="<?= base_url();?>penurunan-percepatan-stunting/">
 						<div class="features__item d-sm-flex align-items-start mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-gears text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Rembuk Stunting</h3>
+								<h3 class="features__title">Percepatan Penurunan Stunting</h3>
 							</div>
 						</div>
 					</a>
@@ -55,8 +55,7 @@
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-building-columns text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Perwal Percepatan Penurunan Stunting
-								</h3>
+								<h3 class="features__title">Perwal Percepatan Penurunan Stunting</h3>
 							</div>
 						</div>
 					</a>
@@ -64,41 +63,41 @@
 			</div>
 			<div class="row mt-50">
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>pembinaan-kader/">
+					<a href="<?= base_url();?>program-intervensi-balita/">
 						<div class="features__item d-sm-flex align-items-start mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-users text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Pembinaan Kader</h3>
+								<h3 class="features__title">Program Intervensi Balita</h3>
 							</div>
 						</div>
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>manajemen-data-stunting/">
+					<a href="<?= base_url();?>wisata-edukasi-gizi/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-chart-column text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Sistem Manajemen Data Stunting</h3>
+								<h3 class="features__title">Wisata Edukasi Gizi</h3>
 							</div>
 						</div>
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>pengukuran-dan-publikasi-stunting/">
+					<a href="<?= base_url();?>penghargaan/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-scale-balanced text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Pengukuran dan Publikasi Stunting</h3>
+								<h3 class="features__title">Penghargaan</h3>
 							</div>
 						</div>
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="javascript:void(0);">
+					<a href="<?= base_url();?>inovasi-percepatan/">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-file-check text-black"></i></div>
 							<div class="features__content">
-								<h3 class="features__title">Review Kinerja Tahunan</h3>
+								<h3 class="features__title">Inovasi Percepatan</h3>
 							</div>
 						</div>
 					</a>
