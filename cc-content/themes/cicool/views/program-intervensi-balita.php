@@ -97,7 +97,7 @@
 	for ($i=0; $i < 2; $i++) {
 ?>
 									<div class="item">
-										<img src="<?= base_url().'uploads/program-intervensi-balita/Slide-'.($i+1);?>"/>
+										<img src="<?= base_url().'uploads/program-intervensi-balita/Slide-'.($i+1);?>.jpg"/>
 									</div>
 <?php
 	}
@@ -108,7 +108,7 @@
 	for ($i=0; $i < 2; $i++) {
 ?>
 									<div class="item">
-										<img src="<?= base_url().'uploads/program-intervensi-balita/Slide-'.($i+1);?>"/>
+										<img src="<?= base_url().'uploads/program-intervensi-balita/Slide-'.($i+1);?>.jpg"/>
 									</div>
 <?php
 	}
