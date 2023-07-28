@@ -120,7 +120,7 @@
 	for ($i=0; $i < 5; $i++) {
 ?>
 									<div class="item">
-										<img src="<?= base_url().'uploads/penurunan-percepatan-stunting/slide-'.($i+1);?>"/>
+										<img src="<?= base_url().'uploads/penurunan-percepatan-stunting/Slide-'.($i+1);?>"/>
 									</div>
 <?php
 	}
@@ -131,7 +131,7 @@
 	for ($i=0; $i < 5; $i++) {
 ?>
 									<div class="item">
-										<img src="<?= base_url().'uploads/penurunan-percepatan-stunting/slide-'.($i+1);?>"/>
+										<img src="<?= base_url().'uploads/penurunan-percepatan-stunting/Slide-'.($i+1);?>"/>
 									</div>
 <?php
 	}
