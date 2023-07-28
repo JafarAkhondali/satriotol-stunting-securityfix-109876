@@ -23,3 +23,4 @@ $route['pengukuran-dan-publikasi-stunting'] = 'web/pengukuran_stunting';
 $route['penurunan-percepatan-stunting'] 	= 'web/ppstunting';
 $route['program-intervensi-balita'] 		= 'web/intervensibalita';
 $route['wisata-edukasi-gizi'] 				= 'web/edukasigizi';
+$route['penghargaan'] 						= 'web/penghargaan';
