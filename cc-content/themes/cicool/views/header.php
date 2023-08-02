@@ -185,22 +185,6 @@
 									</ul>
 								</nav>
 							</div>
-							<!-- <div class="header__category d-flex align-items-center justify-content-end">
-								<div class="header__category-icon mr-10"><i class="fa fa-list-ul text-white"></i></div>
-								<div class="header__category-content">
-									<select id="pilih-berita">
-										<option>Pilih Berita</option>
-										<option value="0">Semua Berita</option>
-										<?php
-										foreach ($categories as $category) {
-										?>
-											<option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
-										<?php
-										}
-										?>
-									</select>
-								</div>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -225,37 +209,7 @@
 							<div class="main-menu main-menu-2 main-menu-mobile ml-10 pl-10">
 								<nav id="mobile-menu">
 									<ul>
-										<li><a href="<?php echo base_url(); ?>">Beranda</a></li>
-										<li><a href="<?php echo base_url(); ?>aksi-konvergensi">Aksi Konvergensi</a></li>
-										<!-- <li class="has-dropdown">
-											<a href="#">Aksi Konvergensi</a>
-											<ul class="submenu">
-												<li><a href="<?= base_url() . 'rembuk-stunting/' ?>">Rembuk Stunting</a></li>
-												<li><a href="<?= base_url() . 'analisa-situasi/' ?>">Analisa Situasi</a></li>
-												<li><a href="<?= base_url() . 'rencana-kegiatan/' ?>">Rencana Kegiatan</a></li>
-											</ul>
-										</li> -->
-										<li class="has-dropdown">
-											<a href="javascript:void(0);">Statistik Stunting</a>
-											<ul class="submenu">
-												<li><a href="<?= base_url();?>data-stunting">Data Stunting</a></li>
-												<li><a href="<?= base_url();?>data-dtks">Data DTKS</a></li>
-												<li><a href="http://119.2.50.170:9095/dashboardNew/index.php/home/stunting" target="blank">Data Statistik</a></li>
-											</ul>
-										</li>
-										<!-- <li><a href="<?php echo base_url(); ?>data-stunting">Data Stunting</a></li>
-										<li><a href="<?php echo base_url(); ?>data-dtks">Data DTKS</a></li>
-										<li><a href="http://119.2.50.170:9095/dashboardNew/index.php/home/stunting" target="blank">Data Statistik</a></li> -->
 										<?php echo display_menu_website(0, 1); ?>
-										<!-- <li><a href="<?php echo base_url(); ?>blog/">Berita</a></li> -->
-										<li class="has-dropdown">
-											<a href="javascript:void(0);">Berita</a>
-											<ul class="submenu">
-												<li><a href="<?= base_url();?>">Dokumentasi</a></li>
-												<li><a href="<?= base_url();?>">Penghargaan</a></li>
-											</ul>
-										</li>
-										<li><a href="<?php echo base_url();?>faq">FAQ</a></li>
 									</ul>
 								</nav>
 							</div>
