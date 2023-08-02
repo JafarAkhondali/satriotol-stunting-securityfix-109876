@@ -61,7 +61,7 @@
 				<div class="container">
 					<div class="footer__bottom-inner">
 						<div class="row">
-							<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+							<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
 								<div class="footer__bottom-link">
 									<ul>
 										<li><a href="javascript:void(0);">Disclaimer & Copyright &copy;<?= date('Y');?></a></li>
@@ -70,7 +70,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+							<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
 								<div class="footer__social footer__social-3 text-md-end">
 									<ul>
 								<?php

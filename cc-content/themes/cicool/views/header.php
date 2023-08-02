@@ -31,6 +31,7 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/font-awesome-pro.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/spacing.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/style.css">
+	<link rel="stylesheet" href="<?= base_url(); ?>assets_stunting/css/v2/style.css">
 	<link rel="stylesheet" href="<?= BASE_ASSET?>chosen/chosen.css">
 
 	<style type="text/css">
@@ -191,12 +192,31 @@
 												<li><a href="<?= base_url();?>">Penghargaan</a></li>
 											</ul>
 										</li>
+										<li><a href="<?php echo base_url();?>faq">FAQ</a></li>
 									</ul>
 								</nav>
 							</div>
 						</div>
 						<div class="col-xxl-2 col-xl-2 col-lg-2">
-							<div class="header__category d-flex align-items-center justify-content-end">
+							<div class="main-menu main-menu-3 align-items-end pull-right">
+								<nav>
+									<ul>
+										<li class="has-dropdown">
+											<a href="javascript:void(0);">Pilih Berita</a>
+											<ul class="submenu">
+										<?php
+											foreach ($categories as $category) {
+										?>
+											<li><a href="<?= base_url();?>blog/category/<?php echo $category->category_id;?>"><?php echo $category->category_name; ?></a></li>
+										<?php
+											}
+										?>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<!-- <div class="header__category d-flex align-items-center justify-content-end">
 								<div class="header__category-icon mr-10"><i class="fa fa-list-ul text-white"></i></div>
 								<div class="header__category-content">
 									<select id="pilih-berita">
@@ -211,7 +231,7 @@
 										?>
 									</select>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -266,6 +286,7 @@
 												<li><a href="<?= base_url();?>">Penghargaan</a></li>
 											</ul>
 										</li>
+										<li><a href="<?php echo base_url();?>faq">FAQ</a></li>
 									</ul>
 								</nav>
 							</div>

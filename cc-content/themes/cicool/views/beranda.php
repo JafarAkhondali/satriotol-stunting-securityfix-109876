@@ -1,8 +1,12 @@
 <?= get_header(); ?>
 <style type="text/css">
 	.about__list ul li {
-    list-style: disc !important;
-}
+		list-style: disc !important;
+	}
+
+	.w-img img {
+		height: 300px !important;
+	}
 </style>
 
 <main>
@@ -104,7 +108,7 @@
 							<img class="about__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/about/about-shape-3.png" alt="">
 						</div>
 						<div class="about__thumb-2 mb-10">
-							<img src="<?php echo base_url().'uploads/about/'.$about->about_image_pengertian;?>" alt="Gambar Pengertian Stunting" style="width: 100%; border-radius: 20px;">
+							<img src="<?php echo base_url().'uploads/about/'.$about->about_image_pengertian;?>" alt="Gambar Pengertian Stunting" style="width: 100%; border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
 						</div>
 					</div>
 				</div>
@@ -122,7 +126,7 @@
 							<img class="about__shape-3" src="<?php echo base_url(); ?>assets_stunting/img/about/about-shape-3.png" alt="">
 						</div>
 						<div class="about__thumb-2 mb-10">
-							<img src="<?php echo base_url().'uploads/about/'.$about->about_image_penyebab;?>" alt="Penyebab Stunting" style="width: 100%; border-radius: 20px;">
+							<img src="<?php echo base_url().'uploads/about/'.$about->about_image_penyebab;?>" alt="Penyebab Stunting" style="width: 100%; border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
 						</div>
 					</div>
 				</div>
@@ -275,7 +279,7 @@
 					<div class="faq__wrapper pt-45 pr-25">
 						<div class="section__title-wrapper mb-5">
 							<span class="section__title-pre-3">Stunting Kota Semarang</span>
-							<h2 class="section__title section__title-44">Pertanyaan Mengenai Stunting</h2>
+							<h2 class="section__title section__title-44">Pertanyaan Sering Ditanyakan</h2>
 						</div>
 						<p>Semarang Semakin Hebat</p>
 					</div>

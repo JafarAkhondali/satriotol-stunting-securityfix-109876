@@ -24,7 +24,7 @@ class Web extends Front {
 		$data['links']          = $this->db->where('menu_type_id = 3')->order_by('sort', 'ASC')->get('menu')->result();
 		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
 		$data['blogs']          = $this->model_web->berita_terbaru()->result();
-		$data['faqs']           = $this->db->from('faqs')->get()->result();
+		$data['faqs']           = $this->db->get('faqs', '5')->result();
 		$data['about']          = $this->db->get('about')->row();
 		$data['kontaks']        = $this->db->get('contacts')->result();
 
@@ -821,6 +821,18 @@ class Web extends Front {
 		];
 
 		$this->template->build('penghargaan', $data);
+	}
+
+	public function faq() {
+		$data = [
+			'links'			=> $this->db->where('menu_type_id = 3')->get('menu')->result(),
+			'categories' 	=> $this->db->get('blog_category')->result(),
+			'navigation' 	=> $this->db->where('menu_type_id = 2')->get('menu')->result(),
+			'about' 		=> $this->db->get('about')->row(),
+			'faqs' 			=> $this->db->get('faqs')->result(),
+		];
+
+		$this->template->build('faq', $data);
 	}
 }
 
