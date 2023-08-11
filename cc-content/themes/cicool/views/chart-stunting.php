@@ -12,13 +12,13 @@
 						<div class="card-body">
 							<h5 class="card-title">Grafik Data Stunting</h5>
 							<ul class="nav nav-tabs" id="myTab">
-								<li class="nav-item"> <button class="nav-link active" id="jenkel-tab" data-bs-toggle="tab" data-bs-target="#jenkel" type="button"aria-selected="true">berdasarkan Jenis Kelamin</button></li>
-								<li class="nav-item"> <button class="nav-link" id="umur-tab" data-bs-toggle="tab" data-bs-target="#umur" type="button"aria-selected="false">berdasarkan Umur</button></li>
-								<li class="nav-item"> <button class="nav-link" id="kecamatan-tab" data-bs-toggle="tab" data-bs-target="#kecamatan" type="button" aria-selected="false">berdasarkan Jenis Kelamin per Kecamatan</button></li>
+								<li class="nav-item"> <button class="nav-link active" id="kecamatan-tab" data-bs-toggle="tab" data-bs-target="#kecamatan" type="button" aria-selected="false">berdasarkan Jenis Kelamin per Kecamatan</button></li>
 								<li class="nav-item"> <button class="nav-link" id="kelurahan-tab" data-bs-toggle="tab" data-bs-target="#kelurahan" type="button" aria-selected="false">berdasarkan Jenis Kelamin per Kelurahan</button></li>
+								<li class="nav-item"> <button class="nav-link" id="jenkel-tab" data-bs-toggle="tab" data-bs-target="#jenkel" type="button"aria-selected="true">berdasarkan Jenis Kelamin</button></li>
+								<li class="nav-item"> <button class="nav-link" id="umur-tab" data-bs-toggle="tab" data-bs-target="#umur" type="button"aria-selected="false">berdasarkan Umur</button></li>
 							</ul>
 							<div class="tab-content pt-2" id="myTabContent">
-								<div class="tab-pane fade show active" id="jenkel">
+								<div class="tab-pane fade" id="jenkel">
 									<div class="box-body chart-responsive">
 										<div class="chart" id="chart-jenkel"></div>
 									</div>
@@ -28,7 +28,7 @@
 										<div class="chart" id="chart-umur"></div>
 									</div>
 								</div>
-								<div class="tab-pane fade" id="kecamatan">
+								<div class="tab-pane fade show active" id="kecamatan">
 									<div class="box-body chart-responsive">
 										<div class="chart" id="chart-kecamatan"></div>
 									</div>
