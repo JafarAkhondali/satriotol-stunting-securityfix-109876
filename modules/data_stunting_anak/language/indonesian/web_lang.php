@@ -1,0 +1,38 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+$lang['data_stunting_anak'] = 'Data Stunting Anak';
+$lang['stunting_anak_id'] = 'ID';
+$lang['stunting_anak_anak_id'] = 'Nama Anak';
+$lang['stunting_anak_dtks'] = 'DTKS';
+$lang['stunting_anak_tgl_ukur'] = 'Tanggal Pengukuran';
+$lang['stunting_anak_berat_badan'] = 'Berat Badan Anak';
+$lang['stunting_anak_tinggi_badan'] = 'Tinggi Badan Anak';
+$lang['stunting_anak_anak_angkat'] = 'Anak Angkat';
+$lang['stunting_anak_anak_angkat_anggaran'] = 'Anggaran Anak Angkat';
+$lang['stunting_anak_pengasuh_balita'] = 'Pengasuh Balita';
+$lang['stunting_anak_pengasuh_balita_anggaran'] = 'Anggaran Pengasuh Balita';
+$lang['stunting_anak_day_care'] = 'Day Care Stunting';
+$lang['stunting_anak_day_care_anggaran'] = 'Anggaran Day Care Stunting';
+$lang['stunting_anak_asupan_gizi_pmt'] = 'Asupan Gizi (PMT)';
+$lang['stunting_anak_imunisasi'] = 'Imunisasi Anak';
+$lang['stunting_anak_imunisasi_anggaran'] = 'Anggaran Imunisasi Anak';
+$lang['stunting_anak_terapi_gizi'] = 'Terapi Gizi';
+$lang['stunting_anak_terapi_gizi_anggaran'] = 'Anggaran Terapi Gizi';
+$lang['stunting_anak_bpjs_stunting'] = 'BPJS Stunting';
+$lang['stunting_anak_bpjs_stunting_anggaran'] = 'Anggaran BPJS Stunting';
+$lang['stunting_anak_bantuan_sembako'] = 'Bantuan Sembako';
+$lang['stunting_anak_bantuan_sembako_anggaran'] = 'Anggaran Bantuan Sembako';
+$lang['stunting_anak_dahsyat'] = 'Dahsyat';
+$lang['stunting_anak_dahsyat_anggaran'] = 'Anggaran Dahsyat';
+$lang['stunting_anak_rtlh'] = 'RTLH';
+$lang['stunting_anak_rtlh_anggaran'] = 'Anggaran RTLH';
+$lang['stunting_anak_dlh'] = 'DLH';
+$lang['stunting_anak_dlh_anggaran'] = 'Anggaran DLH';
+$lang['stunting_anak_akses_pangan'] = 'Akses Pangan / UMKM Lokal';
+$lang['stunting_anak_akses_pangan_anggaran'] = 'Anggaran Akses Pangan / UMKM Lokal';
+$lang['stunting_anak_mitra_lain'] = 'Mitra Lain';
+$lang['stunting_anak_user_created'] = 'Stunting Anak User Created';
+$lang['stunting_anak_created_at'] = 'Stunting Anak Created At';
+$lang['stunting_anak_user_updated'] = 'Stunting Anak User Updated';
+$lang['stunting_anak_update_at'] = 'Stunting Anak Update At';

@@ -1582,6 +1582,36 @@ if (!function_exists('dateOfBirth')) {
 }
 
 
+if (!function_exists('namaBulan')) {
+	function namaBulan($date) {
+		if (strlen($date) > 1) {
+			$bln = $date;
+		}else{
+			$bln = '0'.$date;
+		}
+
+		$namaBulan = [
+			'01' => 'Januari',
+			'02' => 'Februari',
+			'03' => 'Maret',
+			'04' => 'April',
+			'05' => 'Mei',
+			'06' => 'Juni',
+			'07' => 'Juli',
+			'08' => 'Agustus',
+			'09' => 'September',
+			'10' => 'Oktober',
+			'11' => 'November',
+			'12' => 'Desember',
+		];
+
+		$bulan = $namaBulan[$bln];
+
+		return $bulan;
+	}
+}
+
+
 if (!function_exists('kode_acak')) {
 	function kode_acak() {
 		return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
