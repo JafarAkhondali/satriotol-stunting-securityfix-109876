@@ -109,11 +109,15 @@ class Model_data_asupan_gizi_stunting extends MY_Model {
     }
 
     public function filter_avaiable() {
-
-        if (!$this->aauth->is_admin()) {
-            $this->db->where($this->table_name.'.asupan_gizi_user_created', get_user_data('id'));
-        $this->db->where($this->table_name.'.asupan_gizi_user_updated', get_user_data('id'));
-        }
+		if (!$this->aauth->is_admin() && !$this->aauth->is_member('7')) {
+			if ($this->aauth->is_member('8')) {
+				$this->db->where('puskesmas_opd_id', $this->session->userdata('opd_id'));
+			}else if ($this->aauth->is_member('9')) {
+				$this->db->where('kelurahan_id', $this->session->userdata('opd_id'));
+			}else if ($this->aauth->is_member('10')) {
+				$this->db->where('kecamatan_id', $this->session->userdata('opd_id'));
+			}
+		}
 
         return $this;
     }

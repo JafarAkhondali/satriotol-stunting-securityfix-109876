@@ -106,12 +106,12 @@ class Model_data_anak extends MY_Model {
 	}
 
 	public function filter_avaiable() {
-		if (!$this->aauth->is_admin()) {
-			if ($this->aauth->is_member('7')) {
+		if (!$this->aauth->is_admin() && !$this->aauth->is_member('7')) {
+			if ($this->aauth->is_member('8')) {
 				$this->db->where('puskesmas_opd_id', $this->session->userdata('opd_id'));
-			}else if ($this->aauth->is_member('8')) {
-				$this->db->where('kelurahan_id', $this->session->userdata('opd_id'));
 			}else if ($this->aauth->is_member('9')) {
+				$this->db->where('kelurahan_id', $this->session->userdata('opd_id'));
+			}else if ($this->aauth->is_member('10')) {
 				$this->db->where('kecamatan_id', $this->session->userdata('opd_id'));
 			}
 		}

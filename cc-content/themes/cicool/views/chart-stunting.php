@@ -70,6 +70,12 @@
 
 	var colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
 
+	total_jenkel = 0;
+
+	for (i = 0; i < data_jenkel.length; i++) {
+		total_jenkel += data_jenkel[i].y;
+	}
+
 	Highcharts.chart('chart-jenkel', {
 		colors: ['#001EFF', '#F000FF'],
 		chart: {
@@ -139,12 +145,12 @@
 				text: null
 			},
 			accessibility: {
-				description: 'Countries'
+				description: 'Data stunting berdasarkan kategori umur'
 			}
 		},
 		yAxis: {
 			title: {
-				text: 'Jumlah'
+				text: 'Total data stunting ('+total_jenkel+')'
 			},
 			labels: {
 				overflow: 'justify'
@@ -205,12 +211,12 @@
 				text: null
 			},
 			accessibility: {
-				description: 'Countries'
+				description: 'Data stunting berdasarkan kategori kecamatan'
 			}
 		},
 		yAxis: {
 			title: {
-				text: 'Jumlah'
+				text: 'Total data stunting ('+total_jenkel+')'
 			},
 			labels: {
 				overflow: 'justify'
@@ -262,15 +268,19 @@
 			text: ''
 		},
 		credits: {
-			text: 'Data Stunting Pemerintah Kota Semarang',
-			href: 'http://119.2.50.170:9095/dashboardNew/index.php',
+			text: 'Sumber Data : Data Stunting dari Dinas Kesehatan Kota Semarang <?= date('Y');?>',
+			href: 'http://119.2.50.170:9095/dashboardNew/index.php/home/stunting?bulan=06&tahun=2023',
+			style: {
+				color: '#6e6e6e',
+				fontSize: 14,
+			},
 		},
 		xAxis: {
 			type: 'category',
 		},
 		yAxis: {
 			title: {
-				text: 'Total Data Stunting'
+				text: 'Total data stunting ('+total_jenkel+')'
 			}
 		},
 		legend: {
