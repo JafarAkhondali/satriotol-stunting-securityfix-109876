@@ -101,7 +101,7 @@
 					is_allowed('data_stunting_anak_add', function() use ($data_stunting_anak) {
 						$query = db_get_all_data('data_stunting_anak', ['stunting_anak_anak_id' => $data_stunting_anak->anak_id]);
 
-						if (count($query) == 0) {
+						// if (count($query) == 0) {
 				?>
 				<div class="box-header">
 					<div class="pull-right">
@@ -110,9 +110,7 @@
 					</div>
 				</div>
 				<?php
-						}
-				?>
-				<?php
+						// }
 					});
 				?>
 				<div class="box-body">

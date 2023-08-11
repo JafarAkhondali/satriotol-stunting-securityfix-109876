@@ -87,8 +87,10 @@
 			<div class="box box-danger">
 				<div class="box-header">
 					<h3 class="box-title">Detail Perkembangan Anak</h3>
+					<?php is_allowed('perkembangan_anak_add', function(){?>
 					<a class="btn btn-flat btn-primary btn-sm pull-right" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('detail_perkembangan_anak')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/perkembangan_anak/add_perkembangan?id=').$data_perkembangan_anak->anak_id; ?>">
 						<i class="fa fa-plus-square-o"></i> <?= cclang('add_new_button', [cclang('detail_perkembangan_anak')]); ?></a>
+					<?php }) ?>
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
