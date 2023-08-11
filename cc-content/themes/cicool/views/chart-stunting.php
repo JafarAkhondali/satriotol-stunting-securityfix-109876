@@ -43,54 +43,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row">
-				<div class="col-md-12">
-					<div class="box box-danger">
-						<div class="box-header with-border">
-							<h3 class="box-title">Data Stunting balita berdasarkan Jenis Kelamin</h3>
-						</div>
-						<div class="box-body chart-responsive">
-							<div class="chart" id="chart-jenkel"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row" style="margin-top: 30px;">
-				<div class="col-md-12">
-					<div class="box box-success">
-						<div class="box-header with-border">
-							<h3 class="box-title">Data Stunting Balita berdasarkan Umur</h3>
-						</div>
-						<div class="box-body chart-responsive">
-							<div class="chart" id="chart-balita" style="height: 300px;"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12" style="margin-top: 30px;">
-					<div class="box box-success">
-						<div class="box-header with-border">
-							<h3 class="box-title">Data Stunting Balita berdasarkan Kecamatan</h3>
-						</div>
-						<div class="box-body chart-responsive">
-							<div class="chart" id="chart-kecamatan" style="height: 300px;"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12" style="margin-top: 30px;">
-					<div class="box box-success">
-						<div class="box-header with-border">
-							<h3 class="box-title">Data Stunting Balita berdasarkan Kelurahan</h3>
-						</div>
-						<div class="box-body chart-responsive">
-							<div class="chart" id="chart-kelurahan"></div>
-						</div>
-					</div>
-				</div>
-			</div> -->
         </div>
     </section>
 </main>
@@ -98,16 +50,11 @@
 
 
 <script src="<?= BASE_ASSET; ?>admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="<?= BASE_ASSET; ?>admin-lte/plugins/morris/morris.min.js"></script> -->
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-<!-- <script type="text/javascript" src="<?php echo base_url();?>assets_stunting/js/highcharts.js"></script> -->
 
 <script type="text/javascript">
 	var data_jenkel 		= <?= json_encode($stunting_jenkel, JSON_NUMERIC_CHECK);?>;
@@ -117,55 +64,11 @@
 	var nama_kecamatan 		= <?= json_encode($nama_kecamatan, JSON_NUMERIC_CHECK);?>;
 	var male_kecamatan 		= <?= json_encode($male_kecamatan, JSON_NUMERIC_CHECK);?>;
 	var female_kecamatan 	= <?= json_encode($female_kecamatan, JSON_NUMERIC_CHECK);?>;
-	// var data_kelurahan 	= <?//= json_encode($stunting_kelurahan, JSON_NUMERIC_CHECK);?>;
 
 	var statistik_kecamatan = <?= json_encode($data_stunting_kecamatan, JSON_NUMERIC_CHECK );?>;
 	var statistik_kelurahan = <?= json_encode($data_stunting_kelurahan, JSON_NUMERIC_CHECK );?>;
 
 	var colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
-
-	/* var donut = new Morris.Donut({
-		element: 'chart-jenkel',
-		resize: true,
-		colors: ["#3c8dbc", "#f56954"],
-		data: data_jenkel,
-		hideHover: 'auto'
-	}); */
-	
-	/* var bar = new Morris.Bar({
-		element: 'chart-balita',
-		resize: true,
-		data: data_umur,
-		barColors: ['#00a65a', '#f56954'],
-		xkey: 'label',
-		ykeys: ['male', 'female'],
-		labels: ['Laki-Laki', 'Perempuan'],
-		hideHover: 'auto'
-	}); */
-	
-	/* var bar = new Morris.Bar({
-		element: 'chart-kecamatan',
-		resize: true,
-		data: data_kecamatan,
-		barColors: ['#00a65a', '#f56954'],
-		xkey: 'label',
-		ykeys: ['male', 'female'],
-		labels: ['Laki-Laki', 'Perempuan'],
-		hideHover: 'auto'
-	}); */
-	
-	
-	// var bar = new Morris.Bar({
-	// 	element: 'chart-kelurahan',
-	// 	// resize: true,
-	// 	data: data_kelurahan,
-	// 	barColors: ['#00a65a', '#f56954'],
-	// 	xkey: 'label',
-	// 	ykeys: ['male', 'female'],
-	// 	labels: ['Laki-Laki', 'Perempuan'],
-	// 	hideHover: 'auto',
-	// 	stacked: true
-	// });
 
 	Highcharts.chart('chart-jenkel', {
 		colors: ['#001EFF', '#F000FF'],
@@ -176,7 +79,7 @@
 			type: 'pie',
 		},
 		title: {
-			text: 'Data Stunting berdasarkan Jenis Kelamin',
+			text: 'Data Stunting berdasarkan Jenis Kelamin (Tahun <?= date('Y');?>)',
 			align: 'left',
 		},
 		credits: {
@@ -219,7 +122,7 @@
 			height: 500,
 		},
 		title: {
-			text: 'Data Stunting berdasarkan Umur',
+			text: 'Data Stunting berdasarkan Umur (Tahun <?= date('Y');?>)',
 			align: 'left',
 		},
 		credits: {
@@ -285,7 +188,7 @@
 			height: 600,
 		},
 		title: {
-			text: 'Data Stunting berdasarkan Jenis Kelamin per Kecamatan',
+			text: 'Data Stunting berdasarkan Jenis Kelamin per Kecamatan (Tahun <?= date('Y');?>)',
 			align: 'left',
 		},
 		credits: {
@@ -334,7 +237,6 @@
 				name: 'Laki-Laki',
 				colorByPoint: true,
 				data: male_kecamatan,
-				// borderColor: '#999999'
 			},
 			{
 				name: 'Perempuan',
@@ -353,7 +255,7 @@
 		},
 		title: {
 			align: 'left',
-			text: 'Data Stunting Pemerintah Kota Semarang <?= date('Y');?>'
+			text: 'Data Stunting Pemerintah Kota Semarang (Tahun <?= date('Y');?>)'
 		},
 		subtitle: {
 			align: 'left',

@@ -409,15 +409,15 @@ class Web extends Front {
 		$query_stunting_kelurahan = $this->model_web->query_data_stunting_kelurahan()->result();
 
 		for ($i=0; $i < count($stunting_jenkel) ; $i++) {
-			if ($stunting_jenkel[$i]['jenis_kel'] == 'L') {
+			if ($stunting_jenkel[$i]['anak_jenkel'] == '1') {
 				$jenkel = 'Laki-Laki';
-			}elseif ($stunting_jenkel[$i]['jenis_kel'] == 'P') {
+			}elseif ($stunting_jenkel[$i]['anak_jenkel'] == '2') {
 				$jenkel = 'Perempuan';
 			}
 
 			$chart_jenkel[] = [
-				'name' => $jenkel,
-				'y' => $stunting_jenkel[$i]['total'],
+				'name' 	=> $jenkel,
+				'y' 	=> $stunting_jenkel[$i]['total'],
 			];
 		}
 
@@ -427,10 +427,7 @@ class Web extends Front {
 			$stunting_umur = $this->model_web->query_stuntingByAge($i + 1)->result();
 
 			foreach($stunting_umur as $item){
-				// $male[$i] 		= 0;
-				// $femalemale[$i] = 0;
-
-				if($item->jenis_kel == "L"){
+				if($item->anak_jenkel == "1"){
 					$male_umur[$i] 	= $item->total;
 				}else {
 					$female_umur[$i] = $item->total;
@@ -444,9 +441,9 @@ class Web extends Front {
 			$stunting_kecamatan = $this->model_web->query_stuntingByWilayah($data_kecamatan[$i]->kecamatan_id, 'kecamatan')->result();
 
 			foreach ($stunting_kecamatan as $item) {
-				if($item->jenis_kel == "L"){
+				if($item->anak_jenkel == "1"){
 					$male_kecamatan[$i] = $item->total;
-				}else if($item->jenis_kel == "P"){
+				}else if($item->anak_jenkel == "2"){
 					$female_kecamatan[$i] = $item->total;
 				}
 			}
@@ -455,13 +452,13 @@ class Web extends Front {
 		for ($i=0; $i < count($query_stunting_kecamatan); $i++) {
 			$data_stunting_kecamatan[$i]['name'] 		= $query_stunting_kecamatan[$i]->kecamatan_nama;
 			$data_stunting_kecamatan[$i]['y'] 			= $query_stunting_kecamatan[$i]->total;
-			$data_stunting_kecamatan[$i]['drilldown'] 	= $query_stunting_kecamatan[$i]->kecamatan;
+			$data_stunting_kecamatan[$i]['drilldown'] 	= $query_stunting_kecamatan[$i]->kecamatan_id;
 
-			$query_data_stunting_kelurahan[$i] = $this->model_web->query_data_stunting_kelurahan($query_stunting_kecamatan[$i]->kecamatan)->result();
+			$query_data_stunting_kelurahan[$i] = $this->model_web->query_data_stunting_kelurahan($query_stunting_kecamatan[$i]->kecamatan_id)->result();
 
 			if (count($query_data_stunting_kelurahan[$i]) > 0) {
 				$data_stunting_kelurahan[$i]['name'] 	= $query_stunting_kecamatan[$i]->kecamatan_nama;
-				$data_stunting_kelurahan[$i]['id'] 		= $query_stunting_kecamatan[$i]->kecamatan;
+				$data_stunting_kelurahan[$i]['id'] 		= $query_stunting_kecamatan[$i]->kecamatan_id;
 
 				for ($j=0; $j < count($query_data_stunting_kelurahan[$i]); $j++) {
 					$kelurahan_id[$i][$j] 	= $query_data_stunting_kelurahan[$i][$j]->kelurahan_id;
@@ -480,16 +477,13 @@ class Web extends Front {
 			$kelurahan_id[$i] = $query_stunting_kelurahan[$i]->kelurahan_id;
 			$query_kelurahan_by_jenkel[$i] = $this->model_web->query_data_stunting_kelurahan_by_jenkel($query_stunting_kelurahan[$i]->kelurahan_id)->result();
 
-			// echo $this->db->last_query();
-			// exit;
-
 			for ($j=0; $j < count($query_kelurahan_by_jenkel[$i]); $j++) {
 				$data_stunting_kelurahan_by_jenkel[$i]['name'] 	= 'Jenis Kelamin';
 				$data_stunting_kelurahan_by_jenkel[$i]['id'] 	= str_replace(' ', '', $query_stunting_kelurahan[$i]->kelurahan_nama).''.$kelurahan_id[$i];
 
-				if($query_kelurahan_by_jenkel[$i][$j]->jenis_kel == "L"){
+				if($query_kelurahan_by_jenkel[$i][$j]->anak_jenkel == "1"){
 					$data_stunting_kelurahan_by_jenkel[$i]['data'][$j] = ['Laki-Laki', $query_kelurahan_by_jenkel[$i][$j]->total];
-				}else if($query_kelurahan_by_jenkel[$i][$j]->jenis_kel == "P"){
+				}else if($query_kelurahan_by_jenkel[$i][$j]->anak_jenkel == "2"){
 					$data_stunting_kelurahan_by_jenkel[$i]['data'][$j] = ['Perempuan', $query_kelurahan_by_jenkel[$i][$j]->total];
 				}
 			}
@@ -508,17 +502,12 @@ class Web extends Front {
 			'kategori_umur' 			=> $kategori_umur,
 			'umur_male' 				=> $male_umur,
 			'umur_female' 				=> $female_umur,
-			// 'stunting_umur' 			=> $chart_umur,
 			'nama_kecamatan' 			=> $nama_kecamatan,
 			'male_kecamatan' 			=> $male_kecamatan,
 			'female_kecamatan' 			=> $female_kecamatan,
-			// 'stunting_kecamatan' 		=> $chart_kecamatan,
 			'data_stunting_kecamatan' 	=> $data_stunting_kecamatan,
 			'data_stunting_kelurahan' 	=> $merge_kelurahan,
 		];
-
-		// echo json_encode($merge_kelurahan);
-		// exit;
 
 		$this->template->build('chart-stunting', $data);
 	}

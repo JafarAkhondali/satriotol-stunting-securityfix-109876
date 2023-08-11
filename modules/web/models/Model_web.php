@@ -117,85 +117,82 @@ class Model_web extends MY_Model {
 	}
 
 	public function query_stuntingByAge($age = NULL){
-		// select count(id_data_stunting) as total, TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) as umur, jenis_kel from data_stunting
-		// where TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) = 2 AND tanggal_lahir != '0000-00-00'
-		// GROUP BY jenis_kel
-		$this->db->select("count(id_data_stunting) as total, TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) as umur, jenis_kel");
+		$this->db->select("count( anak_id ) AS total, TIMESTAMPDIFF(YEAR, anak_tanggal_lahir, NOW()) AS umur, anak_jenkel");
 
 		if ($age != NULL) {
 			if($age == 1){
-				$this->db->where("TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) <= 1");
+				$this->db->where("TIMESTAMPDIFF(YEAR, anak_tanggal_lahir, NOW()) <= 1");
 			}else {
-				$this->db->where("TIMESTAMPDIFF(YEAR,tanggal_lahir,NOW()) = $age");
+				$this->db->where("TIMESTAMPDIFF(YEAR,anak_tanggal_lahir,NOW()) = $age");
 			}
 		}
 
-		$this->db->where("tanggal_lahir != '0000-00-00'");
-		$this->db->where("jenis_kel != ''");
+		$this->db->where("anak_tanggal_lahir != '0000-00-00'");
+		$this->db->where("anak_jenkel != ''");
 
-		$query = $this->db->group_by("jenis_kel")->get('data_stunting');
+		$query = $this->db->group_by("anak_jenkel")->get('data_anak');
 
 		return $query;
 	}
 
 	public function query_stuntingByWilayah($id, $param){
-		$this->db->select("jenis_kel, count(id_data_stunting) as total");
+		$this->db->select("anak_jenkel, count(anak_id) as total");
 
 		if ($param == 'kecamatan') {
-			$this->db->select('kecamatan, kecamatan_nama');
-			$this->db->where("kecamatan", $id);
-			$this->db->join('kecamatans', 'kecamatans.kecamatan_id = data_stunting.kecamatan', 'LEFT');
+			$this->db->select('kecamatan_id, kecamatan_nama');
+			$this->db->where("kecamatan_id", $id);
+			$this->db->join('kecamatans', 'kecamatan_id = anak_kecamatan_id', 'LEFT');
 			$this->db->order_by('kecamatan_nama');
 		}else if ($param == 'kelurahan') {
-			$this->db->select('kelurahan, kelurahan_nama');
-			$this->db->where('kelurahan', $id);
-			$this->db->join('kelurahans', 'kelurahans.kelurahan_id = data_stunting.kelurahan', 'LEFT');
+			$this->db->select('kelurahan_id, kelurahan_nama');
+			$this->db->where('kelurahan_id', $id);
+			$this->db->join('kelurahans', 'kelurahan_id = anak_kelurahan_id', 'LEFT');
 			$this->db->order_by('kelurahan_nama');
 		}
 
-		$this->db->where("TIMESTAMPDIFF(YEAR,`tanggal_lahir`,NOW()) <= 5");
-		$this->db->where("tanggal_lahir != '0000-00-00'");
+		$this->db->where("TIMESTAMPDIFF(YEAR, anak_tanggal_lahir, NOW()) <= 5");
+		$this->db->where("anak_tanggal_lahir != '0000-00-00'");
 
-		$query = $this->db->group_by("jenis_kel")->get('data_stunting');
+		$query = $this->db->group_by("anak_jenkel")->get('data_anak');
 
 		return $query;
 	}
 
 	public function query_data_stunting_kecamatan() {
-		$this->db->select('kecamatan, kecamatan_nama, count( id_data_stunting ) AS total');
-		$this->db->join('kecamatans', 'kecamatans.kecamatan_id = data_stunting.kecamatan', 'LEFT');
-		$this->db->where("TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) <= 5");
-		$this->db->where("tanggal_lahir != '0000-00-00'");
-		$query = $this->db->group_by('kecamatan')->order_by('kecamatan_nama')->get('data_stunting');
+		$this->db->select('kecamatan_id, kecamatan_nama, count( anak_id ) AS total');
+		$this->db->join('kecamatans', 'kecamatan_id = anak_kecamatan_id', 'LEFT');
+		$this->db->where("TIMESTAMPDIFF(YEAR, anak_tanggal_lahir, NOW()) <= 5");
+		$this->db->where("anak_tanggal_lahir != '0000-00-00'");
+		$query = $this->db->group_by('kecamatan_id')->order_by('kecamatan_nama')->get('data_anak');
 		
 		return $query;
 	}
 
 	public function query_data_stunting_kelurahan($kecamatan = NULL) {
 		if ($kecamatan != NULL) {
-			$this->db->where('kecamatan', $kecamatan);
+			$this->db->where('kec.kecamatan_id', $kecamatan);
 		}
 
-		$this->db->select('kecamatans.kecamatan_id, kecamatans.kecamatan_nama, kelurahans.kelurahan_nama, kelurahan_id, count( id_data_stunting ) AS total');
-		$this->db->join('kecamatans', 'kecamatans.kecamatan_id = data_stunting.kecamatan', 'LEFT');
-		$this->db->join('kelurahans', 'kelurahans.kelurahan_id = data_stunting.kelurahan', 'LEFT');
-		$this->db->where("TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) <= 5");
-		$this->db->where("tanggal_lahir != '0000-00-00'");
-		$query = $this->db->group_by('kelurahan')->order_by('kecamatan_nama, kelurahan_nama')->get('data_stunting');
+		$this->db->select('kec.kecamatan_id AS, kec.kecamatan_nama, kelurahan_nama, kelurahan_id, count( anak_id ) AS total');
+		$this->db->join('kecamatans kec', 'kec.kecamatan_id = anak_kecamatan_id', 'LEFT');
+		$this->db->join('kelurahans', 'kelurahan_id = anak_kelurahan_id', 'LEFT');
+		$this->db->where("TIMESTAMPDIFF(YEAR, anak_tanggal_lahir, NOW()) <= 5");
+		$this->db->where("anak_tanggal_lahir != '0000-00-00'");
+		$query = $this->db->group_by('kelurahan_id')->order_by('kec.kecamatan_nama, kelurahan_nama')->get('data_anak');
 		
 		return $query;
 	}
 
 	public function query_data_stunting_kelurahan_by_jenkel($kelurahan) {
-		$this->db->select('jenis_kel, count( id_data_stunting ) AS total, kelurahan, kelurahan_nama');
-		$this->db->join('kecamatans', 'kecamatans.kecamatan_id = data_stunting.kecamatan', 'LEFT');
-		$this->db->join('kelurahans', 'kelurahans.kelurahan_id = data_stunting.kelurahan', 'LEFT');
-		$this->db->where('kelurahan', $kelurahan);
-		$this->db->where("TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) <= 5");
-		$this->db->group_by('jenis_kel');
-		$query = $this->db->where("tanggal_lahir != '0000-00-00'");
+		$this->db->select('anak_jenkel, count( anak_id) AS total, kelurahan_id, kelurahan_nama');
+		$this->db->join('kecamatans kec', 'kec.kecamatan_id = anak_kecamatan_id', 'LEFT');
+		$this->db->join('kelurahans', 'kelurahan_id = anak_kelurahan_id', 'LEFT');
+		$this->db->where('kelurahan_id', $kelurahan);
+		$this->db->where("TIMESTAMPDIFF(YEAR, anak_tanggal_lahir, NOW()) <= 5");
+		$this->db->group_by('anak_jenkel');
+		$query = $this->db->where("anak_tanggal_lahir != '0000-00-00'");
 		
-		return $query->get('data_stunting');
+		return $query->get('data_anak');
 	}
 
 
