@@ -398,7 +398,7 @@ class Web extends Front {
 	}
 
 	public function data_stunting() {
-		$data_kecamatan 	= $this->db->get('kecamatans')->result();
+		$data_kecamatan 	= $this->db->order_by('kecamatan_nama')->get('kecamatans')->result();
 		$data_kelurahan 	= $this->db->get('kelurahans')->result();
 		
 		$stunting_jenkel 	= $this->model_web->query_stuntingByAge()->result_array();
