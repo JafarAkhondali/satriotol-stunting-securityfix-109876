@@ -127,6 +127,8 @@ class Model_data_intervensi_anak extends MY_Model {
 		$this->db->join('kecamatans', 'kecamatan_id = anak_kecamatan_id', 'LEFT');
 		$this->db->join('kelurahans', 'kelurahan_id = anak_kelurahan_id', 'LEFT');
 		$this->db->join('data_intervensi_anak', 'intervensi_anak_id = anak_id', 'LEFT');
+		$this->db->join('aauth_users penginput', 'penginput.id = intervensi_user_created', 'LEFT');
+		$this->db->join('opd', 'opd.opd_id = penginput.opd_id', 'LEFT');
 
 		return $this;
 	}

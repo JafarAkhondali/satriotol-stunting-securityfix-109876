@@ -541,8 +541,8 @@ class Perkembangan_anak extends Admin {
 			exit;
 		}
 
-		$this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
-		$this->form_validation->set_rules('perkembangan_anak_perkembangan_foto_name[]', 'Foto Kegiatan Perkembangan', 'trim|required');
+		// $this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
+		// $this->form_validation->set_rules('perkembangan_anak_perkembangan_foto_name[]', 'Foto Kegiatan Perkembangan', 'trim|required');
 
 		$id_anak = $this->input->get('anak');
 
@@ -643,8 +643,8 @@ class Perkembangan_anak extends Admin {
 			exit;
 		}
 
-		$this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
-		$this->form_validation->set_rules('perkembangan_anak_perkembangan_foto_name[]', 'Foto Kegiatan Perkembangan', 'trim|required');
+		// $this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
+		// $this->form_validation->set_rules('perkembangan_anak_perkembangan_foto_name[]', 'Foto Kegiatan Perkembangan', 'trim|required');
 
 		$id_anak = db_get_all_data('perkembangan_anak', ['perkembangan_id' => $id])[0]->perkembangan_anak_id;
 

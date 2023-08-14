@@ -189,7 +189,7 @@
 			},
 			function (isConfirm) {
 				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/data_intervensi_anak';
+					window.location.href = BASE_URL + 'administrator/data_intervensi_anak/view_intervensi?anak=<?=$id_anak;?>';
 				}
 			});
 

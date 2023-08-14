@@ -83,12 +83,6 @@ class Data_intervensi_anak extends Admin {
 		
 
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
-		
-
-		$this->form_validation->set_rules('intervensi_kondisi', 'Kondisi', 'trim|required');
-		
-
-		$this->form_validation->set_rules('intervensi_nama_ortu_asuh', 'Nama Orang Tua Asuh', 'trim|required|max_length[80]');
 
 		$bulan_tahun = explode('-', $this->input->post('intervensi_bulan'));
 
@@ -205,12 +199,6 @@ class Data_intervensi_anak extends Admin {
 		
 
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
-		
-
-		$this->form_validation->set_rules('intervensi_kondisi', 'Kondisi', 'trim|required');
-		
-
-		$this->form_validation->set_rules('intervensi_nama_ortu_asuh', 'Nama Orang Tua Asuh', 'trim|required|max_length[80]');
 		
 
 		
@@ -422,7 +410,10 @@ class Data_intervensi_anak extends Admin {
 		$id_anak = $this->input->get('anak');
 
 		$this->model_data_intervensi_anak->join_intervensi()->filter_avaiable();
-		$this->data['data_intervensi_anak'] = $this->db->where('anak_id', $id_anak)->get('data_anak')->row();
+		$query_data = $this->db->where('anak_id', $id_anak)->get('data_anak');
+
+		$this->data['data_intervensi_anak'] 	= $query_data->row();
+		$this->data['query_intervensi_anak'] 	= $query_data->result();
 
 		$this->template->title('Data Intervensi Anak Detail');
 		$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_view', $this->data);
@@ -453,8 +444,6 @@ class Data_intervensi_anak extends Admin {
 		$this->form_validation->set_rules('intervensi_kelurahan_id', 'Kelurahan', 'trim|required');
 		$this->form_validation->set_rules('intervensi_bulan', 'Bulan', 'trim|required');
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
-		$this->form_validation->set_rules('intervensi_kondisi', 'Kondisi', 'trim|required');
-		$this->form_validation->set_rules('intervensi_nama_ortu_asuh', 'Nama Orang Tua Asuh', 'trim|required|max_length[80]');
 
 		$bulan_tahun 	= explode('-', $this->input->post('intervensi_bulan'));
 		$id_anak 		= $this->input->get('anak');
@@ -536,8 +525,6 @@ class Data_intervensi_anak extends Admin {
 		$this->form_validation->set_rules('intervensi_kelurahan_id', 'Kelurahan', 'trim|required');
 		$this->form_validation->set_rules('intervensi_bulan', 'Bulan', 'trim|required');
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
-		$this->form_validation->set_rules('intervensi_kondisi', 'Kondisi', 'trim|required');
-		$this->form_validation->set_rules('intervensi_nama_ortu_asuh', 'Nama Orang Tua Asuh', 'trim|required|max_length[80]');
 
 		$bulan_tahun 	= explode('-', $this->input->post('intervensi_bulan'));
 		$id_anak 		= $this->model_data_intervensi_anak->find($id)->intervensi_anak_id;

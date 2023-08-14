@@ -460,7 +460,7 @@ class Data_stunting_anak extends Admin {
 
 		$id_anak = $this->input->get('anak');
 
-		$this->form_validation->set_rules('stunting_anak_dtks', 'DTKS', 'trim|required');
+		/* $this->form_validation->set_rules('stunting_anak_dtks', 'DTKS', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tgl_ukur', 'Tanggal Pengukuran', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_berat_badan', 'Berat Badan Anak', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tinggi_badan', 'Tinggi Badan Anak', 'trim|required');
@@ -496,7 +496,7 @@ class Data_stunting_anak extends Admin {
 		$this->form_validation->set_rules('stunting_anak_dlh', 'DLH', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_dlh_anggaran', 'Anggaran DLH', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_akses_pangan', 'Akses Pangan / UMKM Lokal', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_akses_pangan_anggaran', 'Anggaran Akses Pangan / UMKM Lokal', 'trim|required');
+		$this->form_validation->set_rules('stunting_anak_akses_pangan_anggaran', 'Anggaran Akses Pangan / UMKM Lokal', 'trim|required'); */
 
 		if ($this->form_validation->run()) {
 			$save_data = [
@@ -611,7 +611,7 @@ class Data_stunting_anak extends Admin {
 
 		$id_anak = db_get_all_data('data_stunting_anak', ['stunting_anak_id' => $id])[0]->stunting_anak_anak_id;
 
-		$this->form_validation->set_rules('stunting_anak_dtks', 'DTKS', 'trim|required');
+		/* $this->form_validation->set_rules('stunting_anak_dtks', 'DTKS', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tgl_ukur', 'Tanggal Pengukuran', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_berat_badan', 'Berat Badan Anak', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tinggi_badan', 'Tinggi Badan Anak', 'trim|required');
@@ -648,7 +648,7 @@ class Data_stunting_anak extends Admin {
 		$this->form_validation->set_rules('stunting_anak_dlh', 'DLH', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_dlh_anggaran', 'Anggaran DLH', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_akses_pangan', 'Akses Pangan / UMKM Lokal', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_akses_pangan_anggaran', 'Anggaran Akses Pangan / UMKM Lokal', 'trim|required');
+		$this->form_validation->set_rules('stunting_anak_akses_pangan_anggaran', 'Anggaran Akses Pangan / UMKM Lokal', 'trim|required'); */
 		
 		if ($this->form_validation->run()) {
 			$save_data = [

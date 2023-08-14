@@ -30,6 +30,8 @@ class Data_anak extends Admin {
 		$field 	= $this->input->get('f');
 
 		$this->data['data_anaks'] = $this->model_data_anak->get($filter, $field, $this->limit_page, $offset);
+		// echo $this->db->last_query();
+		// exit;
 		$this->data['data_anak_counts'] = $this->model_data_anak->count_all($filter, $field);
 
 		$config = [

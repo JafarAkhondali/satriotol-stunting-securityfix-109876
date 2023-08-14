@@ -120,12 +120,13 @@
 								<th style="text-align: center; vertical-align: middle;">Tanggal Pasca Intervensi</th>
 								<th style="text-align: center; vertical-align: middle;">Pasca Intervensi</th>
 								<th style="text-align: center; vertical-align: middle;">Keterangan</th>
+								<th style="text-align: center; vertical-align: middle;">Instansi Penginput</th>
 								<th style="text-align: center; vertical-align: middle;">Actions</th>
 							</tr>
 					<?php
 						$no = 1;
-						$query_data_intervnsi = db_get_all_data('data_intervensi_anak', ['intervensi_anak_id' => $data_intervensi_anak->anak_id]);
-						foreach ($query_data_intervnsi as $item) {
+						// $query_data_intervensi = $this->db->where(['intervensi_anak_id' => $data_intervensi_anak->anak_id])->order_by('intervensi_tgl_masuk', 'ASC');
+						foreach ($query_intervensi_anak as $item) {
 					?>
 						<tr>
 							<td><?= $no++;?></td>
@@ -139,6 +140,7 @@
 							<td><?= $item->intervensi_tgl_pasca != '0000-00-00' ? $item->intervensi_tgl_pasca : '';?></td>
 							<td><?= $item->intervensi_pasca;?></td>
 							<td><?= $item->intervensi_keterangan;?></td>
+							<td><?= $item->opd_nama;?></td>
 							<td>
 							<?php is_allowed('data_intervensi_anak_update', function() use ($item){?>
 								<a href="<?= site_url('administrator/data_intervensi_anak/edit_intervensi/' . $item->intervensi_id); ?>" class="btn btn-success btn-sm">
