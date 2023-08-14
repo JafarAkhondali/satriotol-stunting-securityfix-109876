@@ -511,7 +511,10 @@ class Perkembangan_anak extends Admin {
 		$id_anak = $this->input->get('anak');
 
 		$this->model_perkembangan_anak->join_perkembangan_anak()->filter_avaiable();
-		$this->data['data_perkembangan_anak'] = $this->db->where('anak_id', $id_anak)->get('data_anak')->row();
+		$query_perkembangan = $this->db->where('anak_id', $id_anak)->order_by('perkembangan_tgl', 'ASC')->get('data_anak');
+
+		$this->data['data_perkembangan_anak'] 	= $query_perkembangan->row();
+		$this->data['query_perkembangan_anak'] 	= $query_perkembangan->result();
 
 		$nik_anak = '';
 		if ($this->data['data_perkembangan_anak']->anak_nik != null) {
@@ -541,7 +544,7 @@ class Perkembangan_anak extends Admin {
 			exit;
 		}
 
-		// $this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
+		$this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
 		// $this->form_validation->set_rules('perkembangan_anak_perkembangan_foto_name[]', 'Foto Kegiatan Perkembangan', 'trim|required');
 
 		$id_anak = $this->input->get('anak');
@@ -643,7 +646,7 @@ class Perkembangan_anak extends Admin {
 			exit;
 		}
 
-		// $this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
+		$this->form_validation->set_rules('perkembangan_tgl', 'Tanggal Perkembangan', 'trim|required');
 		// $this->form_validation->set_rules('perkembangan_anak_perkembangan_foto_name[]', 'Foto Kegiatan Perkembangan', 'trim|required');
 
 		$id_anak = db_get_all_data('perkembangan_anak', ['perkembangan_id' => $id])[0]->perkembangan_anak_id;

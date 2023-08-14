@@ -103,18 +103,14 @@
 									<th>Foto Kegiatan</th>
 									<th>Indikasi Penyakit</th>
 									<th>Keterangan</th>
+									<th>Instansi Penginput</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 						<?php
-							$conditions = [
-								'perkembangan_anak_id' => $data_perkembangan_anak->anak_id
-							];
-							$data_query = db_get_all_data('perkembangan_anak', $conditions);
-
 							$no = '1';
-							foreach ($data_query as $item) {
+							foreach ($query_perkembangan_anak as $item) {
 						?>
 								<tr>
 									<td><?= $no++;?>.</td>
@@ -141,6 +137,7 @@
 									</td>
 									<td><?= $item->perkembangan_indikasi;?></td>
 									<td><?= $item->perkembangan_keterangan;?></td>
+									<td><?= $item->opd_nama;?></td>
 									<td>
 								<?php is_allowed('perkembangan_anak_view', function() use ($item){?>
 										<a href="<?= site_url('administrator/perkembangan_anak/view_perkembangan_anak?id=' . $item->perkembangan_id); ?>" class="label-default">

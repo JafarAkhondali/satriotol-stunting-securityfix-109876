@@ -410,7 +410,7 @@ class Data_intervensi_anak extends Admin {
 		$id_anak = $this->input->get('anak');
 
 		$this->model_data_intervensi_anak->join_intervensi()->filter_avaiable();
-		$query_data = $this->db->where('anak_id', $id_anak)->get('data_anak');
+		$query_data = $this->db->where('anak_id', $id_anak)->order_by('intervensi_tgl_masuk', 'ASC')->get('data_anak');
 
 		$this->data['data_intervensi_anak'] 	= $query_data->row();
 		$this->data['query_intervensi_anak'] 	= $query_data->result();
