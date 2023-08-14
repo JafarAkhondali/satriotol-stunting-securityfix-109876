@@ -15,7 +15,7 @@ class Dashboard extends Admin {
 	}
 
 	public function index() {
-        if (!$this->aauth->is_admin()) {
+        if (!$this->aauth->is_admin() && !$this->aauth->is_member(7)) {
 		// if (!$this->aauth->is_allowed('dashboard')) {
 			// redirect('/', 'refresh');
 			redirect(base_url().'administrator/user/profile', 'refresh');
