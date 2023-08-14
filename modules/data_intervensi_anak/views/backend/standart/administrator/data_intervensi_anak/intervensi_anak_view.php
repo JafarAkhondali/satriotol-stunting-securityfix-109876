@@ -97,7 +97,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-danger">
-			<?php is_allowed('data_intervensi_anak_add', function(){?>
+			<?php is_allowed('data_intervensi_anak_add', function() use ($data_intervensi_anak){?>
 				<div class="box-header">
 					<div class="pull-right">
 						<a class="btn btn-flat btn-primary btn-sm" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('data_intervensi_anak')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/data_intervensi_anak/add_intervensi?anak='.$data_intervensi_anak->anak_id); ?>">
