@@ -23,10 +23,10 @@ class Dashboard extends Admin {
 			// }
 			// $data = [];
 			// $this->render('backend/standart/dashboard', $data);
-		}else{
-			$this->data = [];
-			$this->render('backend/standart/administrator/dashboard', $this->data);
+		// }else{
 		}
+		$this->data = [];
+		$this->render('backend/standart/administrator/dashboard', $this->data);
 	}
 
 	public function chart() {
