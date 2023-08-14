@@ -32,9 +32,6 @@ class Data_anak extends Admin {
 		$this->data['data_anaks'] = $this->model_data_anak->get($filter, $field, $this->limit_page, $offset);
 		$this->data['data_anak_counts'] = $this->model_data_anak->count_all($filter, $field);
 
-		// echo $this->db->last_query();
-		// exit;
-
 		$config = [
 			'base_url'     => 'administrator/data_anak/index/',
 			'total_rows'   => $this->data['data_anak_counts'],
@@ -482,7 +479,6 @@ class Data_anak extends Admin {
 		$results = db_get_all_data('kelurahans', ['kecamatan_id' => $id]);
 		$this->response($results);	
 	}
-
 	
 }
 

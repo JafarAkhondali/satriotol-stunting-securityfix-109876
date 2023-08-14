@@ -88,6 +88,7 @@
 									<thead>
 										<tr class="">
 											<th><input type="checkbox" class="flat-red toltip" id="check_all" name="check_all" title="check all"></th>
+											<th>No.</th>
 											<th data-field="anak_puskesmas_id" data-sort="1" data-primary-key="0"><?= cclang('anak_puskesmas_id') ?></th>
 											<th data-field="anak_kecamatan_id" data-sort="1" data-primary-key="0"><?= cclang('anak_kecamatan_id') ?></th>
 											<th data-field="anak_kelurahan_id" data-sort="1" data-primary-key="0"><?= cclang('anak_kelurahan_id') ?></th>
@@ -103,12 +104,14 @@
 									</thead>
 									<tbody id="tbody_data_anak">
 									<?php
+										$no = 1;
 										foreach($data_anaks as $data_anak):
 									?>
 										<tr>
 											<td width="5">
 												<input type="checkbox" class="flat-red check" name="id[]" value="<?= $data_anak->anak_id; ?>">
 											</td>
+											<td><?= $no++;?></td>
 											<td>PUSKESMAS <?= strtoupper($data_anak->puskesmas_puskesmas_nama);?></td>
 											<td><?= strtoupper($data_anak->kecamatans_kecamatan_nama);?></td>
 											<td><?= strtoupper($data_anak->kelurahans_kelurahan_nama);?></td>
