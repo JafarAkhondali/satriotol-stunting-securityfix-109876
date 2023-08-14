@@ -53,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-md-12">
 			<div class="box box-success">
 				<div class="box-header with-border">
@@ -69,7 +69,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
@@ -81,8 +81,8 @@
 		resize: true,
 		colors: ["#3c8dbc", "#f56954"],
 		data: [
-			{label: "Laki-Laki", value: 536},
-			{label: "Perempuan", value: 596},
+			{label: "Laki-Laki", value: 629},
+			{label: "Perempuan", value: 640},
 		],
 		hideHover: 'auto'
 	});
@@ -91,11 +91,11 @@
 		element: 'chart-balita',
 		resize: true,
 		data: [
-			{ y: '1 Tahun', a: 100, b: 90 },
-			{ y: '2 Tahun', a: 75, b: 65 },
-			{ y: '3 Tahun', a: 50, b: 40 },
-			{ y: '4 tahun', a: 75, b: 65 },
-			{ y: '5 tahun', a: 50, b: 40 },
+			{ y: '1 Tahun', a: 144, b: 95 },
+			{ y: '2 Tahun', a: 167, b: 149 },
+			{ y: '3 Tahun', a: 175, b: 210 },
+			{ y: '4 tahun', a: 135, b: 167 },
+			{ y: '5 tahun', a: 8, b: 19 },
 		],
 		barColors: ['#00a65a', '#f56954'],
 		xkey: 'y',
@@ -108,22 +108,22 @@
 		element: 'chart-kecamatan',
 		resize: true,
 		data: [
-			{ y: 'Semarang Barat', a: 100, b: 90 },
-			{ y: 'Semarang Timur', a: 75, b: 65 },
-			{ y: 'Semarang Tengah', a: 50, b: 40 },
-			{ y: 'Banyumanik', a: 75, b: 65 },
-			{ y: 'Candisari', a: 50, b: 40 },
-			{ y: 'Gajahmungkur', a: 100, b: 90 },
-			{ y: 'Gayamsari', a: 75, b: 65 },
-			{ y: 'Genuk', a: 50, b: 40 },
-			{ y: 'Gunungpati', a: 75, b: 65 },
-			{ y: 'Mijen', a: 50, b: 40 },
-			{ y: 'Ngaliyan', a: 100, b: 90 },
-			{ y: 'Pedurungan', a: 75, b: 65 },
-			{ y: 'Semarang Selatan', a: 50, b: 40 },
-			{ y: 'Semarang Utara', a: 75, b: 65 },
-			{ y: 'Tembalang', a: 50, b: 40 },
-			{ y: 'Tugu', a: 50, b: 40 },
+			{ y: 'Semarang Barat', a: 71, b: 61 },
+			{ y: 'Semarang Timur', a: 43, b: 39 },
+			{ y: 'Semarang Tengah', a: 34, b: 40 },
+			{ y: 'Banyumanik', a: 44, b: 41 },
+			{ y: 'Candisari', a: 21, b: 10 },
+			{ y: 'Gajahmungkur', a: 18, b: 19 },
+			{ y: 'Gayamsari', a: 16, b: 22 },
+			{ y: 'Genuk', a: 19, b: 25 },
+			{ y: 'Gunungpati', a: 40, b: 51 },
+			{ y: 'Mijen', a: 37, b: 39 },
+			{ y: 'Ngaliyan', a: 54, b: 50 },
+			{ y: 'Pedurungan', a: 47, b: 59 },
+			{ y: 'Semarang Selatan', a: 42, b: 40 },
+			{ y: 'Semarang Utara', a: 91, b: 101 },
+			{ y: 'Tembalang', a: 37, b: 32 },
+			{ y: 'Tugu', a: 15, b: 11 },
 		],
 		barColors: ['#00a65a', '#f56954'],
 		xkey: 'y',
