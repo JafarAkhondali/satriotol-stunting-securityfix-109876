@@ -18,11 +18,6 @@ class Data_anak extends Admin {
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
-	public function nyoba() {
-		// echo json_encode($this->model_group->get_user_group_ids());
-		echo json_encode($this->session->all_userdata());
-	}
-
 	/**
 	* show all Data Anaks
 	*

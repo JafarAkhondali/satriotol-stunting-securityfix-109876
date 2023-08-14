@@ -113,9 +113,9 @@ class Model_data_asupan_gizi_stunting extends MY_Model {
 			if ($this->aauth->is_member('8')) {
 				$this->db->where('puskesmas_opd_id', $this->session->userdata('opd_id'));
 			}else if ($this->aauth->is_member('9')) {
-				$this->db->where('kelurahan_id', $this->session->userdata('opd_id'));
+				$this->db->where('kelurahan_opd_id', $this->session->userdata('opd_id'));
 			}else if ($this->aauth->is_member('10')) {
-				$this->db->where('kecamatan_id', $this->session->userdata('opd_id'));
+				$this->db->where('kecamatan_opd_id_id', $this->session->userdata('opd_id'));
 			}
 		}
 
