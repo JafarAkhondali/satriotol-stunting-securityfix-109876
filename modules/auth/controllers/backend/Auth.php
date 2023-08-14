@@ -8,11 +8,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *| For authentication
  *|
  */
-class Auth extends Admin
-{
-
-	public function __construct()
-	{
+class Auth extends Admin {
+	public function __construct() {
 		parent::__construct();
 	}
 
@@ -23,7 +20,11 @@ class Auth extends Admin
 	public function login() {
 		if ($this->aauth->is_loggedin()) {
 			if (!$this->aauth->is_admin()) {
-				redirect('/administrator/user/profile', 'refresh');
+				if (!$this->aauth->is_allowed('dashboard')) {
+					redirect('/administrator/user/profile', 'refresh');
+				}else{
+					redirect('/administrator/dashboard', 'refresh');
+				}
 			}else{
 				redirect('/administrator/dashboard', 'refresh');
 			}
