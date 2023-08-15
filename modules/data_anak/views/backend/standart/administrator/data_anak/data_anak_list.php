@@ -97,6 +97,7 @@
 											<th data-field="anak_nama" data-sort="1" data-primary-key="0"><?= cclang('anak_nama') ?></th>
 											<th data-field="anak_jenkel" data-sort="1" data-primary-key="0"><?= cclang('anak_jenkel') ?></th>
 											<th data-field="anak_tanggal_lahir" data-sort="1" data-primary-key="0"><?= cclang('anak_tanggal_lahir') ?></th>
+											<th>Umur</th>
 											<th data-field="anak_alamat" data-sort="1" data-primary-key="0"><?= cclang('anak_alamat') ?></th>
 											<th data-field="anak_nama_ibu" data-sort="1" data-primary-key="0"><?= cclang('anak_nama_ibu') ?></th>
 											<th>Action</th>
@@ -120,6 +121,7 @@
 											<td><span class="list_group-anak_nama"><?= strtoupper(_ent($data_anak->anak_nama)); ?></span></td>
 											<td><span class="list_group-anak_jenkel"><?= _ent($data_anak->anak_jenkel) == '1' ? 'Laki-Laki' : 'Perempuan'; ?></span></td>
 											<td><span class="list_group-anak_tanggal_lahir"><?= _ent($data_anak->anak_tanggal_lahir); ?></span></td>
+											<td><?= dateOfBirth(_ent($data_anak->anak_tanggal_lahir)); ?></td>
 											<td><span class="list_group-anak_alamat"><?= _ent($data_anak->anak_alamat); ?></span></td>
 											<td><span class="list_group-anak_nama_ibu"><?= _ent($data_anak->anak_nama_ibu); ?></span></td>
 											<td width="200">
