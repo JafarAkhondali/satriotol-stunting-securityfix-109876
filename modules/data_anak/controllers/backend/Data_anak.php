@@ -15,6 +15,9 @@ class Data_anak extends Admin {
 
 		$this->load->model('model_data_anak');
 		$this->load->model('group/model_group');
+		$this->load->model('data_stunting_anak/model_data_stunting_anak');
+		$this->load->model('data_intervensi_anak/model_data_intervensi_anak');
+		$this->load->model('perkembangan_anak/model_perkembangan_anak');
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
@@ -30,8 +33,6 @@ class Data_anak extends Admin {
 		$field 	= $this->input->get('f');
 
 		$this->data['data_anaks'] = $this->model_data_anak->get($filter, $field, $this->limit_page, $offset);
-		// echo $this->db->last_query();
-		// exit;
 		$this->data['data_anak_counts'] = $this->model_data_anak->count_all($filter, $field);
 
 		$config = [
@@ -51,8 +52,7 @@ class Data_anak extends Admin {
 	* Add new data_anaks
 	*
 	*/
-	public function add()
-	{
+	public function add() {
 		$this->is_allowed('data_anak_add');
 
 		$this->template->title('Data Identitas Anak New');
@@ -64,8 +64,7 @@ class Data_anak extends Admin {
 	*
 	* @return JSON
 	*/
-	public function add_save()
-	{
+	public function add_save() {
 		if (!$this->is_allowed('data_anak_add', false)) {
 			echo json_encode([
 				'success' => false,
@@ -73,95 +72,48 @@ class Data_anak extends Admin {
 				]);
 			exit;
 		}
-		
-		
 
 		$this->form_validation->set_rules('anak_puskesmas_id', 'Puskesmas', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_kecamatan_id', 'Kecamatan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_kelurahan_id', 'Kelurahan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_no_kk', 'No KK Anak', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_nik', 'NIK Anak', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_nama', 'Nama Anak', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_jenkel', 'Jenis Kelamin', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_tanggal_lahir', 'Tanggal Lahir Anak', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_alamat', 'Alamat Rumah Anak', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_rt', 'RT', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_rw', 'RW', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_nik_ayah', 'NIK Ayah', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_nama_ayah', 'Nama Ayah', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_nik_ibu', 'NIK Ibu', 'trim|required');
-		
-
 		$this->form_validation->set_rules('anak_nama_ibu', 'Nama Ibu', 'trim|required');
-		
-
-		
 
 		if ($this->form_validation->run()) {
-		
 			$save_data = [
-				'anak_puskesmas_id' => $this->input->post('anak_puskesmas_id'),
-				'anak_kecamatan_id' => $this->input->post('anak_kecamatan_id'),
-				'anak_kelurahan_id' => $this->input->post('anak_kelurahan_id'),
-				'anak_no_kk' => $this->input->post('anak_no_kk'),
-				'anak_nik' => $this->input->post('anak_nik'),
-				'anak_nama' => $this->input->post('anak_nama'),
-				'anak_jenkel' => $this->input->post('anak_jenkel'),
-				'anak_tanggal_lahir' => $this->input->post('anak_tanggal_lahir'),
-				'anak_alamat' => $this->input->post('anak_alamat'),
-				'anak_rt' => $this->input->post('anak_rt'),
-				'anak_rw' => $this->input->post('anak_rw'),
-				'anak_nik_ayah' => $this->input->post('anak_nik_ayah'),
-				'anak_nama_ayah' => $this->input->post('anak_nama_ayah'),
-				'anak_nik_ibu' => $this->input->post('anak_nik_ibu'),
-				'anak_nama_ibu' => $this->input->post('anak_nama_ibu'),
-				'anak_user_created' => get_user_data('id'),				'anak_created_at' => date('Y-m-d H:i:s'),
+				'anak_puskesmas_id' 	=> $this->input->post('anak_puskesmas_id'),
+				'anak_kecamatan_id' 	=> $this->input->post('anak_kecamatan_id'),
+				'anak_kelurahan_id' 	=> $this->input->post('anak_kelurahan_id'),
+				'anak_no_kk' 			=> $this->input->post('anak_no_kk'),
+				'anak_nik' 				=> $this->input->post('anak_nik'),
+				'anak_nama' 			=> $this->input->post('anak_nama'),
+				'anak_jenkel' 			=> $this->input->post('anak_jenkel'),
+				'anak_tanggal_lahir' 	=> $this->input->post('anak_tanggal_lahir'),
+				'anak_alamat' 			=> $this->input->post('anak_alamat'),
+				'anak_rt' 				=> $this->input->post('anak_rt'),
+				'anak_rw' 				=> $this->input->post('anak_rw'),
+				'anak_nik_ayah' 		=> $this->input->post('anak_nik_ayah'),
+				'anak_nama_ayah' 		=> $this->input->post('anak_nama_ayah'),
+				'anak_nik_ibu' 			=> $this->input->post('anak_nik_ibu'),
+				'anak_nama_ibu' 		=> $this->input->post('anak_nama_ibu'),
+				'anak_user_created' 	=> get_user_data('id'),
+				'anak_created_at' 		=> date('Y-m-d H:i:s'),
 			];
 
-			
-			
-//$save_data['_example'] = $this->input->post('_example');
-			
-
-
-
-			
-			
 			$save_data_anak = $id = $this->model_data_anak->store($save_data);
-            
 
 			if ($save_data_anak) {
-				
 				$id = $save_data_anak;
-				
-				
-					
 				
 				if ($this->input->post('save_type') == 'stay') {
 					$this->data['success'] = true;
@@ -204,8 +156,7 @@ class Data_anak extends Admin {
 	*
 	* @var $id String
 	*/
-	public function edit($id)
-	{
+	public function edit($id) {
 		$this->is_allowed('data_anak_update');
 
 		$this->data['data_anak'] = $this->model_data_anak->find($id);
@@ -382,14 +333,31 @@ class Data_anak extends Admin {
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('data_anak_view');
 
 		$this->data['data_anak'] = $this->model_data_anak->join_avaiable()->filter_avaiable()->find($id);
 
 		$this->template->title('Data Identitas Anak Detail');
 		$this->render('backend/standart/administrator/data_anak/data_anak_view', $this->data);
+	}
+
+		/**
+	* View view Data Anaks
+	*
+	* @var $id String
+	*/
+	public function profile_anak() {
+		$this->is_allowed('data_anak_profile');
+
+		$id_anak = $this->input->get('anak');
+
+		$query_data_anak = $this->model_data_anak->join_avaiable()->filter_avaiable()->find($id_anak);
+
+		$this->data['data_anak'] 				= $query_data_anak;
+
+		$this->template->title('Data Profile Anak');
+		$this->render('backend/standart/administrator/data_anak/data_anak_profile', $this->data);
 	}
 	
 	/**

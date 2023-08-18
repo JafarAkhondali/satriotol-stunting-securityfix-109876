@@ -125,6 +125,10 @@
 											<td><span class="list_group-anak_alamat"><?= _ent($data_anak->anak_alamat); ?></span></td>
 											<td><span class="list_group-anak_nama_ibu"><?= _ent($data_anak->anak_nama_ibu); ?></span></td>
 											<td width="200">
+											<?php is_allowed('data_anak_profile', function() use ($data_anak){?>
+												<a href="<?= site_url('administrator/data_anak/profile_anak?anak=' . $data_anak->anak_id); ?>" class="btn btn-sm btn-default"><i class="fa fa-file-text-o"></i>
+													<?= cclang('profile_anak'); ?></a><br/>
+											<?php }) ?>
 											<?php is_allowed('data_anak_stunting', function() use ($data_anak){?>
 												<a href="<?= site_url('administrator/data_stunting_anak/view_stunting?anak=' . $data_anak->anak_id); ?>" class="btn btn-sm btn-danger"><i class="fa fa-file-text-o"></i>
 													<?= cclang('stunting_anak'); ?></a><br/>
