@@ -359,18 +359,59 @@ class Data_anak extends Admin {
 		$this->template->title('Data Profile Anak');
 		$this->render('backend/standart/administrator/data_anak/data_anak_profile', $this->data);
 	}
+
+	public function export_profile() {
+		$this->is_allowed('data_anak_profile_export');
+
+		$id_anak = $this->input->get('anak');
+
+		$query_data_anak 	= $this->model_data_anak->join_avaiable()->filter_avaiable()->find($id_anak);
+		$query_stunting 	= $this->db->where(['stunting_anak_anak_id' => $id_anak])->order_by('stunting_anak_tgl_ukur', 'ASC')->get('data_stunting_anak')->result();
+		$query_intervensi 	= $this->db->select('data_intervensi_anak.*, opd.opd_nama AS nama_instansi_penginput')->where(['intervensi_anak_id' => $id_anak])->join('aauth_users users', 'users.id = intervensi_user_created', 'LEFT')->join('opd', 'opd.opd_id = users.opd_id', 'LEFT')->order_by('intervensi_tgl_masuk', 'ASC')->get('data_intervensi_anak')->result();
+		$query_perkembangan = $this->db->select('perkembangan_anak.*, users.id AS users_id, users.full_name AS users_name, opd.opd_id AS id_opd, opd.opd_nama AS nama_opd')->join('aauth_users users', 'users.id = perkembangan_user_created', 'LEFT')->join('opd', 'opd.opd_id = users.opd_id', 'LEFT')->where(['perkembangan_anak_id' => $id_anak])->order_by('perkembangan_tgl', 'ASC')->get('perkembangan_anak')->result();
+
+		$this->data = [
+			'data_anak' 			=> $query_data_anak,
+			'stunting_anak' 		=> $query_stunting,
+			'intervensi_anak' 		=> $query_intervensi,
+			'perkembangan_anak' 	=> $query_perkembangan,
+		];
+
+		
+		// $this->load->library('HtmlPdf');
+      
+        // $config = array(
+        //     'orientation' 	=> 'L',
+        //     'format' 		=> 'a5',
+        //     'marges' 		=> array(5, 5, 5, 5)
+        // );
+
+        // $this->pdf = new HtmlPdf($config);
+
+		// $this->pdf->pdf->SetCreator('Adobe Acrobat PDF Creator from Garasi');
+		// $this->pdf->pdf->SetAuthor('Akang Adnan');
+		// $this->pdf->pdf->SetSubject('Profile Anak Stunting');
+		// $this->pdf->pdf->SetKeywords('Laporan, Profile, PDF, Profile Anak, Data Stunting, Anak Stunting');
+		
+		// $content = $this->pdf->loadHtmlPdf('backend/standart/administrator/data_anak/data_anak_pdf', $this->data, TRUE);
+		// $this->pdf->writeHTML($content);
+
+		// $this->pdf->pdf->lastPage();
+		// $this->pdf->pdf->SetTitle('Profile Anak');
+		// $this->pdf->pdf->SetDisplayMode('fullpage');
+		// $this->pdf->Output('Profile Anak.pdf', 'D');
+
+		$this->load->view('backend/standart/administrator/data_anak/data_anak_pdf', $this->data);
+	}
 	
 	/**
 	* delete Data Anaks
 	*
 	* @var $id String
 	*/
-	private function _remove($id)
-	{
+	private function _remove($id) {
 		$data_anak = $this->model_data_anak->find($id);
 
-		
-		
 		return $this->model_data_anak->remove($id);
 	}
 	
@@ -404,17 +445,16 @@ class Data_anak extends Admin {
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('data_anak_export');
 
 		$table = $title = 'data_anak';
 		$this->load->library('HtmlPdf');
       
         $config = array(
-            'orientation' => 'p',
-            'format' => 'a4',
-            'marges' => array(5, 5, 5, 5)
+            'orientation' 	=> 'L',
+            'format' 		=> 'A4',
+            'marges' 		=> array(5, 5, 5, 5)
         );
 
         $this->pdf = new HtmlPdf($config);

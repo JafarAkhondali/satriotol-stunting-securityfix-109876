@@ -43,12 +43,12 @@ if (!function_exists('redirect_back')) {
 }
 
 if (!function_exists('db_get_all_data')) {
-	function db_get_all_data($table_name = null, $where = false)
-	{
+	function db_get_all_data($table_name = null, $where = false) {
 		$ci = &get_instance();
 		if ($where) {
 			$ci->db->where($where);
 		}
+
 		$query = $ci->db->get($table_name);
 
 		return $query->result();
@@ -1552,6 +1552,30 @@ if (!function_exists('array_group_by')) {
 		return $result;
 	}
 }
+
+
+if (!function_exists('systemTanggalIndo')) {
+	function systemTanggalIndo($date) {
+		$new_date = explode('-', $date);
+
+		$namaBulan = [
+			'01' => 'Januari',
+			'02' => 'Februari',
+			'03' => 'Maret',
+			'04' => 'April',
+			'05' => 'Mei',
+			'06' => 'Juni',
+			'07' => 'Juli',
+			'08' => 'Agustus',
+			'09' => 'September',
+			'10' => 'Oktober',
+			'11' => 'November',
+			'12' => 'Desember',
+		];
+
+		return $new_date[2].' '.strtoupper($namaBulan[$new_date[1]]).' '.$new_date[0];
+	}
+};
 
 
 if (!function_exists('dateOfBirth')) {
