@@ -91,113 +91,225 @@
 		$stunting_distapang 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $stunting->stunting_anak_anak_id, 'asupan_gizi_opd_id' => '12'])[0];
 		$stunting_diperikanan 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $stunting->stunting_anak_anak_id, 'asupan_gizi_opd_id' => '25'])[0];
 ?>
-				<tr>
-					<th style="text-align: center; vertical-align: middle;" rowspan="3">No.</th>
-					<th style="text-align: center; vertical-align: middle;" rowspan="3">Tanggal Pengukuran</th>
-					<th style="text-align: center; vertical-align: middle;" rowspan="3">DTKS</th>
-					<th style="text-align: center; vertical-align: middle;" rowspan="3">BB Anak</th>
-					<th style="text-align: center; vertical-align: middle;" rowspan="3">TB Anak</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Anak Angkat</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Pengasuh Balita</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Day Care Stunting</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="9">Asupan Gizi (PMT)</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Imunisasi Anak</th>
-				</tr>
-				<tr>
-					<th style="text-align: center; vertical-align: middle;" rowspan="2">Gizi Instansi</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">DKK</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">DISTAPANG</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">DISPERIKANAN</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">CSR</th>
-				</tr>
-				<tr>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-				</tr>
-				<tr>
-					<td align="center"><?= $no++;?></td>
-					<td><?= systemTanggalIndo($stunting->stunting_anak_tgl_ukur);?></td>
-					<td align="center"><?= $stunting->stunting_anak_dtks == 'yes' ? '&#10004;' : '&nbsp;';?></td>
-					<td align="left"><?= $stunting->stunting_anak_berat_badan;?></td>
-					<td align="left"><?= $stunting->stunting_anak_tinggi_badan;?></td>
-					<td align="center"><?= $stunting->stunting_anak_anak_angkat == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_anak_angkat_anggaran != null ? number_format($stunting->stunting_anak_anak_angkat_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_pengasuh_balita == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_pengasuh_balita_anggaran != null ? number_format($stunting->stunting_anak_pengasuh_balita_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_day_care == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_day_care_anggaran != null ? number_format($stunting->stunting_anak_day_care_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_asupan_gizi_pmt == 'yes' ? '&#10004;' : '-';?></td>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">No.</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">Tanggal Pengukuran</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">DTKS</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">BB Anak</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">TB Anak</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Anak Angkat</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Pengasuh Balita</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Day Care Stunting</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="9">Asupan Gizi (PMT)</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Imunisasi Anak</th>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;" rowspan="2">Gizi Instansi</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DKK</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DISTAPANG</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DISPERIKANAN</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">CSR</th>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+		</tr>
+		<tr>
+			<td align="center"><?= $no++;?></td>
+			<td><?= systemTanggalIndo($stunting->stunting_anak_tgl_ukur);?></td>
+			<td align="center"><?= $stunting->stunting_anak_dtks == 'yes' ? '&#10004;' : '&nbsp;';?></td>
+			<td align="left"><?= $stunting->stunting_anak_berat_badan;?></td>
+			<td align="left"><?= $stunting->stunting_anak_tinggi_badan;?></td>
+			<td align="center"><?= $stunting->stunting_anak_anak_angkat == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_anak_angkat_anggaran != null ? number_format($stunting->stunting_anak_anak_angkat_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_pengasuh_balita == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_pengasuh_balita_anggaran != null ? number_format($stunting->stunting_anak_pengasuh_balita_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_day_care == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_day_care_anggaran != null ? number_format($stunting->stunting_anak_day_care_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_asupan_gizi_pmt == 'yes' ? '&#10004;' : '-';?></td>
 
-					<td align="center"><?= $stunting_dkk->asupan_gizi_opd == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting_dkk->asupan_gizi_opd_anggaran != null ? number_format($stunting_dkk->asupan_gizi_opd_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting_distapang->asupan_gizi_opd == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting_distapang->asupan_gizi_opd_anggaran != null ? number_format($stunting_distapang->asupan_gizi_opd_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting_disperikanan->asupan_gizi_opd == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting_disperikanan->asupan_gizi_opd_anggaran != null ? number_format($stunting_disperikanan->asupan_gizi_opd_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting_dkk->asupan_gizi_opd == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting_dkk->asupan_gizi_opd_anggaran != null ? number_format($stunting_dkk->asupan_gizi_opd_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting_distapang->asupan_gizi_opd == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting_distapang->asupan_gizi_opd_anggaran != null ? number_format($stunting_distapang->asupan_gizi_opd_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting_disperikanan->asupan_gizi_opd == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting_disperikanan->asupan_gizi_opd_anggaran != null ? number_format($stunting_disperikanan->asupan_gizi_opd_anggaran, 0, ',', '.') : '-';?></td>
 
-					<td align="center"><?= $stunting->stunting_anak_asupan_gizi_csr == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_asupan_gizi_csr_anggaran != null ? number_format($stunting->stunting_anak_asupan_gizi_csr_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_imunisasi == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_imunisasi_anggaran != null ? number_format($stunting->stunting_anak_imunisasi_anggaran, 0, ',', '.') : '-';?></td>
-				</tr>
-				<tr>
-					<td colspan="7" rowspan="3"></td>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">Terapi Gizi</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">BPJS Stunting</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">Bantuan Sembako</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">Dashyat</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">RTLH</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">DLH</th>
-					<th style="text-align: center; vertical-align: middle;" colspan="2">Akses Pangan / UMKM Lokal</th>
-					<th style="text-align: center; vertical-align: middle;" rowspan="2">Mitra Lain</th>
-				</tr>
-				<tr>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-					<th style="text-align: center; vertical-align: middle;">Status</th>
-					<th style="text-align: center; vertical-align: middle;">Anggaran</th>
-				</tr>
-				<tr>
-					<td align="center"><?= $stunting->stunting_anak_terapi_gizi == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_terapi_gizi_anggaran != null ? number_format($stunting->stunting_anak_terapi_gizi_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_bpjs_stunting == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_bpjs_stunting_anggaran != null ? number_format($stunting->stunting_anak_bpjs_stunting_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_bantuan_sembako == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_bantuan_sembako_anggaran != null ? number_format($stunting->stunting_anak_bantuan_sembako_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_rtlh == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_rtlh_anggaran != null ? number_format($stunting->stunting_anak_rtlh_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_dlh == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_dlh_anggaran != null ? number_format($stunting->stunting_anak_dlh_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_akses_pangan == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_akses_pangan_anggaran != null ? number_format($stunting->stunting_anak_akses_pangan_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="center"><?= $stunting->stunting_anak_akses_pangan == 'yes' ? '&#10004;' : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_akses_pangan_anggaran != null ? number_format($stunting->stunting_anak_akses_pangan_anggaran, 0, ',', '.') : '-';?></td>
-					<td align="right"><?= $stunting->stunting_anak_mitra_lain;?></td>
-				</tr>
+			<td align="center"><?= $stunting->stunting_anak_asupan_gizi_csr == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_asupan_gizi_csr_anggaran != null ? number_format($stunting->stunting_anak_asupan_gizi_csr_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_imunisasi == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_imunisasi_anggaran != null ? number_format($stunting->stunting_anak_imunisasi_anggaran, 0, ',', '.') : '-';?></td>
+		</tr>
+		<tr>
+			<td colspan="7" rowspan="3"></td>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Terapi Gizi</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">BPJS Stunting</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Bantuan Sembako</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Dashyat</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">RTLH</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DLH</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Akses Pangan / UMKM Lokal</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="2">Mitra Lain</th>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+		</tr>
+		<tr>
+			<td align="center"><?= $stunting->stunting_anak_terapi_gizi == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_terapi_gizi_anggaran != null ? number_format($stunting->stunting_anak_terapi_gizi_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_bpjs_stunting == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_bpjs_stunting_anggaran != null ? number_format($stunting->stunting_anak_bpjs_stunting_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_bantuan_sembako == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_bantuan_sembako_anggaran != null ? number_format($stunting->stunting_anak_bantuan_sembako_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_rtlh == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_rtlh_anggaran != null ? number_format($stunting->stunting_anak_rtlh_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_dlh == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_dlh_anggaran != null ? number_format($stunting->stunting_anak_dlh_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_akses_pangan == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_akses_pangan_anggaran != null ? number_format($stunting->stunting_anak_akses_pangan_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="center"><?= $stunting->stunting_anak_akses_pangan == 'yes' ? '&#10004;' : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_akses_pangan_anggaran != null ? number_format($stunting->stunting_anak_akses_pangan_anggaran, 0, ',', '.') : '-';?></td>
+			<td align="right"><?= $stunting->stunting_anak_mitra_lain;?></td>
+		</tr>
+<?php
+	}
+
+	if(count($stunting_anak) == 0){
+?>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">No.</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">Tanggal Pengukuran</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">DTKS</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">BB Anak</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="3">TB Anak</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Anak Angkat</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Pengasuh Balita</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Day Care Stunting</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="9">Asupan Gizi (PMT)</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2" rowspan="2">Imunisasi Anak</th>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;" rowspan="2">Gizi Instansi</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DKK</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DISTAPANG</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DISPERIKANAN</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">CSR</th>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+		</tr>
+		<tr>
+			<td align="center">&nbsp;</td>
+			<td>&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="left">&nbsp;</td>
+			<td align="left">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="7" rowspan="3"></td>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Terapi Gizi</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">BPJS Stunting</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Bantuan Sembako</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Dashyat</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">RTLH</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">DLH</th>
+			<th style="text-align: center; vertical-align: middle;" colspan="2">Akses Pangan / UMKM Lokal</th>
+			<th style="text-align: center; vertical-align: middle;" rowspan="2">Mitra Lain</th>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+			<th style="text-align: center; vertical-align: middle;">Status</th>
+			<th style="text-align: center; vertical-align: middle;">Anggaran</th>
+		</tr>
+		<tr>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="center">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+			<td align="right">&nbsp;</td>
+		</tr>
 <?php
 	}
 ?>
@@ -228,6 +340,19 @@
 			<td><?= $perkembangan->perkembangan_indikasi;?></td>
 			<td><?= $perkembangan->perkembangan_keterangan;?></td>
 			<td><?= $perkembangan->nama_opd;?></td>
+		</tr>
+<?php
+	}
+
+	if(count($perkembangan_anak) == 0){
+?>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 		</tr>
 <?php
 	}
@@ -275,6 +400,37 @@
 			<td><?= $intervensi->intervensi_pasca;?></td>
 			<td><?= $intervensi->intervensi_keterangan;?></td>
 		</tr>
+<?php
+	}
+
+	if (count($intervensi_anak) == 0) {
+?>
+	<tr>
+		<th style="text-align: center; vertical-align: middle;">No.</th>
+		<th style="text-align: center; vertical-align: middle;">Kecamatan</th>
+		<th style="text-align: center; vertical-align: middle;">Kelurahan</th>
+		<th style="text-align: center; vertical-align: middle;">Bulan</th>
+		<th style="text-align: center; vertical-align: middle;">Tanggal Intervensi</th>
+		<th style="text-align: center; vertical-align: middle;">Kondisi</th>
+		<th style="text-align: center; vertical-align: middle;">Nama Orang Tua Asuh</th>
+		<th style="text-align: center; vertical-align: middle;">Instansi Penginput</th>
+		<th style="text-align: center; vertical-align: middle;">Tanggal Pasca Intervensi</th>
+		<th style="text-align: center; vertical-align: middle;">Pasca Intervensi</th>
+		<th style="text-align: center; vertical-align: middle;">Keterangan</th>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
 <?php
 	}
 ?>

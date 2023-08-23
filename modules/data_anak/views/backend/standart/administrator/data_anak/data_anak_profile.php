@@ -381,7 +381,11 @@
 		<div class="col-md-12">
 			<div class="box box-danger">
 				<div class="box-footer">
-					<a class="btn btn-flat btn-default btn_action" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/data_anak/'); ?>">
+					<?php is_allowed('data_anak_profile_export', function() use ($data_anak){?>
+						<a href="<?= site_url('administrator/data_anak/export_profile?anak=' . $data_anak->anak_id); ?>" target="_blank" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i>
+							<?= cclang('export_profile_anak'); ?></a>
+					<?php }) ?>
+					<a class="btn btn-flat btn-default" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/data_anak/'); ?>">
 						<i class="fa fa-undo"></i> <?= cclang('go_list_button', ['Data Anak']); ?></a>
 				</div>
 			</div>
