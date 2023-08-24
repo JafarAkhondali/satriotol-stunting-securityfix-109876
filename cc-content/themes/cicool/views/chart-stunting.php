@@ -30,8 +30,7 @@
 								</div>
 								<div class="tab-pane fade show active" id="kecamatan">
 									<div class="box-body chart-responsive">
-										
-										<div class="row">
+										<!-- <div class="row">
 											<div class="col-md-12">
 												<table class="table table-bordered">
 													<tr>
@@ -82,7 +81,7 @@
 													</tr>
 												</table>
 											</div>
-										</div>
+										</div> -->
 										<div class="row">
 											<div class="col-md-12">
 												<div class="chart" id="chart-kecamatan"></div>
