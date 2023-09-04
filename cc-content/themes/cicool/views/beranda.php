@@ -66,7 +66,7 @@
 	<!-- slider area end -->
 
 
-	<section class="slider__area slider__height-2 include-bg d-flex align-items-center" data-background="<?= base_url();?>assets_stunting/img/slider/2/slider-2-bg.jpg">
+	<section class="slider__area slider__height-2 include-bg d-flex align-items-center pt-75" data-background="<?= base_url();?>assets_stunting/img/slider/2/slider-2-bg.jpg">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-xxl-6 col-lg-6">
