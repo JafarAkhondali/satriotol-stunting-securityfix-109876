@@ -64,27 +64,6 @@
 		</div>
 	</section>
 	<!-- slider area end -->
-	<!-- certificate area start -->
-	<!-- <section class="certificate__area pb-120 pt-120">
-		<div class="container">
-			<div class="certificate__inner grey-bg-9 p-relative">
-				<div class="certificate__thumb">
-					<img src="<?= base_url().'uploads/about/'.$about->about_image;?>" alt="Gambar Kata Pengantar Website Stunting" style="width: 523px;">
-				</div>
-				<div class="row">
-					<div class="col-xxl-6">
-						<div class="certificate__content">
-							<div class="section__title-wrapper mb-10">
-								<h2 class="section__title section__title-44">Kata Pengantar</h2>
-							</div>
-							<p><?php echo $about->about_description; ?></p>
-							<div class="certificate__links d-sm-flex align-items-center"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
 
 
 	<section class="slider__area slider__height-2 include-bg d-flex align-items-center" data-background="<?= base_url();?>assets_stunting/img/slider/2/slider-2-bg.jpg">
@@ -99,7 +78,7 @@
 				<div class="col-xxl-6 col-lg-6">
 					<div class="slider__thumb-2 p-relative">
 						<span class="slider__thumb-mask" style="display: block !important; position: inherit !important; border-radius: 0;">
-							<img src="https://stunting.semarangkota.go.id/uploads/about/20230801091847-2023-08-01about091840.png" alt="Foto Walikota Semarang">
+							<img src="<?= base_url().'uploads/about/'.$about->about_image;?>" alt="Foto Walikota Semarang">
 						</span>
 					</div>
 				</div>
