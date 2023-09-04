@@ -27,7 +27,7 @@
 										<span><a href="<?php echo base_url().'blog/category/'.$blog->category_id;?>"><i class="far fa-bookmark"></i> <?php echo $blog->category_name;?></a></span>
 									</div>
 								</div>
-								<img src="https://via.placeholder.com/760x405.png?text=ehehee" alt="" width="20%">
+								<img src="https://via.placeholder.com/760x405.png?text=No Image" alt="" width="20%">
 							</div>
 				<?php
 					}
