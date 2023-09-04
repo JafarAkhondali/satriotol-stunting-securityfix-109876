@@ -51,7 +51,8 @@
 											<h4><?php echo $about->about_address;?></h4>
 										</li>
 										<li>
-											  <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+											  <!-- Histats.com  (div with counter) -->
+											  <!-- <div id="histats_counter"></div> -->
 												<!-- Histats.com  START  (aync)-->
 												<script type="text/javascript">var _Hasync= _Hasync|| [];
 												_Hasync.push(['Histats.start', '1,4789278,4,2048,280,25,00001010']);
