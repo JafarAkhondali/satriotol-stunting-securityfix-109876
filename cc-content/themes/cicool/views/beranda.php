@@ -65,7 +65,7 @@
 	</section>
 	<!-- slider area end -->
 	<!-- certificate area start -->
-	<section class="certificate__area pb-120 pt-120">
+	<!-- <section class="certificate__area pb-120 pt-120">
 		<div class="container">
 			<div class="certificate__inner grey-bg-9 p-relative">
 				<div class="certificate__thumb">
@@ -75,13 +75,32 @@
 					<div class="col-xxl-6">
 						<div class="certificate__content">
 							<div class="section__title-wrapper mb-10">
-								<span class="section__title-pre-3">Stunting Kota Semarang</span>
 								<h2 class="section__title section__title-44">Kata Pengantar</h2>
 							</div>
 							<p><?php echo $about->about_description; ?></p>
-							<div class="certificate__links d-sm-flex align-items-center">
-							</div>
+							<div class="certificate__links d-sm-flex align-items-center"></div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> -->
+
+
+	<section class="slider__area slider__height-2 include-bg d-flex align-items-center" data-background="<?= base_url();?>assets_stunting/img/slider/2/slider-2-bg.jpg">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-xxl-6 col-lg-6">
+					<div class="slider__content-2 mt-30">
+						<h3 class="slider__title-2">Kata Pengantar</h3>
+						<p><?php echo $about->about_description; ?></p>
+					</div>
+				</div>
+				<div class="col-xxl-6 col-lg-6">
+					<div class="slider__thumb-2 p-relative">
+						<span class="slider__thumb-mask" style="display: block !important; position: inherit !important; border-radius: 0;">
+							<img src="https://stunting.semarangkota.go.id/uploads/about/20230801091847-2023-08-01about091840.png" alt="Foto Walikota Semarang">
+						</span>
 					</div>
 				</div>
 			</div>
@@ -278,7 +297,7 @@
 				<div class="col-xxl-5 col-xl-5 col-lg-5">
 					<div class="faq__wrapper pt-45 pr-25">
 						<div class="section__title-wrapper mb-5">
-							<span class="section__title-pre-3">Stunting Kota Semarang</span>
+							<!-- <span class="section__title-pre-3">Stunting Kota Semarang</span> -->
 							<h2 class="section__title section__title-44">Pertanyaan Sering Ditanyakan</h2>
 						</div>
 						<p>Semarang Semakin Hebat</p>
