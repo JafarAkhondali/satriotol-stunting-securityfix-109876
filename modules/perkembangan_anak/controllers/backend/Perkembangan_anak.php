@@ -508,21 +508,23 @@ class Perkembangan_anak extends Admin {
 
 	public function view_perkembangan() {
 		$this->is_allowed('detail_perkembangan_anak');
-		$id_anak = $this->input->get('anak');
 
-		$this->model_perkembangan_anak->join_perkembangan_anak()->filter_avaiable();
-		$query_perkembangan = $this->db->where('anak_id', $id_anak)->order_by('perkembangan_tgl', 'ASC')->get('data_anak');
+		$nik = $this->input->get('nik');
 
-		$this->data['data_perkembangan_anak'] 	= $query_perkembangan->row();
-		$this->data['query_perkembangan_anak'] 	= $query_perkembangan->result();
+		$data_anak 			= json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
+		$data_perkembangan 	= json_decode(api_data_anak('stunting/perkembangan?nik='.$nik), true);
 
-		$nik_anak = '';
-		if ($this->data['data_perkembangan_anak']->anak_nik != null) {
-			$nik_anak = ' ('.$this->data['data_perkembangan_anak']->anak_nik.')';
+		if ($data_anak['success'] == true) {
+			$this->data['data_anak'] 			= $data_anak['data'];
+			$this->data['data_perkembangan'] 	= $data_perkembangan;
+	
+			$this->template->title('Data Perkembangan Anak Detail');
+			$this->render('backend/standart/administrator/perkembangan_anak/view_perkembangan_anak', $this->data);
+		}else{
+			set_message($data_anak['message'], 'error');
+
+			redirect_back(base_url('administrator/data_anak'));
 		}
-
-		$this->template->title('Detail Perkembangan Anak '.$this->data['data_perkembangan_anak']->anak_nama.$nik_anak);
-		$this->render('backend/standart/administrator/perkembangan_anak/view_perkembangan_anak', $this->data);
 	}
 
 	public function add_perkembangan() {

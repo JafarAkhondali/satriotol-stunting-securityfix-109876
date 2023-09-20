@@ -1,5 +1,86 @@
 <?php
 
+if (!function_exists('url_api_dkk')) {
+	function url_api_dkk($param = null) {
+		$url = 'https://sim.sayanganak.semarangkota.go.id/api/';
+
+		if ($param != null) {
+			$url = $url.$param;
+		}
+
+		return $url;
+	}
+}
+
+if (!function_exists('auth_api_login')) {
+	function auth_api_login() {
+		$curl = curl_init();
+
+		curl_setopt_array($curl, [
+			CURLOPT_URL 			=> url_api_dkk('login'),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'POST',
+			CURLOPT_POSTFIELDS 		=> '{
+				"email":"diskominfo@semarangkota.go.id",
+				"password":"kominfoSMG2023@"
+			}',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json'
+				],
+			]
+		);
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		return $response;
+	}
+}
+
+
+if (!function_exists('api_data_anak')) {
+	function api_data_anak($uri = 'stunting') {
+		$obj_api = json_decode(auth_api_login());
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, [
+			CURLOPT_URL 			=> url_api_dkk($uri),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'GET',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json',
+					'Authorization: Bearer '.$obj_api->token,
+				],
+			]
+		);
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		return $response;
+	}
+}
+
+
 if (!function_exists('get_mysql_version')) {
 	function get_mysql_version()
 	{
@@ -1557,6 +1638,12 @@ if (!function_exists('array_group_by')) {
 if (!function_exists('systemTanggalIndo')) {
 	function systemTanggalIndo($date) {
 		$new_date = explode('-', $date);
+		
+		if (strlen($new_date[1]) > 1){
+			$bulan = $new_date[1];
+		}else{
+			$bulan = '0'.$new_date[1];
+		}
 
 		$namaBulan = [
 			'01' => 'Januari',
@@ -1573,9 +1660,25 @@ if (!function_exists('systemTanggalIndo')) {
 			'12' => 'Desember',
 		];
 
-		return $new_date[2].' '.strtoupper($namaBulan[$new_date[1]]).' '.$new_date[0];
+		return $new_date[2].' '.strtoupper($namaBulan[$bulan]).' '.$new_date[0];
 	}
 };
+
+
+if (!function_exists('convertsystemTanggalIndo')) {
+	function convertsystemTanggalIndo($date) {
+		$new_date = explode('-', $date);
+		
+		if (strlen($new_date[1]) > 1){
+			$bulan = $new_date[1];
+		}else{
+			$bulan = '0'.$new_date[1];
+		}
+
+		return $new_date[2].'-'.$bulan.'-'.$new_date[0];
+	}
+};
+
 
 
 if (!function_exists('dateOfBirth')) {

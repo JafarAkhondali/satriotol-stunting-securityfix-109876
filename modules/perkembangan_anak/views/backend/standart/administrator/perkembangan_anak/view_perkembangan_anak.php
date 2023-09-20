@@ -20,11 +20,7 @@
 								<img class="img-circle" src="<?= BASE_ASSET; ?>/img/view.png" alt="User Avatar">
 							</div>
 							<h3 class="widget-user-username">Perkembangan Anak</h3>
-							<h5 class="widget-user-desc">
-								Detail Perkembangan Anak 
-								<?= strtoupper($data_perkembangan_anak->anak_nama);?>
-								<?= $data_perkembangan_anak->anak_nik != null ? ' ('.$data_perkembangan_anak->anak_nik.')' : '';?>
-							</h5>
+							<h5 class="widget-user-desc">Detail Perkembangan Anak</h5>
 						</div>
 					</div>
 				</div>
@@ -41,43 +37,40 @@
 					<table class="table table-striped">
 						<tr>
 							<th>NIK Anak</th>
-							<td><?= $data_perkembangan_anak->anak_nik != null ? $data_perkembangan_anak->anak_nik : '-';?></td>
+							<td><?= $data_anak['nik_anak'] != null ? $data_anak['nik_anak'] : '-';?></td>
 						</tr>
 						<tr>
 							<th>Nama Anak</th>
-							<td><?= $data_perkembangan_anak->anak_nama;?></td>
+							<td><?= $data_anak['nama_anak'];?></td>
 						</tr>
 						<tr>
 							<th>Tanggal Lahir Anak</th>
-							<td><?= $data_perkembangan_anak->anak_tanggal_lahir;?></td>
+							<td><?= systemTanggalIndo($data_anak['tanggal_lahir']);?></td>
 						</tr>
 						<tr>
 							<th>Jenis Kelamin Anak</th>
-							<td><?= $data_perkembangan_anak->anak_jenkel == '1' ? 'Laki-Laki' : 'Perempuan';?></td>
+							<td><?= $data_anak['jenis_kelamin'] == 'L' ? 'Laki-Laki' : 'Perempuan';?></td>
 						</tr>
 						<tr>
 							<th>Alamat Rumah Anak</th>
-							<td><?= $data_perkembangan_anak->anak_alamat;?></td>
+							<td><?= $data_anak['alamat_ktp'];?></td>
 						</tr>
 						<tr>
 							<th>RT / RW</th>
-							<td><?= 'RT '.$data_perkembangan_anak->anak_rt.' / RW '.$data_perkembangan_anak->anak_rw;?></td>
+							<td><?= 'RT '.$data_anak['rt_ktp'].' / RW '.$data_anak['rw_ktp'];?></td>
 						</tr>
 						<tr>
 							<th>Kecamatan, Kelurahan</th>
-							<td><?= $data_perkembangan_anak->kelurahan_nama.' - '.$data_perkembangan_anak->kecamatan_nama;?></td>
+							<td><?= $data_anak['kelurahan_ktp'].' - '.$data_anak['kecamatan_ktp'];?></td>
 						</tr>
 						<tr>
 							<th>Nama Ibu Kandung</th>
-							<td><?= $data_perkembangan_anak->anak_nama_ibu != null ? $data_perkembangan_anak->anak_nama_ibu : '-';?></td>
+							<td><?= $data_anak['nama_ibu'] != null ? $data_anak['nama_ibu'] : '-';?></td>
 						</tr>
 					</table>
 				</div>
 				<div class="box-footer">
 					<div class="row-fluid">
-					<?php is_allowed('data_anak_update', function() use ($data_perkembangan_anak){?>
-                        <a class="btn btn-flat btn-success" id="btn_edit" data-stype='back' title="edit data_anak (Ctrl+e)" href="<?= site_url('administrator/data_anak/edit/'.$data_perkembangan_anak->anak_id); ?>"><i class="fa fa-edit" ></i> <?= cclang('update', ['Data Anak']); ?> </a>
-					<?php }) ?>
                         <a class="btn btn-flat btn-default btn_action" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/data_anak/'); ?>"><i class="fa fa-undo" ></i> <?= cclang('go_list_button', ['Data Anak']); ?></a>
 					</div>
 				</div>
@@ -87,10 +80,6 @@
 			<div class="box box-danger">
 				<div class="box-header">
 					<h3 class="box-title">Detail Perkembangan Anak</h3>
-					<?php is_allowed('perkembangan_anak_add', function() use ($data_perkembangan_anak){?>
-					<a class="btn btn-flat btn-primary btn-sm pull-right" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('detail_perkembangan_anak')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/perkembangan_anak/add_perkembangan?id='.$data_perkembangan_anak->anak_id); ?>">
-						<i class="fa fa-plus-square-o"></i> <?= cclang('add_new_button', [cclang('detail_perkembangan_anak')]); ?></a>
-					<?php }) ?>
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
@@ -99,26 +88,30 @@
 								<tr>
 									<th>No.</th>
 									<th>Tanggal Perkembangan</th>
-									<th>Deskripsi</th>
+									<th>Deskripsi Perkembangan</th>
 									<th>Foto Kegiatan</th>
 									<th>Indikasi Penyakit</th>
-									<th>Keterangan</th>
-									<th>Instansi Penginput</th>
-									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 						<?php
-							$no = '1';
-							foreach ($query_perkembangan_anak as $item) {
+	$no = '1';
+
+	if ($data_perkembangan['success'] == true) {
+		foreach ($data_perkembangan['data'] as $item) {
+			$deskripsi = [];
+
+			foreach ($item['deskripsi'] as $key => $value) {
+				$deskripsi[] = '<b>'.cclang($key).'</b> : '.$value;
+			}
 						?>
 								<tr>
 									<td><?= $no++;?>.</td>
-									<td><?= $item->perkembangan_tgl;?></td>
-									<td><?= $item->perkembangan_deskripsi;?></td>
+									<td><?= systemTanggalIndo($item['tanggal_catat']);?></td>
+									<td><?= implode('<br/>', $deskripsi);;?></td>
 									<td>
 							<?php
-								foreach (explode(',', $item->perkembangan_foto) as $file):
+								foreach (explode(',', $item['foto_kegiatan']) as $file):
 									if (!empty($file)):
 										if (is_image($file)):
 							?>
@@ -135,26 +128,17 @@
 								endforeach;
 							?>
 									</td>
-									<td><?= $item->perkembangan_indikasi;?></td>
-									<td><?= $item->perkembangan_keterangan;?></td>
-									<td><?= $item->opd_nama;?></td>
-									<td>
-								<?php is_allowed('perkembangan_anak_view', function() use ($item){?>
-										<a href="<?= site_url('administrator/perkembangan_anak/view_perkembangan_anak?id=' . $item->perkembangan_id); ?>" class="label-default">
-											<i class="fa fa-newspaper-o"></i> <?= cclang('view_button'); ?>
-								<?php }) ?>
-								<?php is_allowed('perkembangan_anak_update', function() use ($item){?>
-										<a href="<?= site_url('administrator/perkembangan_anak/edit_perkembangan?id='.$item->perkembangan_id); ?>" class="label-default">
-											<i class="fa fa-edit "></i> <?= cclang('update_button'); ?></a>
-								<?php }) ?>
-								<?php is_allowed('perkembangan_anak_delete', function() use ($item){?>
-										<a href="javascript:void(0);" data-href="<?= site_url('administrator/perkembangan_anak/delete/' . $item->perkembangan_id); ?>" class="label-default remove-data">
-											<i class="fa fa-close"></i> <?= cclang('remove_button'); ?></a>
-								<?php }) ?>
-									</td>
+									<td><?= $item['indikasi_penyakit'];?></td>
 								</tr>
 						<?php
-							}
+		}
+	}else {
+?>
+	<tr>
+		<th colspan="100"><label class="label label-danger center">Error : <?= $data_perkembangan['message'];?></label></th>
+	</tr>
+<?php
+	}
 						?>
 							</tbody>
 						</table>

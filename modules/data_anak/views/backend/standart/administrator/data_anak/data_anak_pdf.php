@@ -34,47 +34,47 @@
 	<table border="0" style="border-collapse: collapse; margin-left: 10px;">
 		<tr>
 			<th width="150">NIK Anak</th>
-			<td>: <?= $data_anak->anak_nik != null ? $data_anak->anak_nik : '<i>Belum ditentukan</i>';?></td>
+			<td>: <?= $data_anak['nik_anak'] != null ? $data_anak['nik_anak'] : '<i>Belum ditentukan</i>';?></td>
 		</tr>
 		<tr>
 			<th>Nama Anak</th>
-			<td>: <?= $data_anak->anak_nama != null ? strtoupper($data_anak->anak_nama) : '<i>Belum diketahui</i>';?></td>
+			<td>: <?= $data_anak['nama_anak'] != null ? strtoupper($data_anak['nama_anak']) : '<i>Belum diketahui</i>';?></td>
 		</tr>
 		<tr>
 			<th>Tanggal Lahir Anak</th>
-			<td>: <?= $data_anak->anak_tanggal_lahir != null ? systemTanggalIndo($data_anak->anak_tanggal_lahir) : '<i>Belum diketahui</i>';?></td>
+			<td>: <?= $data_anak['tanggal_lahir'] != null ? systemTanggalIndo($data_anak['tanggal_lahir']) : '<i>Belum diketahui</i>';?></td>
 		</tr>
 		<tr>
 			<th>Jenis Kelamin</th>
-			<td>: <?= $data_anak->anak_tanggal_lahir == '1' ? 'LAKI-LAKI' : $data_anak->anak_tanggal_lahir == '2' ? 'PEREMPUAN' : '<i>Tidak ditentukan</i>';?></td>
+			<td>: <?= $data_anak['jenis_kelamin'] == 'L' ? 'LAKI-LAKI' : $data_anak['jenis_kelamin'] == 'P' ? 'PEREMPUAN' : '<i>Tidak ditentukan</i>';?></td>
 		</tr>
 		<tr>
 			<th>Alamat Rumah Anak</th>
-			<td>: <?= $data_anak->anak_alamat != null ? $data_anak->anak_alamat : '-';?></td>
+			<td>: <?= $data_anak['alamat_ktp'] != null ? $data_anak['alamat_ktp'] : '-';?></td>
 		</tr>
 		<tr>
 			<th>RT / RW</th>
-			<td>: RT <?= $data_anak->anak_rt != null ? $data_anak->anak_rt : '-';?> / RW <?= $data_anak->anak_rw != null ? $data_anak->anak_rw : '-';?></td>
+			<td>: RT <?= $data_anak['rt_ktp'] != null ? $data_anak['rt_ktp'] : '-';?> / RW <?= $data_anak['rw_ktp'] != null ? $data_anak['rw_ktp'] : '-';?></td>
 		</tr>
 		<tr>
 			<th>Kelurahan, Kecamatan</th>
-			<td>: <?= $data_anak->anak_kelurahan_id != null ? 'KEL. '.strtoupper(join_multi_select($data_anak->anak_kelurahan_id, 'kelurahans', 'kelurahan_id', 'kelurahan_nama')) : '-';?> / <?= $data_anak->anak_kecamatan_id != null ? 'KEC. '.strtoupper(join_multi_select($data_anak->anak_kecamatan_id, 'kecamatans', 'kecamatan_id', 'kecamatan_nama')) : '-';?></td>
+			<td>: <?= $data_anak['kelurahan_domsili'] != null ? 'KEL. '.strtoupper($data_anak['kelurahan_domsili']) : '-';?> / <?= $data_anak['kecamatan_domsili'] != null ? 'KEC. '.strtoupper($data_anak['kecamatan_domsili']) : '-';?></td>
 		</tr>
 		<tr>
 			<th>NIK Ayah</th>
-			<td>: <?= $data_anak->anak_nik_ayah != null ? $data_anak->anak_nik_ayah : '<i>Belum ditentukan</i>';?></td>
+			<td>: <?= $data_anak['nik_ayah'] != null ? $data_anak['nik_ayah'] : '<i>Belum ditentukan</i>';?></td>
 		</tr>
 		<tr>
 			<th>Nama Ayah</th>
-			<td>: <?= $data_anak->anak_nama_ayah != null ? $data_anak->anak_nama_ayah : '<i>Belum ditentukan</i>';?></td>
+			<td>: <?= $data_anak['nama_ayah'] != null ? $data_anak['nama_ayah'] : '<i>Belum ditentukan</i>';?></td>
 		</tr>
 		<tr>
 			<th>NIK Ibu</th>
-			<td>: <?= $data_anak->anak_nik_ibu != null ? $data_anak->anak_nik_ibu : '<i>Belum ditentukan</i>';?></td>
+			<td>: <?= $data_anak['nik_ibu'] != null ? $data_anak['nik_ibu'] : '<i>Belum ditentukan</i>';?></td>
 		</tr>
 		<tr>
 			<th>Nama Ibu</th>
-			<td>: <?= $data_anak->anak_nama_ibu != null ? $data_anak->anak_nama_ibu : '<i>Belum ditentukan</i>';?></td>
+			<td>: <?= $data_anak['nama_ibu'] != null ? $data_anak['nama_ibu'] : '<i>Belum ditentukan</i>';?></td>
 		</tr>
 	</table>
 	<br/>
@@ -86,7 +86,7 @@
 	<table  border="1" width="100%" style="border-collapse: collapse; border: 1px solid black;">
 <?php
 	$no = 1;
-	foreach ($stunting_anak as $stunting) {
+	foreach ($data_stunting as $stunting) {
 		$stunting_dkk 			= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $stunting->stunting_anak_anak_id, 'asupan_gizi_opd_id' => '11'])[0];
 		$stunting_distapang 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $stunting->stunting_anak_anak_id, 'asupan_gizi_opd_id' => '12'])[0];
 		$stunting_diperikanan 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $stunting->stunting_anak_anak_id, 'asupan_gizi_opd_id' => '25'])[0];
@@ -201,7 +201,7 @@
 <?php
 	}
 
-	if(count($stunting_anak) == 0){
+	if(count($data_stunting) == 0){
 ?>
 		<tr>
 			<th style="text-align: center; vertical-align: middle;" rowspan="3">No.</th>
@@ -324,27 +324,35 @@
 		<tr>
 			<th style="text-align: center; vertical-align: middle;">No.</th>
 			<th style="text-align: center; vertical-align: middle;">Tanggal Perkembangan</th>
-			<th style="text-align: center; vertical-align: middle;">Deskripsi</th>
+			<th style="text-align: center; vertical-align: middle;">Deskripsi Perkembangan</th>
+			<th style="text-align: center; vertical-align: middle;">Foto Kegiatan</th>
 			<th style="text-align: center; vertical-align: middle;">Indikasi Penyakit</th>
-			<th style="text-align: center; vertical-align: middle;">Keterangan</th>
-			<th style="text-align: center; vertical-align: middle;">Instansi Penginput</th>
 		</tr>
 <?php
 	$no = 1;
-	foreach ($perkembangan_anak as $perkembangan) {
+	foreach ($data_perkembangan['data'] as $perkembangan) {
 ?>
 		<tr>
 			<td><?=$no++;?></td>
-			<td><?= systemTanggalIndo($perkembangan->perkembangan_tgl);?></td>
-			<td><?= $perkembangan->perkembangan_deskripsi;?></td>
-			<td><?= $perkembangan->perkembangan_indikasi;?></td>
-			<td><?= $perkembangan->perkembangan_keterangan;?></td>
-			<td><?= $perkembangan->nama_opd;?></td>
+			<td><?= systemTanggalIndo($perkembangan['tanggal_catat']);?></td>
+			<td>
+<?php
+	$deskripsi = [];
+
+	foreach ($perkembangan['deskripsi'] as $key => $value) {
+		$deskripsi[] = '<b>'.cclang($key).'</b> : '.$value;
+	}
+
+	echo implode('<br/>', $deskripsi);
+?>
+			</td>
+			<td><?= $perkembangan['foto_kegiatan'];?></td>
+			<td><?= $perkembangan['indikasi_penyakit'];?></td>
 		</tr>
 <?php
 	}
 
-	if(count($perkembangan_anak) == 0){
+	if($data_perkembangan['success'] == false){
 ?>
 		<tr>
 			<td>&nbsp;</td>
@@ -367,7 +375,7 @@
 	<table  border="1" width="100%" style="border-collapse: collapse; border: 1px solid black;">
 <?php
 	$no = 1;
-	foreach ($intervensi_anak as $intervensi) {
+	foreach ($data_intervensi as $intervensi) {
 ?>
 		<tr>
 			<th style="text-align: center; vertical-align: middle;">No.</th>
@@ -403,7 +411,7 @@
 <?php
 	}
 
-	if (count($intervensi_anak) == 0) {
+	if (count($data_intervensi) == 0) {
 ?>
 	<tr>
 		<th style="text-align: center; vertical-align: middle;">No.</th>

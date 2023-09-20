@@ -38,31 +38,31 @@
 								<table class="table table-bordered table-striped">
 									<tr>
 										<th>NIK Anak</th>
-										<td><?= $data_intervensi_anak->anak_nik != null ? $data_intervensi_anak->anak_nik : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nik_anak'] != null ? $data_anak['nik_anak'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>Nama Anak</th>
-										<td><?= $data_intervensi_anak->anak_nama;?></td>
+										<td><?= $data_anak['nama_anak'];?></td>
 									</tr>
 									<tr>
 										<th>Tanggal Lahir Anak</th>
-										<td><?= $data_intervensi_anak->anak_tanggal_lahir;?></td>
+										<td><?= systemTanggalIndo($data_anak['tanggal_lahir']);?></td>
 									</tr>
 									<tr>
 										<th>Jenis Kelamin Anak</th>
-										<td><?= $data_intervensi_anak->anak_jenkel == '1' ? 'Laki-Laki' : 'Perempuan';?></td>
+										<td><?= $data_anak['jenis_kelamin'] == 'L' ? 'Laki-Laki' : 'Perempuan';?></td>
 									</tr>
 									<tr>
 										<th>Alamat Rumah Anak</th>
-										<td><?= $data_intervensi_anak->anak_alamat;?></td>
+										<td><?= $data_anak['alamat_ktp'];?></td>
 									</tr>
 									<tr>
 										<th>RT / RW</th>
-										<td><?= 'RT '.$data_intervensi_anak->anak_rt.' / RW '.$data_intervensi_anak->anak_rw;?></td>
+										<td><?= 'RT '.$data_anak['rt_ktp'].' / RW '.$data_anak['rw_ktp'];?></td>
 									</tr>
 									<tr>
 										<th>Kecamatan, Kelurahan</th>
-										<td><?= $data_intervensi_anak->kelurahan_nama.' - '.$data_intervensi_anak->kecamatan_nama;?></td>
+										<td><?= $data_anak['kelurahan_ktp'].' - '.$data_anak['kecamatan_ktp'];?></td>
 									</tr>
 								</table>
 							</div>
@@ -72,19 +72,19 @@
 								<table class="table table-bordered table-striped">
 									<tr>
 										<th>NIK Ayah</th>
-										<td><?= $data_intervensi_anak->anak_nik_ayah != null ? $data_intervensi_anak->anak_nik_ayah : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nik_ayah'] != null ? $data_anak['nik_ayah'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>Nama Ayah</th>
-										<td><?= $data_intervensi_anak->anak_nama_ayah != null ? $data_intervensi_anak->anak_nama_ayah : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nama_ayah'] != null ? $data_anak['nama_ayah'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>NIK Ibu</th>
-										<td><?= $data_intervensi_anak->anak_nik_ibu != null ? $data_intervensi_anak->anak_nik_ibu : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nik_ibu'] != null ? $data_anak['nik_ibu'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>Nama Ibu</th>
-										<td><?= $data_intervensi_anak->anak_nama_ibu != null ? $data_intervensi_anak->anak_nama_ibu : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nama_ibu'] != null ? $data_anak['nama_ibu'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 								</table>
 							</div>
@@ -97,10 +97,10 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-danger">
-			<?php is_allowed('data_intervensi_anak_add', function() use ($data_intervensi_anak){?>
+			<?php is_allowed('data_intervensi_anak_add', function() use ($data_anak){?>
 				<div class="box-header">
 					<div class="pull-right">
-						<a class="btn btn-flat btn-primary btn-sm" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('data_intervensi_anak')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/data_intervensi_anak/add_intervensi?anak='.$data_intervensi_anak->anak_id); ?>">
+						<a class="btn btn-flat btn-primary btn-sm" id="btn_add_new" title="<?= cclang('add_new_button', [cclang('data_intervensi_anak')]); ?>  (Ctrl+a)" href="<?=  site_url('administrator/data_intervensi_anak/add_intervensi?nik='.$data_anak['nik_anak']); ?>">
 							<i class="fa fa-plus-square-o"></i> <?= cclang('add_new_button', [cclang('data_intervensi_anak')]); ?></a>
 					</div>
 				</div>
@@ -125,8 +125,7 @@
 							</tr>
 					<?php
 						$no = 1;
-						// $query_data_intervensi = $this->db->where(['intervensi_anak_id' => $data_intervensi_anak->anak_id])->order_by('intervensi_tgl_masuk', 'ASC');
-						foreach ($query_intervensi_anak as $item) {
+						foreach ($data_intervensi as $item) {
 					?>
 						<tr>
 							<td><?= $no++;?></td>
@@ -155,7 +154,7 @@
 					<?php
 						}
 
-						if (count($query_data_intervnsi) == 0) {
+						if (count($data_intervensi) == 0) {
 					?>
 							<tr>
 								<td colspan="100">
@@ -188,6 +187,26 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+		$('.remove-data').click(function () {
+			var url = $(this).attr('data-href');
+			swal({
+				title: "<?= cclang('are_you_sure'); ?>",
+				text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+				cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function (isConfirm) {
+				if (isConfirm) {
+					document.location.href = url;
+				}
+			});
 
+			return false;
+		});
 	});
 </script>

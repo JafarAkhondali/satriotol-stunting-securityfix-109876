@@ -37,14 +37,14 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">NIK Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= join_multi_select($data_intervensi_anak->intervensi_anak_id, 'data_anak', 'anak_id', 'anak_nik') != null ? join_multi_select($data_intervensi_anak->intervensi_anak_id, 'data_anak', 'anak_id', 'anak_nik') : '-';?></label>
+								<label class="form-control"><?= $data_anak['nik_anak'];?></label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= strtoupper(join_multi_select($data_intervensi_anak->intervensi_anak_id, 'data_anak', 'anak_id', 'anak_nama'));?></label>
+								<label class="form-control"><?= strtoupper($data_anak['nama_anak']);?></label>
 							</div>
 						</div>
 
@@ -58,7 +58,7 @@
 									?>
 									<?php foreach (db_get_all_data('kecamatans', $conditions) as $row): ?>
 									<option
-										<?= $row->kecamatan_id == $data_intervensi_anak->intervensi_kecamatan_id ? 'selected' : ''; ?>
+										<?= $row->kecamatan_id == $data_intervensi->intervensi_kecamatan_id ? 'selected' : ''; ?>
 										value="<?= $row->kecamatan_id ?>"><?= $row->kecamatan_nama; ?></option>
 									<?php endforeach; ?>
 								</select>
@@ -79,7 +79,7 @@
 						<div class="form-group group-intervensi_bulan">
 							<label for="intervensi_bulan" class="col-sm-2 control-label">Bulan <i class="required">*</i></label>
 							<div class="col-sm-2">
-								<input type="month" class="form-control" name="intervensi_bulan" id="intervensi_bulan" placeholder="" value="<?= set_value('intervensi_bulan', $data_intervensi_anak->intervensi_tahun.'-'.$data_intervensi_anak->intervensi_bulan); ?>">
+								<input type="month" class="form-control" name="intervensi_bulan" id="intervensi_bulan" placeholder="" value="<?= set_value('intervensi_bulan', $data_intervensi->intervensi_tahun.'-'.$data_intervensi->intervensi_bulan); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 							<label for="intervensi_tgl_masuk" class="col-sm-2 control-label">Tanggal <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="input-group date col-sm-8">
-									<input type="text" class="form-control pull-right datepicker" 	name="intervensi_tgl_masuk" placeholder="" id="intervensi_tgl_masuk" 	value="<?= set_value('data_intervensi_anak_intervensi_tgl_masuk_name', $data_intervensi_anak->intervensi_tgl_masuk); ?>">
+									<input type="text" class="form-control pull-right datepicker" 	name="intervensi_tgl_masuk" placeholder="" id="intervensi_tgl_masuk" 	value="<?= set_value('data_intervensi_anak_intervensi_tgl_masuk_name', $data_intervensi->intervensi_tgl_masuk); ?>">
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -97,7 +97,7 @@
 						<div class="form-group group-intervensi_kondisi">
 							<label for="intervensi_kondisi" class="col-sm-2 control-label">Kondisi <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="intervensi_kondisi" id="intervensi_kondisi" placeholder="" value="<?= set_value('intervensi_kondisi', $data_intervensi_anak->intervensi_kondisi); ?>">
+								<input type="text" class="form-control" name="intervensi_kondisi" id="intervensi_kondisi" placeholder="" value="<?= set_value('intervensi_kondisi', $data_intervensi->intervensi_kondisi); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -105,7 +105,7 @@
 						<div class="form-group group-intervensi_nama_ortu_asuh">
 							<label for="intervensi_nama_ortu_asuh" class="col-sm-2 control-label">Nama Orang Tua Asuh <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="intervensi_nama_ortu_asuh" id="intervensi_nama_ortu_asuh" placeholder="" value="<?= set_value('intervensi_nama_ortu_asuh', $data_intervensi_anak->intervensi_nama_ortu_asuh); ?>">
+								<input type="text" class="form-control" name="intervensi_nama_ortu_asuh" id="intervensi_nama_ortu_asuh" placeholder="" value="<?= set_value('intervensi_nama_ortu_asuh', $data_intervensi->intervensi_nama_ortu_asuh); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 						<div class="form-group group-intervensi_deskripsi">
 							<label for="intervensi_deskripsi" class="col-sm-2 control-label">Intervensi </label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="intervensi_deskripsi" id="intervensi_deskripsi" placeholder="" value="<?= set_value('intervensi_deskripsi', $data_intervensi_anak->intervensi_deskripsi); ?>">
+								<input type="text" class="form-control" name="intervensi_deskripsi" id="intervensi_deskripsi" placeholder="" value="<?= set_value('intervensi_deskripsi', $data_intervensi->intervensi_deskripsi); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -122,7 +122,7 @@
 							<label for="intervensi_tgl_pasca" class="col-sm-2 control-label">Tanggal Intervensi </label>
 							<div class="col-sm-6">
 								<div class="input-group date col-sm-8">
-									<input type="text" class="form-control pull-right datepicker" 	name="intervensi_tgl_pasca" placeholder="" id="intervensi_tgl_pasca" 	value="<?= set_value('data_intervensi_anak_intervensi_tgl_pasca_name', $data_intervensi_anak->intervensi_tgl_pasca); ?>">
+									<input type="text" class="form-control pull-right datepicker" 	name="intervensi_tgl_pasca" placeholder="" id="intervensi_tgl_pasca" 	value="<?= set_value('data_intervensi_anak_intervensi_tgl_pasca_name', $data_intervensi->intervensi_tgl_pasca); ?>">
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -131,7 +131,7 @@
 						<div class="form-group group-intervensi_pasca">
 							<label for="intervensi_pasca" class="col-sm-2 control-label">Pasca Intervensi </label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="intervensi_pasca" id="intervensi_pasca" placeholder="" value="<?= set_value('intervensi_pasca', $data_intervensi_anak->intervensi_pasca); ?>">
+								<input type="text" class="form-control" name="intervensi_pasca" id="intervensi_pasca" placeholder="" value="<?= set_value('intervensi_pasca', $data_intervensi->intervensi_pasca); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -139,7 +139,7 @@
 						<div class="form-group group-intervensi_keterangan">
 							<label for="intervensi_keterangan" class="col-sm-2 control-label">Keterangan </label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="intervensi_keterangan" id="intervensi_keterangan" placeholder="" value="<?= set_value('intervensi_keterangan', $data_intervensi_anak->intervensi_keterangan); ?>">
+								<input type="text" class="form-control" name="intervensi_keterangan" id="intervensi_keterangan" placeholder="" value="<?= set_value('intervensi_keterangan', $data_intervensi->intervensi_keterangan); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -189,7 +189,7 @@
 			},
 			function (isConfirm) {
 				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/data_intervensi_anak';
+					window.location.href = BASE_URL + 'administrator/data_intervensi_anak/view_intervensi?nik='.$data_anak['nik_anak'];
 				}
 			});
 
@@ -263,36 +263,32 @@
 			return false;
 		}); /*end btn save*/
 
-
-
-
-
 		function chained_intervensi_kelurahan_id(selected, complete) {
 			var val = $('#intervensi_kecamatan_id').val();
 			$.LoadingOverlay('show')
 			return $.ajax({
-					url: BASE_URL + '/administrator/data_intervensi_anak/ajax_intervensi_kelurahan_id/' + val,
-					dataType: 'JSON',
-				})
-				.done(function (res) {
-					var html = '<option value=""></option>';
-					$.each(res, function (index, val) {
-						html += '<option ' + (selected == val.kelurahan_id ? 'selected' : '') +
-							' value="' + val.kelurahan_id + '">' + val.kelurahan_nama + '</option>'
-					});
-					$('#intervensi_kelurahan_id').html(html);
-					$('#intervensi_kelurahan_id').trigger('chosen:updated');
-					if (typeof complete != 'undefined') {
-						complete();
-					}
-
-				})
-				.fail(function () {
-					toastr['error']('Error', 'Getting data fail')
-				})
-				.always(function () {
-					$.LoadingOverlay('hide')
+				url: BASE_URL + '/administrator/data_intervensi_anak/ajax_intervensi_kelurahan_id/' + val,
+				dataType: 'JSON',
+			})
+			.done(function (res) {
+				var html = '<option value=""></option>';
+				$.each(res, function (index, val) {
+					html += '<option ' + (selected == val.kelurahan_id ? 'selected' : '') +
+						' value="' + val.kelurahan_id + '">' + val.kelurahan_nama + '</option>'
 				});
+				$('#intervensi_kelurahan_id').html(html);
+				$('#intervensi_kelurahan_id').trigger('chosen:updated');
+				if (typeof complete != 'undefined') {
+					complete();
+				}
+
+			})
+			.fail(function () {
+				toastr['error']('Error', 'Getting data fail')
+			})
+			.always(function () {
+				$.LoadingOverlay('hide')
+			});
 		}
 
 
@@ -301,7 +297,7 @@
 		});
 
 		async function chain() {
-			await chained_intervensi_kelurahan_id("<?= $data_intervensi_anak->intervensi_kelurahan_id ?>");
+			await chained_intervensi_kelurahan_id("<?= $data_intervensi->intervensi_kelurahan_id ?>");
 		}
 
 		chain();

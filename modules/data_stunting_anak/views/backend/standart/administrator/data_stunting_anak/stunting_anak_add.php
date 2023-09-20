@@ -36,14 +36,14 @@
 						<div class="form-group group-stunting_anak_anak_id">
 							<label for="stunting_anak_anak_id" class="col-sm-2 control-label">Nama Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nik') != null ? strtoupper(join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nik')) : '-';?></label>
+								<label class="form-control"><?= $data_anak['nik_anak'];?></label>
 							</div>
 						</div>
 
 						<div class="form-group group-stunting_anak_anak_id">
 							<label for="stunting_anak_anak_id" class="col-sm-2 control-label">Nama Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= strtoupper(join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nama'));?></label>
+								<label class="form-control"><?= strtoupper($data_anak['nama_anak']);?></label>
 							</div>
 						</div>
 
@@ -479,7 +479,7 @@
 			},
 			function (isConfirm) {
 				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/data_stunting_anak/view_stunting?anak=<?= $id_anak;?>';
+					window.location.href = BASE_URL + 'administrator/data_stunting_anak/view_stunting?nik=<?= $data_anak["nik_anak"];?>';
 				}
 			});
 
@@ -506,7 +506,7 @@
 			$('.loading').show();
 
 			$.ajax({
-				url: BASE_URL + 'administrator/data_stunting_anak/add_save_stunting?anak=<?= $id_anak;?>',
+				url: BASE_URL + 'administrator/data_stunting_anak/add_save_stunting?nik=<?= $data_anak["nik_anak"];?>',
 				type: 'POST',
 				dataType: 'json',
 				data: data_post,
@@ -531,8 +531,7 @@
 					if (res.errors) {
 						$.each(res.errors, function (index, val) {
 							$('form #' + index).parents('.form-group').addClass('has-error');
-							$('form #' + index).parents('.form-group').find('small')
-								.prepend(`<div class="error-input">` + val + `</div>`);
+							$('form #' + index).parents('.form-group').find('small').prepend(`<div class="error-input">` + val + `</div>`);
 						});
 						$('.steps li').removeClass('error');
 						$('.content section').each(function (index, el) {

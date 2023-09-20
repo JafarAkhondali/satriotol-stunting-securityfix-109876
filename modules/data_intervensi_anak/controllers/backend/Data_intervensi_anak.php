@@ -71,17 +71,9 @@ class Data_intervensi_anak extends Admin {
 		}
 
 		$this->form_validation->set_rules('intervensi_kecamatan_id', 'Kecamatan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('intervensi_kelurahan_id', 'Kelurahan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('intervensi_anak_id', 'Nama Anak', 'trim|required');
-		
-
 		$this->form_validation->set_rules('intervensi_bulan', 'Bulan', 'trim|required');
-		
-
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
 
 		$bulan_tahun = explode('-', $this->input->post('intervensi_bulan'));
@@ -100,16 +92,10 @@ class Data_intervensi_anak extends Admin {
 				'intervensi_tgl_pasca' => $this->input->post('intervensi_tgl_pasca'),
 				'intervensi_pasca' => $this->input->post('intervensi_pasca'),
 				'intervensi_keterangan' => $this->input->post('intervensi_keterangan'),
-				'intervensi_user_created' => get_user_data('id'),				'intervensi_created_at' => date('Y-m-d H:i:s'),
+				'intervensi_user_created' => get_user_data('id'),
+				'intervensi_created_at' => date('Y-m-d H:i:s'),
 			];
 
-			
-			
-
-
-
-			
-			
 			$save_data_intervensi_anak = $id = $this->model_data_intervensi_anak->store($save_data);
 			
 
@@ -273,8 +259,7 @@ class Data_intervensi_anak extends Admin {
 	*
 	* @var $id String
 	*/
-	public function delete($id = null)
-	{
+	public function delete($id = null) {
 		$this->is_allowed('data_intervensi_anak_delete');
 
 		$this->load->helper('file');
@@ -304,8 +289,7 @@ class Data_intervensi_anak extends Admin {
 	*
 	* @var $id String
 	*/
-	public function view($id)
-	{
+	public function view($id) {
 		$this->is_allowed('data_intervensi_anak_view');
 
 		$this->data['data_intervensi_anak'] = $this->model_data_intervensi_anak->join_avaiable()->filter_avaiable()->find($id);
@@ -350,16 +334,14 @@ class Data_intervensi_anak extends Admin {
 	*
 	* @return Files PDF .pdf
 	*/
-	public function export_pdf()
-	{
+	public function export_pdf() {
 		$this->is_allowed('data_intervensi_anak_export');
 
 		$this->model_data_intervensi_anak->pdf('data_intervensi_anak', 'data_intervensi_anak');
 	}
 
 
-	public function single_pdf($id = null)
-	{
+	public function single_pdf($id = null) {
 		$this->is_allowed('data_intervensi_anak_export');
 
 		$table = $title = 'data_intervensi_anak';
@@ -407,28 +389,40 @@ class Data_intervensi_anak extends Admin {
 	public function view_intervensi() {
 		$this->is_allowed('data_intervensi_anak_view');
 
-		$id_anak = $this->input->get('anak');
+		$nik = $this->input->get('nik');
 
-		$this->model_data_intervensi_anak->join_intervensi()->filter_avaiable();
-		$query_data = $this->db->where('anak_id', $id_anak)->order_by('intervensi_tgl_masuk', 'ASC')->get('data_anak');
+		$response = json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
 
-		$this->data['data_intervensi_anak'] 	= $query_data->row();
-		$this->data['query_intervensi_anak'] 	= $query_data->result();
+		if ($response['success'] == true) {
+			$this->data['data_anak'] 		= $response['data'];
+			$this->data['data_intervensi'] 	= $this->db->where(['intervensi_anak_nik' => $nik])->get('data_intervensi_anak')->result();
+	
+			$this->template->title('Data Intervensi Anak Detail');
+			$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_view', $this->data);
+		}else{
+			set_message($response['message'], 'error');
 
-		$this->template->title('Data Intervensi Anak Detail');
-		$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_view', $this->data);
+			redirect_back(base_url('administrator/data_anak'));
+		}
 	}
 
 	public function add_intervensi() {
 		$this->is_allowed('data_intervensi_anak_add');
 
-		$id_anak = $this->input->get('anak');
+		$nik = $this->input->get('nik');
 
-		$this->data['id_anak'] 		= $id_anak;
-		$this->data['data_anak'] 	= db_get_all_data('data_anak', ['anak_id' => $id_anak])[0];
+		$response = json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
 
-		$this->template->title('Data Intervensi Anak New');
-		$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_add', $this->data);
+		if ($response['success'] == true) {
+			$this->data['data_anak'] 		= $response['data'];
+
+			$this->template->title('Data Intervensi Anak New');
+			$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_add', $this->data);
+		}else{
+			set_message($response['message'], 'error');
+
+			redirect_back(base_url('administrator/data_anak/view_intervensi?nik='.$nik));
+		}
 	}
 
 	public function add_save_intervensi() {
@@ -446,13 +440,14 @@ class Data_intervensi_anak extends Admin {
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
 
 		$bulan_tahun 	= explode('-', $this->input->post('intervensi_bulan'));
-		$id_anak 		= $this->input->get('anak');
+		$nik_anak 		= $this->input->get('nik');
 
 		if ($this->form_validation->run()) {
 			$save_data = [
 				'intervensi_kecamatan_id' 	=> $this->input->post('intervensi_kecamatan_id'),
 				'intervensi_kelurahan_id' 	=> $this->input->post('intervensi_kelurahan_id'),
-				'intervensi_anak_id' 		=> $id_anak,
+				'intervensi_anak_nik' 		=> $nik_anak,
+				'intervensi_anak_id' 		=> db_get_all_data('data_anak', ['anak_nik' => $nik_anak])[0]->anak_id,
 				'intervensi_bulan' 			=> $bulan_tahun[1],
 				'intervensi_tahun' 			=> $bulan_tahun[0],
 				'intervensi_tgl_masuk' 		=> $this->input->post('intervensi_tgl_masuk'),
@@ -474,7 +469,7 @@ class Data_intervensi_anak extends Admin {
 					$this->data['id'] 	   = $save_data_intervensi_anak;
 					$this->data['message'] = cclang('success_save_data_stay', [
 						anchor('administrator/data_intervensi_anak/edit_intervensi/' . $save_data_intervensi_anak, 'Edit Data Intervensi Anak'),
-						anchor('administrator/data_intervensi_anak/view_intervensi?anak='.$id_anak, ' Go back to list')
+						anchor('administrator/data_intervensi_anak/view_intervensi?nik='.$nik_anak, ' Go back to list')
 					]);
 				} else {
 					set_message(
@@ -483,7 +478,7 @@ class Data_intervensi_anak extends Admin {
 					]), 'success');
 
 					$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?nik='.$nik_anak);
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -492,7 +487,7 @@ class Data_intervensi_anak extends Admin {
 				} else {
 					$this->data['success'] = false;
 					$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?nik='.$nik_anak);
 				}
 			}
 		} else {
@@ -507,11 +502,23 @@ class Data_intervensi_anak extends Admin {
 	public function edit_intervensi($id) {
 		$this->is_allowed('data_intervensi_anak_update');
 
-		$this->data['data_intervensi_anak'] = $this->model_data_intervensi_anak->find($id);
+		$query_intervensi = $this->model_data_intervensi_anak->find($id);
 
-		$this->template->title('Data Intervensi Anak New');
-		$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_update', $this->data);
+		$response = json_decode(api_data_anak('stunting/anak?nik='.$query_intervensi->intervensi_anak_nik), true);
+
+		if ($response['success'] == true) {
+			$this->data['data_anak'] 		= $response['data'];
+			$this->data['data_intervensi'] 	= $query_intervensi;
+
+			$this->template->title('Data Intervensi Anak New');
+			$this->render('backend/standart/administrator/data_intervensi_anak/intervensi_anak_update', $this->data);
+		}else{
+			set_message($response['message'], 'error');
+
+			redirect_back(base_url('administrator/data_intervensi_anak/view_intervensi?nik='.$query_intervensi->intervensi_anak_nik));
+		}
 	}
+
 	public function edit_save_intervensi($id) {
 		if (!$this->is_allowed('data_intervensi_anak_update', false)) {
 			echo json_encode([
@@ -527,7 +534,7 @@ class Data_intervensi_anak extends Admin {
 		$this->form_validation->set_rules('intervensi_tgl_masuk', 'Tanggal', 'trim|required');
 
 		$bulan_tahun 	= explode('-', $this->input->post('intervensi_bulan'));
-		$id_anak 		= $this->model_data_intervensi_anak->find($id)->intervensi_anak_id;
+		$nik_anak 		= $this->model_data_intervensi_anak->find($id)->intervensi_anak_nik;
 		
 		if ($this->form_validation->run()) {
 			$save_data = [
@@ -553,7 +560,7 @@ class Data_intervensi_anak extends Admin {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
 					$this->data['message'] = cclang('success_update_data_stay', [
-						anchor('administrator/data_intervensi_anak/view_intervensi?anak='.$id_anak, ' Go back to list')
+						anchor('administrator/data_intervensi_anak/view_intervensi?nik='.$nik_anak, ' Go back to list')
 					]);
 				} else {
 					set_message(
@@ -561,7 +568,7 @@ class Data_intervensi_anak extends Admin {
 					]), 'success');
 
 					$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?nik='.$nik_anak);
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -570,7 +577,7 @@ class Data_intervensi_anak extends Admin {
 				} else {
 					$this->data['success'] = false;
 					$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_intervensi_anak/view_intervensi?nik='.$nik_anak);
 				}
 			}
 		} else {
@@ -580,6 +587,31 @@ class Data_intervensi_anak extends Admin {
 		}
 
 		$this->response($this->data);
+	}
+
+	public function delete_intervensi($id = null) {
+		$this->is_allowed('data_intervensi_anak_delete');
+
+		$this->load->helper('file');
+
+		$arr_id = $this->input->get('id');
+		$remove = false;
+
+		if (!empty($id)) {
+			$remove = $this->_remove($id);
+		} elseif (count($arr_id) >0) {
+			foreach ($arr_id as $id) {
+				$remove = $this->_remove($id);
+			}
+		}
+
+		if ($remove) {
+			set_message(cclang('has_been_deleted', cclang('data_intervensi_anak')), 'success');
+		} else {
+			set_message(cclang('error_delete', cclang('data_intervensi_anak')), 'error');
+		}
+
+		redirect_back();
 	}
 	
 }

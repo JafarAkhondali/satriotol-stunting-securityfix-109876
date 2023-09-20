@@ -423,27 +423,40 @@ class Data_stunting_anak extends Admin {
 	public function view_stunting() {
 		$this->is_allowed('detail_stunting_anak');
 
-		$id_anak = $this->input->get('anak');
+		$nik = $this->input->get('nik');
 
-		$this->model_data_stunting_anak->filter_avaiable()->join_stunting_anak();
-		$this->data['data_stunting_anak'] = $this->db->where('anak_id', $id_anak)->get('data_anak')->row();
+		$response = json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
 
-		$nik_anak = '';
-		if ($this->data['data_stunting_anak']->anak_nik != null) {
-			$nik_anak = ' ('.$this->data['data_stunting_anak']->anak_nik.')';
+		if ($response['success'] == true) {
+			$this->data['data_anak'] 		= $response['data'];
+			$this->data['data_stunting'] 	= $this->db->where(['stunting_anak_nik' => $nik])->get('data_stunting_anak')->result();
+
+			$this->template->title('Detail Stunting Anak '.$response['data']['nama_anak'].' ('.$response['data']['nik_anak'].')');
+			$this->render('backend/standart/administrator/data_stunting_anak/stunting_anak_detail', $this->data);
+		}else{
+			set_message($response['message'], 'error');
+
+			redirect_back(base_url('administrator/data_anak'));
 		}
-
-		$this->template->title('Detail Stunting Anak '.$this->data['data_stunting_anak']->anak_nama.$nik_anak);
-		$this->render('backend/standart/administrator/data_stunting_anak/stunting_anak_detail', $this->data);
 	}
 
 	public function add_stunting() {
 		$this->is_allowed('data_stunting_anak_add');
 
-		$this->data['id_anak'] = $this->input->get('anak');
+		$nik = $this->input->get('nik');
 
-		$this->template->title('Data Stunting Anak New');
-		$this->render('backend/standart/administrator/data_stunting_anak/stunting_anak_add', $this->data);
+		$response = json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
+
+		if ($response['success'] == true) {
+			$this->data['data_anak'] 		= $response['data'];
+	
+			$this->template->title('Data Stunting Anak New');
+			$this->render('backend/standart/administrator/data_stunting_anak/stunting_anak_add', $this->data);
+		}else{
+			set_message($response['message'], 'error');
+
+			redirect_back(base_url('administrator/data_anak'));
+		}
 	}
 	public function add_save_stunting() {
 		if (!$this->is_allowed('data_stunting_anak_add', false)) {
@@ -458,50 +471,19 @@ class Data_stunting_anak extends Admin {
 		$asupan_opd_status 		= $this->input->post('asupan_gizi_opd');
 		$asupan_opd_anggaran 	= $this->input->post('asupan_gizi_opd_anggaran');
 
-		$id_anak = $this->input->get('anak');
+		$nik_anak = $this->input->get('nik');
+
+		$query_anak = db_get_all_data('data_anak', ['anak_nik' => $nik_anak])[0];
 
 		$this->form_validation->set_rules('stunting_anak_dtks', 'DTKS', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tgl_ukur', 'Tanggal Pengukuran', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_berat_badan', 'Berat Badan Anak', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tinggi_badan', 'Tinggi Badan Anak', 'trim|required');
-		/*
-		$this->form_validation->set_rules('stunting_anak_anak_angkat', 'Anak Angkat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_anak_angkat_anggaran', 'Anggaran Anak Angkat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_pengasuh_balita', 'Pengasuh Balita', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_pengasuh_balita_anggaran', 'Anggaran Pengasuh Balita', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_day_care', 'Day Care Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_day_care_anggaran', 'Anggaran Day Care Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_asupan_gizi_pmt', 'Asupan Gizi (PMT)', 'trim|required');
-
-		$this->form_validation->set_rules('asupan_gizi_opd_id[0]', 'Asupan Gizi Instansi DKK', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_anggaran[0]', 'Anggaran Asupan Gizi Instansi DKK', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_id[1]', 'Asupan Gizi Instansi DISTAPANG', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_anggaran[1]', 'Anggaran Asupan Gizi Instansi DISTAPANG', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_id[2]', 'Asupan Gizi Instansi DISPERIKANAN', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_anggaran[2]', 'Anggaran Asupan Gizi Instansi DISPERIKANAN', 'trim|required');
-
-		$this->form_validation->set_rules('stunting_anak_asupan_gizi_csr', 'Asupan Gizi CSR', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_asupan_gizi_csr_anggaran', 'Anggaran Asupan Gizi CSR', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_imunisasi', 'Imunisasi Anak', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_imunisasi_anggaran', 'Anggaran Imunisasi Anak', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_terapi_gizi', 'Terapi Gizi', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_terapi_gizi_anggaran', 'Anggaran Terapi Gizi', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bpjs_stunting', 'BPJS Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bpjs_stunting_anggaran', 'Anggaran BPJS Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bantuan_sembako', 'Bantuan Sembako', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bantuan_sembako_anggaran', 'Anggaran Bantuan Sembako', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dahsyat', 'Dahsyat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dahsyat_anggaran', 'Anggaran Dahsyat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_rtlh', 'RTLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_rtlh_anggaran', 'Anggaran RTLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dlh', 'DLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dlh_anggaran', 'Anggaran DLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_akses_pangan', 'Akses Pangan / UMKM Lokal', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_akses_pangan_anggaran', 'Anggaran Akses Pangan / UMKM Lokal', 'trim|required'); */
 
 		if ($this->form_validation->run()) {
 			$save_data = [
-				'stunting_anak_anak_id' 					=> $id_anak,
+				'stunting_anak_nik' 						=> $nik_anak,
+				'stunting_anak_anak_id' 					=> $query_anak->anak_id,
 				'stunting_anak_dtks' 						=> $this->input->post('stunting_anak_dtks'),
 				'stunting_anak_tgl_ukur' 					=> $this->input->post('stunting_anak_tgl_ukur'),
 				'stunting_anak_berat_badan' 				=> $this->input->post('stunting_anak_berat_badan'),
@@ -557,7 +539,7 @@ class Data_stunting_anak extends Admin {
 					$this->data['id'] 	   = $save_data_stunting_anak;
 					$this->data['message'] = cclang('success_save_data_stay', [
 						anchor('administrator/data_stunting_anak/edit/' . $save_data_stunting_anak, 'Edit Data Stunting Anak'),
-						anchor('administrator/data_stunting_anak', ' Go back to list')
+						anchor('administrator/data_stunting_anak/view_stunting?nik='.$nik_anak, ' Go back to list')
 					]);
 				} else {
 					set_message(
@@ -566,7 +548,7 @@ class Data_stunting_anak extends Admin {
 					]), 'success');
 
 					$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?nik='.$nik_anak);
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -575,7 +557,7 @@ class Data_stunting_anak extends Admin {
 				} else {
 					$this->data['success'] = false;
 					$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?nik='.$nik_anak);
 				}
 			}
 		} else {
@@ -590,10 +572,21 @@ class Data_stunting_anak extends Admin {
 	public function edit_stunting($id) {
 		$this->is_allowed('data_stunting_anak_update');
 
-		$this->data['data_stunting_anak'] = $this->model_data_stunting_anak->find($id);
+		$query_stunting = $this->model_data_stunting_anak->find($id);
 
-		$this->template->title('Data Stunting Anak Update');
-		$this->render('backend/standart/administrator/data_stunting_anak/stunting_anak_update', $this->data);
+		$response = json_decode(api_data_anak('stunting/anak?nik='.$query_stunting->stunting_anak_nik), true);
+
+		if ($response['success'] == true) {
+			$this->data['data_anak'] 		= $response['data'];
+			$this->data['data_stunting'] 	= $this->model_data_stunting_anak->find($id);
+
+			$this->template->title('Data Stunting Anak Update');
+			$this->render('backend/standart/administrator/data_stunting_anak/stunting_anak_update', $this->data);
+		}else{
+			set_message($response['message'], 'error');
+
+			redirect_back(base_url('administrator/data_stunting_anak/view_stunting?nik='.$query_stunting->intervensi_anak_nik));
+		}
 	}
 
 	
@@ -610,47 +603,12 @@ class Data_stunting_anak extends Admin {
 		$asupan_opd_status 		= $this->input->post('asupan_gizi_opd');
 		$asupan_opd_anggaran 	= $this->input->post('asupan_gizi_opd_anggaran');
 
-		$id_anak = db_get_all_data('data_stunting_anak', ['stunting_anak_id' => $id])[0]->stunting_anak_anak_id;
+		$query_stunting = db_get_all_data('data_stunting_anak', ['stunting_anak_id' => $id])[0];
 
 		$this->form_validation->set_rules('stunting_anak_dtks', 'DTKS', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tgl_ukur', 'Tanggal Pengukuran', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_berat_badan', 'Berat Badan Anak', 'trim|required');
 		$this->form_validation->set_rules('stunting_anak_tinggi_badan', 'Tinggi Badan Anak', 'trim|required');
-		/*
-		$this->form_validation->set_rules('stunting_anak_anak_angkat', 'Anak Angkat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_anak_angkat_anggaran', 'Anggaran Anak Angkat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_pengasuh_balita', 'Pengasuh Balita', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_pengasuh_balita_anggaran', 'Anggaran Pengasuh Balita', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_day_care', 'Day Care Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_day_care_anggaran', 'Anggaran Day Care Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_asupan_gizi_pmt', 'Asupan Gizi (PMT)', 'trim|required');
-
-		$this->form_validation->set_rules('asupan_gizi_opd_id[0]', 'Asupan Gizi Instansi DKK', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_anggaran[0]', 'Anggaran Asupan Gizi Instansi DKK', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_id[1]', 'Asupan Gizi Instansi DISTAPANG', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_anggaran[1]', 'Anggaran Asupan Gizi Instansi DISTAPANG', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_id[2]', 'Asupan Gizi Instansi DISPERIKANAN', 'trim|required');
-		$this->form_validation->set_rules('asupan_gizi_opd_anggaran[2]', 'Anggaran Asupan Gizi Instansi DISPERIKANAN', 'trim|required');
-
-		$this->form_validation->set_rules('stunting_anak_asupan_gizi_csr', 'Asupan Gizi CSR', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_asupan_gizi_csr_anggaran', 'Anggaran Asupan Gizi CSR', 'trim|required');
-
-		$this->form_validation->set_rules('stunting_anak_imunisasi', 'Imunisasi Anak', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_imunisasi_anggaran', 'Anggaran Imunisasi Anak', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_terapi_gizi', 'Terapi Gizi', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_terapi_gizi_anggaran', 'Anggaran Terapi Gizi', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bpjs_stunting', 'BPJS Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bpjs_stunting_anggaran', 'Anggaran BPJS Stunting', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bantuan_sembako', 'Bantuan Sembako', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_bantuan_sembako_anggaran', 'Anggaran Bantuan Sembako', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dahsyat', 'Dahsyat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dahsyat_anggaran', 'Anggaran Dahsyat', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_rtlh', 'RTLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_rtlh_anggaran', 'Anggaran RTLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dlh', 'DLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_dlh_anggaran', 'Anggaran DLH', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_akses_pangan', 'Akses Pangan / UMKM Lokal', 'trim|required');
-		$this->form_validation->set_rules('stunting_anak_akses_pangan_anggaran', 'Anggaran Akses Pangan / UMKM Lokal', 'trim|required'); */
 
 		if ($this->form_validation->run()) {
 			$save_data = [
@@ -706,7 +664,7 @@ class Data_stunting_anak extends Admin {
 					$this->data['success'] = true;
 					$this->data['id'] 	   = $id;
 					$this->data['message'] = cclang('success_update_data_stay', [
-						anchor('administrator/data_stunting_anak', ' Go back to list')
+						anchor('administrator/data_stunting_anak/view_stunting?nik='.$query_stunting->stunting_anak_nik, ' Go back to list')
 					]);
 				} else {
 					set_message(
@@ -714,7 +672,7 @@ class Data_stunting_anak extends Admin {
 					]), 'success');
 
 					$this->data['success'] = true;
-					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?nik='.$query_stunting->stunting_anak_nik);
 				}
 			} else {
 				if ($this->input->post('save_type') == 'stay') {
@@ -723,7 +681,7 @@ class Data_stunting_anak extends Admin {
 				} else {
 					$this->data['success'] = false;
 					$this->data['message'] = cclang('data_not_change');
-					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?anak='.$id_anak);
+					$this->data['redirect'] = base_url('administrator/data_stunting_anak/view_stunting?nik='.$query_stunting->stunting_anak_nik);
 				}
 			}
 		} else {

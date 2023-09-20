@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?= BASE_ASSET.'datatables/datatables.min.css';?>" />
+
 <section class="content-header">
 	<h1>
 		Data Profile Anak <small><?= cclang('detail', ['Data Profile Anak']); ?> </small>
@@ -40,15 +42,15 @@
 								<table class="table table-hover table-striped">
 									<tr>
 										<th>NIK Anak</th>
-										<td><?= $data_anak->anak_nik != null ? $data_anak->anak_nik : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nik_anak'] != null ? $data_anak['nik_anak'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>Nama Anak</th>
-										<td><?= $data_anak->anak_nama;?></td>
+										<td><?= $data_anak['nama_anak'];?></td>
 									</tr>
 									<tr>
 										<th>Tanggal Lahir Anak</th>
-										<td><?= $data_anak->anak_tanggal_lahir;?></td>
+										<td><?= systemTanggalIndo($data_anak['tanggal_lahir']);?></td>
 									</tr>
 									<tr>
 										<th>Jenis Kelamin Anak</th>
@@ -56,15 +58,15 @@
 									</tr>
 									<tr>
 										<th>Alamat Rumah Anak</th>
-										<td><?= $data_anak->anak_alamat;?></td>
+										<td><?= $data_anak['alamat_ktp'];?></td>
 									</tr>
 									<tr>
 										<th>RT / RW</th>
-										<td>RT <?= $data_anak->anak_rt != null ? $data_anak->anak_rt : '-'?> / RW <?= $data_anak->anak_rw != null ? $data_anak->anak_rw : '-';?></td>
+										<td>RT <?= $data_anak['rt_ktp'] != null ? $data_anak['rt_ktp'] : '-'?> / RW <?= $data_anak['rw_ktp'] != null ? $data_anak['rw_ktp'] : '-';?></td>
 									</tr>
 									<tr>
 										<th>Kecamatan, Kelurahan</th>
-										<td><?= $data_anak->kelurahan_nama.' - '.$data_anak->kecamatan_nama;?></td>
+										<td><?= $data_anak['kelurahan_ktp'].' - '.$data_anak['kecamatan_ktp'];?></td>
 									</tr>
 								</table>
 							</div>
@@ -74,19 +76,19 @@
 								<table class="table table-hover table-striped">
 									<tr>
 										<th>NIK Ayah</th>
-										<td><?= $data_anak->anak_nik_ayah != null ? $data_anak->anak_nik_ayah : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nik_ayah'] != null ? $data_anak['nik_ayah'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>Nama Ayah</th>
-										<td><?= $data_anak->anak_nama_ayah != null ? $data_anak->anak_nama_ayah : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nama_ayah'] != null ? $data_anak['nama_ayah'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>NIK Ibu</th>
-										<td><?= $data_anak->anak_nik_ibu != null ? $data_anak->anak_nik_ibu : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nik_ibu'] != null ? $data_anak['nik_ibu'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 									<tr>
 										<th>Nama Ibu</th>
-										<td><?= $data_anak->anak_nama_ibu != null ? $data_anak->anak_nama_ibu : '<i>belum ditentukan</i>';?></td>
+										<td><?= $data_anak['nama_ibu'] != null ? $data_anak['nama_ibu'] : '<i>belum ditentukan</i>';?></td>
 									</tr>
 								</table>
 							</div>
@@ -106,7 +108,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive no-padding">
-								<table class="table table-bordered">
+								<table class="table table-bordered" id="tabel-stunting">
 									<tr>
 										<th style="text-align: center; vertical-align: middle;" rowspan="3">Tanggal Pengukuran</th>
 										<th style="text-align: center; vertical-align: middle;" rowspan="3">DTKS</th>
@@ -166,8 +168,7 @@
 										<th style="text-align: center; vertical-align: middle;">Anggaran</th>
 									</tr>
 							<?php
-								$query_data_stunting = db_get_all_data('data_stunting_anak', ['stunting_anak_anak_id' => $data_anak->anak_id]);
-								foreach ($query_data_stunting as $item) {
+								foreach ($data_stunting as $item) {
 							?>
 									<tr>
 										<td><?= $item->stunting_anak_tgl_ukur;?></td>
@@ -245,64 +246,67 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive no-padding">
-								<table class="table table-bordered">
+								<table class="table table-bordered" id="tabel-perkembangan">
 									<thead>
 										<tr>
-											<th>No.</th>
-											<th>Tanggal Perkembangan</th>
-											<th>Deskripsi</th>
-											<th>Foto Kegiatan</th>
-											<th>Indikasi Penyakit</th>
-											<th>Keterangan</th>
-											<th>Instansi Penginput</th>
+											<th style="text-align: center;">No.</th>
+											<th style="text-align: center;">Tanggal Perkembangan</th>
+											<th style="text-align: center;">Deskripsi Perkembangan</th>
+											<th style="text-align: center;">Foto Kegiatan</th>
+											<th style="text-align: center;">Indikasi Penyakit</th>
 										</tr>
 									</thead>
-									<tbody>
-								<?php
-									$no = '1';
-									$query_perkembangan_anak = $this->db->where(['perkembangan_anak_id' => $data_anak->anak_id])->order_by('perkembangan_tgl', 'ASC')->get('perkembangan_anak')->result();
-									foreach ($query_perkembangan_anak as $item) {
-								?>
-										<tr>
-											<td><?= $no++;?>.</td>
-											<td><?= $item->perkembangan_tgl;?></td>
-											<td><?= $item->perkembangan_deskripsi;?></td>
-											<td>
-									<?php
-										foreach (explode(',', $item->perkembangan_foto) as $file):
-											if (!empty($file)):
-												if (is_image($file)):
-									?>
-											<a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/perkembangan_anak/' . $file; ?>">
-												<img src="<?= BASE_URL . 'uploads/perkembangan_anak/' . $file; ?>" class="image-responsive" alt="image perkembangan_anak" title="perkembangan_foto perkembangan_anak" width="40px">
-											</a>
-									<?php else: ?>
-											<a href="<?= BASE_URL . 'uploads/perkembangan_anak/' . $file; ?>" target="blank">
-												<img src="<?= get_icon_file($file); ?>" class="image-responsive image-icon" alt="image perkembangan_anak" title="perkembangan_foto <?= $file; ?>" width="40px">
-											</a>
-									<?php
-												endif;
-											endif;
-										endforeach;
-									?>
-											</td>
-											<td><?= $item->perkembangan_indikasi;?></td>
-											<td><?= $item->perkembangan_keterangan;?></td>
-											<td><?= $item->opd_nama;?></td>
-										</tr>
-								<?php
-									}
+									<tbody>									
+<?php
+	$no = '1';
 
-									if (count($query_perkembangan_anak) == 0) {
-								?>
-										<tr>
-											<td colspan="100">
-												Data Tidak ada.
-											</td>
-										</tr>
-								<?php
-									}
-								?>
+	if ($data_perkembangan['success'] == true) {
+		foreach ($data_perkembangan['data'] as $item) {
+			$deskripsi = [];
+
+			foreach ($item['deskripsi'] as $key => $value) {
+				$deskripsi[] = '<b>'.cclang($key).'</b> : '.$value;
+			}
+?>
+			<tr>
+				<td><?= $no++;?>.</td>
+				<td><?= $item['tanggal_catat'];?></td>
+				<td>
+<?php
+	echo implode('<br/>', $deskripsi);
+?>
+				</td>
+				<td>
+			<?php
+				foreach (explode(',', $item['foto_kegiatan']) as $file):
+					if (!empty($file)):
+						if (is_image($file)):
+			?>
+					<a class="fancybox" rel="group" href="<?= BASE_URL . 'uploads/perkembangan_anak/' . $file; ?>">
+						<img src="<?= BASE_URL . 'uploads/perkembangan_anak/' . $file; ?>" class="image-responsive" alt="image perkembangan_anak" title="perkembangan_foto perkembangan_anak" width="40px">
+					</a>
+			<?php else: ?>
+					<a href="<?= BASE_URL . 'uploads/perkembangan_anak/' . $file; ?>" target="blank">
+						<img src="<?= get_icon_file($file); ?>" class="image-responsive image-icon" alt="image perkembangan_anak" title="perkembangan_foto <?= $file; ?>" width="40px">
+					</a>
+			<?php
+						endif;
+					endif;
+				endforeach;
+			?>
+				</td>
+				<td></td>
+			</tr>
+<?php
+		}		
+	}else {
+?>
+	<tr>
+		<th colspan="100"><label class="label label-danger center">Error : <?= $data['message'];?></label></th>
+	</tr>
+<?php
+	}
+?>
 									</tbody>
 								</table>
 							</div>
@@ -322,7 +326,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive no-padding">
-								<table class="table table-bordered">
+								<table class="table table-bordered" id="tabel-intervensi">
 									<tr>
 										<th style="text-align: center; vertical-align: middle;">No</th>
 										<th style="text-align: center; vertical-align: middle;">Kecamatan</th>
@@ -339,8 +343,7 @@
 									</tr>
 							<?php
 								$no = 1;
-								$query_intervensi_anak = $this->db->where(['intervensi_anak_id' => $data_anak->anak_id])->order_by('intervensi_tgl_masuk', 'ASC')->get('data_intervensi_anak')->result();
-								foreach ($query_intervensi_anak as $item) {
+								foreach ($data_intervensi as $item) {
 							?>
 								<tr>
 									<td><?= $no++;?></td>
@@ -359,7 +362,7 @@
 							<?php
 								}
 
-								if (count($query_intervensi_anak) == 0) {
+								if (count($data_intervensi) == 0) {
 							?>
 									<tr>
 										<td colspan="100">
@@ -382,7 +385,7 @@
 			<div class="box box-danger">
 				<div class="box-footer">
 					<?php is_allowed('data_anak_profile_export', function() use ($data_anak){?>
-						<a href="<?= site_url('administrator/data_anak/export_profile?anak=' . $data_anak->anak_id); ?>" target="_blank" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i>
+						<a href="<?= site_url('administrator/data_anak/export_profile?nik=' . $data_anak['nik_anak']); ?>" target="_blank" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i>
 							<?= cclang('export_profile_anak'); ?></a>
 					<?php }) ?>
 					<a class="btn btn-flat btn-default" id="btn_back" title="back (Ctrl+x)" href="<?= site_url('administrator/data_anak/'); ?>">
@@ -393,25 +396,29 @@
 	</div>
 </section>
 
+<script type="text/javascript" src="<?= BASE_ASSET.'datatables/datatables.min.js';?>"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		(function () {
-			var anak_puskesmas_id = $('.detail_group-anak_puskesmas_id');
-			var anak_kecamatan_id = $('.detail_group-anak_kecamatan_id');
-			var anak_kelurahan_id = $('.detail_group-anak_kelurahan_id');
-			var anak_no_kk = $('.detail_group-anak_no_kk');
-			var anak_nik = $('.detail_group-anak_nik');
-			var anak_nama = $('.detail_group-anak_nama');
-			var anak_jenkel = $('.detail_group-anak_jenkel');
-			var anak_tanggal_lahir = $('.detail_group-anak_tanggal_lahir');
-			var anak_alamat = $('.detail_group-anak_alamat');
-			var anak_rt = $('.detail_group-anak_rt');
-			var anak_rw = $('.detail_group-anak_rw');
-			var anak_nik_ayah = $('.detail_group-anak_nik_ayah');
-			var anak_nama_ayah = $('.detail_group-anak_nama_ayah');
-			var anak_nik_ibu = $('.detail_group-anak_nik_ibu');
-			var anak_nama_ibu = $('.detail_group-anak_nama_ibu');
-		})()
+		$('#tabel-perkembangan').DataTable({
+			"ordering": false,
+		});
 
+		(function () {
+			var anak_puskesmas_id 	= $('.detail_group-anak_puskesmas_id');
+			var anak_kecamatan_id 	= $('.detail_group-anak_kecamatan_id');
+			var anak_kelurahan_id 	= $('.detail_group-anak_kelurahan_id');
+			var anak_no_kk 			= $('.detail_group-anak_no_kk');
+			var anak_nik 			= $('.detail_group-anak_nik');
+			var anak_nama 			= $('.detail_group-anak_nama');
+			var anak_jenkel 		= $('.detail_group-anak_jenkel');
+			var anak_tanggal_lahir 	= $('.detail_group-anak_tanggal_lahir');
+			var anak_alamat 		= $('.detail_group-anak_alamat');
+			var anak_rt 			= $('.detail_group-anak_rt');
+			var anak_rw 			= $('.detail_group-anak_rw');
+			var anak_nik_ayah 		= $('.detail_group-anak_nik_ayah');
+			var anak_nama_ayah 		= $('.detail_group-anak_nama_ayah');
+			var anak_nik_ibu 		= $('.detail_group-anak_nik_ibu');
+			var anak_nama_ibu 		= $('.detail_group-anak_nama_ibu');
+		})()
 	});
 </script>

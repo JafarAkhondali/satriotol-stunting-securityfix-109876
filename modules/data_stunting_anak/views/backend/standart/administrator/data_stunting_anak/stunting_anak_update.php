@@ -12,7 +12,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-warning">
+			<div class="box box-danger">
 				<div class="box-body">
 					<div class="box box-widget widget-user-2">
 						<div class="widget-user-header">
@@ -32,22 +32,22 @@
 
 							$user_groups = $this->model_group->get_user_group_ids();
 
-							$stunting_dkk 			= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $data_stunting_anak->stunting_anak_id, 'asupan_gizi_opd_id' => 11])[0];
-							$stunting_distapang 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $data_stunting_anak->stunting_anak_id, 'asupan_gizi_opd_id' => 12])[0];
-							$stunting_disperikan 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $data_stunting_anak->stunting_anak_id, 'asupan_gizi_opd_id' => 25])[0];
+							$stunting_dkk 			= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $data_stunting->stunting_anak_id, 'asupan_gizi_opd_id' => 11])[0];
+							$stunting_distapang 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $data_stunting->stunting_anak_id, 'asupan_gizi_opd_id' => 12])[0];
+							$stunting_disperikan 	= db_get_all_data('data_asupan_gizi_stunting', ['asupan_gizi_data_stunting_anak_id' => $data_stunting->stunting_anak_id, 'asupan_gizi_opd_id' => 25])[0];
 						?>
 
 						<div class="form-group group-stunting_anak_anak_id">
-							<label for="stunting_anak_anak_id" class="col-sm-2 control-label">Nama Anak <i class="required">*</i></label>
+							<label for="stunting_anak_anak_id" class="col-sm-2 control-label">NIK Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= join_multi_select($data_stunting_anak->stunting_anak_anak_id, 'data_anak', 'anak_id', 'anak_nik') != null ? strtoupper(join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nik')) : '-';?></label>
+								<label class="form-control"><?= $data_anak['nik_anak'];?></label>
 							</div>
 						</div>
 
 						<div class="form-group group-stunting_anak_anak_id">
 							<label for="stunting_anak_anak_id" class="col-sm-2 control-label">Nama Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= strtoupper(join_multi_select($data_stunting_anak->stunting_anak_anak_id, 'data_anak', 'anak_id', 'anak_nama'));?></label>
+								<label class="form-control"><?= strtoupper($data_anak['nama_anak']);?></label>
 							</div>
 						</div>
 
@@ -55,10 +55,10 @@
 							<label for="stunting_anak_dtks" class="col-sm-2 control-label">DTKS <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_dtks" id="stunting_anak_dtks" value="yes" <?= $data_stunting_anak->stunting_anak_dtks == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_dtks" id="stunting_anak_dtks" value="yes" <?= $data_stunting->stunting_anak_dtks == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_dtks" id="stunting_anak_dtks" value="no" <?= $data_stunting_anak->stunting_anak_dtks == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_dtks" id="stunting_anak_dtks" value="no" <?= $data_stunting->stunting_anak_dtks == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -68,7 +68,7 @@
 							<label for="stunting_anak_tgl_ukur" class="col-sm-2 control-label">Tanggal Pengukuran <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="input-group date col-sm-8">
-									<input type="text" class="form-control pull-right datepicker" name="stunting_anak_tgl_ukur" placeholder="" id="stunting_anak_tgl_ukur" value="<?= set_value('data_stunting_anak_stunting_anak_tgl_ukur_name', $data_stunting_anak->stunting_anak_tgl_ukur); ?>">
+									<input type="text" class="form-control pull-right datepicker" name="stunting_anak_tgl_ukur" placeholder="" id="stunting_anak_tgl_ukur" value="<?= set_value('data_stunting_anak_stunting_anak_tgl_ukur_name', $data_stunting->stunting_anak_tgl_ukur); ?>">
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -77,7 +77,7 @@
 						<div class="form-group group-stunting_anak_berat_badan">
 							<label for="stunting_anak_berat_badan" class="col-sm-2 control-label">Berat Badan Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_berat_badan" id="stunting_anak_berat_badan" placeholder="" value="<?= set_value('stunting_anak_berat_badan', $data_stunting_anak->stunting_anak_berat_badan); ?>">
+								<input type="text" class="form-control" name="stunting_anak_berat_badan" id="stunting_anak_berat_badan" placeholder="" value="<?= set_value('stunting_anak_berat_badan', $data_stunting->stunting_anak_berat_badan); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 						<div class="form-group group-stunting_anak_tinggi_badan">
 							<label for="stunting_anak_tinggi_badan" class="col-sm-2 control-label">Tinggi Badan Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_tinggi_badan" id="stunting_anak_tinggi_badan" placeholder="" value="<?= set_value('stunting_anak_tinggi_badan', $data_stunting_anak->stunting_anak_tinggi_badan); ?>">
+								<input type="text" class="form-control" name="stunting_anak_tinggi_badan" id="stunting_anak_tinggi_badan" placeholder="" value="<?= set_value('stunting_anak_tinggi_badan', $data_stunting->stunting_anak_tinggi_badan); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -94,10 +94,10 @@
 							<label for="stunting_anak_anak_angkat" class="col-sm-2 control-label">Anak Angkat <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_anak_angkat" id="stunting_anak_anak_angkat" value="yes" <?= $data_stunting_anak->stunting_anak_anak_angkat == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_anak_angkat" id="stunting_anak_anak_angkat" value="yes" <?= $data_stunting->stunting_anak_anak_angkat == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_anak_angkat" id="stunting_anak_anak_angkat" value="no" <?= $data_stunting_anak->stunting_anak_anak_angkat == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_anak_angkat" id="stunting_anak_anak_angkat" value="no" <?= $data_stunting->stunting_anak_anak_angkat == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -106,7 +106,7 @@
 						<div class="form-group group-stunting_anak_anak_angkat_anggaran">
 							<label for="stunting_anak_anak_angkat_anggaran" class="col-sm-2 control-label">Anggaran Anak Angkat <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_anak_angkat_anggaran" id="stunting_anak_anak_angkat_anggaran" placeholder="" value="<?= set_value('stunting_anak_anak_angkat_anggaran', $data_stunting_anak->stunting_anak_anak_angkat_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_anak_angkat_anggaran" id="stunting_anak_anak_angkat_anggaran" placeholder="" value="<?= set_value('stunting_anak_anak_angkat_anggaran', $data_stunting->stunting_anak_anak_angkat_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -115,10 +115,10 @@
 							<label for="stunting_anak_pengasuh_balita" class="col-sm-2 control-label">Pengasuh Balita <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_pengasuh_balita" id="stunting_anak_pengasuh_balita" value="yes" <?= $data_stunting_anak->stunting_anak_pengasuh_balita == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_pengasuh_balita" id="stunting_anak_pengasuh_balita" value="yes" <?= $data_stunting->stunting_anak_pengasuh_balita == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_pengasuh_balita" id="stunting_anak_pengasuh_balita" value="no" <?= $data_stunting_anak->stunting_anak_pengasuh_balita == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_pengasuh_balita" id="stunting_anak_pengasuh_balita" value="no" <?= $data_stunting->stunting_anak_pengasuh_balita == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -127,7 +127,7 @@
 						<div class="form-group group-stunting_anak_pengasuh_balita_anggaran">
 							<label for="stunting_anak_pengasuh_balita_anggaran" class="col-sm-2 control-label">Anggaran Pengasuh Balita <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_pengasuh_balita_anggaran" id="stunting_anak_pengasuh_balita_anggaran" placeholder="" value="<?= set_value('stunting_anak_pengasuh_balita_anggaran', $data_stunting_anak->stunting_anak_pengasuh_balita_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_pengasuh_balita_anggaran" id="stunting_anak_pengasuh_balita_anggaran" placeholder="" value="<?= set_value('stunting_anak_pengasuh_balita_anggaran', $data_stunting->stunting_anak_pengasuh_balita_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -136,10 +136,10 @@
 							<label for="stunting_anak_day_care" class="col-sm-2 control-label">Day Care Stunting <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_day_care" id="stunting_anak_day_care" value="yes" <?= $data_stunting_anak->stunting_anak_day_care == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_day_care" id="stunting_anak_day_care" value="yes" <?= $data_stunting->stunting_anak_day_care == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_day_care" id="stunting_anak_day_care" value="no" <?= $data_stunting_anak->stunting_anak_day_care == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_day_care" id="stunting_anak_day_care" value="no" <?= $data_stunting->stunting_anak_day_care == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -148,7 +148,7 @@
 						<div class="form-group group-stunting_anak_day_care_anggaran">
 							<label for="stunting_anak_day_care_anggaran" class="col-sm-2 control-label">Anggaran Day Care Stunting <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_day_care_anggaran" id="stunting_anak_day_care_anggaran" placeholder="" value="<?= set_value('stunting_anak_day_care_anggaran', $data_stunting_anak->stunting_anak_day_care_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_day_care_anggaran" id="stunting_anak_day_care_anggaran" placeholder="" value="<?= set_value('stunting_anak_day_care_anggaran', $data_stunting->stunting_anak_day_care_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -158,10 +158,10 @@
 								<i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_pmt" id="stunting_anak_asupan_gizi_pmt" value="yes" <?= $data_stunting_anak->stunting_anak_asupan_gizi_pmt == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_pmt" id="stunting_anak_asupan_gizi_pmt" value="yes" <?= $data_stunting->stunting_anak_asupan_gizi_pmt == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_pmt" id="stunting_anak_asupan_gizi_pmt" value="no" <?= $data_stunting_anak->stunting_anak_asupan_gizi_pmt == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_pmt" id="stunting_anak_asupan_gizi_pmt" value="no" <?= $data_stunting->stunting_anak_asupan_gizi_pmt == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -237,10 +237,10 @@
 							<label for="stunting_anak_asupan_gizi_csr" class="col-sm-2 control-label">Asupan Gizi CSR <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_csr" id="stunting_anak_asupan_gizi_csr" value="yes" <?= $data_stunting_anak->stunting_anak_asupan_gizi_csr == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_csr" id="stunting_anak_asupan_gizi_csr" value="yes" <?= $data_stunting->stunting_anak_asupan_gizi_csr == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_csr" id="stunting_anak_asupan_gizi_csr" value="no" <?= $data_stunting_anak->stunting_anak_asupan_gizi_csr == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_asupan_gizi_csr" id="stunting_anak_asupan_gizi_csr" value="no" <?= $data_stunting->stunting_anak_asupan_gizi_csr == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -249,7 +249,7 @@
 						<div class="form-group group-stunting_anak_asupan_gizi_csr_anggaran">
 							<label for="stunting_anak_asupan_gizi_csr_anggaran" class="col-sm-2 control-label">Asupan Gizi CSR <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="number" class="form-control" name="stunting_anak_asupan_gizi_csr_anggaran" id="stunting_anak_asupan_gizi_csr_anggaran" placeholder="Anggaran Asupan Gizi CSR" value="<?= set_value('stunting_anak_asupan_gizi_csr_anggaran', $data_stunting_anak->stunting_anak_asupan_gizi_csr_anggaran); ?>">
+								<input type="number" class="form-control" name="stunting_anak_asupan_gizi_csr_anggaran" id="stunting_anak_asupan_gizi_csr_anggaran" placeholder="Anggaran Asupan Gizi CSR" value="<?= set_value('stunting_anak_asupan_gizi_csr_anggaran', $data_stunting->stunting_anak_asupan_gizi_csr_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -258,10 +258,10 @@
 							<label for="stunting_anak_imunisasi" class="col-sm-2 control-label">Imunisasi Anak <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_imunisasi" id="stunting_anak_imunisasi" value="yes" <?= $data_stunting_anak->stunting_anak_imunisasi == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_imunisasi" id="stunting_anak_imunisasi" value="yes" <?= $data_stunting->stunting_anak_imunisasi == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_imunisasi" id="stunting_anak_imunisasi" value="no" <?= $data_stunting_anak->stunting_anak_imunisasi == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_imunisasi" id="stunting_anak_imunisasi" value="no" <?= $data_stunting->stunting_anak_imunisasi == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -270,7 +270,7 @@
 						<div class="form-group group-stunting_anak_imunisasi_anggaran">
 							<label for="stunting_anak_imunisasi_anggaran" class="col-sm-2 control-label">Anggaran Imunisasi Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_imunisasi_anggaran" id="stunting_anak_imunisasi_anggaran" placeholder="" value="<?= set_value('stunting_anak_imunisasi_anggaran', $data_stunting_anak->stunting_anak_imunisasi_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_imunisasi_anggaran" id="stunting_anak_imunisasi_anggaran" placeholder="" value="<?= set_value('stunting_anak_imunisasi_anggaran', $data_stunting->stunting_anak_imunisasi_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -279,10 +279,10 @@
 							<label for="stunting_anak_terapi_gizi" class="col-sm-2 control-label">Terapi Gizi <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_terapi_gizi" id="stunting_anak_terapi_gizi" value="yes" <?= $data_stunting_anak->stunting_anak_terapi_gizi == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_terapi_gizi" id="stunting_anak_terapi_gizi" value="yes" <?= $data_stunting->stunting_anak_terapi_gizi == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_terapi_gizi" id="stunting_anak_terapi_gizi" value="no" <?= $data_stunting_anak->stunting_anak_terapi_gizi == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_terapi_gizi" id="stunting_anak_terapi_gizi" value="no" <?= $data_stunting->stunting_anak_terapi_gizi == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -291,7 +291,7 @@
 						<div class="form-group group-stunting_anak_terapi_gizi_anggaran">
 							<label for="stunting_anak_terapi_gizi_anggaran" class="col-sm-2 control-label">Anggaran Terapi Gizi <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_terapi_gizi_anggaran" id="stunting_anak_terapi_gizi_anggaran" placeholder="" value="<?= set_value('stunting_anak_terapi_gizi_anggaran', $data_stunting_anak->stunting_anak_terapi_gizi_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_terapi_gizi_anggaran" id="stunting_anak_terapi_gizi_anggaran" placeholder="" value="<?= set_value('stunting_anak_terapi_gizi_anggaran', $data_stunting->stunting_anak_terapi_gizi_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -300,10 +300,10 @@
 							<label for="stunting_anak_bpjs_stunting" class="col-sm-2 control-label">BPJS Stunting <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_bpjs_stunting" id="stunting_anak_bpjs_stunting" value="yes" <?= $data_stunting_anak->stunting_anak_bpjs_stunting == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_bpjs_stunting" id="stunting_anak_bpjs_stunting" value="yes" <?= $data_stunting->stunting_anak_bpjs_stunting == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_bpjs_stunting" id="stunting_anak_bpjs_stunting" value="no" <?= $data_stunting_anak->stunting_anak_bpjs_stunting == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_bpjs_stunting" id="stunting_anak_bpjs_stunting" value="no" <?= $data_stunting->stunting_anak_bpjs_stunting == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -312,7 +312,7 @@
 						<div class="form-group group-stunting_anak_bpjs_stunting_anggaran">
 							<label for="stunting_anak_bpjs_stunting_anggaran" class="col-sm-2 control-label">Anggaran BPJS Stunting <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_bpjs_stunting_anggaran" id="stunting_anak_bpjs_stunting_anggaran" placeholder="" value="<?= set_value('stunting_anak_bpjs_stunting_anggaran', $data_stunting_anak->stunting_anak_bpjs_stunting_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_bpjs_stunting_anggaran" id="stunting_anak_bpjs_stunting_anggaran" placeholder="" value="<?= set_value('stunting_anak_bpjs_stunting_anggaran', $data_stunting->stunting_anak_bpjs_stunting_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -321,10 +321,10 @@
 							<label for="stunting_anak_bantuan_sembako" class="col-sm-2 control-label">Bantuan Sembako <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_bantuan_sembako" id="stunting_anak_bantuan_sembako" value="yes" <?= $data_stunting_anak->stunting_anak_bantuan_sembako == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_bantuan_sembako" id="stunting_anak_bantuan_sembako" value="yes" <?= $data_stunting->stunting_anak_bantuan_sembako == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_bantuan_sembako" id="stunting_anak_bantuan_sembako" value="no" <?= $data_stunting_anak->stunting_anak_bantuan_sembako == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_bantuan_sembako" id="stunting_anak_bantuan_sembako" value="no" <?= $data_stunting->stunting_anak_bantuan_sembako == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -333,7 +333,7 @@
 						<div class="form-group group-stunting_anak_bantuan_sembako_anggaran">
 							<label for="stunting_anak_bantuan_sembako_anggaran" class="col-sm-2 control-label">Anggaran Bantuan Sembako <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_bantuan_sembako_anggaran" id="stunting_anak_bantuan_sembako_anggaran" placeholder="" value="<?= set_value('stunting_anak_bantuan_sembako_anggaran', $data_stunting_anak->stunting_anak_bantuan_sembako_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_bantuan_sembako_anggaran" id="stunting_anak_bantuan_sembako_anggaran" placeholder="" value="<?= set_value('stunting_anak_bantuan_sembako_anggaran', $data_stunting->stunting_anak_bantuan_sembako_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -342,10 +342,10 @@
 							<label for="stunting_anak_dahsyat" class="col-sm-2 control-label">Dahsyat <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_dahsyat" id="stunting_anak_dahsyat" value="yes" <?= $data_stunting_anak->stunting_anak_dahsyat == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_dahsyat" id="stunting_anak_dahsyat" value="yes" <?= $data_stunting->stunting_anak_dahsyat == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_dahsyat" id="stunting_anak_dahsyat" value="no" <?= $data_stunting_anak->stunting_anak_dahsyat == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_dahsyat" id="stunting_anak_dahsyat" value="no" <?= $data_stunting->stunting_anak_dahsyat == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -354,7 +354,7 @@
 						<div class="form-group group-stunting_anak_dahsyat_anggaran">
 							<label for="stunting_anak_dahsyat_anggaran" class="col-sm-2 control-label">Anggaran Dahsyat <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_dahsyat_anggaran" id="stunting_anak_dahsyat_anggaran" placeholder="" value="<?= set_value('stunting_anak_dahsyat_anggaran', $data_stunting_anak->stunting_anak_dahsyat_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_dahsyat_anggaran" id="stunting_anak_dahsyat_anggaran" placeholder="" value="<?= set_value('stunting_anak_dahsyat_anggaran', $data_stunting->stunting_anak_dahsyat_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -363,10 +363,10 @@
 							<label for="stunting_anak_rtlh" class="col-sm-2 control-label">RTLH <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_rtlh" id="stunting_anak_rtlh" value="yes" <?= $data_stunting_anak->stunting_anak_rtlh == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_rtlh" id="stunting_anak_rtlh" value="yes" <?= $data_stunting->stunting_anak_rtlh == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_rtlh" id="stunting_anak_rtlh" value="no" <?= $data_stunting_anak->stunting_anak_rtlh == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_rtlh" id="stunting_anak_rtlh" value="no" <?= $data_stunting->stunting_anak_rtlh == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -375,7 +375,7 @@
 						<div class="form-group group-stunting_anak_rtlh_anggaran">
 							<label for="stunting_anak_rtlh_anggaran" class="col-sm-2 control-label">Anggaran RTLH <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_rtlh_anggaran" id="stunting_anak_rtlh_anggaran" placeholder="" value="<?= set_value('stunting_anak_rtlh_anggaran', $data_stunting_anak->stunting_anak_rtlh_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_rtlh_anggaran" id="stunting_anak_rtlh_anggaran" placeholder="" value="<?= set_value('stunting_anak_rtlh_anggaran', $data_stunting->stunting_anak_rtlh_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -384,10 +384,10 @@
 							<label for="stunting_anak_dlh" class="col-sm-2 control-label">DLH <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_dlh" id="stunting_anak_dlh" value="yes" <?= $data_stunting_anak->stunting_anak_dlh == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_dlh" id="stunting_anak_dlh" value="yes" <?= $data_stunting->stunting_anak_dlh == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_dlh" id="stunting_anak_dlh" value="no" <?= $data_stunting_anak->stunting_anak_dlh == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_dlh" id="stunting_anak_dlh" value="no" <?= $data_stunting->stunting_anak_dlh == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -396,7 +396,7 @@
 						<div class="form-group group-stunting_anak_dlh_anggaran">
 							<label for="stunting_anak_dlh_anggaran" class="col-sm-2 control-label">Anggaran DLH <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_dlh_anggaran" id="stunting_anak_dlh_anggaran" placeholder="" value="<?= set_value('stunting_anak_dlh_anggaran', $data_stunting_anak->stunting_anak_dlh_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_dlh_anggaran" id="stunting_anak_dlh_anggaran" placeholder="" value="<?= set_value('stunting_anak_dlh_anggaran', $data_stunting->stunting_anak_dlh_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -405,10 +405,10 @@
 							<label for="stunting_anak_akses_pangan" class="col-sm-2 control-label">Akses Pangan / UMKM Lokal <i class="required">*</i></label>
 							<div class="col-sm-6">
 								<div class="col-md-2 padding-left-0">
-									<label><input type="radio" class="flat-red" name="stunting_anak_akses_pangan" id="stunting_anak_akses_pangan" value="yes" <?= $data_stunting_anak->stunting_anak_akses_pangan == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_akses_pangan" id="stunting_anak_akses_pangan" value="yes" <?= $data_stunting->stunting_anak_akses_pangan == "yes" ? "checked" : ""; ?>><?= cclang('yes'); ?></label>
 								</div>
 								<div class="col-md-14">
-									<label><input type="radio" class="flat-red" name="stunting_anak_akses_pangan" id="stunting_anak_akses_pangan" value="no" <?= $data_stunting_anak->stunting_anak_akses_pangan == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
+									<label><input type="radio" class="flat-red" name="stunting_anak_akses_pangan" id="stunting_anak_akses_pangan" value="no" <?= $data_stunting->stunting_anak_akses_pangan == "no" ? "checked" : ""; ?>><?= cclang('no'); ?></label>
 								</div>
 								<small class="info help-block"></small>
 							</div>
@@ -417,7 +417,7 @@
 						<div class="form-group group-stunting_anak_akses_pangan_anggaran">
 							<label for="stunting_anak_akses_pangan_anggaran" class="col-sm-2 control-label">Anggaran Akses Pangan / UMKM Lokal <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_akses_pangan_anggaran" id="stunting_anak_akses_pangan_anggaran" placeholder="" value="<?= set_value('stunting_anak_akses_pangan_anggaran', $data_stunting_anak->stunting_anak_akses_pangan_anggaran); ?>">
+								<input type="text" class="form-control" name="stunting_anak_akses_pangan_anggaran" id="stunting_anak_akses_pangan_anggaran" placeholder="" value="<?= set_value('stunting_anak_akses_pangan_anggaran', $data_stunting->stunting_anak_akses_pangan_anggaran); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -425,7 +425,7 @@
 						<div class="form-group group-stunting_anak_mitra_lain">
 							<label for="stunting_anak_mitra_lain" class="col-sm-2 control-label">Mitra Lain </label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="stunting_anak_mitra_lain" id="stunting_anak_mitra_lain" placeholder="" value="<?= set_value('stunting_anak_mitra_lain', $data_stunting_anak->stunting_anak_mitra_lain); ?>">
+								<input type="text" class="form-control" name="stunting_anak_mitra_lain" id="stunting_anak_mitra_lain" placeholder="" value="<?= set_value('stunting_anak_mitra_lain', $data_stunting->stunting_anak_mitra_lain); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -482,7 +482,7 @@
 			},
 			function (isConfirm) {
 				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/data_stunting_anak/view_stunting?anak=<?= $data_stunting_anak->stunting_anak_anak_id;?>';
+					window.location.href = BASE_URL + 'administrator/data_stunting_anak/view_stunting?nik=<?= $data_anak["nik_anak"];?>';
 				}
 			});
 

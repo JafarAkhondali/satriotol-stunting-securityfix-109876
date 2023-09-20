@@ -38,14 +38,14 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">NIK Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nik') != null ? join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nik') : '-';?></label>
+								<label class="form-control"><?= $data_anak['nik_anak'];?></label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Anak <i class="required">*</i></label>
 							<div class="col-sm-8">
-								<label class="form-control"><?= strtoupper(join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nama'));?></label>
+								<label class="form-control"><?= strtoupper($data_anak['nama_anak']);?></label>
 							</div>
 						</div>
 
@@ -105,7 +105,7 @@
 						<div class="form-group group-intervensi_nama_ortu_asuh">
 							<label for="intervensi_nama_ortu_asuh" class="col-sm-2 control-label">Nama Orang Tua Asuh<i class="required">*</i></label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="intervensi_nama_ortu_asuh" id="intervensi_nama_ortu_asuh" placeholder="Nama Orang Tua Asuh" value="<?= set_value('intervensi_nama_ortu_asuh', join_multi_select($id_anak, 'data_anak', 'anak_id', 'anak_nama_ibu')); ?>">
+								<input type="text" class="form-control" name="intervensi_nama_ortu_asuh" id="intervensi_nama_ortu_asuh" placeholder="Nama Orang Tua Asuh" value="<?= set_value('intervensi_nama_ortu_asuh', $data_anak["nama_ibu"]); ?>">
 								<small class="info help-block"></small>
 							</div>
 						</div>
@@ -189,7 +189,7 @@
 			},
 			function (isConfirm) {
 				if (isConfirm) {
-					window.location.href = BASE_URL + 'administrator/data_intervensi_anak/view_intervensi?anak=<?=$id_anak;?>';
+					window.location.href = BASE_URL + 'administrator/data_intervensi_anak/view_intervensi?nik=<?= $data_anak["nik_anak"];?>';
 				}
 			});
 
@@ -216,7 +216,7 @@
 			$('.loading').show();
 
 			$.ajax({
-				url: BASE_URL + 'administrator/data_intervensi_anak/add_save_intervensi?anak=<?= $id_anak;?>',
+				url: BASE_URL + 'administrator/data_intervensi_anak/add_save_intervensi?nik=<?= $data_anak["nik_anak"];?>',
 				type: 'POST',
 				dataType: 'json',
 				data: data_post,
@@ -300,20 +300,25 @@
 		});
 
 
-		function chained_intervensi_kelurahan_id(selected, complete) {
-			var val = $('#intervensi_kecamatan_id').val();
-			$.LoadingOverlay('show')
+		$('#intervensi_kecamatan_id').change(function(event) {
+			var val = $(this).val();
+
+			$.LoadingOverlay('show');
+
 			return $.ajax({
 				url: BASE_URL + 'administrator/data_intervensi_anak/ajax_intervensi_kelurahan_id/' + val,
 				dataType: 'JSON',
 			})
 			.done(function(res) {
 				var html = '<option value=""></option>';
+
 				$.each(res, function(index, val) {
-					html += '<option ' + (selected == val.kelurahan_id ? 'selected' : '') + ' value="' + val.kelurahan_id + '">' + val.kelurahan_nama + '</option>'
+					html += '<option value="' + val.kelurahan_id + '">' + val.kelurahan_nama + '</option>'
 				});
+
 				$('#intervensi_kelurahan_id').html(html);
 				$('#intervensi_kelurahan_id').trigger('chosen:updated');
+
 				if (typeof complete != 'undefined') {
 					complete();
 				}
@@ -324,17 +329,7 @@
 			.always(function() {
 				$.LoadingOverlay('hide')
 			});
-		}
-
-		$('#intervensi_kecamatan_id').change(function(event) {
-			chained_intervensi_kelurahan_id('')
 		});
-
-		async function chain() {
-			await chained_intervensi_kelurahan_id("<?= $data_anak->anak_kelurahan_id ?>");
-				}
-
-		chain();
 
 	}); /*end doc ready*/
 </script>
