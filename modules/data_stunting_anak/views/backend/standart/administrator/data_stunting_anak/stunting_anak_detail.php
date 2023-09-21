@@ -4,7 +4,7 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="<?= site_url('administrator/data_stunting_anak'); ?>">Data Stunting Anak</a></li>
+		<li><a href="<?= site_url('administrator/data_anak'); ?>">Data Anak</a></li>
 		<li class="active"><?= cclang('detail'); ?></li>
 	</ol>
 </section>

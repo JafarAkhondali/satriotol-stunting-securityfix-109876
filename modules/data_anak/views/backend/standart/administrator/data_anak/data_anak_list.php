@@ -10,6 +10,8 @@
 	</ol>
 </section>
 
+
+
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
@@ -57,7 +59,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php
+									<?php
 										if ($data_anak['success'] == true) {
 											$no = 1;
 											foreach ($data_anak['data'] as $item) {
@@ -68,7 +70,7 @@
 												} else {
 													$jenkel = '-';
 												}
-										?>
+									?>
 												<tr>
 													<td><?= $no++; ?></td>
 													<td>-</td>
@@ -105,10 +107,10 @@
 														<?php }) ?>
 													</td>
 												</tr>
-										<?php
+									<?php
 											}
 										}
-										?>
+									?>
 									</tbody>
 								</table>
 							</div>

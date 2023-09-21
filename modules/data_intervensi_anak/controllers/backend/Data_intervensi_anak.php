@@ -18,6 +18,68 @@ class Data_intervensi_anak extends Admin {
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
+	public function api_auth_data($parameter = null) {
+		$this->is_allowed('data_intervensi_anak_list');
+		
+		$curl_login = curl_init();
+
+		curl_setopt_array($curl_login, [
+			CURLOPT_URL 			=> url_api_dkk('login'),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'POST',
+			CURLOPT_POSTFIELDS 		=> '{
+				"email":"diskominfo@semarangkota.go.id",
+				"password":"kominfoSMG2023@"
+			}',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json'
+				],
+			]
+		);
+
+		$response_login = curl_exec($curl_login);
+
+		curl_close($curl_login);
+
+		$obj_login = json_decode($response_login);
+
+
+		$curl_data = curl_init();
+
+		curl_setopt_array($curl_data, [
+			CURLOPT_URL 			=> url_api_dkk($parameter),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'GET',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json',
+					'Authorization: Bearer '.$obj_login->token,
+				],
+			]
+		);
+
+		$response_stunting = curl_exec($curl_data);
+
+		curl_close($curl_data);
+
+		return json_decode($response_stunting, true);
+	}
+
 	/**
 	* show all Data Intervensi Anaks
 	*
@@ -391,7 +453,7 @@ class Data_intervensi_anak extends Admin {
 
 		$nik = $this->input->get('nik');
 
-		$response = json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
+		$response = $this->api_auth_data('stunting/anak?nik='.$nik);
 
 		if ($response['success'] == true) {
 			$this->data['data_anak'] 		= $response['data'];
@@ -411,7 +473,7 @@ class Data_intervensi_anak extends Admin {
 
 		$nik = $this->input->get('nik');
 
-		$response = json_decode(api_data_anak('stunting/anak?nik='.$nik), true);
+		$response = $this->api_auth_data('stunting/anak?nik='.$nik);
 
 		if ($response['success'] == true) {
 			$this->data['data_anak'] 		= $response['data'];
@@ -504,7 +566,7 @@ class Data_intervensi_anak extends Admin {
 
 		$query_intervensi = $this->model_data_intervensi_anak->find($id);
 
-		$response = json_decode(api_data_anak('stunting/anak?nik='.$query_intervensi->intervensi_anak_nik), true);
+		$response = json_decode($this->api_auth_data('stunting/anak?nik='.$query_intervensi->intervensi_anak_nik), true);
 
 		if ($response['success'] == true) {
 			$this->data['data_anak'] 		= $response['data'];

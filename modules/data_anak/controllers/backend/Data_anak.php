@@ -21,39 +21,66 @@ class Data_anak extends Admin {
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
-	public function data_anak_stunting($parameter = null) {
-		// $obj_api = json_decode(auth_api_login());
+	public function api_auth_data($parameter = null) {
+		$this->is_allowed('data_anak_list');
+		
+		$curl_login = curl_init();
 
-		// $uri = url_api_dkk('stunting');
+		curl_setopt_array($curl_login, [
+			CURLOPT_URL 			=> url_api_dkk('login'),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'POST',
+			CURLOPT_POSTFIELDS 		=> '{
+				"email":"diskominfo@semarangkota.go.id",
+				"password":"kominfoSMG2023@"
+			}',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json'
+				],
+			]
+		);
 
-		// $curl = curl_init();
+		$response_login = curl_exec($curl_login);
 
-		// curl_setopt_array($curl, [
-		// 	CURLOPT_URL 			=> $uri,
-		// 	CURLOPT_RETURNTRANSFER 	=> true,
-		// 	CURLOPT_ENCODING 		=> '',
-		// 	CURLOPT_MAXREDIRS 		=> 10,
-		// 	CURLOPT_TIMEOUT 		=> 0,
-		// 	CURLOPT_SSL_VERIFYHOST 	=> 0,
-		// 	CURLOPT_SSL_VERIFYPEER 	=> 0,
-		// 	CURLOPT_FOLLOWLOCATION 	=> true,
-		// 	CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
-		// 	CURLOPT_CUSTOMREQUEST 	=> 'GET',
-		// 	CURLOPT_HTTPHEADER 		=> [
-		// 			'Accept: application/json',
-		// 			'Content-Type: application/json',
-		// 			'Authorization: Bearer '.$obj_api->token,
-		// 		],
-		// 	]
-		// );
+		curl_close($curl_login);
 
-		// $response = curl_exec($curl);
+		$obj_login = json_decode($response_login);
 
-		// curl_close($curl);
 
-		$response = api_data_anak('stunting'.$parameter);
+		$curl_data = curl_init();
 
-		return json_decode($response, true);
+		curl_setopt_array($curl_data, [
+			CURLOPT_URL 			=> url_api_dkk($parameter),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'GET',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json',
+					'Authorization: Bearer '.$obj_login->token,
+				],
+			]
+		);
+
+		$response_stunting = curl_exec($curl_data);
+
+		curl_close($curl_data);
+
+		return json_decode($response_stunting, true);
 	}
 
 	/**
@@ -62,10 +89,8 @@ class Data_anak extends Admin {
 	* @var $offset String
 	*/
 	public function index($offset = 0) {
-		$this->is_allowed('data_anak_list');
-
 		$this->data = [
-			'data_anak' => $this->data_anak_stunting(),
+			'data_anak' => $this->api_auth_data('stunting'),
 		];
 
 		$this->template->title('Data Identitas Anak List');
@@ -330,8 +355,8 @@ class Data_anak extends Admin {
 
 		$nik = $this->input->get('nik');
 
-		$data_anak 			= $this->data_anak_stunting('/anak?nik='.$nik);
-		$data_perkembangan 	= $this->data_anak_stunting('/perkembangan?nik='.$nik);
+		$data_anak 			= $this->api_auth_data('stunting/anak?nik='.$nik);
+		$data_perkembangan 	= $this->api_auth_data('stunting/perkembangan?nik='.$nik);
 
 		$this->data['data_anak'] 			= $data_anak['data'];
 		$this->data['data_stunting'] 		= $this->db->where(['stunting_anak_nik' => $nik])->get('data_stunting_anak')->result();
@@ -361,8 +386,8 @@ class Data_anak extends Admin {
 		// $query_intervensi 	= $this->db->select('data_intervensi_anak.*, opd.opd_nama AS nama_instansi_penginput')->where(['intervensi_anak_id' => $id_anak])->join('aauth_users users', 'users.id = intervensi_user_created', 'LEFT')->join('opd', 'opd.opd_id = users.opd_id', 'LEFT')->order_by('intervensi_tgl_masuk', 'ASC')->get('data_intervensi_anak')->result();
 		// $query_perkembangan = $this->db->select('perkembangan_anak.*, users.id AS users_id, users.full_name AS users_name, opd.opd_id AS id_opd, opd.opd_nama AS nama_opd')->join('aauth_users users', 'users.id = perkembangan_user_created', 'LEFT')->join('opd', 'opd.opd_id = users.opd_id', 'LEFT')->where(['perkembangan_anak_id' => $id_anak])->order_by('perkembangan_tgl', 'ASC')->get('perkembangan_anak')->result();
 
-		$data_anak 			= $this->data_anak_stunting('/anak?nik='.$nik);
-		$data_perkembangan 	= $this->data_anak_stunting('/perkembangan?nik='.$nik);
+		$data_anak 			= $this->api_auth_data('stunting/anak?nik='.$nik);
+		$data_perkembangan 	= $this->api_auth_data('stunting/perkembangan?nik='.$nik);
 
 		$this->data['data_anak'] 			= $data_anak['data'];
 		$this->data['data_stunting'] 		= $this->db->where(['stunting_anak_nik' => $nik])->get('data_stunting_anak')->result();

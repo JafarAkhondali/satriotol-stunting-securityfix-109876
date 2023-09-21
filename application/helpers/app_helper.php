@@ -12,6 +12,7 @@ if (!function_exists('url_api_dkk')) {
 	}
 }
 
+/* 
 if (!function_exists('auth_api_login')) {
 	function auth_api_login() {
 		$curl = curl_init();
@@ -78,7 +79,7 @@ if (!function_exists('api_data_anak')) {
 
 		return $response;
 	}
-}
+} */
 
 
 if (!function_exists('get_mysql_version')) {
