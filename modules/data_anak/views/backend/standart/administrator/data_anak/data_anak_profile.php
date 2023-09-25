@@ -240,7 +240,7 @@
 		<div class="col-md-12">
 			<div class="box box-danger">
 				<div class="box-header">
-					<h3 class="box-title">Data Perkembangan Anak</h3>
+					<h3 class="box-title">Data Perkembangan & Pertumbuhan Anak</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">

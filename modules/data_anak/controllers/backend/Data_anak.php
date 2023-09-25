@@ -21,39 +21,12 @@ class Data_anak extends Admin {
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
-	public function api_auth_data($parameter = null) {
+	public function api_auth_data($parameter = null, $token = null) {
 		$this->is_allowed('data_anak_list');
-		
-		$curl_login = curl_init();
 
-		curl_setopt_array($curl_login, [
-			CURLOPT_URL 			=> url_api_dkk('login'),
-			CURLOPT_RETURNTRANSFER 	=> true,
-			CURLOPT_ENCODING 		=> '',
-			CURLOPT_MAXREDIRS 		=> 10,
-			CURLOPT_TIMEOUT 		=> 0,
-			CURLOPT_SSL_VERIFYHOST 	=> 0,
-			CURLOPT_SSL_VERIFYPEER 	=> 0,
-			CURLOPT_FOLLOWLOCATION 	=> true,
-			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST 	=> 'POST',
-			CURLOPT_POSTFIELDS 		=> '{
-				"email":"diskominfo@semarangkota.go.id",
-				"password":"kominfoSMG2023@"
-			}',
-			CURLOPT_HTTPHEADER 		=> [
-					'Accept: application/json',
-					'Content-Type: application/json'
-				],
-			]
-		);
-
-		$response_login = curl_exec($curl_login);
-
-		curl_close($curl_login);
-
-		$obj_login = json_decode($response_login);
-
+		if ($token == null) {
+			$token = $this->session->userdata('token');
+		}
 
 		$curl_data = curl_init();
 
@@ -71,7 +44,7 @@ class Data_anak extends Admin {
 			CURLOPT_HTTPHEADER 		=> [
 					'Accept: application/json',
 					'Content-Type: application/json',
-					'Authorization: Bearer '.$obj_login->token,
+					'Authorization: Bearer '.$token,
 				],
 			]
 		);
@@ -83,15 +56,69 @@ class Data_anak extends Admin {
 		return json_decode($response_stunting, true);
 	}
 
+	public function response_data_anak() {
+		$this->is_allowed('data_anak_list');
+
+		$data_anak = $this->api_auth_data('stunting');
+
+		$this->data['status'] 	= $data_anak['success'];
+
+		if ($data_anak['success'] == true) {
+			$data 	= [];
+			$no 	= $_POST['start'];
+
+			foreach ($data_anak['data'] as $item) {
+				$no++;
+				$row 					= [];
+
+				if ($item['jenis_kelamin'] == 'L') {
+					$jenkel = 'Laki-Laki';
+				}else if ($item['jenis_kelamin'] == 'P') {
+					$jenkel = 'Perempuan';
+				}else{
+					$jenkel = '-';
+				}
+
+				$row['no'] 				= $no.'.';
+				$row['nama_kecamatan'] 	= $item['kecamatan_ktp'];
+				$row['nama_kelurahan'] 	= $item['kelurahan_ktp'];
+				$row['no_kk_anak'] 		= $item['no_kk'];
+				$row['nik_anak'] 		= $item['nik_anak'];
+				$row['nama_anak'] 		= $item['nama_anak'];
+				$row['jenkel'] 			= $jenkel;
+				$row['tgl_lahir'] 		= systemTanggalIndo($item['tanggal_lahir']);
+				$row['umur'] 			= $item['usia'];
+				$row['alamat'] 			= $item['alamat_ktp'];
+				$row['nama_ibu'] 		= $item['nama_ibu'];
+				$row['action'] 			= '<a href="'.site_url('administrator/data_anak/profile_anak?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-default"><i class="fa fa-file-text-o"></i> '.cclang('profile_anak').'</a><br/>
+				<a href="'.site_url('administrator/data_stunting_anak/view_stunting?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-danger"><i class="fa fa-file-text-o"></i> '.cclang('stunting_anak').'</a><br/>
+				<a href="'.site_url('administrator/perkembangan_anak/view_perkembangan?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-info"><i class="fa fa-file-text-o"></i> '.cclang('perkembangan_anak').' & Pertumbuhan Anak</a><br/>
+				<a href="'.site_url('administrator/data_intervensi_anak/view_intervensi?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o"></i> '.cclang('intervensi_anak').'</a>';
+
+				$data[] = $row;
+			}
+
+			$this->data['data'] 	= $data;
+		}else{
+			$this->data['message'] 	= $data_anak['message'];
+		}
+
+		$this->response($this->data);
+	}
+
 	/**
 	* show all Data Anaks
 	*
 	* @var $offset String
 	*/
 	public function index($offset = 0) {
-		$this->data = [
-			'data_anak' => $this->api_auth_data('stunting'),
-		];
+		$this->is_allowed('data_anak_list');
+
+		// $this->data = [
+		// 	'data_anak' => $this->api_auth_data('stunting'),
+		// ];
+
+		// $this->response($this->data);
 
 		$this->template->title('Data Identitas Anak List');
 		$this->render('backend/standart/administrator/data_anak/data_anak_list', $this->data);
@@ -363,9 +390,6 @@ class Data_anak extends Admin {
 		$this->data['data_perkembangan'] 	= $data_perkembangan;
 		$this->data['data_intervensi'] 		= $this->db->where(['intervensi_anak_nik' => $nik])->get('data_intervensi_anak')->result();
 
-		// $this->response($this->data);
-		// exit;
-
 		if ($data_anak['success'] == true) {
 			$this->template->title('Data Profile Anak');
 			$this->render('backend/standart/administrator/data_anak/data_anak_profile', $this->data);
@@ -380,11 +404,6 @@ class Data_anak extends Admin {
 		$this->is_allowed('data_anak_profile_export');
 
 		$nik = $this->input->get('nik');
-
-		// $query_data_anak 	= $this->model_data_anak->join_avaiable()->filter_avaiable()->find($id_anak);
-		// $query_stunting 	= $this->db->where(['stunting_anak_anak_id' => $id_anak])->order_by('stunting_anak_tgl_ukur', 'ASC')->get('data_stunting_anak')->result();
-		// $query_intervensi 	= $this->db->select('data_intervensi_anak.*, opd.opd_nama AS nama_instansi_penginput')->where(['intervensi_anak_id' => $id_anak])->join('aauth_users users', 'users.id = intervensi_user_created', 'LEFT')->join('opd', 'opd.opd_id = users.opd_id', 'LEFT')->order_by('intervensi_tgl_masuk', 'ASC')->get('data_intervensi_anak')->result();
-		// $query_perkembangan = $this->db->select('perkembangan_anak.*, users.id AS users_id, users.full_name AS users_name, opd.opd_id AS id_opd, opd.opd_nama AS nama_opd')->join('aauth_users users', 'users.id = perkembangan_user_created', 'LEFT')->join('opd', 'opd.opd_id = users.opd_id', 'LEFT')->where(['perkembangan_anak_id' => $id_anak])->order_by('perkembangan_tgl', 'ASC')->get('perkembangan_anak')->result();
 
 		$data_anak 			= $this->api_auth_data('stunting/anak?nik='.$nik);
 		$data_perkembangan 	= $this->api_auth_data('stunting/perkembangan?nik='.$nik);

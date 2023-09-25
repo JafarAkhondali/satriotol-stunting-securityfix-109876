@@ -40,79 +40,7 @@
 							</div>
 
 							<div class="table-responsive">
-								<table class="table table-bordered table-striped dataTable">
-									<thead>
-										<tr>
-											<th>No.</th>
-											<th><?= cclang('anak_puskesmas_id') ?></th>
-											<th><?= cclang('anak_kecamatan_id') ?></th>
-											<th><?= cclang('anak_kelurahan_id') ?></th>
-											<th><?= cclang('anak_no_kk') ?></th>
-											<th><?= cclang('anak_nik') ?></th>
-											<th><?= cclang('anak_nama') ?></th>
-											<th><?= cclang('anak_jenkel') ?></th>
-											<th><?= cclang('anak_tanggal_lahir') ?></th>
-											<th>Umur</th>
-											<th><?= cclang('anak_alamat') ?></th>
-											<th><?= cclang('anak_nama_ibu') ?></th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-									<?php
-										if ($data_anak['success'] == true) {
-											$no = 1;
-											foreach ($data_anak['data'] as $item) {
-												if ($item['jenis_kelamin'] == 'L') {
-													$jenkel = 'LAKI-LAKI';
-												} else if ($item['jenis_kelamin'] == 'P') {
-													$jenkel = 'PEREMPUAN';
-												} else {
-													$jenkel = '-';
-												}
-									?>
-												<tr>
-													<td><?= $no++; ?></td>
-													<td>-</td>
-													<td><?= $item['kecamatan_ktp']; ?></td>
-													<td><?= $item['kelurahan_ktp']; ?></td>
-													<td><?= $item['no_kk']; ?></td>
-													<td><?= $item['nik_anak']; ?></td>
-													<td><?= $item['nama_anak']; ?></td>
-													<td><?= $jenkel; ?></td>
-													<td><?= convertsystemTanggalIndo($item['tanggal_lahir']); ?></td>
-													<td><?= $item['usia']; ?></td>
-													<td><?= $item['alamat_ktp']; ?></td>
-													<td><?= $item['nama_ibu']; ?></td>
-													<td width="200">
-														<?php is_allowed('data_anak_profile', function () use ($item) { ?>
-															<a href="<?= site_url('administrator/data_anak/profile_anak?nik=' . $item['nik_anak']); ?>" class="btn btn-sm btn-default"><i class="fa fa-file-text-o"></i>
-																<?= cclang('profile_anak'); ?></a><br />
-														<?php }) ?>
-														<?php is_allowed('data_anak_stunting', function () use ($item) { ?>
-															<a href="<?= site_url('administrator/data_stunting_anak/view_stunting?nik=' . $item['nik_anak']); ?>" class="btn btn-sm btn-danger"><i class="fa fa-file-text-o"></i>
-																<?= cclang('stunting_anak'); ?></a><br />
-														<?php }) ?>
-														<?php is_allowed('data_perkembangan_anak', function () use ($item) { ?>
-															<a href="<?= site_url('administrator/perkembangan_anak/view_perkembangan?nik=' . $item['nik_anak']); ?>" class="btn btn-sm btn-info"><i class="fa fa-file-text-o"></i>
-																<?= cclang('perkembangan_anak'); ?></a><br />
-														<?php }) ?>
-														<?php is_allowed('data_intervensi_anak', function () use ($item) { ?>
-															<a href="<?= site_url('administrator/data_intervensi_anak/view_intervensi?nik=' . $item['nik_anak']); ?>" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o"></i>
-																<?= cclang('intervensi_anak'); ?></a><br />
-														<?php }) ?>
-														<?php is_allowed('data_anak_view', function () use ($item) { ?>
-															<a href="<?= site_url('administrator/data_anak/view/' . $item['nik_anak']); ?>" class="btn btn-sm btn-warning"><i class="fa fa-newspaper-o"></i>
-																<?= cclang('view_button'); ?></a><br />
-														<?php }) ?>
-													</td>
-												</tr>
-									<?php
-											}
-										}
-									?>
-									</tbody>
-								</table>
+								<table class="table table-bordered table-striped" id="dataTable"></table>
 							</div>
 						</div>
 					</div>
@@ -126,26 +54,35 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		var table = $('.dataTable').DataTable();
-
-		// $.ajax({
-		// 	url: "<?= BASE_URL . 'administrator/data_anak/data_anak_stunting'; ?>",
-		// 	dataType: "json",
-		// 	success: function(response) {
-		// 		if (response.success === true) {
-		// 			$('.dataTable').DataTable({
-		// 				"processing" 	: true,
-		// 				"retrieve" 		: true,
-		// 				"serverSide" 	: true,
-		// 				"data"			: response.data,
-		// 			});
-		// 		} else {
-		// 			alert(response.message);
-		// 		}
-		// 	},
-		// 	error: function() {
-		// 		alert("Terjadi kesalahan saat mengambil data.");
-		// 	}
-		// });
+		$.ajax({
+			url: "<?= BASE_URL . 'administrator/data_anak/response_data_anak'; ?>",
+			dataType: "json",
+			success: function(response) {
+				if (response.status === true) {
+					$('#dataTable').DataTable({
+						"data"			: response.data,
+						"columns" : [
+							{ data: 'no', title: 'No.' },
+							{ data: 'nama_kecamatan', title: '<?= cclang('anak_kecamatan_id') ?>' },
+							{ data: 'nama_kelurahan', title: '<?= cclang('anak_kelurahan_id') ?>' },
+							{ data: 'no_kk_anak', title: '<?= cclang('anak_no_kk') ?>' },
+							{ data: 'nik_anak', title: '<?= cclang('anak_nik') ?>' },
+							{ data: 'nama_anak', title: '<?= cclang('anak_nama') ?>' },
+							{ data: 'jenkel', title: '<?= cclang('anak_jenkel') ?>'},
+							{ data: 'tgl_lahir', title: '<?= cclang('anak_tanggal_lahir') ?>' },
+							{ data: 'umur', title: 'Umur' },
+							{ data: 'alamat', title: '<?= cclang('anak_alamat') ?>' },
+							{ data: 'nama_ibu', title: '<?= cclang('anak_nama_ibu') ?>' },
+							{ data: 'action', title: 'Action' },
+						],
+					});
+				} else {
+					alert(response.message);
+				}
+			},
+			error: function() {
+				alert("Terjadi kesalahan saat mengambil data.");
+			}
+		});
 	});
 </script>

@@ -18,39 +18,12 @@ class Data_stunting_anak extends Admin {
 		$this->lang->load('web_lang', $this->current_lang);
 	}
 
-	public function api_auth_data($parameter = null) {
+	public function api_auth_data($parameter = null, $token = null) {
 		$this->is_allowed('data_stunting_anak_list');
-		
-		$curl_login = curl_init();
 
-		curl_setopt_array($curl_login, [
-			CURLOPT_URL 			=> url_api_dkk('login'),
-			CURLOPT_RETURNTRANSFER 	=> true,
-			CURLOPT_ENCODING 		=> '',
-			CURLOPT_MAXREDIRS 		=> 10,
-			CURLOPT_TIMEOUT 		=> 0,
-			CURLOPT_SSL_VERIFYHOST 	=> 0,
-			CURLOPT_SSL_VERIFYPEER 	=> 0,
-			CURLOPT_FOLLOWLOCATION 	=> true,
-			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST 	=> 'POST',
-			CURLOPT_POSTFIELDS 		=> '{
-				"email":"diskominfo@semarangkota.go.id",
-				"password":"kominfoSMG2023@"
-			}',
-			CURLOPT_HTTPHEADER 		=> [
-					'Accept: application/json',
-					'Content-Type: application/json'
-				],
-			]
-		);
-
-		$response_login = curl_exec($curl_login);
-
-		curl_close($curl_login);
-
-		$obj_login = json_decode($response_login);
-
+		if ($token == null) {
+			$token = $this->session->userdata('token');
+		}
 
 		$curl_data = curl_init();
 
@@ -68,7 +41,7 @@ class Data_stunting_anak extends Admin {
 			CURLOPT_HTTPHEADER 		=> [
 					'Accept: application/json',
 					'Content-Type: application/json',
-					'Authorization: Bearer '.$obj_login->token,
+					'Authorization: Bearer '.$token,
 				],
 			]
 		);

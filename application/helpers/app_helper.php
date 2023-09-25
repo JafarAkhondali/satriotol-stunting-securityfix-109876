@@ -12,7 +12,6 @@ if (!function_exists('url_api_dkk')) {
 	}
 }
 
-/* 
 if (!function_exists('auth_api_login')) {
 	function auth_api_login() {
 		$curl = curl_init();
@@ -47,6 +46,42 @@ if (!function_exists('auth_api_login')) {
 	}
 }
 
+
+if (!function_exists('auth_api_logout')) {
+	function auth_api_logout() {
+		$ci = &get_instance();
+		$token = $ci->session->userdata('token_api');
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL 			=> url_api_dkk('logout'),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'POST',
+			CURLOPT_HTTPHEADER 		=> array(
+					'Accept: application/json',
+					'Content-Type: application/json',
+					'Authorization: Bearer '.$token
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		return $response;
+	}
+}
+
+
+/* 
 
 if (!function_exists('api_data_anak')) {
 	function api_data_anak($uri = 'stunting') {

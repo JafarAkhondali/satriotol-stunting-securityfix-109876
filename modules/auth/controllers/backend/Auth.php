@@ -40,6 +40,15 @@ class Auth extends Admin {
 			if ($this->aauth->login($this->input->post('username'), $this->input->post('password'), $this->input->post('remember'))) {
 				$ref = $this->session->userdata('redirect');
 
+				$api_token_dkk = json_decode(auth_api_login(), true);
+
+				$array_api = [
+					'status_auth_api' 	=> $api_token_dkk['success'],
+					'token' 			=> $api_token_dkk['token'],
+				];
+				
+				$this->session->set_userdata($array_api);
+
 				if ($ref) {
 					redirect($ref, 'refresh');
 				} else {
