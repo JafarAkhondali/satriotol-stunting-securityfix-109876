@@ -40,6 +40,7 @@
 							</div>
 
 							<div class="table-responsive">
+								<div id="indikator" class="text-center"></div>
 								<table class="table table-bordered table-striped" id="dataTable"></table>
 							</div>
 						</div>
@@ -57,7 +58,12 @@
 		$.ajax({
 			url: "<?= BASE_URL . 'administrator/data_anak/response_data_anak'; ?>",
 			dataType: "json",
+			beforeSend: function(){
+				$('#indikator').html('<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Sedang memproses data. Mohon tunggu sebentar...</div>');
+			},
 			success: function(response) {
+				$('#indikator').empty();
+
 				if (response.status === true) {
 					$('#dataTable').DataTable({
 						"data"			: response.data,
@@ -77,11 +83,11 @@
 						],
 					});
 				} else {
-					alert(response.message);
+					alert(response.message+'. Refresh halaman ini!');
 				}
 			},
 			error: function() {
-				alert("Terjadi kesalahan saat mengambil data.");
+				alert("Terjadi kesalahan saat mengambil data. Silahkan refresh halaman ini!");
 			}
 		});
 	});
