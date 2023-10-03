@@ -18,6 +18,50 @@ class Web extends Front {
 		$this->load->model('model_web');
 	}
 
+	public function api_data() {
+		$token = $this->session->userdata('token');
+
+		if ($token == null) {
+			$login_api = json_decode(auth_api_login(), true);
+
+			$token = $login_api['token'];
+
+			$session_api = [
+				'token' => $token,
+			];
+
+			$this->session->set_userdata($session_api);
+		}
+
+		$curl_data = curl_init();
+
+		curl_setopt_array($curl_data, [
+			CURLOPT_URL 			=> url_api_dkk('stunting'),
+			CURLOPT_RETURNTRANSFER 	=> true,
+			CURLOPT_ENCODING 		=> '',
+			CURLOPT_MAXREDIRS 		=> 10,
+			CURLOPT_TIMEOUT 		=> 0,
+			CURLOPT_SSL_VERIFYHOST 	=> 0,
+			CURLOPT_SSL_VERIFYPEER 	=> 0,
+			CURLOPT_FOLLOWLOCATION 	=> true,
+			CURLOPT_HTTP_VERSION 	=> CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST 	=> 'GET',
+			CURLOPT_HTTPHEADER 		=> [
+					'Accept: application/json',
+					'Content-Type: application/json',
+					'Authorization: Bearer '.$token,
+				],
+			]
+		);
+
+		$response_stunting = curl_exec($curl_data);
+
+		curl_close($curl_data);
+
+		// $this->response($response_stunting);
+		return json_decode($response_stunting, true);
+	}
+
 	public function index() {
 		$data['sliders']        = $this->db->where('slider_status', '1')->order_by('slider_id', 'DESC')->get('sliders')->result();
 		$data['categories']     = $this->db->get('blog_category')->result();
@@ -27,8 +71,6 @@ class Web extends Front {
 		$data['faqs']           = $this->db->get('faqs', '5')->result();
 		$data['about']          = $this->db->get('about')->row();
 		$data['kontaks']        = $this->db->get('contacts')->result();
-
-		// echo json_encode($data['about']);
 
 		$this->template->build('beranda', $data);
 	}
@@ -193,44 +235,8 @@ class Web extends Front {
 
 		$data['rembuks'] 		= $this->model_web->rembuk_stunting()->row();
 
-		// echo json_encode($rembuks);
-		// exit;
-
 		$this->template->build('rembuk-stunting', $data);
-
-		// if (!empty($id)) {
-		// 	$data['rembuks'] 		= $rembuks->row();
-			
-		// 	$this->template->build('rembuk-stunting-detail', $data);
-		// }else{
-		// 	$data['rembuks'] 		= $rembuks->result();
-
-		// 	$this->template->build('rembuk-stunting', $data);
-		// }
 	}
-
-	/* public function rembuk_stunting() {
-		$id                     = $this->input->get('id');
-		
-		$data['sliders']        = $this->db->where('slider_status', '1')->get('sliders')->result();
-		$data['categories']     = $this->db->get('blog_category')->result();
-		$data['links']          = $this->db->where('menu_type_id = 3')->get('menu')->result();
-		$data['navigation']     = $this->db->where('menu_type_id = 2')->get('menu')->result();
-		$data['blogs']          = $this->model_web->berita_terbaru()->result();
-		$data['faqs']           = $this->db->from('faqs')->get()->result();
-		$data['about']          = $this->db->get('about')->row();
-		$rembuks 				= $this->model_web->rembuk_stunting($id);
-
-		if (!empty($id)) {
-			$data['rembuks'] 		= $rembuks->row();
-			
-			$this->template->build('rembuk-stunting-detail', $data);
-		}else{
-			$data['rembuks'] 		= $rembuks->result();
-
-			$this->template->build('rembuk-stunting', $data);
-		}
-	} */
 
 	public function detail_rembuk_stunting() {
 		$id                     = $this->input->get('id');
@@ -517,8 +523,6 @@ class Web extends Front {
 		$data_kelurahan 	= $this->db->get('kelurahans')->result();
 
 		$dtks_jenkel 		= $this->model_web->query_dtksByAge()->result_array();
-		// $dtks_kecamatan 	= $this->model_web->query_data_dtks_kecamatan()->result();
-		// $dtks_kelurahan 	= $this->model_web->query_data_stunting_kelurahan()->result();
 
 		for ($i=0; $i < count($dtks_jenkel) ; $i++) {
 			if ($dtks_jenkel[$i]['dtks_jenkel'] == 'L') {
@@ -533,88 +537,6 @@ class Web extends Front {
 			];
 		}
 
-		// for ($i=0; $i < 5 ; $i++) { 
-		// 	$kategori_umur[$i] = $i + 1 ." Tahun";
-
-		// 	$dtks_umur = $this->model_web->query_dtksByAge($i + 1)->result();
-
-		// 	foreach($dtks_umur as $item){
-		// 		if($item->dtks_jenkel == "L"){
-		// 			$male_umur[$i] 	= $item->total;
-		// 		}else {
-		// 			$female_umur[$i] = $item->total;
-		// 		}
-		// 	}
-		// }
-
-		// for ($i=0; $i < count($data_kecamatan); $i++) {
-		// 	$nama_kecamatan[$i] = $data_kecamatan[$i]->kecamatan_nama;
-
-		// 	$dtks_wilayah_kecamatan = $this->model_web->query_dtksByWilayah($data_kecamatan[$i]->kecamatan_id, 'kecamatan')->result();
-
-		// 	foreach ($dtks_wilayah_kecamatan as $item) {
-		// 		if($item->dtks_jenkel == "L"){
-		// 			$male_kecamatan[$i] = $item->total;
-		// 		}else if($item->dtks_jenkel == "P"){
-		// 			$female_kecamatan[$i] = $item->total;
-		// 		}
-		// 	}
-		// }
-
-		// for ($i=0; $i < count($dtks_kecamatan); $i++) {
-		// 	$data_dtks_kecamatan[$i]['name'] 		= $dtks_kecamatan[$i]->kecamatan_nama;
-		// 	$data_dtks_kecamatan[$i]['y'] 			= $dtks_kecamatan[$i]->total;
-		// 	$data_dtks_kecamatan[$i]['drilldown'] 	= $dtks_kecamatan[$i]->dtks_kecamatan;
-
-		// 	$query_data_dtks_kelurahan[$i] = $this->model_web->query_data_dtks_kelurahan($dtks_kecamatan[$i]->dtks_kecamatan)->result();
-
-		// 	if (count($query_data_dtks_kelurahan[$i]) > 0) {
-		// 		$data_dtks_kelurahan[$i]['name'] 	= $dtks_kecamatan[$i]->kecamatan_nama;
-		// 		$data_dtks_kelurahan[$i]['id'] 		= $dtks_kecamatan[$i]->dtks_kecamatan;
-
-		// 		for ($j=0; $j < count($query_data_dtks_kelurahan[$i]); $j++) {
-		// 			$kelurahan_id[$i][$j] 	= $query_data_dtks_kelurahan[$i][$j]->kelurahan_id;
-		// 			$kelurahan_nama[$i][$j] = $query_data_dtks_kelurahan[$i][$j]->kelurahan_nama;
-
-		// 			if ($kelurahan_id[$i][$j] != null) {
-		// 				$_kelurahan = $query_data_dtks_kelurahan[$i][$j]->kelurahan_nama;
-		// 			}else{
-		// 				$_kelurahan = 'Tidak Diketahui';
-		// 			}
-
-		// 			$data_dtks_kelurahan[$i]['data'][] = [
-		// 				'name' 		=> $_kelurahan,
-		// 				'y' 		=> $query_data_dtks_kelurahan[$i][$j]->total,
-		// 				'drilldown' => str_replace(' ', '', $kelurahan_nama[$i][$j]).''.$kelurahan_id[$i][$j],
-		// 			];
-		// 		}
-		// 	}
-		// }
-
-		// echo json_encode($data_dtks_kelurahan);
-		// exit;
-
-		// for ($i=0; $i < count($dtks_kelurahan); $i++) {
-		// 	$kelurahan_id[$i] = $dtks_kelurahan[$i]->kelurahan_id;
-		// 	$query_kelurahan_by_jenkel[$i] = $this->model_web->query_data_dtks_kelurahan_by_jenkel($dtks_kelurahan[$i]->kelurahan_id)->result();
-
-		// 	for ($j=0; $j < count($query_kelurahan_by_jenkel[$i]); $j++) {
-		// 		$data_dtks_kelurahan_by_jenkel[$i]['name'] 	= 'Jenis Kelamin';
-		// 		$data_dtks_kelurahan_by_jenkel[$i]['id'] 	= str_replace(' ', '', $dtks_kelurahan[$i]->kelurahan_nama).''.$kelurahan_id[$i];
-
-		// 		if($query_kelurahan_by_jenkel[$i][$j]->dtks_jenkel == "L"){
-		// 			$data_dtks_kelurahan_by_jenkel[$i]['data'][$j] = ['Laki-Laki', $query_kelurahan_by_jenkel[$i][$j]->total];
-		// 		}else if($query_kelurahan_by_jenkel[$i][$j]->dtks_jenkel == "P"){
-		// 			$data_dtks_kelurahan_by_jenkel[$i]['data'][$j] = ['Perempuan', $query_kelurahan_by_jenkel[$i][$j]->total];
-		// 		}
-		// 	}
-		// }
-
-		// $merge_kelurahan = array_merge($data_dtks_kelurahan, $data_dtks_kelurahan_by_jenkel);
-
-		// echo json_encode($data_dtks_kelurahan);
-		// exit;
-
 		$data = [
 			'about' 			=> $this->db->get('about')->row(),
 			'categories' 		=> $this->db->get('blog_category')->result(),
@@ -623,20 +545,7 @@ class Web extends Front {
 			'kontaks'        	=> $this->db->get('contacts')->result(),
 
 			'dtks_jenkel' 				=> $chart_jenkel,
-			// 'kategori_umur' 			=> $kategori_umur,
-			// 'umur_male' 				=> $male_umur,
-			// 'umur_female' 				=> $female_umur,
-
-			// 'nama_kecamatan' 			=> $nama_kecamatan,
-			// 'male_kecamatan' 			=> $male_kecamatan,
-			// 'female_kecamatan' 			=> $female_kecamatan,
-
-			// 'data_dtks_kecamatan' 	=> $data_dtks_kecamatan,
-			// 'data_dtks_kelurahan' 	=> $merge_kelurahan,
 		];
-
-		// echo json_encode($data);
-		// exit;
 
 		$this->template->build('chart-dtks', $data);
 	}
@@ -757,10 +666,6 @@ class Web extends Front {
 			$konten 		= 'pengukuran-stunting';
 		}
 
-		// echo $this->db->last_query();
-// echo json_encode($data['pustu']);
-// 		exit;
-
 		$this->template->build($konten, $data);
 	}
 
@@ -822,6 +727,238 @@ class Web extends Front {
 		];
 
 		$this->template->build('faq', $data);
+	}
+
+	
+
+	public function data_jumlah_jenkel() {
+		$data_api = $this->api_data();
+
+		$jenkel = [
+			'Laki-laki' => 0,
+			'Perempuan' => 0,
+		];
+
+		foreach ($data_api['data'] as $item) {
+			if ($item['jenis_kelamin'] == 'L') {
+				$jenkel['Laki-laki']++;
+			} else if ($item['jenis_kelamin'] == 'P') {
+				$jenkel['Perempuan']++;
+			}
+		}
+		
+		$result_data = [
+			[
+				'name' 			=> 'Jenis Kelamin',
+				'colorByPoint' 	=> true,
+				'innerSize'		=> '70%',
+				'dataLabels'	=> [
+					'enabled' 	=> false,
+					'style' 	=> [
+						'fontSize' => 12
+					]
+				],
+				'data' => [
+					[
+						'name' 	=> 'Laki-laki',
+						'y' 	=> $jenkel['Laki-laki'],
+						'dataLabels' => [
+							'enabled' 	=> true,
+							'distance' 	=> -165,
+							'format' 	=>  'Total {point.total} anak',
+							'style' =>[
+								'fontSize' => '12pt',
+							],
+						],
+					],
+					[
+						'name' 	=> 'Perempuan',
+						'y' 	=> $jenkel['Perempuan'],
+					],
+				],
+			],
+		];
+
+		$this->response($result_data);
+	}
+
+	public function data_jumlah_umur() {
+		$data_api = $this->api_data();
+
+		$umur_male = [];
+		$umur_female = [];
+
+		for ($umur = 1; $umur <= 5; $umur++) {
+			$umur_male[$umur] 	= 0;
+			$umur_female[$umur] = 0;
+		}
+
+		foreach ($data_api['data'] as $item) {
+			$tgl_lahir 		= $item['tanggal_lahir'];
+			$tgl_lahir_date = new DateTime($tgl_lahir);
+			$tgl_sekarang 	= new DateTime();
+			$umur 			= $tgl_lahir_date->diff($tgl_sekarang)->y;
+
+			if ($umur <= 5) {
+				if ($item['jenis_kelamin'] == 'L') {
+					$umur_male[$umur]++;
+				} else if ($item['jenis_kelamin'] == 'P') {
+					$umur_female[$umur]++;
+				}
+			}
+		}
+
+		$result_data['kategoriUmur'] 	= ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun'];
+		$result_data['totalJenkel'] 	= array_sum($umur_male) + array_sum($umur_female);
+		$result_data['jenkel'] 			= [
+			[
+				'name' => 'Laki-Laki',
+				'dataLabels' => [
+					'style' => [
+						'fontSize' => 14,
+					],
+				],
+				'data' => array_values($umur_male),
+			],
+			[
+				'name' => 'Perempuan',
+				'dataLabels' => [
+					'style' => [
+						'fontSize' => 14,
+					],
+				],
+				'data' => array_values($umur_female),
+			],
+		];
+
+		$this->response($result_data);
+	}
+
+	public function data_jumlah_kecamatan() {
+		$data_api 			= $this->api_data();
+		$dataUsia 			= [];
+		$totalDataPerTahun 	= [];
+
+		$kecamatanDomisiliArray = [];
+
+		foreach ($data_api['data'] as $data) {
+			$usia 				= $data['usia'];
+			$kecamatanDomisili 	= $data['kecamatan_domsili'];
+
+			if (!isset($kecamatanDomisiliArray[$kecamatanDomisili])) {
+				$kecamatanDomisiliArray[$kecamatanDomisili] = true;
+			}
+
+			preg_match('/(\d+) tahun/', $usia, $matches);
+			$tahun = (int)$matches[1];
+
+			if (!isset($totalDataPerTahun[$tahun][$kecamatanDomisili])) {
+				$totalDataPerTahun[$tahun][$kecamatanDomisili] = 1;
+			} else {
+				$totalDataPerTahun[$tahun][$kecamatanDomisili]++;
+			}
+		}
+
+		$kecamatanOrder = array_keys($kecamatanDomisiliArray);
+		ksort($kecamatanOrder);
+
+		foreach ($totalDataPerTahun as $tahun => $totalPerKecamatan) {
+			$dataPerKecamatan = [];
+			foreach ($kecamatanOrder as $kecamatan) {
+				$total = isset($totalPerKecamatan[$kecamatan]) ? $totalPerKecamatan[$kecamatan] : 0;
+					$dataPerKecamatan[] = $total;
+			}
+
+			usort($dataPerKecamatan, function ($a, $b) use ($kecamatanOrder) {
+				$aIndex = array_search($a['name'], $kecamatanOrder);
+				$bIndex = array_search($b['name'], $kecamatanOrder);
+	
+				return $aIndex - $bIndex;
+			});
+
+			$dataUsia[] = [
+				"name" => "$tahun Tahun",
+				"data" => $dataPerKecamatan
+			];
+		}
+
+		usort($dataUsia, function ($a, $b) {
+			return strcmp($a['name'], $b['name']);
+		});
+
+		foreach ($dataUsia as &$tahunData) {
+			foreach ($tahunData['data'] as &$kecamatanData) {
+				$kecamatan = $kecamatanData['name'];
+				$urutan = array_search($kecamatan, $kecamatanOrder);
+				if ($urutan !== false) {
+					$kecamatanData['name'] = $kecamatanOrder[$urutan];
+				}
+			}
+		}
+
+		$totalData = array_sum(array_map(function ($tahun) {
+			return array_sum($tahun);
+		}, $totalDataPerTahun));
+
+		$this->data['total_data'] = $totalData;
+		$this->data['kecamatan'] = $kecamatanOrder;
+		$this->data['data_usia'] = $dataUsia;
+
+		$this->response($this->data);
+	}
+
+	public function data_jumlah_kelurahan() {
+		$data_api 			= $this->api_data();
+		$jumlah_kecamatan 	= [];
+		$kelurahan_data 	= [];
+
+		foreach ($data_api['data'] as $data) {
+			$kecamatan_domisili = $data['kecamatan_domsili'];
+			$kelurahan_domisili = $data['kelurahan_domsili'];
+
+			if (!isset($jumlah_kecamatan[$kecamatan_domisili])) {
+				$jumlah_kecamatan[$kecamatan_domisili] = 0;
+			}
+
+			$jumlah_kecamatan[$kecamatan_domisili]++;
+
+			$kelurahan_data[$kecamatan_domisili][$kelurahan_domisili] = isset($kelurahan_data[$kecamatan_domisili][$kelurahan_domisili]) ? $kelurahan_data[$kecamatan_domisili][$kelurahan_domisili] + 1 : 1;
+		}
+
+		foreach ($kelurahan_data as $kecamatan_domisili) {
+			ksort($kelurahan_data[$kecamatan_domisili]);
+		}
+
+		foreach ($jumlah_kecamatan as $kecamatan_domisili => $jumlah) {
+			$hasil_series[] = [
+				'name' 		=> $kecamatan_domisili,
+				'y' 		=> $jumlah,
+				'drilldown' => str_replace(' ', '', $kecamatan_domisili),
+			];
+		}
+
+		foreach ($jumlah_kecamatan as $kecamatan_domisili => $jumlah) {
+			$data_per_kecamatan = [];
+
+			foreach ($kelurahan_data[$kecamatan_domisili] as $nama_kelurahan => $total_per_kelurahan) {
+				$data_per_kecamatan[] = [
+					$nama_kelurahan,
+					$total_per_kelurahan
+				];
+			}
+
+			$hasil_drilldown[] = [
+				'name' 	=> $kecamatan_domisili,
+				'id' 	=> str_replace(' ', '', $kecamatan_domisili),
+				'data' 	=> $data_per_kecamatan
+			];
+		}
+
+		$this->data['data_total'] 		= array_sum(array_column($hasil_series, 'y'));
+		$this->data['data_series'] 		= $hasil_series;
+		$this->data['data_drilldown'] 	= $hasil_drilldown;
+
+		$this->response($this->data);
 	}
 }
 
