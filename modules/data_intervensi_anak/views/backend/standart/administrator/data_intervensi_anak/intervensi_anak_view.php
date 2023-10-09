@@ -49,6 +49,10 @@
 										<td><?= systemTanggalIndo($data_anak['tanggal_lahir']);?></td>
 									</tr>
 									<tr>
+										<th>Umur Anak</th>
+										<td><?= $data_anak['usia'];?></td>
+									</tr>
+									<tr>
 										<th>Jenis Kelamin Anak</th>
 										<td><?= $data_anak['jenis_kelamin'] == 'L' ? 'Laki-Laki' : 'Perempuan';?></td>
 									</tr>

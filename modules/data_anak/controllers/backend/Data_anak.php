@@ -53,6 +53,8 @@ class Data_anak extends Admin {
 
 		curl_close($curl_data);
 
+		// $this->response($response_stunting);
+
 		return json_decode($response_stunting, true);
 	}
 
@@ -60,6 +62,9 @@ class Data_anak extends Admin {
 		$this->is_allowed('data_anak_list');
 
 		$data_anak = $this->api_auth_data('stunting');
+
+		$param = $this->input->get('param');
+		$nilai = $this->input->get('nilai');
 
 		$this->data['status'] 	= $data_anak['success'];
 
@@ -71,31 +76,51 @@ class Data_anak extends Admin {
 				$no++;
 				$row 					= [];
 
-				if ($item['jenis_kelamin'] == 'L') {
-					$jenkel = 'Laki-Laki';
-				}else if ($item['jenis_kelamin'] == 'P') {
-					$jenkel = 'Perempuan';
-				}else{
-					$jenkel = '-';
+				$showRow = true;
+
+				if (!empty($param)) {
+					if ($param == 'kecamatan') {
+						$showRow = stripos($item['kecamatan_domsili'], $nilai) !== false;
+					}else if ($param == 'kelurahan') {
+						$showRow = stripos($item['kelurahan_domsili'], $nilai) !== false;
+					}else if ($param == 'nokk') {
+						$showRow = stripos($item['no_kk'], $nilai) !== false;
+					}else if ($param == 'nonik') {
+						$showRow = stripos($item['nik_anak'], $nilai) !== false;
+					}else if ($param == 'nama_anak') {
+						$showRow = stripos($item['nama_anak'], $nilai) !== false;
+					}else if ($param == 'nama_ibu') {
+						$showRow = stripos($item['nama_ibu'], $nilai) !== false;
+					}
 				}
 
-				$row['no'] 				= $no.'.';
-				$row['nama_kecamatan'] 	= $item['kecamatan_ktp'];
-				$row['nama_kelurahan'] 	= $item['kelurahan_ktp'];
-				$row['no_kk_anak'] 		= $item['no_kk'];
-				$row['nik_anak'] 		= $item['nik_anak'];
-				$row['nama_anak'] 		= $item['nama_anak'];
-				$row['jenkel'] 			= $jenkel;
-				$row['tgl_lahir'] 		= systemTanggalIndo($item['tanggal_lahir']);
-				$row['umur'] 			= $item['usia'];
-				$row['alamat'] 			= $item['alamat_ktp'];
-				$row['nama_ibu'] 		= $item['nama_ibu'];
-				$row['action'] 			= '<a href="'.site_url('administrator/data_anak/profile_anak?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-default"><i class="fa fa-file-text-o"></i> '.cclang('profile_anak').'</a><br/>
-				<a href="'.site_url('administrator/data_stunting_anak/view_stunting?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-danger"><i class="fa fa-file-text-o"></i> '.cclang('stunting_anak').'</a><br/>
-				<a href="'.site_url('administrator/perkembangan_anak/view_perkembangan?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-info"><i class="fa fa-file-text-o"></i> '.cclang('perkembangan_anak').' & Pertumbuhan Anak</a><br/>
-				<a href="'.site_url('administrator/data_intervensi_anak/view_intervensi?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o"></i> '.cclang('intervensi_anak').'</a>';
-
-				$data[] = $row;
+				if ($showRow) {
+					if ($item['jenis_kelamin'] == 'L') {
+						$jenkel = 'Laki-Laki';
+					}else if ($item['jenis_kelamin'] == 'P') {
+						$jenkel = 'Perempuan';
+					}else{
+						$jenkel = '-';
+					}
+	
+					$row['no'] 				= $no.'.';
+					$row['nama_kecamatan'] 	= $item['kecamatan_ktp'];
+					$row['nama_kelurahan'] 	= $item['kelurahan_ktp'];
+					$row['no_kk_anak'] 		= $item['no_kk'];
+					$row['nik_anak'] 		= $item['nik_anak'];
+					$row['nama_anak'] 		= $item['nama_anak'];
+					$row['jenkel'] 			= $jenkel;
+					$row['tgl_lahir'] 		= systemTanggalIndo($item['tanggal_lahir']);
+					$row['umur'] 			= $item['usia'];
+					$row['alamat'] 			= $item['alamat_ktp'];
+					$row['nama_ibu'] 		= $item['nama_ibu'];
+					$row['action'] 			= '<a href="'.site_url('administrator/data_anak/profile_anak?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-default"><i class="fa fa-file-text-o"></i> '.cclang('profile_anak').'</a><br/>
+					<a href="'.site_url('administrator/data_stunting_anak/view_stunting?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-danger"><i class="fa fa-file-text-o"></i> '.cclang('stunting_anak').'</a><br/>
+					<a href="'.site_url('administrator/perkembangan_anak/view_perkembangan?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-info"><i class="fa fa-file-text-o"></i> '.cclang('perkembangan_anak').' & Pertumbuhan Anak</a><br/>
+					<a href="'.site_url('administrator/data_intervensi_anak/view_intervensi?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o"></i> '.cclang('intervensi_anak').'</a>';
+	
+					$data[] = $row;
+				}
 			}
 
 			$this->data['data'] 	= $data;

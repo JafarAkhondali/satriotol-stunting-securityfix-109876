@@ -10,8 +10,6 @@
 	</ol>
 </section>
 
-
-
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
@@ -39,6 +37,31 @@
 								</h5>
 							</div>
 
+							<div class="row" style="margin-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="col-sm-3 padd-left-0">
+										<select type="text" class="form-control chosen chosen-select" name="f" id="field">
+											<option value=""><?= cclang('all'); ?></option>
+											<option <?= $this->input->get('f') == 'kecamatan' ? 'selected' :''; ?> value="kecamatan">Kecamatan</option>
+											<option <?= $this->input->get('f') == 'kelurahan' ? 'selected' :''; ?> value="kelurahan">Kelurahan</option>
+											<option <?= $this->input->get('f') == 'nokk' ? 'selected' :''; ?> value="nokk">Nomor KK</option>
+											<option <?= $this->input->get('f') == 'nonik' ? 'selected' :''; ?> value="nonik">Nomor NIK Anak</option>
+											<option <?= $this->input->get('f') == 'nama_anak' ? 'selected' :''; ?> value="nama_anak">Nama Anak</option>
+											<option <?= $this->input->get('f') == 'nama_ibu' ? 'selected' :''; ?> value="nama_ibu">Nama Ibu</option>
+										</select>
+									</div>
+									<div class="col-sm-3 padd-left-0">
+										<input type="text" class="form-control" name="q" id="filter" placeholder="<?= cclang('filter'); ?>" value="<?= $this->input->get('q'); ?>">
+									</div>
+									<div class="col-sm-1 padd-left-0">
+										<button type="button" class="btn btn-flat btn-default" name="sbtn" id="sbtn" value="Apply" title="<?= cclang('filter_search'); ?>">Filter</button>
+									</div>
+									<div class="col-sm-1 padd-left-0">
+										<button type="button" class="btn btn-flat btn-default" name="reset" id="reset" value="Reset" title="<?= cclang('reset_search'); ?>"><i class="fa fa-undo"></i></button>
+									</div>
+								</div>
+							</div>
+
 							<div class="table-responsive">
 								<div id="indikator" class="text-center"></div>
 								<table class="table table-bordered table-striped" id="dataTable"></table>
@@ -54,19 +77,12 @@
 <script type="text/javascript" src="<?= BASE_ASSET . 'datatables/datatables.min.js'; ?>"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$.ajax({
-			url: "<?= BASE_URL . 'administrator/data_anak/response_data_anak'; ?>",
-			dataType: "json",
-			beforeSend: function(){
-				$('#indikator').html('<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Sedang memproses data. Mohon tunggu sebentar...</div>');
-			},
-			success: function(response) {
-				$('#indikator').empty();
+	var urlCurrent = "<?= BASE_URL . 'administrator/data_anak/response_data_anak'; ?>";
+	var dataTable;
 
-				if (response.status === true) {
-					$('#dataTable').DataTable({
-						"data"			: response.data,
+	function initDataTable() {
+		dataTable = $('#dataTable').DataTable({
+						"searching"	: true,
 						"columns" : [
 							{ data: 'no', title: 'No.' },
 							{ data: 'nama_kecamatan', title: '<?= cclang('anak_kecamatan_id') ?>' },
@@ -82,9 +98,57 @@
 							{ data: 'action', title: 'Action' },
 						],
 					});
+	}
+
+	$(document).ready(function() {
+		$.ajax({
+			url: urlCurrent,
+			dataType: "json",
+			beforeSend: function(){
+				$('#indikator').html('<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Sedang memproses data. Mohon tunggu sebentar...</div>');
+			},
+			success: function(response) {
+				$('#indikator').empty();
+
+				if (response.status === true) {
+					initDataTable();
+
+					dataTable.search('').columns().search('').draw();
+					dataTable.clear().rows.add(response.data).draw();
 				} else {
 					alert(response.message+'. Refresh halaman ini!');
 				}
+			},
+			error: function() {
+				alert("Terjadi kesalahan saat mengambil data. Silahkan refresh halaman ini!");
+			}
+		});
+	});
+
+	$('#sbtn').on('click', function () {
+		var param = $('#field').val();
+		var nilai = $('#filter').val();
+
+		$.ajax({
+			url: urlCurrent,
+			type: 'GET',
+			dataType: "json",
+			data: {
+				param: param,
+				nilai: nilai,
+			},
+			beforeSend: function(){
+				$('#dataTable').DataTable().clear().destroy();
+				$('#indikator').html('<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Sedang memproses data. Mohon tunggu sebentar...</div>');
+				$('#dataTable').html('');
+			},
+			success: function(response) {
+				$('#indikator').empty();
+
+				initDataTable();
+
+				dataTable.search('').columns().search('').draw();
+				dataTable.clear().rows.add(response.data).draw();
 			},
 			error: function() {
 				alert("Terjadi kesalahan saat mengambil data. Silahkan refresh halaman ini!");
