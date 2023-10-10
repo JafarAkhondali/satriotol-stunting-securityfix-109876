@@ -42,6 +42,7 @@
 									<div class="col-sm-3 padd-left-0">
 										<select type="text" class="form-control chosen chosen-select" name="f" id="field">
 											<option value=""><?= cclang('all'); ?></option>
+											<option <?= $this->input->get('f') == 'puskemas' ? 'selected' :''; ?> value="puskesmas">Puskesmas</option>
 											<option <?= $this->input->get('f') == 'kecamatan' ? 'selected' :''; ?> value="kecamatan">Kecamatan</option>
 											<option <?= $this->input->get('f') == 'kelurahan' ? 'selected' :''; ?> value="kelurahan">Kelurahan</option>
 											<option <?= $this->input->get('f') == 'nokk' ? 'selected' :''; ?> value="nokk">Nomor KK</option>
@@ -82,22 +83,24 @@
 
 	function initDataTable() {
 		dataTable = $('#dataTable').DataTable({
-						"searching"	: true,
-						"columns" : [
-							{ data: 'no', title: 'No.' },
-							{ data: 'nama_kecamatan', title: '<?= cclang('anak_kecamatan_id') ?>' },
-							{ data: 'nama_kelurahan', title: '<?= cclang('anak_kelurahan_id') ?>' },
-							{ data: 'no_kk_anak', title: '<?= cclang('anak_no_kk') ?>' },
-							{ data: 'nik_anak', title: '<?= cclang('anak_nik') ?>' },
-							{ data: 'nama_anak', title: '<?= cclang('anak_nama') ?>' },
-							{ data: 'jenkel', title: '<?= cclang('anak_jenkel') ?>'},
-							{ data: 'tgl_lahir', title: '<?= cclang('anak_tanggal_lahir') ?>' },
-							{ data: 'umur', title: 'Umur' },
-							{ data: 'alamat', title: '<?= cclang('anak_alamat') ?>' },
-							{ data: 'nama_ibu', title: '<?= cclang('anak_nama_ibu') ?>' },
-							{ data: 'action', title: 'Action' },
-						],
-					});
+			"searching"	: true,
+			"columns" : [
+				{ data: 'no', title: 'No.' },
+				{ data: 'puskesmas', title: 'Puskesmas' },
+				{ data: 'nama_kecamatan', title: '<?= cclang('anak_kecamatan_id') ?>' },
+				{ data: 'nama_kelurahan', title: '<?= cclang('anak_kelurahan_id') ?>' },
+				{ data: 'no_kk_anak', title: '<?= cclang('anak_no_kk') ?>' },
+				{ data: 'nik_anak', title: '<?= cclang('anak_nik') ?>' },
+				{ data: 'nama_anak', title: '<?= cclang('anak_nama') ?>' },
+				{ data: 'jenkel', title: '<?= cclang('anak_jenkel') ?>'},
+				{ data: 'tgl_lahir', title: '<?= cclang('anak_tanggal_lahir') ?>' },
+				{ data: 'umur', title: 'Umur' },
+				{ data: 'alamat', title: '<?= cclang('anak_alamat') ?>' },
+				{ data: 'nama_ibu', title: '<?= cclang('anak_nama_ibu') ?>' },
+				{ data: 'no_hp_ortu', title: 'No. Telf. Orang Tua' },
+				{ data: 'action', title: 'Action' },
+			],
+		});
 	}
 
 	$(document).ready(function() {
@@ -149,6 +152,36 @@
 
 				dataTable.search('').columns().search('').draw();
 				dataTable.clear().rows.add(response.data).draw();
+			},
+			error: function() {
+				alert("Terjadi kesalahan saat mengambil data. Silahkan refresh halaman ini!");
+			}
+		});
+	});
+
+	$('#reset').on('click', function () {
+		$('.chosen option').prop('selected', false).trigger('chosen:updated');
+		$('#filter').val('');
+
+		$.ajax({
+			url: urlCurrent,
+			dataType: "json",
+			beforeSend: function(){
+				$('#dataTable').DataTable().clear().destroy();
+				$('#indikator').html('<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Sedang memproses data. Mohon tunggu sebentar...</div>');
+				$('#dataTable').html('');
+			},
+			success: function(response) {
+				$('#indikator').empty();
+
+				if (response.status === true) {
+					initDataTable();
+
+					dataTable.search('').columns().search('').draw();
+					dataTable.clear().rows.add(response.data).draw();
+				} else {
+					alert(response.message+'. Refresh halaman ini!');
+				}
 			},
 			error: function() {
 				alert("Terjadi kesalahan saat mengambil data. Silahkan refresh halaman ini!");

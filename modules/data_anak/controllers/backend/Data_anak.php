@@ -79,7 +79,9 @@ class Data_anak extends Admin {
 				$showRow = true;
 
 				if (!empty($param)) {
-					if ($param == 'kecamatan') {
+					if ($param == 'puskesmas') {
+						$showRow = stripos($item['puskesmas'], $nilai) !== false;
+					}elseif ($param == 'kecamatan') {
 						$showRow = stripos($item['kecamatan_domsili'], $nilai) !== false;
 					}else if ($param == 'kelurahan') {
 						$showRow = stripos($item['kelurahan_domsili'], $nilai) !== false;
@@ -104,6 +106,7 @@ class Data_anak extends Admin {
 					}
 	
 					$row['no'] 				= $no.'.';
+					$row['puskesmas'] 		= $item['puskesmas'];
 					$row['nama_kecamatan'] 	= $item['kecamatan_ktp'];
 					$row['nama_kelurahan'] 	= $item['kelurahan_ktp'];
 					$row['no_kk_anak'] 		= $item['no_kk'];
@@ -114,6 +117,7 @@ class Data_anak extends Admin {
 					$row['umur'] 			= $item['usia'];
 					$row['alamat'] 			= $item['alamat_ktp'];
 					$row['nama_ibu'] 		= $item['nama_ibu'];
+					$row['no_hp_ortu'] 		= $item['no_hp_ortu'];
 					$row['action'] 			= '<a href="'.site_url('administrator/data_anak/profile_anak?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-default"><i class="fa fa-file-text-o"></i> '.cclang('profile_anak').'</a><br/>
 					<a href="'.site_url('administrator/data_stunting_anak/view_stunting?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-danger"><i class="fa fa-file-text-o"></i> '.cclang('stunting_anak').'</a><br/>
 					<a href="'.site_url('administrator/perkembangan_anak/view_perkembangan?nik=' . $item['nik_anak']).'" class="btn btn-sm btn-info"><i class="fa fa-file-text-o"></i> '.cclang('perkembangan_anak').' & Pertumbuhan Anak</a><br/>
