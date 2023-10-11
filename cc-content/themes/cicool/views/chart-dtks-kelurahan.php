@@ -12,27 +12,11 @@
 						<div class="card-body">
 							<h5 class="card-title">Grafik Data Terpadu Kesejahteraan Sosial (DTKS)</h5>
 							<ul class="nav nav-tabs" id="myTab">
-								<li class="nav-item"> <a href="<?= base_url(); ?>data-dtks" class="nav-link">berdasarkan Jenis Kelamin</a></li>
-								<!-- <li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-jenkel" target="_blank" class="nav-link">berdasarkan Umur</a></li> -->
-								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-kecamatan" class="nav-link">berdasarkan Jenis Kelamin per Kecamatan</a></li>
-								<li class="nav-item"> <a href="<?= base_url(); ?>chart-dtks-kelurahan" class="nav-link active">berdasarkan Jenis Kelamin per Kelurahan</a></li>
+								<li class="nav-item"> <a href="<?= base_url(); ?>web/data_dtks" class="nav-link">berdasarkan Jenis Kelamin</a></li>
+								<li class="nav-item"> <a href="<?= base_url(); ?>web/chart_dtks_kecamatan" class="nav-link">berdasarkan Jenis Kelamin per Kecamatan</a></li>
+								<li class="nav-item active"> <a href="<?= base_url(); ?>web/chart_dtks_kelurahan" class="nav-link active">berdasarkan Jenis Kelamin per Kelurahan</a></li>
 							</ul>
 							<div class="tab-content pt-2" id="myTabContent">
-								<div class="tab-pane fade" id="jenkel">
-									<div class="box-body chart-responsive">
-										<div class="chart" id="chart-jenkel"></div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="umur">
-									<div class="box-body chart-responsive">
-										<div class="chart" id="chart-umur"></div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="kecamatan">
-									<div class="box-body chart-responsive">
-										<div class="chart" id="chart-kecamatan"></div>
-									</div>
-								</div>
 								<div class="tab-pane fade show active" id="kelurahan">
 									<div class="box-body chart-responsive">
 										<div class="chart" width="100%" id="chart-kelurahan"></div>
