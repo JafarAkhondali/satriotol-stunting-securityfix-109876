@@ -21,7 +21,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>analisa-situasi/">
+					<a href="<?= base_url();?>web/analisa_situasi">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-head-side-brain text-black"></i></div>
 							<div class="features__content">
@@ -31,7 +31,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>rencana-kegiatan/">
+					<a href="<?= base_url();?>web/rencana_kegiatan">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-book-open text-black"></i></div>
 							<div class="features__content">
@@ -41,7 +41,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>penurunan-percepatan-stunting/">
+					<a href="<?= base_url();?>web/ppstunting">
 						<div class="features__item d-sm-flex align-items-start mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-gears text-black"></i></div>
 							<div class="features__content">
@@ -51,7 +51,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>kebijakan/">
+					<a href="<?= base_url();?>web/kebijakan">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-building-columns text-black"></i></div>
 							<div class="features__content">
@@ -63,7 +63,7 @@
 			</div>
 			<div class="row mt-50">
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>program-intervensi-balita/">
+					<a href="<?= base_url();?>web/intervensibalita">
 						<div class="features__item d-sm-flex align-items-start mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-users text-black"></i></div>
 							<div class="features__content">
@@ -73,7 +73,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>wisata-edukasi-gizi/">
+					<a href="<?= base_url();?>web/edukasigizi">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-chart-column text-black"></i></div>
 							<div class="features__content">
@@ -83,7 +83,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>penghargaan/">
+					<a href="<?= base_url();?>web/penghargaan">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-scale-balanced text-black"></i></div>
 							<div class="features__content">
@@ -93,7 +93,7 @@
 					</a>
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 item-aksi-konvergensi">
-					<a href="<?= base_url();?>inovasi-percepatan/">
+					<a href="<?= base_url();?>">
 						<div class="features__item d-sm-flex align-items-start white-bg mb-30">
 							<div class="features__icon mr-25"><i class="fa-light fa-file-check text-black"></i></div>
 							<div class="features__content">
