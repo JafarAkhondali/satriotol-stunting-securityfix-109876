@@ -27,7 +27,30 @@
 										<span><a href="<?php echo base_url().'blog/category/'.$blog->category_id;?>"><i class="far fa-bookmark"></i> <?php echo $blog->category_name;?></a></span>
 									</div>
 								</div>
-								<img src="https://via.placeholder.com/760x405.png?text=No Image" alt="" width="20%">
+				<?php
+					if (strlen($blog->title) < 15) {
+						$titlenya = str_replace(' ', '+', $blog->title);
+					} else {
+						$titlenya = str_replace(' ', '+', substr($blog->title, 0, 15) . '...');
+					}
+
+							if (!empty($blog->image)) {
+								$file = FCPATH . 'uploads/blog/' . $blog->image;
+
+								if (is_image($blog->image)) {
+									if (file_exists($file)) {
+										echo '<img src="' . base_url() . 'uploads/blog/' . $blog->image . '" alt="'.$blog->title.'" width="20%">';
+									} else {
+										echo '<img src="https://via.placeholder.com/760x405.png?text=' . $titlenya . '" alt="'.$blog->title.'" width="20%">';
+									}
+								} else {
+									echo '<img src="https://via.placeholder.com/760x405.png?text=' . $titlenya . '" alt="'.$blog->title.'" width="20%">';
+								}
+							} else {
+								echo '<img src="https://via.placeholder.com/760x405.png?text=' . $titlenya . '" alt="'.$blog->title.'" width="20%">';
+							}
+						?>
+								<!-- <img src="https://via.placeholder.com/760x405.png?text=No Image" alt="" width="20%"> -->
 							</div>
 				<?php
 					}
